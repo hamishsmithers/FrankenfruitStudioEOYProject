@@ -1,2 +1,0 @@
-This is a temporary file to allow SVN to check this folder.
-Please delete this file from the repo when other files are present.
