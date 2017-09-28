@@ -12,11 +12,6 @@ public class Player : MonoBehaviour {
     //----------
     public float m_fSpeed = 10;
     public XboxController controller;
-
-    //----------   
-    // Rotation
-    //----------
-    public Vector3 DirVector { get; set; }
     
     //----------
     // Shooting
@@ -86,7 +81,7 @@ public class Player : MonoBehaviour {
         v3Pos = transform.position;
         float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
         float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controller);
-        Debug.Log("Left Stick X: " + axisX + " Left Stick Y: " + axisY);
+        //Debug.Log("Left Stick X: " + axisX + " Left Stick Y: " + axisY);
         float newPosX = v3Pos.x + (axisX * m_fSpeed * Time.deltaTime);
         float newPosZ = v3Pos.z + (axisY * m_fSpeed * Time.deltaTime);
         v3Pos = new Vector3(newPosX, transform.position.y, newPosZ);
@@ -94,16 +89,25 @@ public class Player : MonoBehaviour {
         
         axisX = XCI.GetAxis(XboxAxis.RightStickX, controller);
         axisY = XCI.GetAxis(XboxAxis.RightStickY, controller);
-        //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+        Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
 
-        // attempt at rotation via right analog stick 
-        // transform.eulerAngles = new Vector3(axisX * 25, 0, axisY * 25);
-        Vector3 Direction;
-        Direction = new Vector3(0, 0, 0);
-        Direction += new Vector3(axisX, 0, axisY);
-
-        transform.rotation = Quaternion.LookRotation(DirVector);
+        //-------------------- 
+        // Right stick aiming
+        //-------------------- 
+        Vector3 dir = new Vector3(axisX, 0.0f, axisY);
+        transform.forward = dir;
         
+        // trying to store the last direction facing and apply that when no left stick input is read.
+        //{
+        //    Vector3 dirStore = new Vector3();
+        //    dirStore = dir;
+
+        //    if (axisX == 0.0f && axisY == 0.0f)
+        //    {
+        //        transform.forward = dirStore;
+        //    }
+        //}
+
         //----------------------------
         // Keyboard Movement Controls
         //----------------------------
