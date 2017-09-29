@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using XboxCtrlrInput;		// Be sure to include this if you want an object to have Xbox input
 
-public class Player : MonoBehaviour {
-
+public class Player : MonoBehaviour
+{
     //----------   
     // Movement
     //----------
     public float m_fSpeed = 10;
     public XboxController controller;
-    
+
     //----------
     // Shooting
     //----------
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
     public int nSpawnHealth = 20;
     public int nCurrentHealth;
     private bool bAlive = true;
-
+    
     //--------------------------------------------------------
     // Use this for initialization
     //--------------------------------------------------------
@@ -61,97 +61,107 @@ public class Player : MonoBehaviour {
         Vector3 v3Pos;
         v3Pos.x = transform.position.x;
 
-        //---------------
-        // Mouse raycast
-        //---------------
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        //RaycastHit hit;
-        //Physics.Raycast(ray, out hit);
-
-        //Vector3 target = hit.point;
-        //target.y = transform.position.y;
-        //transform.LookAt(target);
-
         //------------------------
         // Xbox Movement Controls
         //
         // Left stick movement
         //------------------------ 
-        v3Pos = transform.position;
-        float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
-        float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controller);
-        //Debug.Log("Left Stick X: " + axisX + " Left Stick Y: " + axisY);
-        float newPosX = v3Pos.x + (axisX * m_fSpeed * Time.deltaTime);
-        float newPosZ = v3Pos.z + (axisY * m_fSpeed * Time.deltaTime);
-        v3Pos = new Vector3(newPosX, transform.position.y, newPosZ);
-        transform.position = v3Pos;
-        
-        axisX = XCI.GetAxis(XboxAxis.RightStickX, controller);
-        axisY = XCI.GetAxis(XboxAxis.RightStickY, controller);
-        Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+        if (Global.bXboxControls)
+        {
+            v3Pos = transform.position;
+            float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
+            float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controller);
+            //Debug.Log("Left Stick X: " + axisX + " Left Stick Y: " + axisY);
 
-        //-------------------- 
-        // Right stick aiming
-        //-------------------- 
-        Vector3 dir = new Vector3(axisX, 0.0f, axisY);
-        transform.forward = dir;
-        
-        // trying to store the last direction facing and apply that when no left stick input is read.
-        //{
-        //    Vector3 dirStore = new Vector3();
-        //    dirStore = dir;
+            float newPosX = v3Pos.x + (axisX * m_fSpeed * Time.deltaTime);
+            float newPosZ = v3Pos.z + (axisY * m_fSpeed * Time.deltaTime);
+            v3Pos = new Vector3(newPosX, transform.position.y, newPosZ);
+            transform.position = v3Pos;
 
-        //    if (axisX == 0.0f && axisY == 0.0f)
-        //    {
-        //        transform.forward = dirStore;
-        //    }
-        //}
+            axisX = XCI.GetAxis(XboxAxis.RightStickX, controller);
+            axisY = XCI.GetAxis(XboxAxis.RightStickY, controller);
+            //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+
+            //-------------------------
+            // Xbox right stick aiming
+            ////-------------------------
+            Vector3 dir = new Vector3(axisX, 0.0f, axisY);
+            transform.forward = dir;
+
+            //// trying to store the last direction facing and apply that when no left stick input is read.
+            //{
+            //    Vector3 dirStore = new Vector3();
+            //    dirStore = dir;
+
+            //    if (axisX == 0.0f && axisY == 0.0f)
+            //    {
+            //        transform.forward = dirStore;
+            //    }
+            //}
+
+            //---------------
+            // Xbox shooting
+            //---------------
+            float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
+
+            if (rightTrigHeight < 1.0f)
+            {
+                //Debug.Log("Right Trigger Pressed");
+                GameObject copy = Instantiate(m_TennisBall);
+                copy.transform.position = transform.position + transform.forward;
+                Rigidbody rb = copy.GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+            }
+        }
 
         //----------------------------
         // Keyboard Movement Controls
         //----------------------------
-        if (Input.GetKey(KeyCode.W))
+        if (Global.bKeyboardControls)
         {
-            transform.Translate(Vector3.forward * m_fSpeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.W))
+            {
+                transform.position += Vector3.forward * Time.deltaTime * m_fSpeed;
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                transform.position += Vector3.forward * Time.deltaTime * -m_fSpeed;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.position += Vector3.right * Time.deltaTime * m_fSpeed;
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.position += Vector3.right * Time.deltaTime * -m_fSpeed;
+            }
+
+            //-------------- 
+            // Mouse aiming
+            //--------------
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
+
+            Vector3 target = hit.point;
+            target.y = transform.position.y;
+            transform.LookAt(target);
+
+            //----------------
+            // Mouse shooting
+            //----------------
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                GameObject copy = Instantiate(m_TennisBall);
+                copy.transform.position = transform.position + transform.forward;
+                Rigidbody rb = copy.GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+            }
         }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back * m_fSpeed * Time.deltaTime);
-        }
-
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    transform.Rotate(0, Time.deltaTime * 200.0f, 0);
-        //}
-
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    transform.Rotate(0, Time.deltaTime * -200.0f, 0);
-        //}
-
-        //----------
-        // Shooting
-        //----------
-        float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
-
-        if (rightTrigHeight < 1.0f)
-        {
-            //Debug.Log("Right Trigger Pressed");
-            GameObject copy = Instantiate(m_TennisBall);
-            copy.transform.position = transform.position + transform.forward;
-            Rigidbody rb = copy.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
-        }
-
-        //if (Input.GetKeyDown(KeyCode.Mouse0))
-        //{
-        //    GameObject copy = Instantiate(m_TennisBall);
-        //    copy.transform.position = transform.position + transform.forward;
-        //    Rigidbody rb = copy.GetComponent<Rigidbody>();
-        //    rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
-        //}
 
         //--------
         // Health
