@@ -28,7 +28,12 @@ public class Player : MonoBehaviour
     public int nSpawnHealth = 20;
     public int nCurrentHealth;
     private bool bAlive = true;
-    
+
+    //-------------
+    // Ball Pickup
+    //-------------
+    private bool bBallPickUp = false;
+
     //--------------------------------------------------------
     // Use this for initialization
     //--------------------------------------------------------
@@ -154,12 +159,18 @@ public class Player : MonoBehaviour
             //----------------
             // Mouse shooting
             //----------------
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (bBallPickUp == true)
             {
-                GameObject copy = Instantiate(m_TennisBall);
-                copy.transform.position = transform.position + transform.forward;
-                Rigidbody rb = copy.GetComponent<Rigidbody>();
-                rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    GameObject copy = Instantiate(m_TennisBall);
+                    copy.transform.position = transform.position + transform.forward;
+                    Rigidbody rb = copy.GetComponent<Rigidbody>();
+                    rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+
+                    // The ball is thrown so it becomes false
+                    bBallPickUp = false;
+                }
             }
         }
 
@@ -195,6 +206,11 @@ public class Player : MonoBehaviour
 
             // updating the health value onscreen
             SetHealthText();
+
+            // The player has picked it up
+            bBallPickUp = true;
+
+            // INSERT DESTROY TENNISBALL SCRIPT HERE
         }
     }
 
