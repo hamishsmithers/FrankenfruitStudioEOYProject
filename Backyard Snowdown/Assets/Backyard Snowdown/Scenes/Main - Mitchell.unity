@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4399003, g: 0.48836243, b: 0.5685675, a: 1}
+  m_IndirectSpecularColor: {r: 0.4398998, g: 0.48836178, b: 0.5685669, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4818759989017614, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 19.05
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4818759989017614, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_LocalPosition.y
@@ -157,7 +157,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4818759989017614, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.1500001
+      value: -1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4818759989017614, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_LocalRotation.x
@@ -192,6 +192,10 @@ Prefab:
         type: 2}
       propertyPath: bKeyboardControls
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001984826856994, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
+      propertyPath: m_TagString
+      value: Character
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
@@ -15199,7 +15203,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4818759989017614, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.12
+      value: 17.33
       objectReference: {fileID: 0}
     - target: {fileID: 4818759989017614, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_LocalPosition.y
@@ -15207,7 +15211,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4818759989017614, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.21
+      value: -1.48
       objectReference: {fileID: 0}
     - target: {fileID: 4818759989017614, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_LocalRotation.x
@@ -15246,6 +15250,10 @@ Prefab:
     - target: {fileID: 1001984826856994, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001984826856994, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
+      propertyPath: m_TagString
+      value: Character
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}

@@ -33,19 +33,20 @@ public class Player : MonoBehaviour
     // Ball Pickup
     //-------------
     private bool bBallPickUp = false;
+    private bool brightTriggerPressed = false;
 
     //--------------------------------------------------------
     // Use this for initialization
     //--------------------------------------------------------
-    void Start ()
+    void Start()
     {
         // Setting up multiple xbox controller input
         switch (controller)
         {
             case XboxController.First: GetComponent<Renderer>().name = "Characterp1"; break;
-            //case XboxController.Second: GetComponent<Renderer>().name = "Characterp2"; break;
-            //case XboxController.Third: GetComponent<Renderer>().name = "Characterp3"; break;
-            //case XboxController.Fourth: GetComponent<Renderer>().name = "Characterp4"; break;
+                //case XboxController.Second: GetComponent<Renderer>().name = "Characterp2"; break;
+                //case XboxController.Third: GetComponent<Renderer>().name = "Characterp3"; break;
+                //case XboxController.Fourth: GetComponent<Renderer>().name = "Characterp4"; break;
         }
 
         //--------
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     // Update is called once per frame
     //--------------------------------------------------------
-    void Update ()
+    void Update()
     {
         //----------
         // Movement
@@ -109,13 +110,27 @@ public class Player : MonoBehaviour
             //---------------
             float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
 
-            if (rightTrigHeight < 1.0f)
+            if (rightTrigHeight < 1.0f && brightTriggerPressed)
             {
                 //Debug.Log("Right Trigger Pressed");
-                GameObject copy = Instantiate(m_TennisBall);
-                copy.transform.position = transform.position + transform.forward;
-                Rigidbody rb = copy.GetComponent<Rigidbody>();
-                rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+
+                if (bBallPickUp)
+                {
+                    GameObject copy = Instantiate(m_TennisBall);
+                    copy.transform.position = transform.position + transform.forward;
+                    Rigidbody rb = copy.GetComponent<Rigidbody>();
+                    rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+
+                    // The ball is thrown so it becomes false
+                    bBallPickUp = false;
+                }
+
+                brightTriggerPressed = false;
+            }
+
+            if (rightTrigHeight > 1.0f)
+            {
+                brightTriggerPressed = true;
             }
         }
 
@@ -159,9 +174,9 @@ public class Player : MonoBehaviour
             //----------------
             // Mouse shooting
             //----------------
-            if (bBallPickUp == true)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (bBallPickUp)
                 {
                     GameObject copy = Instantiate(m_TennisBall);
                     copy.transform.position = transform.position + transform.forward;
@@ -177,14 +192,14 @@ public class Player : MonoBehaviour
         //--------
         // Health
         //--------
-        if(nCurrentHealth <=0)
+        if (nCurrentHealth <= 0)
         {
             bAlive = false;
             nCurrentHealth = 0;
         }
 
         // if player is dead
-        if(!bAlive)
+        if (!bAlive)
         {
             Destroy(gameObject);
         }
@@ -211,6 +226,9 @@ public class Player : MonoBehaviour
             bBallPickUp = true;
 
             // INSERT DESTROY TENNISBALL SCRIPT HERE
+            //TennisBall tb = new TennisBall();
+            //TennisBall.Kill();
+            //tb.Kill();
         }
     }
 
