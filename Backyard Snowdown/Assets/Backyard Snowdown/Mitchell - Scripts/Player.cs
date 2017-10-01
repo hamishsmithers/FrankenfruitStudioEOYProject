@@ -10,9 +10,15 @@ public class Player : MonoBehaviour
     //----------   
     // Movement
     //----------
-    public float m_fSpeed = 10;
     public XboxController controller;
-
+    public float m_fSpeed = 5.0f;
+    public float m_fDashSpeed = 10.0f;
+    public float fDashDuration = 0.5f;
+    private float fDashCount = 0.0f;
+    bool bSpacePressed = false;
+    bool bKeyboardMovementLock = false;
+    bool bXboxMovementLock = false;
+    bool bLeftTriggerPressed = false;
     //----------
     // Shooting
     //----------
@@ -33,7 +39,7 @@ public class Player : MonoBehaviour
     // Ball Pickup
     //-------------
     private bool bBallPickUp = false;
-    private bool brightTriggerPressed = false;
+    private bool bRightTriggerPressed = false;
 
     //--------------------------------------------------------
     // Use this for initialization
@@ -67,22 +73,25 @@ public class Player : MonoBehaviour
         Vector3 v3Pos;
         v3Pos.x = transform.position.x;
 
-        //------------------------
-        // Xbox Movement Controls
-        //
-        // Left stick movement
-        //------------------------ 
         if (Global.bXboxControls)
         {
+            //------------------------
+            // Xbox Movement Controls
+            //
+            // Left stick movement
+            //------------------------ 
             v3Pos = transform.position;
             float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
             float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controller);
             //Debug.Log("Left Stick X: " + axisX + " Left Stick Y: " + axisY);
 
-            float newPosX = v3Pos.x + (axisX * m_fSpeed * Time.deltaTime);
-            float newPosZ = v3Pos.z + (axisY * m_fSpeed * Time.deltaTime);
-            v3Pos = new Vector3(newPosX, transform.position.y, newPosZ);
-            transform.position = v3Pos;
+            if (!bXboxMovementLock)
+            {
+                float newPosX = v3Pos.x + (axisX * m_fSpeed * Time.deltaTime);
+                float newPosZ = v3Pos.z + (axisY * m_fSpeed * Time.deltaTime);
+                v3Pos = new Vector3(newPosX, transform.position.y, newPosZ);
+                transform.position = v3Pos;
+            }
 
             axisX = XCI.GetAxis(XboxAxis.RightStickX, controller);
             axisY = XCI.GetAxis(XboxAxis.RightStickY, controller);
@@ -90,7 +99,7 @@ public class Player : MonoBehaviour
 
             //-------------------------
             // Xbox right stick aiming
-            ////-------------------------
+            //-------------------------
             Vector3 dir = new Vector3(axisX, 0.0f, axisY);
             transform.forward = dir;
 
@@ -105,12 +114,35 @@ public class Player : MonoBehaviour
             //    }
             //}
 
+            //------
+            // Dash
+            //------
+            float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.LeftTrigger, controller));
+
+            if (leftTrigHeight < 1.0f || bLeftTriggerPressed)
+            {
+                bLeftTriggerPressed = true;
+                bXboxMovementLock = true;
+
+                if (fDashDuration > fDashCount)
+                {
+                    Dash();
+                    fDashCount += Time.deltaTime;
+                }
+                else
+                {
+                    bLeftTriggerPressed = false;
+                    fDashCount = 0.0f;
+                    bXboxMovementLock = false;
+                }
+            }
+
             //---------------
             // Xbox shooting
             //---------------
             float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
 
-            if (rightTrigHeight < 1.0f && brightTriggerPressed)
+            if (rightTrigHeight < 1.0f && bRightTriggerPressed)
             {
                 //Debug.Log("Right Trigger Pressed");
 
@@ -125,12 +157,12 @@ public class Player : MonoBehaviour
                     bBallPickUp = false;
                 }
 
-                brightTriggerPressed = false;
+                bRightTriggerPressed = false;
             }
 
             if (rightTrigHeight > 1.0f)
             {
-                brightTriggerPressed = true;
+                bRightTriggerPressed = true;
             }
         }
 
@@ -139,24 +171,48 @@ public class Player : MonoBehaviour
         //----------------------------
         if (Global.bKeyboardControls)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (!bKeyboardMovementLock)
             {
-                transform.position += Vector3.forward * Time.deltaTime * m_fSpeed;
+                if (Input.GetKey(KeyCode.W))
+                {
+                        transform.position += Vector3.forward * Time.deltaTime * m_fSpeed;
+                }
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                        transform.position += Vector3.forward * Time.deltaTime * -m_fSpeed;
+                }
+
+                if (Input.GetKey(KeyCode.D))
+                {
+                        transform.position += Vector3.right * Time.deltaTime * m_fSpeed;
+                }
+
+                if (Input.GetKey(KeyCode.A))
+                {
+                        transform.position += Vector3.right * Time.deltaTime * -m_fSpeed;
+                }
             }
 
-            if (Input.GetKey(KeyCode.S))
+            //-----
+            //Dash
+            //-----
+            if (Input.GetKeyDown(KeyCode.Space) || bSpacePressed)
             {
-                transform.position += Vector3.forward * Time.deltaTime * -m_fSpeed;
-            }
+                bSpacePressed = true;
+                bKeyboardMovementLock = true;
 
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.position += Vector3.right * Time.deltaTime * m_fSpeed;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.position += Vector3.right * Time.deltaTime * -m_fSpeed;
+                if (fDashDuration > fDashCount)
+                {
+                    Dash();
+                    fDashCount += Time.deltaTime;
+                }
+                else
+                {
+                    bSpacePressed = false;
+                    fDashCount = 0.0f;
+                    bKeyboardMovementLock = false;
+                }
             }
 
             //-------------- 
@@ -196,6 +252,9 @@ public class Player : MonoBehaviour
         {
             bAlive = false;
             nCurrentHealth = 0;
+
+            // updating the health value onscreen
+            SetHealthText();
         }
 
         // if player is dead
@@ -230,6 +289,15 @@ public class Player : MonoBehaviour
             //TennisBall.Kill();
             //tb.Kill();
         }
+    }
+
+    //--------------------------------------------------------
+    //
+    //--------------------------------------------------------
+    private void Dash()
+    {
+        // this is bad, need to somehow get the player's last direction as a vector
+        transform.Translate(Vector3.forward * m_fDashSpeed * Time.deltaTime);
     }
 
     //--------------------------------------------------------
