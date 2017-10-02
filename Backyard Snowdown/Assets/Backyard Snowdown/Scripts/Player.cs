@@ -18,8 +18,7 @@ public class Player : MonoBehaviour
     public GameObject m_PlayerModel = null;
     private float fDashCount = 0.0f;
     bool bSpacePressed = false;
-    bool bKeyboardMovementLock = false;
-    bool bXboxMovementLock = false;
+    bool bMovementLock = false;
     bool bLeftTriggerPressed = false;
     Vector3 v3DashDir;
     Vector3 v3MovePos;
@@ -58,15 +57,6 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void Start()
     {
-        //// Setting up multiple xbox controller input
-        //switch (controller)
-        //{
-        //    case XboxController.First: gameObject.name = "Character1"; break;
-        //        //case XboxController.Second: GetComponent<Renderer>().name = "Characterp2"; break;
-        //        //case XboxController.Third: GetComponent<Renderer>().name = "Characterp3"; break;
-        //        //case XboxController.Fourth: GetComponent<Renderer>().name = "Characterp4"; break;
-        //}
-
         rb = GetComponent<Rigidbody>();
 
         //--------
@@ -74,165 +64,122 @@ public class Player : MonoBehaviour
         //--------
         nCurrentHealth = nSpawnHealth;
         SetHealthText();
-
     }
 
     //--------------------------------------------------------
-    // Update is called once per frame
+    // FixedUpdate is called once per frame
     //--------------------------------------------------------
     void FixedUpdate()
     {
         float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
         bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
 
-        Vector3 v3LeftAxis = Vector3.zero;
-        if (Input.GetKey(KeyCode.D) && controller == XboxController.First)
-            v3LeftAxis.x = 1.0f;
-        else if(Input.GetKey(KeyCode.A) && controller == XboxController.First)
-            v3LeftAxis.x = -1.0f;
+        //----------
+        // Movement
+        //----------
+        Vector3 v3VerticalAxis = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.W) && controller == XboxController.First)
+            v3VerticalAxis.z = 1.0f;
+        else if (Input.GetKey(KeyCode.S) && controller == XboxController.First)
+            v3VerticalAxis.z = -1.0f;
         else
-            v3LeftAxis.x = XCI.GetAxis(XboxAxis.LeftStickX, controller);
+            v3VerticalAxis.z = XCI.GetAxis(XboxAxis.LeftStickY, controller);
+
+
+        Vector3 v3HorizontalAxis = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.D) && controller == XboxController.First)
+            v3HorizontalAxis.x = 1.0f;
+        else if (Input.GetKey(KeyCode.A) && controller == XboxController.First)
+            v3HorizontalAxis.x = -1.0f;
+        else
+            v3HorizontalAxis.x = XCI.GetAxis(XboxAxis.LeftStickX, controller);
+
+        Vector3 v3Pos;
+        v3Pos.x = transform.position.x;
+        v3Pos.z = transform.position.z;
+
+        //xbox
+        float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
+        float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controller);
+
+        //-------------------------
+        // Xbox Right Stick Aiming
+        //-------------------------
+        axisX = XCI.GetAxis(XboxAxis.RightStickX, controller);
+        axisY = XCI.GetAxis(XboxAxis.RightStickY, controller);
+        //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+
+        Vector3 v3XboxDashDir = new Vector3(axisX, 0.0f, axisY);
+        transform.forward = v3XboxDashDir;
+
+        //------
+        // Dash
+        //------
+        float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.LeftTrigger, controller));
+
+        if (leftTrigHeight < 1.0f || bLeftTriggerPressed || Input.GetKeyDown(KeyCode.Space) || bSpacePressed)
+        {
+            bLeftTriggerPressed = true;
+            bSpacePressed = true;
+            bMovementLock = true;
+
+            if (fDashDuration > fDashCount)
+            {
+                Dash();
+                fDashCount += Time.deltaTime;
+                m_PlayerModel.GetComponent<Animator>().SetBool("dashing", true);
+            }
+            else
+            {
+                bLeftTriggerPressed = false;
+                bSpacePressed = false;
+                fDashCount = 0.0f;
+                bMovementLock = false;
+                m_PlayerModel.GetComponent<Animator>().SetBool("dashing", false);
+            }
+        }
+
+        if (leftTrigHeight < 1.0f)
+        {
+            v3DashDir = v3XboxDashDir;
+            v3DashDir.y = 0.0f;
+            v3DashDir.Normalize();
+            v3MovePos.Normalize();
+        }
+
+        //------------------
+        // Ability Snowball
+        //------------------
+        if (XCI.GetButtonDown(XboxButton.LeftBumper, controller))
+        {
+            GameObject copy = Instantiate(m_SnowBall);
+            copy.transform.position = transform.position + transform.forward;
+            Rigidbody rb = copy.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+        }
 
         //----------
         // Movement
         //----------
-        Vector3 v3Pos;
-        v3Pos.x = transform.position.x;
-
-        if (Global.bXboxControls)
-        {
-            //------------------------
-            // Xbox Movement Controls
-            //
-            // Left Stick Movement
-            //------------------------ 
-            v3Pos = transform.position;
-            float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
-            float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controller);
-            //Debug.Log("Left Stick X: " + axisX + " Left Stick Y: " + axisY);
-
-            if (!bXboxMovementLock)
-            {
-                // Cap Movement
-                if (m_fSpeed > m_fMaxSpeed)
-                {
-                    m_fSpeed = m_fMaxSpeed;
-                }
-
-                float newPosX = v3Pos.x + (axisX * m_fSpeed * Time.deltaTime);
-                float newPosZ = v3Pos.z + (axisY * m_fSpeed * Time.deltaTime);
-                v3Pos = new Vector3(newPosX, transform.position.y, newPosZ);
-                transform.position = v3Pos;
-            }
-
-            axisX = XCI.GetAxis(XboxAxis.RightStickX, controller);
-            axisY = XCI.GetAxis(XboxAxis.RightStickY, controller);
-            //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
-
-            //-------------------------
-            // Xbox Right Stick Aiming
-            //-------------------------
-            Vector3 dir = new Vector3(axisX, 0.0f, axisY);
-            transform.forward = dir;
-
-            //// trying to store the last direction facing and apply that when no left stick input is read.
-            //{
-            //    Vector3 dirStore = new Vector3();
-            //    dirStore = dir;
-
-            //    if (axisX == 0.0f && axisY == 0.0f)
-            //    {
-            //        transform.forward = dirStore;
-            //    }
-            //}
-
-            //------
-            // Dash
-            //------
-            float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.LeftTrigger, controller));
-
-            if (leftTrigHeight < 1.0f || bLeftTriggerPressed)
-            {
-                bLeftTriggerPressed = true;
-                bXboxMovementLock = true;
-
-                if (fDashDuration > fDashCount)
-                {
-                    Dash();
-                    fDashCount += Time.deltaTime;
-                    m_PlayerModel.GetComponent<Animator>().SetBool("dashing", true);
-                }
-                else
-                {
-                    bLeftTriggerPressed = false;
-                    fDashCount = 0.0f;
-                    bXboxMovementLock = false;
-                    m_PlayerModel.GetComponent<Animator>().SetBool("dashing", false);
-                }
-            }
-
-            //---------------
-            // Xbox Shooting
-            //---------------
-            //float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
-
-            //if (rightTrigHeight < 1.0f && bRightTriggerPressed)
-            //{
-            //    //Debug.Log("Right Trigger Pressed");
-
-            //    if (bBallPickUp)
-            //    {
-            //        GameObject copy = Instantiate(m_TennisBall);
-            //        copy.transform.position = transform.position + transform.forward;
-                    
-            //        rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
-
-            //        // The ball is thrown so it becomes false
-            //        bBallPickUp = false;
-            //    }
-
-            //    bRightTriggerPressed = false;
-            //}
-
-            //if (rightTrigHeight > 1.0f)
-            //{
-            //    bRightTriggerPressed = true;
-            //}
-
-            //------------------
-            // Ability Snowball
-            //------------------
-            if(XCI.GetButtonDown(XboxButton.LeftBumper, controller))
-            {
-                GameObject copy = Instantiate(m_SnowBall);
-                copy.transform.position = transform.position + transform.forward;
-                Rigidbody rb = copy.GetComponent<Rigidbody>();
-                rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-            }
-
-
-        }
-
-        //----------------------------
-        // Keyboard Movement Controls
-        //----------------------------
         if (Global.bKeyboardControls)
         {
-            if (!bKeyboardMovementLock)
+            if (!bMovementLock)
             {
+                // Up and down movement
                 v3MovePos = Vector3.zero;
 
-                //if (Input.GetKey(KeyCode.W))
-                //{
-                //    v3MovePos += Vector3.forward * Time.fixedDeltaTime * m_fSpeed;
-                //}
+                v3MovePos += v3VerticalAxis * Time.fixedDeltaTime * m_fSpeed;
 
-                //if (Input.GetKey(KeyCode.S))
-                //{
-                //    v3MovePos += Vector3.forward * Time.fixedDeltaTime * -m_fSpeed;
-                //}
+                if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
+                {
+                    v3MovePos.Normalize();
+                    v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
+                }
 
-                v3MovePos += v3LeftAxis * Time.fixedDeltaTime * m_fSpeed;
+                // Left and right movement
+                v3MovePos += v3HorizontalAxis * Time.fixedDeltaTime * m_fSpeed;
 
                 if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
                 {
@@ -246,26 +193,25 @@ public class Player : MonoBehaviour
             //-------------- 
             // Mouse Aiming
             //--------------
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            Physics.Raycast(ray, out hit);
-
-            Vector3 v3Target = hit.point;
-            v3Target.y = transform.position.y;
-            transform.LookAt(v3Target);
-
-            Debug.Log(v3Target);
-
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (axisX == 0.0f && axisY == 0.0f)
             {
-                v3DashDir = hit.point - transform.position;
-                v3DashDir.y = 0.0f;
-                v3DashDir.Normalize();
-                v3MovePos.Normalize();
-            }
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            //Debug.Log(v3DashDir);
+                RaycastHit hit;
+                Physics.Raycast(ray, out hit);
+
+                Vector3 v3Target = hit.point;
+                v3Target.y = transform.position.y;
+                transform.LookAt(v3Target);
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    v3DashDir = hit.point - transform.position;
+                    v3DashDir.y = 0.0f;
+                    v3DashDir.Normalize();
+                    v3MovePos.Normalize();
+                }
+            }
 
             //----------------
             // Mouse Shooting
@@ -278,32 +224,9 @@ public class Player : MonoBehaviour
                     copy.transform.position = transform.position + transform.forward;
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
                     rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
-                    
+
                     // The ball is thrown so it becomes false
                     bBallPickUp = false;
-                }
-            }
-
-            //------
-            // Dash
-            //------
-            if (Input.GetKeyDown(KeyCode.Space) || bSpacePressed)
-            {
-                bSpacePressed = true;
-                bKeyboardMovementLock = true;
-
-                if (fDashDuration > fDashCount)
-                {
-                    Dash();
-                    fDashCount += Time.deltaTime;
-                    m_PlayerModel.GetComponent<Animator>().SetBool("dashing", true);
-                }
-                else
-                {
-                    bSpacePressed = false;
-                    fDashCount = 0.0f;
-                    bKeyboardMovementLock = false;
-                    m_PlayerModel.GetComponent<Animator>().SetBool("dashing", false);
                 }
             }
 
@@ -360,7 +283,7 @@ public class Player : MonoBehaviour
 
             // The player has picked it up
             bBallPickUp = true;
-            
+
             Destroy(col.gameObject);
         }
     }

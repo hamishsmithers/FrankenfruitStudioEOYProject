@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114350160294729074}
   - component: {fileID: 65620250731004514}
   - component: {fileID: 54410493344195324}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Character
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33020051827003012}
   - component: {fileID: 23329090169715610}
   - component: {fileID: 95109827045722992}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CharacterMesh
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -66,8 +66,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1001984826856994}
-  m_LocalRotation: {x: -0, y: -0.038785998, z: -0, w: 0.99924755}
-  m_LocalPosition: {x: 9.761455, y: -1.9200001, z: -2.6469207}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4164806739333848}
@@ -126,7 +126,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!65 &65620250731004514
 BoxCollider:
@@ -177,6 +177,8 @@ MonoBehaviour:
   m_TennisBall: {fileID: 1770691937743794, guid: f9a9a1a256e40914c8b103e269ca19f8,
     type: 2}
   nTennisBallSpeed: 1000
+  m_SnowBall: {fileID: 1190738819308500, guid: a32ea0354c09ef24a8adfcd29ba52e08, type: 2}
+  m_fSnowballSpeed: 1000
   txtHealth: {fileID: 0}
   nSpawnHealth: 20
   nCurrentHealth: 18
