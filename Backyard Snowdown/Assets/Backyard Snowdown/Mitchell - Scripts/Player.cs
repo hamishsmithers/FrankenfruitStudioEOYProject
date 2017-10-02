@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     bool bKeyboardMovementLock = false;
     bool bXboxMovementLock = false;
     bool bLeftTriggerPressed = false;
+    Vector3 v3DashDir;
+    Vector3 v3MovePos;
+
     //----------
     // Shooting
     //----------
@@ -48,14 +51,14 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void Start()
     {
-        // Setting up multiple xbox controller input
-        switch (controller)
-        {
-            case XboxController.First: gameObject.name = "Character1"; break;
-                //case XboxController.Second: GetComponent<Renderer>().name = "Characterp2"; break;
-                //case XboxController.Third: GetComponent<Renderer>().name = "Characterp3"; break;
-                //case XboxController.Fourth: GetComponent<Renderer>().name = "Characterp4"; break;
-        }
+        //// Setting up multiple xbox controller input
+        //switch (controller)
+        //{
+        //    case XboxController.First: gameObject.name = "Character1"; break;
+        //        //case XboxController.Second: GetComponent<Renderer>().name = "Characterp2"; break;
+        //        //case XboxController.Third: GetComponent<Renderer>().name = "Characterp3"; break;
+        //        //case XboxController.Fourth: GetComponent<Renderer>().name = "Characterp4"; break;
+        //}
 
         //--------
         // Health
@@ -183,46 +186,80 @@ public class Player : MonoBehaviour
         {
             if (!bKeyboardMovementLock)
             {
-                //// Cap Movement
-                //if (m_fSpeed > m_fMaxSpeed)
-                //{
-                //    m_fSpeed = m_fMaxSpeed;
-                //}
-
-                Vector3 MovePos = Vector3.zero;
+                v3MovePos = Vector3.zero;
 
                 if (Input.GetKey(KeyCode.W))
                 {
-                        MovePos += Vector3.forward * Time.deltaTime * m_fSpeed;
+                    v3MovePos += Vector3.forward * Time.deltaTime * m_fSpeed;
                 }
 
                 if (Input.GetKey(KeyCode.S))
                 {
-                       MovePos += Vector3.forward * Time.deltaTime * -m_fSpeed;
+                    v3MovePos += Vector3.forward * Time.deltaTime * -m_fSpeed;
                 }
 
                 if (Input.GetKey(KeyCode.D))
                 {
-                        MovePos += Vector3.right * Time.deltaTime * m_fSpeed;
+                    v3MovePos += Vector3.right * Time.deltaTime * m_fSpeed;
                 }
 
                 if (Input.GetKey(KeyCode.A))
                 {
-                        MovePos += Vector3.right * Time.deltaTime * -m_fSpeed;
+                    v3MovePos += Vector3.right * Time.deltaTime * -m_fSpeed;
                 }
 
-                if(MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
+                if (v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
                 {
-                    MovePos.Normalize();
-                    MovePos *= m_fMaxSpeed * Time.deltaTime;
+                    v3MovePos.Normalize();
+                    v3MovePos *= m_fMaxSpeed * Time.deltaTime;
                 }
 
-                transform.position += MovePos;
+                transform.position += v3MovePos;
             }
 
-            //-----
-            //Dash
-            //-----
+            //-------------- 
+            // Mouse Aiming
+            //--------------
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
+
+            Vector3 v3Target = hit.point;
+            v3Target.y = transform.position.y;
+            transform.LookAt(v3Target);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                v3DashDir = hit.point;
+                v3DashDir.Normalize();
+                v3MovePos.Normalize();
+
+                v3DashDir += v3MovePos;
+            }
+
+            Debug.Log(v3DashDir);
+
+            //----------------
+            // Mouse Shooting
+            //----------------
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (bBallPickUp)
+                {
+                    GameObject copy = Instantiate(m_TennisBall);
+                    copy.transform.position = transform.position + transform.forward;
+                    Rigidbody rb = copy.GetComponent<Rigidbody>();
+                    rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+
+                    // The ball is thrown so it becomes false
+                    bBallPickUp = false;
+                }
+            }
+
+            //------
+            // Dash
+            //------
             if (Input.GetKeyDown(KeyCode.Space) || bSpacePressed)
             {
                 bSpacePressed = true;
@@ -240,35 +277,6 @@ public class Player : MonoBehaviour
                     fDashCount = 0.0f;
                     bKeyboardMovementLock = false;
                     m_PlayerModel.GetComponent<Animator>().SetBool("dashing", false);
-                }
-            }
-
-            //-------------- 
-            // Mouse Aiming
-            //--------------
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            Physics.Raycast(ray, out hit);
-
-            Vector3 target = hit.point;
-            target.y = transform.position.y;
-            transform.LookAt(target);
-
-            //----------------
-            // Mouse Shooting
-            //----------------
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                if (bBallPickUp)
-                {
-                    GameObject copy = Instantiate(m_TennisBall);
-                    copy.transform.position = transform.position + transform.forward;
-                    Rigidbody rb = copy.GetComponent<Rigidbody>();
-                    rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
-
-                    // The ball is thrown so it becomes false
-                    bBallPickUp = false;
                 }
             }
         }
@@ -324,10 +332,9 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Dash()
     {
-       
         // this is bad, need to somehow get the player's last direction as a vector
-        transform.Translate(Vector3.forward * m_fDashSpeed * Time.deltaTime);
-        
+        //transform.Translate(Vector3.forward * m_fDashSpeed * Time.deltaTime);
+        transform.position += v3DashDir * Time.deltaTime * m_fSpeed;
     }
 
     //--------------------------------------------------------
