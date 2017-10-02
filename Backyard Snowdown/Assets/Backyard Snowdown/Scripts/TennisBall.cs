@@ -42,23 +42,19 @@ public class TennisBall : MonoBehaviour
         //    }
         //}
 
-        if (rb.velocity.x < 2.0f)
+        if (rb.velocity.x + rb.velocity.z > 0.5f)
+            nScoreValue = 2;
+        else if (rb.velocity.x + rb.velocity.z < 0.5f)
             nScoreValue = 0;
 
-        if (rb.velocity.y < 2.0f)
+        if (rb.velocity.x + rb.velocity.z > 0.5f)
+            nScoreValue = 2;
+        else if (rb.velocity.x + rb.velocity.z < 0.5f)
             nScoreValue = 0;
 
-        if (rb.velocity.x > 2.0f)
-            nScoreValue = 2;
+        // now i need to do the same for the negitive axis but then conflicts happen.
 
-        if (rb.velocity.y > 2.0f)
-            nScoreValue = 2;
-
-        if (rb.velocity.x > -2.0f)
-            nScoreValue = 2;
-
-        if (rb.velocity.y > -2.0f)
-            nScoreValue = 2;
+        Debug.Log(nScoreValue);
 
         //if (rb.velocity.x < 2.0f && rb.velocity.x > 0.0f || rb.velocity.x > -2.0f && rb.velocity.x < 0.0f || rb.velocity.z < 2.0f && rb.velocity.z > 0.0f || rb.velocity.z > -2.0f && rb.velocity.z < 0.0f)
         //    nScoreValue = 2;
