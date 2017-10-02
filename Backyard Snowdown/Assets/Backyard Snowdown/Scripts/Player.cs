@@ -33,6 +33,12 @@ public class Player : MonoBehaviour
     // xbox max scale of trigger when pressed down
     private const float MAX_TRG_SCL = 1.21f;
 
+    //-----------------
+    // Ability Snowball
+    //-----------------
+    public GameObject m_SnowBall = null;
+    public float m_fSnowballSpeed = 1000.0f;
+
     //--------
     // Health
     //--------
@@ -192,6 +198,19 @@ public class Player : MonoBehaviour
             //{
             //    bRightTriggerPressed = true;
             //}
+
+            //------------------
+            // Ability Snowball
+            //------------------
+            if(XCI.GetButtonDown(XboxButton.LeftBumper, controller))
+            {
+                GameObject copy = Instantiate(m_SnowBall);
+                copy.transform.position = transform.position + transform.forward;
+                Rigidbody rb = copy.GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+            }
+
+
         }
 
         //----------------------------
@@ -286,6 +305,17 @@ public class Player : MonoBehaviour
                     bKeyboardMovementLock = false;
                     m_PlayerModel.GetComponent<Animator>().SetBool("dashing", false);
                 }
+            }
+
+            //------------------
+            // Ability Snowball
+            //------------------
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                GameObject copy = Instantiate(m_SnowBall);
+                copy.transform.position = transform.position + transform.forward;
+                Rigidbody rb = copy.GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
             }
         }
 
