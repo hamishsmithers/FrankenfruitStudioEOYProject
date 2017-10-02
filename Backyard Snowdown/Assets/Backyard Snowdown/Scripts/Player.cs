@@ -233,37 +233,28 @@ public class Player : MonoBehaviour
                 // The ball is thrown so it becomes false
                 bBallPickUp = false;
             }
-
-        //------------------
-        // Ability Snowball
-        //------------------
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-            //-----------------
-            // Ability Snowman
-            //-----------------
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-
-            GameObject copy = Instantiate(m_SnowBall);
-            copy.transform.position = transform.position + transform.forward;
-            Rigidbody rb = copy.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
         }
 
-        //--------
-        // Health
-        //--------
-        if (nCurrentHealth <= 0)
-        {
-            bAlive = false;
-            nCurrentHealth = 0;
-            {
-                GameObject copy = Instantiate(m_SnowMan);
+            //------------------
+            // Ability Snowball
+            //------------------
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            { 
+                GameObject copy = Instantiate(m_SnowBall);
                 copy.transform.position = transform.position + transform.forward;
-                //Rigidbody rb = copy.GetComponent<Rigidbody>();
-                //rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+                Rigidbody rb = copy.GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
             }
 
+        //-----------------
+        // Ability Snowman
+        //-----------------
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+                GameObject copy = Instantiate(m_SnowMan);
+                copy.transform.position = transform.position + transform.forward;
+
+        }
             //--------
             // Health
             //--------
@@ -271,22 +262,37 @@ public class Player : MonoBehaviour
             {
                 bAlive = false;
                 nCurrentHealth = 0;
+                {
+                    GameObject copy = Instantiate(m_SnowMan);
+                    copy.transform.position = transform.position + transform.forward;
+                    //Rigidbody rb = copy.GetComponent<Rigidbody>();
+                    //rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+                }
 
-                // updating the health value onscreen
-                SetHealthText();
+                ////--------
+                //// Health
+                ////--------
+                //if (nCurrentHealth <= 0)
+                //{
+                //    bAlive = false;
+                //    nCurrentHealth = 0;
+
+                //    // updating the health value onscreen
+                //    SetHealthText();
+                //}
+
+                //// if player is dead
+                //if (!bAlive)
+                //{
+                //    Destroy(gameObject);
+                //}
+
+                //stop sliding
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
             }
-
-            // if player is dead
-            if (!bAlive)
-            {
-                Destroy(gameObject);
-            }
-
-            //stop sliding
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
         }
-    }
+    
 
     //--------------------------------------------------------
     //

@@ -38,6 +38,6 @@ public class AbilitySnowBall : MonoBehaviour
             }
         }
 
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
