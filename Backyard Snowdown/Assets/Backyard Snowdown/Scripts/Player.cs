@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     bool bLeftTriggerPressed = false;
     Vector3 v3DashDir;
     Vector3 v3MovePos;
+    Rigidbody rb;
 
     //----------
     // Shooting
@@ -60,18 +61,32 @@ public class Player : MonoBehaviour
         //        //case XboxController.Fourth: GetComponent<Renderer>().name = "Characterp4"; break;
         //}
 
+        rb = GetComponent<Rigidbody>();
+
         //--------
         // Health
         //--------
         nCurrentHealth = nSpawnHealth;
         SetHealthText();
+
     }
 
     //--------------------------------------------------------
     // Update is called once per frame
     //--------------------------------------------------------
-    void Update()
+    void FixedUpdate()
     {
+        float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
+        bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
+
+        Vector3 v3LeftAxis = Vector3.zero;
+        if (Input.GetKey(KeyCode.D) && controller == XboxController.First)
+            v3LeftAxis.x = 1.0f;
+        else if(Input.GetKey(KeyCode.A) && controller == XboxController.First)
+            v3LeftAxis.x = -1.0f;
+        else
+            v3LeftAxis.x = XCI.GetAxis(XboxAxis.LeftStickX, controller);
+
         //----------
         // Movement
         //----------
@@ -153,30 +168,30 @@ public class Player : MonoBehaviour
             //---------------
             // Xbox Shooting
             //---------------
-            float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
+            //float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
 
-            if (rightTrigHeight < 1.0f && bRightTriggerPressed)
-            {
-                //Debug.Log("Right Trigger Pressed");
+            //if (rightTrigHeight < 1.0f && bRightTriggerPressed)
+            //{
+            //    //Debug.Log("Right Trigger Pressed");
 
-                if (bBallPickUp)
-                {
-                    GameObject copy = Instantiate(m_TennisBall);
-                    copy.transform.position = transform.position + transform.forward;
-                    Rigidbody rb = copy.GetComponent<Rigidbody>();
-                    rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+            //    if (bBallPickUp)
+            //    {
+            //        GameObject copy = Instantiate(m_TennisBall);
+            //        copy.transform.position = transform.position + transform.forward;
+                    
+            //        rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
 
-                    // The ball is thrown so it becomes false
-                    bBallPickUp = false;
-                }
+            //        // The ball is thrown so it becomes false
+            //        bBallPickUp = false;
+            //    }
 
-                bRightTriggerPressed = false;
-            }
+            //    bRightTriggerPressed = false;
+            //}
 
-            if (rightTrigHeight > 1.0f)
-            {
-                bRightTriggerPressed = true;
-            }
+            //if (rightTrigHeight > 1.0f)
+            //{
+            //    bRightTriggerPressed = true;
+            //}
         }
 
         //----------------------------
@@ -188,33 +203,25 @@ public class Player : MonoBehaviour
             {
                 v3MovePos = Vector3.zero;
 
-                if (Input.GetKey(KeyCode.W))
-                {
-                    v3MovePos += Vector3.forward * Time.deltaTime * m_fSpeed;
-                }
+                //if (Input.GetKey(KeyCode.W))
+                //{
+                //    v3MovePos += Vector3.forward * Time.fixedDeltaTime * m_fSpeed;
+                //}
 
-                if (Input.GetKey(KeyCode.S))
-                {
-                    v3MovePos += Vector3.forward * Time.deltaTime * -m_fSpeed;
-                }
+                //if (Input.GetKey(KeyCode.S))
+                //{
+                //    v3MovePos += Vector3.forward * Time.fixedDeltaTime * -m_fSpeed;
+                //}
 
-                if (Input.GetKey(KeyCode.D))
-                {
-                    v3MovePos += Vector3.right * Time.deltaTime * m_fSpeed;
-                }
+                v3MovePos += v3LeftAxis * Time.fixedDeltaTime * m_fSpeed;
 
-                if (Input.GetKey(KeyCode.A))
-                {
-                    v3MovePos += Vector3.right * Time.deltaTime * -m_fSpeed;
-                }
-
-                if (v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
+                if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
                 {
                     v3MovePos.Normalize();
-                    v3MovePos *= m_fMaxSpeed * Time.deltaTime;
+                    v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
                 }
 
-                transform.position += v3MovePos;
+                rb.MovePosition(rb.position + v3MovePos);
             }
 
             //-------------- 
@@ -229,21 +236,22 @@ public class Player : MonoBehaviour
             v3Target.y = transform.position.y;
             transform.LookAt(v3Target);
 
+            Debug.Log(v3Target);
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                v3DashDir = hit.point;
+                v3DashDir = hit.point - transform.position;
+                v3DashDir.y = 0.0f;
                 v3DashDir.Normalize();
                 v3MovePos.Normalize();
-
-                v3DashDir += v3MovePos;
             }
 
-            Debug.Log(v3DashDir);
+            //Debug.Log(v3DashDir);
 
             //----------------
             // Mouse Shooting
             //----------------
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (bShoot)
             {
                 if (bBallPickUp)
                 {
@@ -252,8 +260,6 @@ public class Player : MonoBehaviour
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
                     rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
                     
-                    
-
                     // The ball is thrown so it becomes false
                     bBallPickUp = false;
                 }
@@ -301,6 +307,9 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
 
+        //stop sliding
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     //--------------------------------------------------------
@@ -321,11 +330,8 @@ public class Player : MonoBehaviour
 
             // The player has picked it up
             bBallPickUp = true;
-
-            // INSERT DESTROY TENNISBALL SCRIPT HERE
-            //TennisBall tb = new TennisBall();
-            //TennisBall.Kill();
-            //tb.Kill();
+            
+            Destroy(col.gameObject);
         }
     }
 

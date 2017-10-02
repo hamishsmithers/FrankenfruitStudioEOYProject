@@ -18,17 +18,4 @@ public class TennisBall : MonoBehaviour
 	void Update () {
 		
 	}
-
-    public void Kill()
-    {
-            Destroy(gameObject);
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        if(col.gameObject.tag == "Character")
-        {
-            Destroy(gameObject);
-        }
-    }
 }
