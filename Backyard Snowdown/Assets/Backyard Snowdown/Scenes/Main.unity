@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4398998, g: 0.48836178, b: 0.5685669, a: 1}
+  m_IndirectSpecularColor: {r: 0.4399003, g: 0.48836243, b: 0.5685675, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -9382,6 +9382,17 @@ Prefab:
       propertyPath: m_Name
       value: Characterp1
       objectReference: {fileID: 0}
+    - target: {fileID: 114350160294729074, guid: 5f727f9534bb16f4a822f47f0ed2d420,
+        type: 2}
+      propertyPath: m_fSlowSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114350160294729074, guid: 5f727f9534bb16f4a822f47f0ed2d420,
+        type: 2}
+      propertyPath: m_SnowMan
+      value: 
+      objectReference: {fileID: 1090126879507318, guid: fe501194b641aa14594234346163bf9e,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
   m_IsPrefabParent: 0
@@ -15277,6 +15288,11 @@ Prefab:
         type: 2}
       propertyPath: m_Constraints
       value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 114350160294729074, guid: 5f727f9534bb16f4a822f47f0ed2d420,
+        type: 2}
+      propertyPath: m_fSlowSpeed
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}

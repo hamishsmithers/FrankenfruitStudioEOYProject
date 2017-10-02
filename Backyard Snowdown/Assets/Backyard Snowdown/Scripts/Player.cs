@@ -37,6 +37,13 @@ public class Player : MonoBehaviour
     //-----------------
     public GameObject m_SnowBall = null;
     public float m_fSnowballSpeed = 1000.0f;
+    public float m_fSlowSpeed = 0.5f;
+
+    //-----------------
+    // Ability Snowman
+    //-----------------
+    public GameObject m_SnowMan = null;
+    public int nSnowManHitCount = 0;
 
     //--------
     // Health
@@ -226,12 +233,15 @@ public class Player : MonoBehaviour
                 // The ball is thrown so it becomes false
                 bBallPickUp = false;
             }
-        }
 
         //------------------
         // Ability Snowball
         //------------------
         if (Input.GetKeyDown(KeyCode.Mouse1))
+            //-----------------
+            // Ability Snowman
+            //-----------------
+            if (Input.GetKeyDown(KeyCode.LeftShift))
         {
 
             GameObject copy = Instantiate(m_SnowBall);
@@ -247,20 +257,35 @@ public class Player : MonoBehaviour
         {
             bAlive = false;
             nCurrentHealth = 0;
+            {
+                GameObject copy = Instantiate(m_SnowMan);
+                copy.transform.position = transform.position + transform.forward;
+                //Rigidbody rb = copy.GetComponent<Rigidbody>();
+                //rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+            }
 
-            // updating the health value onscreen
-            SetHealthText();
+            //--------
+            // Health
+            //--------
+            if (nCurrentHealth <= 0)
+            {
+                bAlive = false;
+                nCurrentHealth = 0;
+
+                // updating the health value onscreen
+                SetHealthText();
+            }
+
+            // if player is dead
+            if (!bAlive)
+            {
+                Destroy(gameObject);
+            }
+
+            //stop sliding
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
-
-        // if player is dead
-        if (!bAlive)
-        {
-            Destroy(gameObject);
-        }
-
-        //stop sliding
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
     }
 
     //--------------------------------------------------------
@@ -303,4 +328,17 @@ public class Player : MonoBehaviour
     {
         txtHealth.text = "HP:" + nCurrentHealth.ToString();
     }
+
+    // This is the function that slows the player when hit by SnowBall
+    public void Slow()
+    {
+        float fSlowTemp = 0.0f;
+        float fOldSpeed = 0.0f;
+        fOldSpeed = m_fSpeed;
+        fSlowTemp = (m_fSpeed * m_fSlowSpeed);
+        m_fSpeed = fSlowTemp;
+        //Wait for 2 seconds here
+        //m_fSpeed = fOldSpeed;
+    }
 }
+
