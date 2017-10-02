@@ -12,8 +12,10 @@ public class Player : MonoBehaviour
     //----------
     public XboxController controller;
     public float m_fSpeed = 5.0f;
+    public float m_fMaxSpeed = 5.0f;
     public float m_fDashSpeed = 10.0f;
     public float fDashDuration = 0.5f;
+    public GameObject m_PlayerModel = null;
     private float fDashCount = 0.0f;
     bool bSpacePressed = false;
     bool bKeyboardMovementLock = false;
@@ -49,7 +51,7 @@ public class Player : MonoBehaviour
         // Setting up multiple xbox controller input
         switch (controller)
         {
-            case XboxController.First: GetComponent<Renderer>().name = "Characterp1"; break;
+            case XboxController.First: gameObject.name = "Character1"; break;
                 //case XboxController.Second: GetComponent<Renderer>().name = "Characterp2"; break;
                 //case XboxController.Third: GetComponent<Renderer>().name = "Characterp3"; break;
                 //case XboxController.Fourth: GetComponent<Renderer>().name = "Characterp4"; break;
@@ -78,7 +80,7 @@ public class Player : MonoBehaviour
             //------------------------
             // Xbox Movement Controls
             //
-            // Left stick movement
+            // Left Stick Movement
             //------------------------ 
             v3Pos = transform.position;
             float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
@@ -87,6 +89,12 @@ public class Player : MonoBehaviour
 
             if (!bXboxMovementLock)
             {
+                // Cap Movement
+                if (m_fSpeed > m_fMaxSpeed)
+                {
+                    m_fSpeed = m_fMaxSpeed;
+                }
+
                 float newPosX = v3Pos.x + (axisX * m_fSpeed * Time.deltaTime);
                 float newPosZ = v3Pos.z + (axisY * m_fSpeed * Time.deltaTime);
                 v3Pos = new Vector3(newPosX, transform.position.y, newPosZ);
@@ -98,7 +106,7 @@ public class Player : MonoBehaviour
             //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
 
             //-------------------------
-            // Xbox right stick aiming
+            // Xbox Right Stick Aiming
             //-------------------------
             Vector3 dir = new Vector3(axisX, 0.0f, axisY);
             transform.forward = dir;
@@ -128,17 +136,19 @@ public class Player : MonoBehaviour
                 {
                     Dash();
                     fDashCount += Time.deltaTime;
+                    m_PlayerModel.GetComponent<Animator>().SetBool("dashing", true);
                 }
                 else
                 {
                     bLeftTriggerPressed = false;
                     fDashCount = 0.0f;
                     bXboxMovementLock = false;
+                    m_PlayerModel.GetComponent<Animator>().SetBool("dashing", false);
                 }
             }
 
             //---------------
-            // Xbox shooting
+            // Xbox Shooting
             //---------------
             float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
 
@@ -173,25 +183,41 @@ public class Player : MonoBehaviour
         {
             if (!bKeyboardMovementLock)
             {
+                //// Cap Movement
+                //if (m_fSpeed > m_fMaxSpeed)
+                //{
+                //    m_fSpeed = m_fMaxSpeed;
+                //}
+
+                Vector3 MovePos = Vector3.zero;
+
                 if (Input.GetKey(KeyCode.W))
                 {
-                        transform.position += Vector3.forward * Time.deltaTime * m_fSpeed;
+                        MovePos += Vector3.forward * Time.deltaTime * m_fSpeed;
                 }
 
                 if (Input.GetKey(KeyCode.S))
                 {
-                        transform.position += Vector3.forward * Time.deltaTime * -m_fSpeed;
+                       MovePos += Vector3.forward * Time.deltaTime * -m_fSpeed;
                 }
 
                 if (Input.GetKey(KeyCode.D))
                 {
-                        transform.position += Vector3.right * Time.deltaTime * m_fSpeed;
+                        MovePos += Vector3.right * Time.deltaTime * m_fSpeed;
                 }
 
                 if (Input.GetKey(KeyCode.A))
                 {
-                        transform.position += Vector3.right * Time.deltaTime * -m_fSpeed;
+                        MovePos += Vector3.right * Time.deltaTime * -m_fSpeed;
                 }
+
+                if(MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
+                {
+                    MovePos.Normalize();
+                    MovePos *= m_fMaxSpeed * Time.deltaTime;
+                }
+
+                transform.position += MovePos;
             }
 
             //-----
@@ -206,17 +232,19 @@ public class Player : MonoBehaviour
                 {
                     Dash();
                     fDashCount += Time.deltaTime;
+                    m_PlayerModel.GetComponent<Animator>().SetBool("dashing", true);
                 }
                 else
                 {
                     bSpacePressed = false;
                     fDashCount = 0.0f;
                     bKeyboardMovementLock = false;
+                    m_PlayerModel.GetComponent<Animator>().SetBool("dashing", false);
                 }
             }
 
             //-------------- 
-            // Mouse aiming
+            // Mouse Aiming
             //--------------
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -228,7 +256,7 @@ public class Player : MonoBehaviour
             transform.LookAt(target);
 
             //----------------
-            // Mouse shooting
+            // Mouse Shooting
             //----------------
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -292,12 +320,14 @@ public class Player : MonoBehaviour
     }
 
     //--------------------------------------------------------
-    //
+    // 
     //--------------------------------------------------------
     private void Dash()
     {
+       
         // this is bad, need to somehow get the player's last direction as a vector
         transform.Translate(Vector3.forward * m_fDashSpeed * Time.deltaTime);
+        
     }
 
     //--------------------------------------------------------
