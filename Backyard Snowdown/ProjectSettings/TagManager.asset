@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - TennisBall
   - Character
+  - Boundaries
   layers:
   - Default
   - TransparentFX

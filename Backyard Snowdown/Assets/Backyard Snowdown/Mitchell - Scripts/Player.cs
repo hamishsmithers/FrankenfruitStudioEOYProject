@@ -251,6 +251,8 @@ public class Player : MonoBehaviour
                     copy.transform.position = transform.position + transform.forward;
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
                     rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+                    
+                    
 
                     // The ball is thrown so it becomes false
                     bBallPickUp = false;
