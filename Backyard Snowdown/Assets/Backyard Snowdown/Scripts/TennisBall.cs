@@ -5,7 +5,8 @@ using UnityEngine;
 public class TennisBall : MonoBehaviour
 {
     Rigidbody rb;
-    private float fVelCount = 0.0f;
+    public float fDamageSpeed = 3.0f;
+    public static bool bTooFast = false;
     //-------
     // Score
     //-------
@@ -42,17 +43,44 @@ public class TennisBall : MonoBehaviour
         //    }
         //}
 
-        if (rb.velocity.x + rb.velocity.z > 0.5f)
+        if (rb.velocity.x + rb.velocity.z > fDamageSpeed)
+        {
             nScoreValue = 2;
-        else if (rb.velocity.x + rb.velocity.z < 0.5f)
-            nScoreValue = 0;
+            bTooFast = true;
+        }
 
-        if (rb.velocity.x + rb.velocity.z > 0.5f)
-            nScoreValue = 2;
-        else if (rb.velocity.x + rb.velocity.z < 0.5f)
+        else if (rb.velocity.x + rb.velocity.z < fDamageSpeed)
+        {
             nScoreValue = 0;
+            bTooFast = false;
+        }
+
+        if (rb.velocity.x + rb.velocity.z > fDamageSpeed)
+        {
+            nScoreValue = 2;
+            bTooFast = true;
+        }
+
+        else if (rb.velocity.x + rb.velocity.z < fDamageSpeed)
+        {
+            nScoreValue = 0;
+            bTooFast = false;
+        }
 
         // now i need to do the same for the negitive axis but then conflicts happen.
+
+        if (rb.velocity.x + rb.velocity.z < -fDamageSpeed)
+        {
+            nScoreValue = 2;
+            bTooFast = true;
+        }
+
+        if (rb.velocity.x + rb.velocity.z < -fDamageSpeed)
+        {
+            nScoreValue = 2;
+            bTooFast = true;
+        }
+
 
         Debug.Log(nScoreValue);
 
@@ -82,5 +110,8 @@ public class TennisBall : MonoBehaviour
         //    nScoreValue = 0;
 
         //Debug.Log(nScoreValue);
+
+        //stop sliding
+        rb.angularVelocity = Vector3.zero;
     }
 }

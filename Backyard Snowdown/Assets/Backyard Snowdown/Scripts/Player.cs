@@ -310,10 +310,13 @@ public class Player : MonoBehaviour
             // updating the health value onscreen
             SetHealthText();
 
-            // The player has picked it up
-            bBallPickUp = true;
+            if (!TennisBall.bTooFast)
+            {
+                // The player has picked it up
+                bBallPickUp = true;
 
-            Destroy(col.gameObject);
+                Destroy(col.gameObject);
+            }
         }
     }
 
