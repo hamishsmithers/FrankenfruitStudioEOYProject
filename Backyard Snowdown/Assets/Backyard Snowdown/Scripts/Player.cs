@@ -163,83 +163,81 @@ public class Player : MonoBehaviour
         //----------
         // Movement
         //----------
-        if (Global.bKeyboardControls)
+        if (!bMovementLock)
         {
-            if (!bMovementLock)
+            // Up and down movement
+            v3MovePos = Vector3.zero;
+
+            v3MovePos += v3VerticalAxis * Time.fixedDeltaTime * m_fSpeed;
+
+            if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
             {
-                // Up and down movement
-                v3MovePos = Vector3.zero;
-
-                v3MovePos += v3VerticalAxis * Time.fixedDeltaTime * m_fSpeed;
-
-                if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
-                {
-                    v3MovePos.Normalize();
-                    v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
-                }
-
-                // Left and right movement
-                v3MovePos += v3HorizontalAxis * Time.fixedDeltaTime * m_fSpeed;
-
-                if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
-                {
-                    v3MovePos.Normalize();
-                    v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
-                }
-
-                rb.MovePosition(rb.position + v3MovePos);
+                v3MovePos.Normalize();
+                v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
             }
 
-            //-------------- 
-            // Mouse Aiming
-            //--------------
-            if (axisX == 0.0f && axisY == 0.0f)
+            // Left and right movement
+            v3MovePos += v3HorizontalAxis * Time.fixedDeltaTime * m_fSpeed;
+
+            if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                RaycastHit hit;
-                Physics.Raycast(ray, out hit);
-
-                Vector3 v3Target = hit.point;
-                v3Target.y = transform.position.y;
-                transform.LookAt(v3Target);
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    v3DashDir = hit.point - transform.position;
-                    v3DashDir.y = 0.0f;
-                    v3DashDir.Normalize();
-                    v3MovePos.Normalize();
-                }
+                v3MovePos.Normalize();
+                v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
             }
 
-            //----------------
-            // Mouse Shooting
-            //----------------
-            if (bShoot)
-            {
-                if (bBallPickUp)
-                {
-                    GameObject copy = Instantiate(m_TennisBall);
-                    copy.transform.position = transform.position + transform.forward;
-                    Rigidbody rb = copy.GetComponent<Rigidbody>();
-                    rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+            rb.MovePosition(rb.position + v3MovePos);
+        }
 
-                    // The ball is thrown so it becomes false
-                    bBallPickUp = false;
-                }
+        //-------------- 
+        // Mouse Aiming
+        //--------------
+        if (axisX == 0.0f && axisY == 0.0f)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
+
+            Vector3 v3Target = hit.point;
+            v3Target.y = transform.position.y;
+            transform.LookAt(v3Target);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                v3DashDir = hit.point - transform.position;
+                v3DashDir.y = 0.0f;
+                v3DashDir.Normalize();
+                v3MovePos.Normalize();
             }
+        }
 
-            //------------------
-            // Ability Snowball
-            //------------------
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+        //----------------
+        // Mouse Shooting
+        //----------------
+        if (bShoot)
+        {
+            if (bBallPickUp)
             {
-                GameObject copy = Instantiate(m_SnowBall);
+                GameObject copy = Instantiate(m_TennisBall);
                 copy.transform.position = transform.position + transform.forward;
                 Rigidbody rb = copy.GetComponent<Rigidbody>();
-                rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+                rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+
+                // The ball is thrown so it becomes false
+                bBallPickUp = false;
             }
+        }
+
+        //------------------
+        // Ability Snowball
+        //------------------
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+
+            GameObject copy = Instantiate(m_SnowBall);
+            copy.transform.position = transform.position + transform.forward;
+            Rigidbody rb = copy.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
         }
 
         //--------
