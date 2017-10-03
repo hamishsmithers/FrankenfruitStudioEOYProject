@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public float m_fMaxSpeed = 5.0f;
     public float m_fDashSpeed = 10.0f;
     public float fDashDuration = 0.5f;
+    private float m_fCurrentSpeed = 5.0f;
     public GameObject m_PlayerModel = null;
     private float fDashCount = 0.0f;
     bool bSpacePressed = false;
@@ -24,26 +25,28 @@ public class Player : MonoBehaviour
     Vector3 v3MovePos;
     Rigidbody rb;
 
-    //----------
-    // Shooting
-    //----------
+    //-----------------------
+    // Shooting / TennisBall
+    //-----------------------
     public GameObject m_TennisBall = null;
     public int nTennisBallSpeed = 1000;
     // xbox max scale of trigger when pressed down
     private const float MAX_TRG_SCL = 1.21f;
+    private bool bHasBall = false;
 
     //-----------------
     // Ability Snowball
     //-----------------
     public GameObject m_SnowBall = null;
     public float m_fSnowballSpeed = 1000.0f;
-    public float m_fSlowSpeed = 0.5f;
+    public float m_fSlowSpeed = 2.5f;
+    private bool m_bSlow = false;
+    private float m_fSlowTimer = 0.0f;
 
     //-----------------
     // Ability Snowman
     //-----------------
     public GameObject m_SnowMan = null;
-    public int nSnowManHitCount = 0;
 
     //--------
     // Health
@@ -65,6 +68,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        m_fCurrentSpeed = m_fSpeed;
 
         //--------
         // Health
@@ -118,8 +122,12 @@ public class Player : MonoBehaviour
         axisY = XCI.GetAxis(XboxAxis.RightStickY, controller);
         //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
 
-        Vector3 v3XboxDashDir = new Vector3(axisX, 0.0f, axisY);
-        transform.forward = v3XboxDashDir;
+        Vector3 v3XboxDashDir = transform.forward;
+        if (axisX != 0.0f || axisY != 0.0f)
+        {
+            v3XboxDashDir = new Vector3(axisX, 0.0f, axisY);
+            transform.forward = v3XboxDashDir;
+        }
 
         //------
         // Dash
@@ -162,7 +170,7 @@ public class Player : MonoBehaviour
         if (XCI.GetButtonDown(XboxButton.LeftBumper, controller))
         {
             GameObject copy = Instantiate(m_SnowBall);
-            copy.transform.position = transform.position + transform.forward;
+            copy.transform.position = transform.position + (transform.forward * 0.5f) + transform.up;
             Rigidbody rb = copy.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
         }
@@ -175,7 +183,7 @@ public class Player : MonoBehaviour
             // Up and down movement
             v3MovePos = Vector3.zero;
 
-            v3MovePos += v3VerticalAxis * Time.fixedDeltaTime * m_fSpeed;
+            v3MovePos += v3VerticalAxis * Time.fixedDeltaTime * m_fCurrentSpeed;
 
             if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
             {
@@ -184,7 +192,7 @@ public class Player : MonoBehaviour
             }
 
             // Left and right movement
-            v3MovePos += v3HorizontalAxis * Time.fixedDeltaTime * m_fSpeed;
+            v3MovePos += v3HorizontalAxis * Time.fixedDeltaTime * m_fCurrentSpeed;
 
             if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
             {
@@ -198,7 +206,7 @@ public class Player : MonoBehaviour
         //-------------- 
         // Mouse Aiming
         //--------------
-        if (axisX == 0.0f && axisY == 0.0f)
+        if (!XCI.IsPluggedIn(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -232,67 +240,81 @@ public class Player : MonoBehaviour
 
                 // The ball is thrown so it becomes false
                 bBallPickUp = false;
+                bHasBall = false;
             }
         }
 
-            //------------------
-            // Ability Snowball
-            //------------------
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-            { 
-                GameObject copy = Instantiate(m_SnowBall);
-                copy.transform.position = transform.position + transform.forward;
-                Rigidbody rb = copy.GetComponent<Rigidbody>();
-                rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-            }
+        //------------------
+        // Ability Snowball
+        //------------------
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            GameObject copy = Instantiate(m_SnowBall);
+            copy.transform.position = transform.position + transform.forward + transform.up;
+            Rigidbody rb = copy.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+        }
 
         //-----------------
         // Ability Snowman
         //-----------------
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            GameObject copy = Instantiate(m_SnowMan);
+            copy.transform.position = transform.position + transform.forward;
+
+        }
+        //--------
+        // Health
+        //--------
+        if (nCurrentHealth <= 0)
+        {
+            bAlive = false;
+            nCurrentHealth = 0;
+            {
                 GameObject copy = Instantiate(m_SnowMan);
                 copy.transform.position = transform.position + transform.forward;
+                //Rigidbody rb = copy.GetComponent<Rigidbody>();
+                //rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+            }
 
+            ////--------
+            //// Health
+            ////--------
+            //if (nCurrentHealth <= 0)
+            //{
+            //    bAlive = false;
+            //    nCurrentHealth = 0;
+
+            //    // updating the health value onscreen
+            //    SetHealthText();
+            //}
+
+            //// if player is dead
+            //if (!bAlive)
+            //{
+            //    Destroy(gameObject);
+            //}
+            
+            //stop sliding
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
-            //--------
-            // Health
-            //--------
-            if (nCurrentHealth <= 0)
+    }
+
+    void Update()
+    {
+        if (m_bSlow)
+        {
+            m_fSlowSpeed += Time.deltaTime;
+            if (m_fSlowSpeed > 2.0f)
             {
-                bAlive = false;
-                nCurrentHealth = 0;
-                {
-                    GameObject copy = Instantiate(m_SnowMan);
-                    copy.transform.position = transform.position + transform.forward;
-                    //Rigidbody rb = copy.GetComponent<Rigidbody>();
-                    //rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-                }
-
-                ////--------
-                //// Health
-                ////--------
-                //if (nCurrentHealth <= 0)
-                //{
-                //    bAlive = false;
-                //    nCurrentHealth = 0;
-
-                //    // updating the health value onscreen
-                //    SetHealthText();
-                //}
-
-                //// if player is dead
-                //if (!bAlive)
-                //{
-                //    Destroy(gameObject);
-                //}
-
-                //stop sliding
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
+                m_bSlow = false;
+                m_fCurrentSpeed = m_fSpeed;
             }
         }
-    
+    }
+
 
     //--------------------------------------------------------
     //
@@ -310,12 +332,15 @@ public class Player : MonoBehaviour
             // updating the health value onscreen
             SetHealthText();
 
-            if (!TennisBall.bTooFast)
+            TennisBall script = col.gameObject.GetComponent<TennisBall>();
+
+
+            if (!script.bTooFast && !bHasBall)
             {
                 // The player has picked it up
                 bBallPickUp = true;
-
                 Destroy(col.gameObject);
+                bHasBall = true;
             }
         }
     }
@@ -327,7 +352,7 @@ public class Player : MonoBehaviour
     {
         // this is bad, need to somehow get the player's last direction as a vector
         //transform.Translate(Vector3.forward * m_fDashSpeed * Time.deltaTime);
-        transform.position += v3DashDir * Time.deltaTime * m_fSpeed;
+        transform.position += v3DashDir * Time.deltaTime * m_fCurrentSpeed;
     }
 
     //--------------------------------------------------------
@@ -341,11 +366,14 @@ public class Player : MonoBehaviour
     // This is the function that slows the player when hit by SnowBall
     public void Slow()
     {
-        float fSlowTemp = 0.0f;
-        float fOldSpeed = 0.0f;
-        fOldSpeed = m_fSpeed;
-        fSlowTemp = (m_fSpeed * m_fSlowSpeed);
-        m_fSpeed = fSlowTemp;
+        //float fSlowTemp = 0.0f;
+        //float fOldSpeed = 0.0f;
+        //fOldSpeed = m_fSpeed;
+        //fSlowTemp = (m_fSpeed * m_fSlowSpeed);
+        //m_fSpeed = fSlowTemp;
+        m_bSlow = true;
+        m_fSlowTimer = 0.0f;
+        m_fCurrentSpeed = m_fSlowSpeed;
         //Wait for 2 seconds here
         //m_fSpeed = fOldSpeed;
     }

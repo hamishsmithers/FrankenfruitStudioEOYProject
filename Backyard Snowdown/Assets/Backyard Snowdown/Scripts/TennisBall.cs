@@ -6,7 +6,11 @@ public class TennisBall : MonoBehaviour
 {
     Rigidbody rb;
     public float fDamageSpeed = 3.0f;
-    public static bool bTooFast = false;
+    public bool bTooFast = false;
+
+    public Material[] materials;
+    private Renderer rend;
+
     //-------
     // Score
     //-------
@@ -16,11 +20,19 @@ public class TennisBall : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if the ball is moving at a dangerous speed, let the player know!
+        if (bTooFast)
+            rend.material = materials[1];
+        else
+            rend.material = materials[0];
+
         //Debug.Log(rb.velocity);
 
         //if (fVelCount > 1.0f || Input.GetKeyDown(KeyCode.Mouse0))
@@ -43,46 +55,45 @@ public class TennisBall : MonoBehaviour
         //    }
         //}
 
-        if (rb.velocity.x + rb.velocity.z > fDamageSpeed)
+        if (rb.velocity.magnitude >= fDamageSpeed)
         {
             nScoreValue = 2;
             bTooFast = true;
         }
 
-        else if (rb.velocity.x + rb.velocity.z < fDamageSpeed)
+        else if (rb.velocity.magnitude < fDamageSpeed)
         {
             nScoreValue = 0;
             bTooFast = false;
         }
 
-        if (rb.velocity.x + rb.velocity.z > fDamageSpeed)
-        {
-            nScoreValue = 2;
-            bTooFast = true;
-        }
+        //if (rb.velocity.magnitude > fDamageSpeed)
+        //{
+        //    nScoreValue = 2;
+        //    bTooFast = true;
+        //}
 
-        else if (rb.velocity.x + rb.velocity.z < fDamageSpeed)
-        {
-            nScoreValue = 0;
-            bTooFast = false;
-        }
+        //else if (rb.velocity.magnitude < fDamageSpeed)
+        //{
+        //    nScoreValue = 0;
+        //    bTooFast = false;
+        //}
 
         // now i need to do the same for the negitive axis but then conflicts happen.
 
-        if (rb.velocity.x + rb.velocity.z < -fDamageSpeed)
-        {
-            nScoreValue = 2;
-            bTooFast = true;
-        }
+        //if (rb.velocity.x + rb.velocity.z < -fDamageSpeed)
+        //{
+        //    nScoreValue = 2;
+        //    bTooFast = true;
+        //}
 
-        if (rb.velocity.x + rb.velocity.z < -fDamageSpeed)
-        {
-            nScoreValue = 2;
-            bTooFast = true;
-        }
+        //if (rb.velocity.x + rb.velocity.z < -fDamageSpeed)
+        //{
+        //    nScoreValue = 2;
+        //    bTooFast = true;
+        //}
 
-
-        Debug.Log(nScoreValue);
+        //Debug.Log(nScoreValue);
 
         //if (rb.velocity.x < 2.0f && rb.velocity.x > 0.0f || rb.velocity.x > -2.0f && rb.velocity.x < 0.0f || rb.velocity.z < 2.0f && rb.velocity.z > 0.0f || rb.velocity.z > -2.0f && rb.velocity.z < 0.0f)
         //    nScoreValue = 2;
@@ -112,6 +123,6 @@ public class TennisBall : MonoBehaviour
         //Debug.Log(nScoreValue);
 
         //stop sliding
-        rb.angularVelocity = Vector3.zero;
+        //rb.angularVelocity = Vector3.zero;
     }
 }
