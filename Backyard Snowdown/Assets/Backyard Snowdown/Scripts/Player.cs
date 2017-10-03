@@ -262,21 +262,24 @@ public class Player : MonoBehaviour
         {
             GameObject copy = Instantiate(m_SnowMan);
             copy.transform.position = transform.position + transform.forward;
-
         }
+
         //--------
         // Health
         //--------
-        if (nCurrentHealth <= 0)
+        if (nCurrentHealth <= 0 && bAlive)
         {
             bAlive = false;
+            Destroy(gameObject);
             nCurrentHealth = 0;
-            {
-                GameObject copy = Instantiate(m_SnowMan);
-                copy.transform.position = transform.position + transform.forward;
-                //Rigidbody rb = copy.GetComponent<Rigidbody>();
-                //rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-            }
+            //updating the health value onscreen
+            SetHealthText();
+            
+            GameObject copy = Instantiate(m_SnowMan);
+            copy.transform.position = transform.position;
+            //Rigidbody rb = copy.GetComponent<Rigidbody>();
+            //rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+
 
             ////--------
             //// Health
@@ -295,11 +298,12 @@ public class Player : MonoBehaviour
             //{
             //    Destroy(gameObject);
             //}
-            
-            //stop sliding
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+
         }
+
+        //stop sliding
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     void Update()
