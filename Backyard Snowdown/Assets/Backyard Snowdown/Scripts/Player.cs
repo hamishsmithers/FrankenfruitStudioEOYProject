@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void FixedUpdate()
     {
-        float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.RightTrigger, controller));
+        float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
         bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
 
         //----------
@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
         else if (Input.GetKey(KeyCode.S) && controller == XboxController.First)
             v3VerticalAxis.z = -1.0f;
         else
-            v3VerticalAxis.z = XCI.GetAxis(XboxAxis.LeftStickY, controller);
+            v3VerticalAxis.z = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
 
 
         Vector3 v3HorizontalAxis = Vector3.zero;
@@ -105,22 +105,23 @@ public class Player : MonoBehaviour
         else if (Input.GetKey(KeyCode.A) && controller == XboxController.First)
             v3HorizontalAxis.x = -1.0f;
         else
-            v3HorizontalAxis.x = XCI.GetAxis(XboxAxis.LeftStickX, controller);
+            v3HorizontalAxis.x = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
 
         Vector3 v3Pos;
         v3Pos.x = transform.position.x;
         v3Pos.z = transform.position.z;
 
         //xbox
-        float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controller);
-        float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controller);
+        float axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
+        float axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
 
         //-------------------------
         // Xbox Right Stick Aiming
         //-------------------------
-        axisX = XCI.GetAxis(XboxAxis.RightStickX, controller);
-        axisY = XCI.GetAxis(XboxAxis.RightStickY, controller);
-        //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+        axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
+        axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
+
+        Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
 
         Vector3 v3XboxDashDir = transform.forward;
         if (axisX != 0.0f || axisY != 0.0f)
@@ -132,7 +133,7 @@ public class Player : MonoBehaviour
         //------
         // Dash
         //------
-        float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxis(XboxAxis.LeftTrigger, controller));
+        float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.LeftTrigger, controller));
 
         if (leftTrigHeight < 1.0f || bLeftTriggerPressed || Input.GetKeyDown(KeyCode.Space) || bSpacePressed)
         {
@@ -258,7 +259,7 @@ public class Player : MonoBehaviour
         //-----------------
         // Ability Snowman
         //-----------------
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || XCI.GetButtonDown(XboxButton.RightBumper, controller))
         {
             GameObject copy = Instantiate(m_SnowMan);
             copy.transform.position = transform.position + transform.forward;

@@ -204,11 +204,7 @@ public class MovePlayer : MonoBehaviour
 		triggerLeftPrefab.transform.localScale = new Vector3(trigSclX, leftTrigHeight, trigSclZ);
 		triggerRightPrefab.transform.localScale = new Vector3(trigSclX, rightTrigHeight, trigSclZ);
 		
-        //if(rightTrigHeight < 1.0f)
-        //{
-        //    Debug.Log("Right Trigger Pressed");
-        //}
-        
+		
 		// Bumper input
 		if(XCI.GetButtonDown(XboxButton.LeftBumper, controller))
 		{
