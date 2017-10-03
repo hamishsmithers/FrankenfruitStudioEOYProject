@@ -9,48 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1139900445632026}
+  m_RootGameObject: {fileID: 1090126879507318}
   m_IsPrefabParent: 1
---- !u!1 &1139900445632026
+--- !u!1 &1090126879507318
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4765867439133042}
-  - component: {fileID: 33722076025879516}
-  - component: {fileID: 23084544059476812}
-  - component: {fileID: 95599328501255838}
-  - component: {fileID: 54260255697432528}
-  - component: {fileID: 114479137673399830}
-  - component: {fileID: 136104731254281296}
+  - component: {fileID: 4737954454571638}
+  - component: {fileID: 33073077823880414}
+  - component: {fileID: 23821526794901956}
+  - component: {fileID: 65752098254123296}
+  - component: {fileID: 54001941930155484}
+  - component: {fileID: 114190117214447574}
   m_Layer: 0
-  m_Name: Snowman Ability
+  m_Name: Snowman Ability1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4765867439133042
+--- !u!4 &4737954454571638
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1139900445632026}
+  m_GameObject: {fileID: 1090126879507318}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.801798, y: 1, z: -8.804408}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 26.147526, y: 13.274514, z: -16.312832}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23084544059476812
+--- !u!23 &23821526794901956
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1139900445632026}
+  m_GameObject: {fileID: 1090126879507318}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,9 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 050d9af6ba9579b49b2b54c870da1bc3, type: 2}
-  - {fileID: 2100000, guid: 378f16e391ec1d64784c99ae7d892645, type: 2}
-  - {fileID: 2100000, guid: f0790a359cd83c04b958e8b34eea10bf, type: 2}
+  - {fileID: 2100000, guid: 50e062c8881a7b240820c21112f1563c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,19 +76,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33722076025879516
+--- !u!33 &33073077823880414
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1139900445632026}
+  m_GameObject: {fileID: 1090126879507318}
   m_Mesh: {fileID: 4300000, guid: 1321ea09c31b0984f94760709dfb7470, type: 3}
---- !u!54 &54260255697432528
+--- !u!54 &54001941930155484
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1139900445632026}
+  m_GameObject: {fileID: 1090126879507318}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -101,45 +98,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &95599328501255838
-Animator:
-  serializedVersion: 3
+--- !u!65 &65752098254123296
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1139900445632026}
+  m_GameObject: {fileID: 1090126879507318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1321ea09c31b0984f94760709dfb7470, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114479137673399830
+  serializedVersion: 2
+  m_Size: {x: 1.3, y: 2, z: 1.3}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &114190117214447574
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1139900445632026}
+  m_GameObject: {fileID: 1090126879507318}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1ec51959e23cb46b5d991f2e3d84d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nSnowManHitCount: 2
---- !u!136 &136104731254281296
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1139900445632026}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 75.00002
-  m_Height: 263.04056
-  m_Direction: 1
-  m_Center: {x: 0.0000076293945, y: 131.52028, z: -0.000015258789}
