@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
     Vector3 v3DashDir;
     Vector3 v3MovePos;
     Rigidbody rb;
-
+    float axisX;
+    float axisY;
     //-----------------------
     // Shooting / TennisBall
     //-----------------------
@@ -34,14 +35,14 @@ public class Player : MonoBehaviour
     private const float MAX_TRG_SCL = 1.21f;
     private bool bHasBall = false;
 
-    //-----------------
-    // Ability Snowball
-    //-----------------
-    public GameObject m_SnowBall = null;
-    public float m_fSnowballSpeed = 1000.0f;
-    public float m_fSlowSpeed = 2.5f;
-    private bool m_bSlow = false;
-    private float m_fSlowTimer = 0.0f;
+    ////-----------------
+    //// Ability Snowball
+    ////-----------------
+    //public GameObject m_SnowBall = null;
+    //public float m_fSnowballSpeed = 1000.0f;
+    //public float m_fSlowSpeed = 2.5f;
+    //private bool m_bSlow = false;
+    //private float m_fSlowTimer = 0.0f;
 
     //-----------------
     // Ability Snowman
@@ -67,6 +68,10 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void Start()
     {
+        //Xbox Stick Axis'
+        axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
+        axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
+
         rb = GetComponent<Rigidbody>();
         m_fCurrentSpeed = m_fSpeed;
 
@@ -85,49 +90,24 @@ public class Player : MonoBehaviour
         float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
         bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
 
-        //----------
-        // Movement
-        //----------
-        Vector3 v3VerticalAxis = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.W) && controller == XboxController.First)
-            v3VerticalAxis.z = 1.0f;
-        else if (Input.GetKey(KeyCode.S) && controller == XboxController.First)
-            v3VerticalAxis.z = -1.0f;
-        else
-            v3VerticalAxis.z = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
-
-
-        Vector3 v3HorizontalAxis = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.D) && controller == XboxController.First)
-            v3HorizontalAxis.x = 1.0f;
-        else if (Input.GetKey(KeyCode.A) && controller == XboxController.First)
-            v3HorizontalAxis.x = -1.0f;
-        else
-            v3HorizontalAxis.x = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
-
-        Vector3 v3Pos;
-        v3Pos.x = transform.position.x;
-        v3Pos.z = transform.position.z;
-
-        //xbox
-        float axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
-        float axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
+        Movement();
 
         //-------------------------
         // Xbox Right Stick Aiming
         //-------------------------
-        axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
-        axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
-
-        Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
-
         Vector3 v3XboxDashDir = transform.forward;
-        if (axisX != 0.0f || axisY != 0.0f)
+        if (!bLeftTriggerPressed)
         {
-            v3XboxDashDir = new Vector3(axisX, 0.0f, axisY);
-            transform.forward = v3XboxDashDir;
+            axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
+            axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
+
+            //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+
+            if (axisX != 0.0f || axisY != 0.0f)
+            {
+                v3XboxDashDir = new Vector3(axisX, 0.0f, axisY);
+                transform.forward = v3XboxDashDir;
+            }
         }
 
         //------
@@ -165,49 +145,21 @@ public class Player : MonoBehaviour
             v3MovePos.Normalize();
         }
 
-        //------------------
-        // Ability Snowball
-        //------------------
-        if (XCI.GetButtonDown(XboxButton.LeftBumper, controller))
-        {
-            GameObject copy = Instantiate(m_SnowBall);
-            copy.transform.position = transform.position + (transform.forward * 0.5f) + transform.up;
-            Rigidbody rb = copy.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-        }
-
-        //----------
-        // Movement
-        //----------
-        if (!bMovementLock)
-        {
-            // Up and down movement
-            v3MovePos = Vector3.zero;
-
-            v3MovePos += v3VerticalAxis * Time.fixedDeltaTime * m_fCurrentSpeed;
-
-            if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
-            {
-                v3MovePos.Normalize();
-                v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
-            }
-
-            // Left and right movement
-            v3MovePos += v3HorizontalAxis * Time.fixedDeltaTime * m_fCurrentSpeed;
-
-            if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
-            {
-                v3MovePos.Normalize();
-                v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
-            }
-
-            rb.MovePosition(rb.position + v3MovePos);
-        }
-
+        ////------------------
+        //// Ability Snowball
+        ////------------------
+        //if (XCI.GetButtonDown(XboxButton.LeftBumper, controller))
+        //{
+        //    GameObject copy = Instantiate(m_SnowBall);
+        //    copy.transform.position = transform.position + (transform.forward * 0.5f) + transform.up;
+        //    Rigidbody rb = copy.GetComponent<Rigidbody>();
+        //    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+        //}
+        
         //-------------- 
         // Mouse Aiming
         //--------------
-        if (!XCI.IsPluggedIn(1))
+        if (!XCI.IsPluggedIn(1) && !bLeftTriggerPressed)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -245,16 +197,16 @@ public class Player : MonoBehaviour
             }
         }
 
-        //------------------
-        // Ability Snowball
-        //------------------
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            GameObject copy = Instantiate(m_SnowBall);
-            copy.transform.position = transform.position + transform.forward + transform.up;
-            Rigidbody rb = copy.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-        }
+        ////------------------
+        //// Ability Snowball
+        ////------------------
+        //if (Input.GetKeyDown(KeyCode.Mouse1))
+        //{
+        //    GameObject copy = Instantiate(m_SnowBall);
+        //    copy.transform.position = transform.position + transform.forward + transform.up;
+        //    Rigidbody rb = copy.GetComponent<Rigidbody>();
+        //    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+        //}
 
         //-----------------
         // Ability Snowman
@@ -275,7 +227,7 @@ public class Player : MonoBehaviour
             nCurrentHealth = 0;
             //updating the health value onscreen
             SetHealthText();
-            
+
             GameObject copy = Instantiate(m_SnowMan);
             copy.transform.position = transform.position;
             //Rigidbody rb = copy.GetComponent<Rigidbody>();
@@ -309,17 +261,70 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (m_bSlow)
-        {
-            m_fSlowSpeed += Time.deltaTime;
-            if (m_fSlowSpeed > 2.0f)
-            {
-                m_bSlow = false;
-                m_fCurrentSpeed = m_fSpeed;
-            }
-        }
+        //    if (m_bSlow)
+        //    {
+        //        m_fSlowSpeed += Time.deltaTime;
+        //        if (m_fSlowSpeed > 2.0f)
+        //        {
+        //            m_bSlow = false;
+        //            m_fCurrentSpeed = m_fSpeed;
+        //        }
+        //    }
     }
 
+    //----------
+    // Movement
+    //----------
+    private void Movement()
+    {
+        Vector3 v3VerticalAxis = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.W) && controller == XboxController.First)
+            v3VerticalAxis.z = 1.0f;
+        else if (Input.GetKey(KeyCode.S) && controller == XboxController.First)
+            v3VerticalAxis.z = -1.0f;
+        else
+            v3VerticalAxis.z = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
+
+
+        Vector3 v3HorizontalAxis = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.D) && controller == XboxController.First)
+            v3HorizontalAxis.x = 1.0f;
+        else if (Input.GetKey(KeyCode.A) && controller == XboxController.First)
+            v3HorizontalAxis.x = -1.0f;
+        else
+            v3HorizontalAxis.x = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
+
+        Vector3 v3Pos;
+        v3Pos.x = transform.position.x;
+        v3Pos.z = transform.position.z;
+
+        if (!bMovementLock)
+        {
+            // Up and down movement
+            v3MovePos = Vector3.zero;
+
+            v3MovePos += v3VerticalAxis * Time.fixedDeltaTime * m_fCurrentSpeed;
+
+            if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
+            {
+                v3MovePos.Normalize();
+                v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
+            }
+
+            // Left and right movement
+            v3MovePos += v3HorizontalAxis * Time.fixedDeltaTime * m_fCurrentSpeed;
+
+            if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
+            {
+                v3MovePos.Normalize();
+                v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
+            }
+
+            rb.MovePosition(rb.position + v3MovePos);
+        }
+    }
 
     //--------------------------------------------------------
     //
@@ -337,10 +342,9 @@ public class Player : MonoBehaviour
             // updating the health value onscreen
             SetHealthText();
 
-            TennisBall script = col.gameObject.GetComponent<TennisBall>();
+            TennisBall tbScript = col.gameObject.GetComponent<TennisBall>();
 
-
-            if (!script.bTooFast && !bHasBall)
+            if (!tbScript.bTooFast && !bHasBall)
             {
                 // The player has picked it up
                 bBallPickUp = true;
@@ -355,9 +359,8 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Dash()
     {
-        // this is bad, need to somehow get the player's last direction as a vector
-        //transform.Translate(Vector3.forward * m_fDashSpeed * Time.deltaTime);
         transform.position += v3DashDir * Time.deltaTime * m_fCurrentSpeed;
+        //transform.LookAt(v3DashDir);
     }
 
     //--------------------------------------------------------
@@ -368,19 +371,19 @@ public class Player : MonoBehaviour
         txtHealth.text = "HP:" + nCurrentHealth.ToString();
     }
 
-    // This is the function that slows the player when hit by SnowBall
-    public void Slow()
-    {
-        //float fSlowTemp = 0.0f;
-        //float fOldSpeed = 0.0f;
-        //fOldSpeed = m_fSpeed;
-        //fSlowTemp = (m_fSpeed * m_fSlowSpeed);
-        //m_fSpeed = fSlowTemp;
-        m_bSlow = true;
-        m_fSlowTimer = 0.0f;
-        m_fCurrentSpeed = m_fSlowSpeed;
-        //Wait for 2 seconds here
-        //m_fSpeed = fOldSpeed;
-    }
+    //// This is the function that slows the player when hit by SnowBall
+    //public void Slow()
+    //{
+    //    //float fSlowTemp = 0.0f;
+    //    //float fOldSpeed = 0.0f;
+    //    //fOldSpeed = m_fSpeed;
+    //    //fSlowTemp = (m_fSpeed * m_fSlowSpeed);
+    //    //m_fSpeed = fSlowTemp;
+    //    m_bSlow = true;
+    //    m_fSlowTimer = 0.0f;
+    //    m_fCurrentSpeed = m_fSlowSpeed;
+    //    //Wait for 2 seconds here
+    //    //m_fSpeed = fOldSpeed;
+    //}
 }
 

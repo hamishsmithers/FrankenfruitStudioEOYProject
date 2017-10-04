@@ -29,7 +29,7 @@ public class AbilitySnowBall : MonoBehaviour
             // create a slow function in player and do p.slow
             if (fSlowDuration > fSlowCount)
             {
-                p.Slow();
+                //p.Slow();
                 fSlowCount += Time.deltaTime;
             }
             else
