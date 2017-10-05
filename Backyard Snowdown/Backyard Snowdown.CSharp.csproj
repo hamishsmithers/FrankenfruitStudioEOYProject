@@ -97,10 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Backyard Snowdown\Scripts\AbilitySnowBall.cs" />
-    <Compile Include="Assets\Backyard Snowdown\Scripts\Dashing.cs" />
+    <Compile Include="Assets\Backyard Snowdown\Scripts\AbilitySnowMan.cs" />
+    <Compile Include="Assets\Backyard Snowdown\Scripts\Dash.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Global.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Menu.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Player.cs" />
+    <Compile Include="Assets\Backyard Snowdown\Scripts\SnowMan.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\TennisBall.cs" />
     <Compile Include="Assets\OBJExport\OBJExporter.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
