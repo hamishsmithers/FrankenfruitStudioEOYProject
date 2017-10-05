@@ -15,17 +15,24 @@ public class Player : MonoBehaviour
     public float m_fMaxSpeed = 5.0f;
     public float m_fDashSpeed = 10.0f;
     public float fDashDuration = 0.5f;
-    private float m_fCurrentSpeed = 5.0f;
+    [HideInInspector]
+    public float m_fCurrentSpeed = 5.0f;
     public GameObject m_PlayerModel = null;
     private float fDashCount = 0.0f;
     bool bSpacePressed = false;
-    bool bMovementLock = false;
-    bool bLeftTriggerPressed = false;
+    [HideInInspector]
+    public bool bMovementLock = false;
+    [HideInInspector]
+    public bool bLeftTriggerPressed = false;
     Vector3 v3DashDir;
-    Vector3 v3MovePos;
+    [HideInInspector]
+    public Vector3 v3MovePos;
     Rigidbody rb;
     float axisX;
     float axisY;
+    [HideInInspector]
+    public Vector3 v3XboxDashDir;
+
     //-----------------------
     // Shooting / TennisBall
     //-----------------------
@@ -34,20 +41,6 @@ public class Player : MonoBehaviour
     // xbox max scale of trigger when pressed down
     private const float MAX_TRG_SCL = 1.21f;
     private bool bHasBall = false;
-
-    ////-----------------
-    //// Ability Snowball
-    ////-----------------
-    //public GameObject m_SnowBall = null;
-    //public float m_fSnowballSpeed = 1000.0f;
-    //public float m_fSlowSpeed = 2.5f;
-    //private bool m_bSlow = false;
-    //private float m_fSlowTimer = 0.0f;
-
-    //-----------------
-    // Ability Snowman
-    //-----------------
-    public GameObject m_SnowMan = null;
 
     //--------
     // Health
@@ -87,178 +80,29 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void FixedUpdate()
     {
-        float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
-        bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
+        Dash scpDash = gameObject.GetComponent<Dash>();
+        SnowMan scpSnowMan = gameObject.GetComponent<SnowMan>();
 
         Movement();
 
-        //-------------------------
-        // Xbox Right Stick Aiming
-        //-------------------------
-        Vector3 v3XboxDashDir = transform.forward;
-        if (!bLeftTriggerPressed)
-        {
-            axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
-            axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
+        Aiming();
 
-            //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+        scpDash.DoDash();
 
-            if (axisX != 0.0f || axisY != 0.0f)
-            {
-                v3XboxDashDir = new Vector3(axisX, 0.0f, axisY);
-                transform.forward = v3XboxDashDir;
-            }
-        }
+        Shoot();
 
-        //------
-        // Dash
-        //------
-        float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.LeftTrigger, controller));
+        scpSnowMan.CreateSnowMan();
 
-        if (leftTrigHeight < 1.0f || bLeftTriggerPressed || Input.GetKeyDown(KeyCode.Space) || bSpacePressed)
-        {
-            bLeftTriggerPressed = true;
-            bSpacePressed = true;
-            bMovementLock = true;
-
-            if (fDashDuration > fDashCount)
-            {
-                Dash();
-                fDashCount += Time.deltaTime;
-                m_PlayerModel.GetComponent<Animator>().SetBool("dashing", true);
-            }
-            else
-            {
-                bLeftTriggerPressed = false;
-                bSpacePressed = false;
-                fDashCount = 0.0f;
-                bMovementLock = false;
-                m_PlayerModel.GetComponent<Animator>().SetBool("dashing", false);
-            }
-        }
-
-        if (leftTrigHeight < 1.0f)
-        {
-            v3DashDir = v3XboxDashDir;
-            v3DashDir.y = 0.0f;
-            v3DashDir.Normalize();
-            v3MovePos.Normalize();
-        }
-
-        ////------------------
-        //// Ability Snowball
-        ////------------------
-        //if (XCI.GetButtonDown(XboxButton.LeftBumper, controller))
-        //{
-        //    GameObject copy = Instantiate(m_SnowBall);
-        //    copy.transform.position = transform.position + (transform.forward * 0.5f) + transform.up;
-        //    Rigidbody rb = copy.GetComponent<Rigidbody>();
-        //    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-        //}
-        
-        //-------------- 
-        // Mouse Aiming
-        //--------------
-        if (!XCI.IsPluggedIn(1) && !bLeftTriggerPressed)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            Physics.Raycast(ray, out hit);
-
-            Vector3 v3Target = hit.point;
-            v3Target.y = transform.position.y;
-            transform.LookAt(v3Target);
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                v3DashDir = hit.point - transform.position;
-                v3DashDir.y = 0.0f;
-                v3DashDir.Normalize();
-                v3MovePos.Normalize();
-            }
-        }
-
-        //----------------
-        // Mouse Shooting
-        //----------------
-        if (bShoot)
-        {
-            if (bBallPickUp)
-            {
-                GameObject copy = Instantiate(m_TennisBall);
-                copy.transform.position = transform.position + transform.forward;
-                Rigidbody rb = copy.GetComponent<Rigidbody>();
-                rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
-
-                // The ball is thrown so it becomes false
-                bBallPickUp = false;
-                bHasBall = false;
-            }
-        }
-
-        ////------------------
-        //// Ability Snowball
-        ////------------------
-        //if (Input.GetKeyDown(KeyCode.Mouse1))
-        //{
-        //    GameObject copy = Instantiate(m_SnowBall);
-        //    copy.transform.position = transform.position + transform.forward + transform.up;
-        //    Rigidbody rb = copy.GetComponent<Rigidbody>();
-        //    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-        //}
-
-        //-----------------
-        // Ability Snowman
-        //-----------------
-        if (Input.GetKeyDown(KeyCode.LeftShift) || XCI.GetButtonDown(XboxButton.RightBumper, controller))
-        {
-            GameObject copy = Instantiate(m_SnowMan);
-            copy.transform.position = transform.position + transform.forward;
-        }
-
-        //--------
-        // Health
-        //--------
-        if (nCurrentHealth <= 0 && bAlive)
-        {
-            bAlive = false;
-            Destroy(gameObject);
-            nCurrentHealth = 0;
-            //updating the health value onscreen
-            SetHealthText();
-
-            GameObject copy = Instantiate(m_SnowMan);
-            copy.transform.position = transform.position;
-            //Rigidbody rb = copy.GetComponent<Rigidbody>();
-            //rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-
-
-            ////--------
-            //// Health
-            ////--------
-            //if (nCurrentHealth <= 0)
-            //{
-            //    bAlive = false;
-            //    nCurrentHealth = 0;
-
-            //    // updating the health value onscreen
-            //    SetHealthText();
-            //}
-
-            //// if player is dead
-            //if (!bAlive)
-            //{
-            //    Destroy(gameObject);
-            //}
-
-        }
+        Health();
 
         //stop sliding
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
 
+    //--------------------------------------------------------
+    //
+    //--------------------------------------------------------
     void Update()
     {
         //    if (m_bSlow)
@@ -272,9 +116,9 @@ public class Player : MonoBehaviour
         //    }
     }
 
-    //----------
+    //--------------------------------------------------------
     // Movement
-    //----------
+    //--------------------------------------------------------
     private void Movement()
     {
         Vector3 v3VerticalAxis = Vector3.zero;
@@ -353,14 +197,93 @@ public class Player : MonoBehaviour
             }
         }
     }
+    //--------------------------------------------------------
+    // Aiming
+    //--------------------------------------------------------
+    private void Aiming()
+    {
+        //-------------------------
+        // Xbox Right Stick Aiming
+        //-------------------------
+        v3XboxDashDir = transform.forward;
+        if (!bLeftTriggerPressed)
+        {
+            axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
+            axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
+
+            //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+
+            if (axisX != 0.0f || axisY != 0.0f)
+            {
+                v3XboxDashDir = new Vector3(axisX, 0.0f, axisY);
+                transform.forward = v3XboxDashDir;
+            }
+        }
+
+        //-------------- 
+        // Mouse Aiming
+        //--------------
+        if (!XCI.IsPluggedIn(1) && !bLeftTriggerPressed)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
+
+            Vector3 v3Target = hit.point;
+            v3Target.y = transform.position.y;
+            transform.LookAt(v3Target);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                v3DashDir = hit.point - transform.position;
+                v3DashDir.y = 0.0f;
+                v3DashDir.Normalize();
+                v3MovePos.Normalize();
+            }
+        }
+    }
 
     //--------------------------------------------------------
-    // 
+    // Shoot
     //--------------------------------------------------------
-    private void Dash()
+    private void Shoot()
     {
-        transform.position += v3DashDir * Time.deltaTime * m_fCurrentSpeed;
-        //transform.LookAt(v3DashDir);
+        float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
+        bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
+
+        if (bShoot)
+        {
+            if (bBallPickUp)
+            {
+                GameObject copy = Instantiate(m_TennisBall);
+                copy.transform.position = transform.position + transform.forward;
+                Rigidbody rb = copy.GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+
+                // The ball is thrown so it becomes false
+                bBallPickUp = false;
+                bHasBall = false;
+            }
+        }
+    }
+    //--------------------------------------------------------
+    // Health
+    //--------------------------------------------------------
+    private void Health()
+    {
+        if (nCurrentHealth <= 0 && bAlive)
+        {
+            bAlive = false;
+            Destroy(gameObject);
+            nCurrentHealth = 0;
+
+            //updating the health value onscreen
+            SetHealthText();
+
+            //GameObject copy = Instantiate(scpSnowMan.m_SnowMan);
+            //copy.transform.position = transform.position;
+        }
     }
 
     //--------------------------------------------------------
@@ -370,20 +293,54 @@ public class Player : MonoBehaviour
     {
         txtHealth.text = "HP:" + nCurrentHealth.ToString();
     }
-
-    //// This is the function that slows the player when hit by SnowBall
-    //public void Slow()
-    //{
-    //    //float fSlowTemp = 0.0f;
-    //    //float fOldSpeed = 0.0f;
-    //    //fOldSpeed = m_fSpeed;
-    //    //fSlowTemp = (m_fSpeed * m_fSlowSpeed);
-    //    //m_fSpeed = fSlowTemp;
-    //    m_bSlow = true;
-    //    m_fSlowTimer = 0.0f;
-    //    m_fCurrentSpeed = m_fSlowSpeed;
-    //    //Wait for 2 seconds here
-    //    //m_fSpeed = fOldSpeed;
-    //}
 }
 
+
+
+
+////-----------------
+//// Ability Snowball
+////-----------------
+//public GameObject m_SnowBall = null;
+//public float m_fSnowballSpeed = 1000.0f;
+//public float m_fSlowSpeed = 2.5f;
+//private bool m_bSlow = false;
+//private float m_fSlowTimer = 0.0f;
+
+////------------------
+//// Ability Snowball
+////------------------
+//if (XCI.GetButtonDown(XboxButton.LeftBumper, controller))
+//{
+//    GameObject copy = Instantiate(m_SnowBall);
+//    copy.transform.position = transform.position + (transform.forward * 0.5f) + transform.up;
+//    Rigidbody rb = copy.GetComponent<Rigidbody>();
+//    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+//}
+
+////------------------
+//// Ability Snowball
+////------------------
+//if (Input.GetKeyDown(KeyCode.Mouse1))
+//{
+//    GameObject copy = Instantiate(m_SnowBall);
+//    copy.transform.position = transform.position + transform.forward + transform.up;
+//    Rigidbody rb = copy.GetComponent<Rigidbody>();
+//    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+//}
+
+
+//// This is the function that slows the player when hit by SnowBall
+//public void Slow()
+//{
+//    //float fSlowTemp = 0.0f;
+//    //float fOldSpeed = 0.0f;
+//    //fOldSpeed = m_fSpeed;
+//    //fSlowTemp = (m_fSpeed * m_fSlowSpeed);
+//    //m_fSpeed = fSlowTemp;
+//    m_bSlow = true;
+//    m_fSlowTimer = 0.0f;
+//    m_fCurrentSpeed = m_fSlowSpeed;
+//    //Wait for 2 seconds here
+//    //m_fSpeed = fOldSpeed;
+//}

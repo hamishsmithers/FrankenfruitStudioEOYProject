@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4818759989017614}
   - component: {fileID: 114350160294729074}
+  - component: {fileID: 114656729441924484}
+  - component: {fileID: 114467377238538012}
   - component: {fileID: 65620250731004514}
   - component: {fileID: 54410493344195324}
   m_Layer: 2
@@ -405,14 +407,42 @@ MonoBehaviour:
   m_fMaxSpeed: 7.5
   m_fDashSpeed: 12.5
   fDashDuration: 0.5
+  m_fCurrentSpeed: 5
   m_PlayerModel: {fileID: 1093020421483726}
+  bMovementLock: 0
+  bLeftTriggerPressed: 0
+  v3MovePos: {x: 0, y: 0, z: 0}
+  v3XboxDashDir: {x: 0, y: 0, z: 0}
   m_TennisBall: {fileID: 1770691937743794, guid: f9a9a1a256e40914c8b103e269ca19f8,
     type: 2}
   nTennisBallSpeed: 1000
-  m_SnowBall: {fileID: 1190738819308500, guid: a32ea0354c09ef24a8adfcd29ba52e08, type: 2}
-  m_fSnowballSpeed: 1000
-  m_fSlowSpeed: 0.25
-  m_SnowMan: {fileID: 1139900445632026, guid: c54c14fb57e3d2843b58f3eef0ff5054, type: 2}
   txtHealth: {fileID: 0}
   nSpawnHealth: 20
   nCurrentHealth: 20
+--- !u!114 &114467377238538012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001984826856994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 937b0057bbafacb4d9f3a78edd827157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SnowMan: {fileID: 100000, guid: 1321ea09c31b0984f94760709dfb7470, type: 3}
+--- !u!114 &114656729441924484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001984826856994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e63b11b971e9841af72fc0eabb103c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fDashSpeed: 10
+  fDashDuration: 0.5
+  fCoolDown: 0.8
+  v3DashDir: {x: 0, y: 0, z: 0}
