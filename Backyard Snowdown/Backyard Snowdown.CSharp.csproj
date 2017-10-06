@@ -99,6 +99,7 @@
     <Compile Include="Assets\Backyard Snowdown\Scripts\AbilitySnowBall.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\AbilitySnowMan.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Dash.cs" />
+    <Compile Include="Assets\Backyard Snowdown\Scripts\Eliminated.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Global.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Menu.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Player.cs" />

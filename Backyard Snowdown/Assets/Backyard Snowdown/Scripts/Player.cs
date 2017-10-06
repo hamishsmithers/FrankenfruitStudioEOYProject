@@ -48,7 +48,8 @@ public class Player : MonoBehaviour
     public Text txtHealth;
     public int nSpawnHealth = 20;
     public int nCurrentHealth;
-    private bool bAlive = true;
+    [HideInInspector]
+    public bool bAlive = true;
 
     //-------------
     // Ball Pickup
