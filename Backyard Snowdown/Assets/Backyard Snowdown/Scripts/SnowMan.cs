@@ -23,6 +23,7 @@ public class SnowMan : MonoBehaviour
     {
 
     }
+
     //--------------------------------------------------------
     // SnowMan, creates a snowman infront of the player
     //--------------------------------------------------------

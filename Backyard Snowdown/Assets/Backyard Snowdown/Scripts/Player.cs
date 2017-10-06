@@ -275,6 +275,13 @@ public class Player : MonoBehaviour
     {
         if (nCurrentHealth <= 0 && bAlive)
         {
+            if (bHasBall)
+            {
+                GameObject copy = Instantiate(m_TennisBall);
+                copy.transform.position = transform.position + transform.forward;
+                bHasBall = false;
+            }
+
             bAlive = false;
             Destroy(gameObject);
             nCurrentHealth = 0;
