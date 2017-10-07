@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     // Shooting / TennisBall
     //-----------------------
     public GameObject m_TennisBall = null;
-    public int nTennisBallSpeed = 1000;
+    public int nTennisBallSpeed = 1750;
     // xbox max scale of trigger when pressed down
     private const float MAX_TRG_SCL = 1.21f;
     private bool bHasBall = false;
@@ -186,9 +186,15 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "TennisBall")
         {
-            TennisBall tbScript = col.gameObject.GetComponent<TennisBall>();
+            TennisBall scpTennisBall = col.gameObject.GetComponent<TennisBall>();
+            Dash scpDash = gameObject.GetComponent<Dash>();
 
-            if (tbScript.bTooFast && bHasBall)
+            if (scpDash.bDashing && col.gameObject.tag == "TennisBall" && !scpTennisBall.bTooFast)
+            {
+                Physics.IgnoreCollision(col.collider, GetComponent<Collider>());
+            }
+
+            if (scpTennisBall.bTooFast && bHasBall)
             {
                 bHasBall = false;
                 GameObject copy = Instantiate(m_TennisBall);
@@ -201,7 +207,7 @@ public class Player : MonoBehaviour
             SetHealthText();
 
 
-            if (!tbScript.bTooFast && !bHasBall)
+            if (!scpTennisBall.bTooFast && !bHasBall)
             {
                 // The player has picked it up
                 bBallPickUp = true;
@@ -267,7 +273,9 @@ public class Player : MonoBehaviour
         float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
         bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
 
-        if (bShoot)
+        Dash scpDash = gameObject.GetComponent<Dash>();
+
+        if (bShoot && !scpDash.bDashing)
         {
             if (bBallPickUp)
             {

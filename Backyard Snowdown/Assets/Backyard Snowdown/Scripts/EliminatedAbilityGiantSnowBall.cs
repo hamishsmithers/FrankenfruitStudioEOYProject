@@ -18,7 +18,12 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
     }
 
     public void DoEliminatedAbilityGiantSnowBall()
-    {
-        //if 
+    { 
+        Player scpPlayer = gameObject.GetComponent<Player>();
+
+        if (!scpPlayer.bAlive)
+        {
+
+        }
     }
 }
