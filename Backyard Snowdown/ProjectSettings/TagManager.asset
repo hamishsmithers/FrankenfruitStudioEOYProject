@@ -9,6 +9,7 @@ TagManager:
   - TennisBall
   - Character
   - Boundaries
+  - Spawnbox
   layers:
   - Default
   - TransparentFX

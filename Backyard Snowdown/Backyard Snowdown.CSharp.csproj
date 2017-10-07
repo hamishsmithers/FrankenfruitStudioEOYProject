@@ -100,9 +100,11 @@
     <Compile Include="Assets\Backyard Snowdown\Scripts\AbilitySnowMan.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Dash.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Eliminated.cs" />
+    <Compile Include="Assets\Backyard Snowdown\Scripts\EliminatedAbilityGiantSnowBall.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Global.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Menu.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\Player.cs" />
+    <Compile Include="Assets\Backyard Snowdown\Scripts\PodiumPosition.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\SnowMan.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\TennisBall.cs" />
     <Compile Include="Assets\OBJExport\OBJExporter.cs" />
