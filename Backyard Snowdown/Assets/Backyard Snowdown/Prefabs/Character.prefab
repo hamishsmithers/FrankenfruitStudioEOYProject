@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114350160294729074}
   - component: {fileID: 114656729441924484}
   - component: {fileID: 114467377238538012}
+  - component: {fileID: 114889811701367488}
   - component: {fileID: 65620250731004514}
   - component: {fileID: 54410493344195324}
   m_Layer: 2
@@ -355,8 +356,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 1, z: 0.7}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 0.65, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.5, z: 0.06}
 --- !u!95 &95109827045722992
 Animator:
   serializedVersion: 3
@@ -419,6 +420,7 @@ MonoBehaviour:
   txtHealth: {fileID: 0}
   nSpawnHealth: 20
   nCurrentHealth: 20
+  bAlive: 1
 --- !u!114 &114467377238538012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -446,3 +448,14 @@ MonoBehaviour:
   fDashDuration: 0.5
   fCoolDown: 0.8
   v3DashDir: {x: 0, y: 0, z: 0}
+--- !u!114 &114889811701367488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001984826856994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4723a56331b12b44aa34aa59580fe2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

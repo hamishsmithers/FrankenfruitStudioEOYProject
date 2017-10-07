@@ -7,10 +7,11 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class Player : MonoBehaviour
 {
+    public XboxController controller;
+
     //----------   
     // Movement
     //----------
-    public XboxController controller;
     public float m_fSpeed = 5.0f;
     public float m_fMaxSpeed = 5.0f;
     public float m_fDashSpeed = 10.0f;
@@ -18,7 +19,6 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public float m_fCurrentSpeed = 5.0f;
     public GameObject m_PlayerModel = null;
-    private float fDashCount = 0.0f;
     bool bSpacePressed = false;
     [HideInInspector]
     public bool bMovementLock = false;
@@ -95,6 +95,10 @@ public class Player : MonoBehaviour
         scpSnowMan.CreateSnowMan();
 
         Health();
+
+        EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
+
+        scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
 
         //stop sliding
         rb.velocity = Vector3.zero;
@@ -182,12 +186,20 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "TennisBall")
         {
+            TennisBall tbScript = col.gameObject.GetComponent<TennisBall>();
+
+            if (tbScript.bTooFast && bHasBall)
+            {
+                bHasBall = false;
+                GameObject copy = Instantiate(m_TennisBall);
+                copy.transform.position = transform.position + transform.forward;
+            }
+
             nCurrentHealth = nCurrentHealth - TennisBall.nScoreValue;
 
             // updating the health value onscreen
             SetHealthText();
 
-            TennisBall tbScript = col.gameObject.GetComponent<TennisBall>();
 
             if (!tbScript.bTooFast && !bHasBall)
             {
@@ -196,8 +208,10 @@ public class Player : MonoBehaviour
                 Destroy(col.gameObject);
                 bHasBall = true;
             }
+            
         }
     }
+
     //--------------------------------------------------------
     // Aiming
     //--------------------------------------------------------
@@ -268,6 +282,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
     //--------------------------------------------------------
     // Health
     //--------------------------------------------------------

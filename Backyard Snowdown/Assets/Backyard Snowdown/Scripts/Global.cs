@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using XboxCtrlrInput;       // Be sure to include this if you want an object to have Xbox input
 
-public class Global : MonoBehaviour {
-
-    static string strControl;
+public class Global : MonoBehaviour
+{
+    private float fResetTimer = 0.0f;
+    public float fResetConfirmTime = 3.0f;
+    //static string strControl;
 
     ////-------------------------------
     //// Use Xbox controls or keyboard
@@ -13,17 +18,34 @@ public class Global : MonoBehaviour {
     //static public bool bKeyboardControls = true;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         //bKeyboardControls = true;
         //strControl = "xbox";
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		
-	}
+        ResetGame();
+    }
+
+    public void ResetGame()
+    {
+        Player scpPlayer = gameObject.GetComponent<Player>();
+
+        if (XCI.GetButton(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButtonDown(XboxButton.RightStick, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButton(XboxButton.RightStick, scpPlayer.controller))
+        {
+            fResetTimer += Time.deltaTime;
+
+            if (fResetTimer >= fResetConfirmTime)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                fResetTimer = 0.0f;
+            }
+        }
+        else { fResetTimer = 0.0f; }
+    }
 
     //private void OnGUI()
     //{

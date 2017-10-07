@@ -18,7 +18,8 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || XCI.GetButtonDown(XboxButton.Back))
+        Player scpPlayer = gameObject.GetComponent<Player>();
+        if (Input.GetKeyDown(KeyCode.Escape) || (XCI.GetButtonDown(XboxButton.Start, scpPlayer.controller)))
         {
             if (bEscapeToggle)
             {

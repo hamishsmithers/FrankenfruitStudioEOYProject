@@ -11,6 +11,7 @@ public class SnowMan : MonoBehaviour
     // Ability SnowMan
     //-----------------
     public GameObject m_SnowMan = null;
+    
 
     // Use this for initialization
     void Start()
