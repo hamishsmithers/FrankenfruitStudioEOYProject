@@ -41,6 +41,9 @@ public class Player : MonoBehaviour
     // xbox max scale of trigger when pressed down
     private const float MAX_TRG_SCL = 1.21f;
     private bool bHasBall = false;
+    private GameObject goTennisBall;
+    [HideInInspector]
+    public bool bCanShoot = true;
 
     //--------
     // Health
@@ -50,7 +53,9 @@ public class Player : MonoBehaviour
     public int nCurrentHealth;
     [HideInInspector]
     public bool bAlive = true;
-
+    public float fStun = 0.2f;
+    private float fStunTimer = 0.0f;
+    private bool bHit = false;
     //-------------
     // Ball Pickup
     //-------------
@@ -82,7 +87,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         Dash scpDash = gameObject.GetComponent<Dash>();
-        SnowMan scpSnowMan = gameObject.GetComponent<SnowMan>();
+        AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
 
         Movement();
 
@@ -110,15 +115,46 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void Update()
     {
-        //    if (m_bSlow)
-        //    {
-        //        m_fSlowSpeed += Time.deltaTime;
-        //        if (m_fSlowSpeed > 2.0f)
-        //        {
-        //            m_bSlow = false;
-        //            m_fCurrentSpeed = m_fSpeed;
-        //        }
-        //    }
+        TennisBall scpTennisBall = m_TennisBall.GetComponent<TennisBall>();
+        Dash scpDash = gameObject.GetComponent<Dash>();
+
+        if (!scpTennisBall.bTooFast && bHasBall && !scpDash.bDashing)
+        {
+            /*if (GameObject.Find("Tennisball"))
+            {
+                goTennisBall = GameObject.Find("Tennisball");
+                Physics.IgnoreCollision(goTennisBall.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            }
+
+            if (GameObject.Find("Tennisball (1)"))
+            {
+                goTennisBall = GameObject.Find("Tennisball (1)");
+                Physics.IgnoreCollision(goTennisBall.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            }
+
+            if (GameObject.Find("Tennisball(Clone)"))
+            {
+                goTennisBall = GameObject.Find("Tennisball(Clone)");
+                Physics.IgnoreCollision(goTennisBall.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            }*/
+            TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
+            for(int i = 0; i < tennisBalls.Length; i++)
+            {
+                Physics.IgnoreCollision(tennisBalls[i].gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>(),false);
+            }
+        }
+
+        if (fStunTimer <= fStun && bHit)
+        {
+            fStunTimer += Time.deltaTime;
+            bMovementLock = true;
+        }
+        else if (fStunTimer >= fStun)
+        {
+            fStunTimer = 0.0f;
+            bMovementLock = false;
+            bHit = false;
+        }
     }
 
     //--------------------------------------------------------
@@ -176,49 +212,6 @@ public class Player : MonoBehaviour
     }
 
     //--------------------------------------------------------
-    //
-    //
-    //    Param:
-    //          col:
-    //
-    //--------------------------------------------------------
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "TennisBall")
-        {
-            TennisBall scpTennisBall = col.gameObject.GetComponent<TennisBall>();
-            Dash scpDash = gameObject.GetComponent<Dash>();
-
-            if (scpDash.bDashing && col.gameObject.tag == "TennisBall" && !scpTennisBall.bTooFast)
-            {
-                Physics.IgnoreCollision(col.collider, GetComponent<Collider>());
-            }
-
-            if (scpTennisBall.bTooFast && bHasBall)
-            {
-                bHasBall = false;
-                GameObject copy = Instantiate(m_TennisBall);
-                copy.transform.position = transform.position + transform.forward;
-            }
-
-            nCurrentHealth = nCurrentHealth - TennisBall.nScoreValue;
-
-            // updating the health value onscreen
-            SetHealthText();
-
-
-            if (!scpTennisBall.bTooFast && !bHasBall)
-            {
-                // The player has picked it up
-                bBallPickUp = true;
-                Destroy(col.gameObject);
-                bHasBall = true;
-            }
-            
-        }
-    }
-
-    //--------------------------------------------------------
     // Aiming
     //--------------------------------------------------------
     private void Aiming()
@@ -270,23 +263,43 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Shoot()
     {
-        float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
-        bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
-
-        Dash scpDash = gameObject.GetComponent<Dash>();
-
-        if (bShoot && !scpDash.bDashing)
+        if (bCanShoot)
         {
-            if (bBallPickUp)
-            {
-                GameObject copy = Instantiate(m_TennisBall);
-                copy.transform.position = transform.position + transform.forward;
-                Rigidbody rb = copy.GetComponent<Rigidbody>();
-                rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+            float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
+            bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
 
-                // The ball is thrown so it becomes false
-                bBallPickUp = false;
-                bHasBall = false;
+            Dash scpDash = gameObject.GetComponent<Dash>();
+
+            if (bShoot && !scpDash.bDashing)
+            {
+                if (bBallPickUp)
+                {
+                    RaycastHit hit;
+                    if(Physics.Raycast(gameObject.transform.position,gameObject.transform.forward, out hit, 1.3f))
+                    {
+                        GameObject copy = Instantiate(m_TennisBall);
+                        copy.transform.position = transform.position + transform.forward * -1;
+                        Rigidbody rb = copy.GetComponent<Rigidbody>();
+                        rb.AddForce(transform.forward * nTennisBallSpeed * -1, ForceMode.Acceleration);
+                        copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                        // The ball is thrown so it becomes false
+                        bBallPickUp = false;
+                        bHasBall = false;
+                        Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
+                    }
+                    else
+                    {
+                        GameObject copy = Instantiate(m_TennisBall);
+                        copy.transform.position = transform.position + transform.forward;
+                        Rigidbody rb = copy.GetComponent<Rigidbody>();
+                        rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
+                        copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                        // The ball is thrown so it becomes false
+                        bBallPickUp = false;
+                        bHasBall = false;
+                    }
+
+                }
             }
         }
     }
@@ -324,6 +337,56 @@ public class Player : MonoBehaviour
     {
         txtHealth.text = "HP:" + nCurrentHealth.ToString();
     }
+
+
+
+    //--------------------------------------------------------
+    //
+    //
+    //    Param:
+    //          col:
+    //
+    //--------------------------------------------------------
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "TennisBall")
+        {
+            bHit = true;
+
+            TennisBall scpTennisBall = col.gameObject.GetComponent<TennisBall>();
+            Dash scpDash = gameObject.GetComponent<Dash>();
+
+            if (scpDash.bDashing && col.gameObject.tag == "TennisBall" && !scpTennisBall.bTooFast)
+            {
+                Physics.IgnoreCollision(col.collider, GetComponent<Collider>(), true);
+                bHit = false;
+            }
+
+            if (scpTennisBall.bTooFast && bHasBall)
+            {
+                bHasBall = false;
+                GameObject copy = Instantiate(m_TennisBall);
+                copy.transform.position = transform.position + transform.forward;
+            }
+
+            nCurrentHealth = nCurrentHealth - TennisBall.nScoreValue;
+
+            // updating the health value onscreen
+            SetHealthText();
+
+            if (!scpTennisBall.bTooFast && bHasBall)
+                bHit = false;
+
+            if (!scpTennisBall.bTooFast && !bHasBall)
+            {
+                // The player has picked it up
+                bBallPickUp = true;
+                Destroy(col.gameObject);
+                bHasBall = true;
+                bHit = false;
+            }
+        }
+    }
 }
 
 
@@ -360,7 +423,6 @@ public class Player : MonoBehaviour
 //    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
 //}
 
-
 //// This is the function that slows the player when hit by SnowBall
 //public void Slow()
 //{
@@ -375,3 +437,13 @@ public class Player : MonoBehaviour
 //    //Wait for 2 seconds here
 //    //m_fSpeed = fOldSpeed;
 //}
+
+//    if (m_bSlow)
+//    {
+//        m_fSlowSpeed += Time.deltaTime;
+//        if (m_fSlowSpeed > 2.0f)
+//        {
+//            m_bSlow = false;
+//            m_fCurrentSpeed = m_fSpeed;
+//        }
+//    }

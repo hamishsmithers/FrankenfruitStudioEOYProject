@@ -1,12 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using XboxCtrlrInput;		// Be sure to include this if you want an object to have Xbox input
 
 public class AbilitySnowMan : MonoBehaviour
 {
 
-    // Counts how many times it's been hit
-    public int nSnowManHitCount = 2;
+    //-----------------
+    // Ability SnowMan
+    //-----------------
+    public GameObject m_SnowMan = null;
+
+    public float fSnowManBeforeSpawn = 0.3f;
+    private float fSnowManBeforeSpawnTimer = 0.0f;
+    public float fSnowManAfterSpawn = 0.3f;
+    private float fSnowManAfterSpawnTimer = 0.0f;
+    private bool bCreateSnowManBefore = false;
+    private bool bCreateSnowManAfter = false;
+    [HideInInspector]
+    public bool bASnowManExists = false;
 
     // Use this for initialization
     void Start()
@@ -17,18 +31,55 @@ public class AbilitySnowMan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(nSnowManHitCount < 1)
-        {
-            Destroy(gameObject);
-        }
+
     }
 
-    private void OnCollisionEnter(Collision col)
+    //--------------------------------------------------------
+    // SnowMan, creates a snowman infront of the player
+    //--------------------------------------------------------
+    public void CreateSnowMan()
     {
-        if (col.gameObject.tag == "TennisBall")
+        Player scpPlayer = gameObject.GetComponent<Player>();
+
+        Debug.Log(bASnowManExists);
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) || XCI.GetButtonDown(XboxButton.RightBumper, scpPlayer.controller) || bCreateSnowManBefore || bCreateSnowManAfter)
         {
-            nSnowManHitCount = nSnowManHitCount - 1;
+            if (!bASnowManExists)
+            {
+                if (fSnowManBeforeSpawnTimer <= fSnowManBeforeSpawn)
+                {
+                    fSnowManBeforeSpawnTimer += Time.deltaTime;
+                    bCreateSnowManBefore = true;
+                    scpPlayer.bMovementLock = true;
+                    scpPlayer.bCanShoot = false;
+                }
+                else if (fSnowManBeforeSpawnTimer >= fSnowManBeforeSpawn)
+                {
+                    GameObject copy = Instantiate(m_SnowMan);
+                    copy.GetComponent<SnowMan>().player = gameObject.GetComponent<Player>();
+                    copy.transform.position = transform.position + transform.forward;
+                    bCreateSnowManBefore = false;
+                    fSnowManBeforeSpawnTimer = 0.0f;
+                }
+
+                if (!bCreateSnowManBefore || bCreateSnowManAfter)
+                {
+                    fSnowManAfterSpawnTimer += Time.deltaTime;
+                    bCreateSnowManAfter = true;
+                }
+
+                if (fSnowManAfterSpawnTimer >= fSnowManAfterSpawn)
+                {
+                    fSnowManBeforeSpawnTimer = 0.0f;
+                    fSnowManAfterSpawnTimer = 0.0f;
+                    bCreateSnowManBefore = false;
+                    bCreateSnowManAfter = false;
+                    scpPlayer.bMovementLock = false;
+                    scpPlayer.bCanShoot = true;
+                    bASnowManExists = true;
+                }
+            }
         }
-        
     }
 }

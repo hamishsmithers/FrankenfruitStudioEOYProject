@@ -7,12 +7,10 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class SnowMan : MonoBehaviour
 {
-    //-----------------
-    // Ability SnowMan
-    //-----------------
-    public GameObject m_SnowMan = null;
+    // Counts how many times it's been hit
+    //public int nSnowManHitCount = 2;
+    public Player player;
     
-
     // Use this for initialization
     void Start()
     {
@@ -25,17 +23,14 @@ public class SnowMan : MonoBehaviour
 
     }
 
-    //--------------------------------------------------------
-    // SnowMan, creates a snowman infront of the player
-    //--------------------------------------------------------
-    public void CreateSnowMan()
+    private void OnCollisionEnter(Collision col)
     {
-        Player scpPlayer = gameObject.GetComponent<Player>();
-        
-        if (Input.GetKeyDown(KeyCode.LeftShift) || XCI.GetButtonDown(XboxButton.RightBumper, scpPlayer.controller))
+        //Player scpSnowMan = GameObject.FindObjectOfType<Player>();
+        AbilitySnowMan scpAbilitySnowMan = player.gameObject.GetComponent<AbilitySnowMan>();
+        if (col.gameObject.tag == "TennisBall")
         {
-            GameObject copy = Instantiate(m_SnowMan);
-            copy.transform.position = transform.position + transform.forward;
+            scpAbilitySnowMan.bASnowManExists = false;
+            Destroy(gameObject);
         }
     }
 }

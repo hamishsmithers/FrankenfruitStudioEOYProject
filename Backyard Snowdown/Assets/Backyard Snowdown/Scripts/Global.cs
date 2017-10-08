@@ -32,19 +32,19 @@ public class Global : MonoBehaviour
 
     public void ResetGame()
     {
-        Player scpPlayer = gameObject.GetComponent<Player>();
+        //Player scpPlayer = gameObject.GetComponent<Player>();
 
-        if (XCI.GetButton(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButtonDown(XboxButton.RightStick, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButton(XboxButton.RightStick, scpPlayer.controller))
-        {
-            fResetTimer += Time.deltaTime;
+        //if (XCI.GetButton(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButtonDown(XboxButton.RightStick, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButton(XboxButton.RightStick, scpPlayer.controller))
+        //{
+        //    fResetTimer += Time.deltaTime;
 
-            if (fResetTimer >= fResetConfirmTime)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                fResetTimer = 0.0f;
-            }
-        }
-        else { fResetTimer = 0.0f; }
+        //    if (fResetTimer >= fResetConfirmTime)
+        //    {
+        //        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //        fResetTimer = 0.0f;
+        //    }
+        //}
+        //else { fResetTimer = 0.0f; }
     }
 
     //private void OnGUI()
