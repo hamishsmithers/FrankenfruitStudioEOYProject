@@ -46,38 +46,39 @@ public class AbilitySnowMan : MonoBehaviour
         {
             if (!bASnowManExists)
             {
-                if (fSnowManBeforeSpawnTimer <= fSnowManBeforeSpawn)
-                {
-                    fSnowManBeforeSpawnTimer += Time.deltaTime;
-                    bCreateSnowManBefore = true;
-                    scpPlayer.bMovementLock = true;
-                    scpPlayer.bCanShoot = false;
-                }
-                else if (fSnowManBeforeSpawnTimer >= fSnowManBeforeSpawn)
-                {
+                //if (fSnowManBeforeSpawnTimer <= fSnowManBeforeSpawn)
+                //{
+                //    fSnowManBeforeSpawnTimer += Time.deltaTime;
+                //    bCreateSnowManBefore = true;
+                //    scpPlayer.bMovementLock = true;
+                //    scpPlayer.bCanShoot = false;
+                //}
+                //else if (fSnowManBeforeSpawnTimer >= fSnowManBeforeSpawn)
+                //{
                     GameObject copy = Instantiate(m_SnowMan);
                     copy.GetComponent<SnowMan>().player = gameObject;
                     copy.transform.position = transform.position + transform.forward;
-                    bCreateSnowManBefore = false;
-                    fSnowManBeforeSpawnTimer = 0.0f;
-                }
-
-                if (!bCreateSnowManBefore || bCreateSnowManAfter)
-                {
-                    fSnowManAfterSpawnTimer += Time.deltaTime;
-                    bCreateSnowManAfter = true;
-                }
-
-                if (fSnowManAfterSpawnTimer >= fSnowManAfterSpawn)
-                {
-                    fSnowManBeforeSpawnTimer = 0.0f;
-                    fSnowManAfterSpawnTimer = 0.0f;
-                    bCreateSnowManBefore = false;
-                    bCreateSnowManAfter = false;
-                    scpPlayer.bMovementLock = false;
-                    scpPlayer.bCanShoot = true;
+                    //bCreateSnowManBefore = false;
+                    //fSnowManBeforeSpawnTimer = 0.0f;
                     bASnowManExists = true;
-                }
+                //}
+
+                //if (!bCreateSnowManBefore || bCreateSnowManAfter)
+                //{
+                //    fSnowManAfterSpawnTimer += Time.deltaTime;
+                //    bCreateSnowManAfter = true;
+                //}
+
+                //if (fSnowManAfterSpawnTimer >= fSnowManAfterSpawn)
+                //{
+                //    fSnowManBeforeSpawnTimer = 0.0f;
+                //    fSnowManAfterSpawnTimer = 0.0f;
+                //    bCreateSnowManBefore = false;
+                //    bCreateSnowManAfter = false;
+                //    scpPlayer.bMovementLock = false;
+                //    scpPlayer.bCanShoot = true;
+                //    bASnowManExists = true;
+                //}
             }
         }
     }

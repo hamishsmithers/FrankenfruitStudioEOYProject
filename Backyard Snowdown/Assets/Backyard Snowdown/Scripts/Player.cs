@@ -88,6 +88,35 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void FixedUpdate()
     {
+        //Dash scpDash = gameObject.GetComponent<Dash>();
+        //AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
+
+        //Movement();
+
+        //Aiming();
+
+        //scpDash.DoDash();
+
+        //Shoot();
+
+        //scpSnowMan.CreateSnowMan();
+
+        //Health();
+
+        //EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
+
+        //scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
+
+        ////stop sliding
+        //rb.velocity = Vector3.zero;
+        //rb.angularVelocity = Vector3.zero;
+    }
+
+    //--------------------------------------------------------
+    //
+    //--------------------------------------------------------
+    void Update()
+    {
         Dash scpDash = gameObject.GetComponent<Dash>();
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
 
@@ -110,15 +139,11 @@ public class Player : MonoBehaviour
         //stop sliding
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-    }
 
-    //--------------------------------------------------------
-    //
-    //--------------------------------------------------------
-    void Update()
-    {
+        ///////
+
         TennisBall scpTennisBall = m_TennisBall.GetComponent<TennisBall>();
-        Dash scpDash = gameObject.GetComponent<Dash>();
+        //Dash scpDash = gameObject.GetComponent<Dash>();
 
         if (!scpTennisBall.bTooFast && bHasBall && !scpDash.bDashing)
         {
@@ -192,21 +217,21 @@ public class Player : MonoBehaviour
             // Up and down movement
             v3MovePos = Vector3.zero;
 
-            v3MovePos += v3VerticalAxis * Time.fixedDeltaTime * m_fCurrentSpeed;
+            v3MovePos += v3VerticalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-            if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
+            if (v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
             {
                 v3MovePos.Normalize();
-                v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
+                v3MovePos *= m_fMaxSpeed * Time.deltaTime;
             }
 
             // Left and right movement
-            v3MovePos += v3HorizontalAxis * Time.fixedDeltaTime * m_fCurrentSpeed;
+            v3MovePos += v3HorizontalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-            if (v3MovePos.magnitude > m_fMaxSpeed * Time.fixedDeltaTime)
+            if (v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
             {
                 v3MovePos.Normalize();
-                v3MovePos *= m_fMaxSpeed * Time.fixedDeltaTime;
+                v3MovePos *= m_fMaxSpeed * Time.deltaTime;
             }
 
             rb.MovePosition(rb.position + v3MovePos);

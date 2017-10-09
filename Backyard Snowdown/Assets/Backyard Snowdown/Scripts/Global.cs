@@ -46,20 +46,20 @@ public class Global : MonoBehaviour
     public void ResetGame()
     {
         //Player scpPlayer = gameObject.GetComponent<Player>();
-        Debug.Log(fResetTimer);
+        //Debug.Log(fResetTimer);
         //if (XCI.GetButton(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButtonDown(XboxButton.RightStick, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButton(XboxButton.RightStick, scpPlayer.controller))
-        if (XCI.GetButton(XboxButton.Start, controller) && XCI.GetButtonDown(XboxButton.Back, controller) || XCI.GetButtonDown(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))
+        if (XCI.GetButton(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))// || XCI.GetButtonDown(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))
         {
-            Debug.Log("START");
-            fResetTimer += Time.deltaTime;
+            //Debug.Log("START");
+            //fResetTimer += Time.deltaTime;
 
-            if (fResetTimer >= fResetConfirmTime)
-            {
+            //if (fResetTimer >= fResetConfirmTime)
+            //{
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                fResetTimer = 0.0f;
-            }
+             //   fResetTimer = 0.0f;
+            //}
         }
-        else { fResetTimer = 0.0f; }
+        //else { fResetTimer = 0.0f; }
     }
 
     //private void OnGUI()
