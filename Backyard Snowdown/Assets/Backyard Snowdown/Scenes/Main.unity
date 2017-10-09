@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 143272191}
   - component: {fileID: 143272190}
   - component: {fileID: 143272189}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: wallLeft
   m_TagString: Boundaries
   m_Icon: {fileID: 0}
@@ -2061,7 +2061,7 @@ GameObject:
   - component: {fileID: 566793243}
   - component: {fileID: 566793242}
   - component: {fileID: 566793241}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: wallRight
   m_TagString: Boundaries
   m_Icon: {fileID: 0}
@@ -2419,7 +2419,7 @@ GameObject:
   - component: {fileID: 628132936}
   - component: {fileID: 628132935}
   - component: {fileID: 628132934}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: wallBottom
   m_TagString: Boundaries
   m_Icon: {fileID: 0}
@@ -2522,6 +2522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36edc5cffd3f4d459e788cc07fad3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: 0
+  player: {fileID: 0}
 --- !u!4 &706680258
 Transform:
   m_ObjectHideFlags: 0
@@ -3134,7 +3136,7 @@ GameObject:
   - component: {fileID: 836198706}
   - component: {fileID: 836198705}
   - component: {fileID: 836198704}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: wallTop
   m_TagString: Boundaries
   m_Icon: {fileID: 0}
@@ -3216,7 +3218,7 @@ GameObject:
   - component: {fileID: 839468692}
   - component: {fileID: 839468691}
   - component: {fileID: 839468690}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: Roof
   m_TagString: Boundaries
   m_Icon: {fileID: 0}
@@ -4466,11 +4468,6 @@ Prefab:
       propertyPath: m_Name
       value: Characterp1
       objectReference: {fileID: 0}
-    - target: {fileID: 114656729441924484, guid: 5f727f9534bb16f4a822f47f0ed2d420,
-        type: 2}
-      propertyPath: m_fDashSpeed
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
   m_IsPrefabParent: 0
@@ -4790,7 +4787,7 @@ Prefab:
       objectReference: {fileID: 807958862}
     - target: {fileID: 1001984826856994, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1001984826856994, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_TagString
@@ -5095,7 +5092,7 @@ Prefab:
       objectReference: {fileID: 2134589153}
     - target: {fileID: 1001984826856994, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1001984826856994, guid: 5f727f9534bb16f4a822f47f0ed2d420, type: 2}
       propertyPath: m_TagString
@@ -5140,7 +5137,7 @@ Prefab:
     - target: {fileID: 114656729441924484, guid: 5f727f9534bb16f4a822f47f0ed2d420,
         type: 2}
       propertyPath: m_fDashSpeed
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114134921094457618, guid: 5f727f9534bb16f4a822f47f0ed2d420,
         type: 2}
@@ -5853,6 +5850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd52100847798346991436ce210461e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: 0
   fResetConfirmTime: 3
 --- !u!4 &2061066234
 Transform:

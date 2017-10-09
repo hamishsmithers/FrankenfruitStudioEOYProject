@@ -7,8 +7,10 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class Menu : MonoBehaviour
 {
-    bool bEscapeToggle = false;
+    public XboxController controller;
 
+    bool bEscapeToggle = false;
+    public GameObject player;
     // Use this for initialization
     void Start()
     {
@@ -18,19 +20,19 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Player scpPlayer = gameObject.GetComponent<Player>();
-        //if (Input.GetKeyDown(KeyCode.Escape) || (XCI.GetButtonDown(XboxButton.Start, scpPlayer.controller)))
-        //{
-        //    if (bEscapeToggle)
-        //    {
-        //        Time.timeScale = 0;
-        //        bEscapeToggle = false;
-        //    }
-        //    else if (!bEscapeToggle)
-        //    {
-        //        Time.timeScale = 1;
-        //        bEscapeToggle = true;
-        //    }
-        //}
+        //Player scpPlayer = player.gameObject.GetComponent<Player>();
+        if (Input.GetKeyDown(KeyCode.Escape) || (XCI.GetButtonDown(XboxButton.Start, controller)))
+        {
+            if (bEscapeToggle)
+            {
+                Time.timeScale = 0;
+                bEscapeToggle = false;
+            }
+            else if (!bEscapeToggle)
+            {
+                Time.timeScale = 1;
+                bEscapeToggle = true;
+            }
+        }
     }
 }

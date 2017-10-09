@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db54cd4a509e4dd4696618a4894caaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fDamageSpeed: 3
+  fDamageSpeed: 5
   bTooFast: 0
   materials:
   - {fileID: 2100000, guid: 08c5ef49389b86343a532bc48bc04983, type: 2}

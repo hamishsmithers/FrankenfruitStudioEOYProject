@@ -130,15 +130,15 @@ public class TennisBall : MonoBehaviour
     {
         if (col.gameObject.tag != "Ground" && col.gameObject.tag != "Character")
         {
-            Vector3 v3 = new Vector3(-0.5f, -0.5f, -0.5f);
-            
-            rb.AddForce(transform.forward * 111.0f, ForceMode.Impulse);
+            if(rb)
+                rb.velocity = rb.velocity * 0.5f;
         }
 
         else
         {
 
         }
+
         //Player scpPlayer = gameObject.GetComponent<Player>();
 
         //float fBallMagnitude = rb.velocity.magnitude;

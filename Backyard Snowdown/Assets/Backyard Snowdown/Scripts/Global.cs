@@ -8,10 +8,12 @@ using XboxCtrlrInput;       // Be sure to include this if you want an object to 
 
 public class Global : MonoBehaviour
 {
+    public XboxController controller;
+
     private float fResetTimer = 0.0f;
     public float fResetConfirmTime = 3.0f;
 
-    
+
     //static string strControl;
 
     ////-------------------------------
@@ -27,7 +29,7 @@ public class Global : MonoBehaviour
         //strControl = "xbox";
 
         // list then when the list is full, wait a second then change to the endround scene.
-        
+
         // 
     }
 
@@ -44,18 +46,20 @@ public class Global : MonoBehaviour
     public void ResetGame()
     {
         //Player scpPlayer = gameObject.GetComponent<Player>();
-
+        Debug.Log(fResetTimer);
         //if (XCI.GetButton(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButtonDown(XboxButton.RightStick, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButton(XboxButton.RightStick, scpPlayer.controller))
-        //{
-        //    fResetTimer += Time.deltaTime;
+        if (XCI.GetButton(XboxButton.Start, controller) && XCI.GetButtonDown(XboxButton.Back, controller) || XCI.GetButtonDown(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))
+        {
+            Debug.Log("START");
+            fResetTimer += Time.deltaTime;
 
-        //    if (fResetTimer >= fResetConfirmTime)
-        //    {
-        //        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //        fResetTimer = 0.0f;
-        //    }
-        //}
-        //else { fResetTimer = 0.0f; }
+            if (fResetTimer >= fResetConfirmTime)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                fResetTimer = 0.0f;
+            }
+        }
+        else { fResetTimer = 0.0f; }
     }
 
     //private void OnGUI()
