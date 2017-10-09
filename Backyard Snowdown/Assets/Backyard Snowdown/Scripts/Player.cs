@@ -320,7 +320,9 @@ public class Player : MonoBehaviour
             
             bAlive = false;
 
-            
+            //ScoreManager scpScoreManager = gameObject.GetComponent<ScoreManager>();
+
+            ScoreManager.PlayerFinish(((int)controller) - 1);
 
             Destroy(gameObject);
             nCurrentHealth = 0;
