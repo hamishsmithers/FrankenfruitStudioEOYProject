@@ -302,12 +302,12 @@ public class Player : MonoBehaviour
                 if (bHasBall)
                 {
                     RaycastHit hit;
-                    if(Physics.Raycast(gameObject.transform.position,gameObject.transform.forward, out hit, 0.5f))
+                    if(Physics.Raycast(gameObject.transform.position,gameObject.transform.forward, out hit, 1))
                     {
                         GameObject copy = Instantiate(m_TennisBall);
-                        copy.transform.position = transform.position + transform.forward * -0.5f;
+                        copy.transform.position = transform.position + transform.forward * -1;
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
-                        rb.AddForce(transform.forward * nTennisBallSpeed * -1, ForceMode.Acceleration);
+                        rb.AddForce(transform.forward * nTennisBallSpeed * -0.5f, ForceMode.Acceleration);
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
                         // The ball is thrown so it becomes false
                         bHasBall = false;
@@ -316,7 +316,7 @@ public class Player : MonoBehaviour
                     else
                     {
                         GameObject copy = Instantiate(m_TennisBall);
-                        copy.transform.position = transform.position + transform.forward * 0.5f;
+                        copy.transform.position = transform.position + transform.forward * 1;
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
                         rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
@@ -341,8 +341,7 @@ public class Player : MonoBehaviour
                 copy.transform.position = transform.position + transform.forward;
                 bHasBall = false;
             }
-
-            
+                        
             bAlive = false;
 
             //ScoreManager scpScoreManager = gameObject.GetComponent<ScoreManager>();

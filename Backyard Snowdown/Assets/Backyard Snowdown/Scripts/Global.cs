@@ -55,7 +55,7 @@ public class Global : MonoBehaviour
 
             //if (fResetTimer >= fResetConfirmTime)
             //{
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                SceneManager.LoadScene(0);
              //   fResetTimer = 0.0f;
             //}
         }
