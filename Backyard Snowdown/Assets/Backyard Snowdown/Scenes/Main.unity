@@ -3545,28 +3545,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 0
---- !u!1 &890010837 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1644543914228606, guid: d79acf12d54c7b84b81dd63a1372c222,
-    type: 2}
-  m_PrefabInternal: {fileID: 932761973}
 --- !u!4 &890010840 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4772631931552534, guid: d79acf12d54c7b84b81dd63a1372c222,
     type: 2}
   m_PrefabInternal: {fileID: 932761973}
---- !u!65 &890010841
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 890010837}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 48, y: 1, z: 26}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &910637045
 Prefab:
   m_ObjectHideFlags: 0
@@ -3664,19 +3647,6 @@ Prefab:
     - target: {fileID: 4772631931552534, guid: d79acf12d54c7b84b81dd63a1372c222, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 23793158783909546, guid: d79acf12d54c7b84b81dd63a1372c222,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 01a04e2d024308544b0db343d087d3d0, type: 2}
-    - target: {fileID: 1644543914228606, guid: d79acf12d54c7b84b81dd63a1372c222, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4772631931552534, guid: d79acf12d54c7b84b81dd63a1372c222, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.1348339
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d79acf12d54c7b84b81dd63a1372c222, type: 2}

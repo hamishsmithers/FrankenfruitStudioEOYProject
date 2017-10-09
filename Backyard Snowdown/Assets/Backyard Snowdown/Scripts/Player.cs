@@ -318,7 +318,11 @@ public class Player : MonoBehaviour
                 bHasBall = false;
             }
 
+            
             bAlive = false;
+
+            
+
             Destroy(gameObject);
             nCurrentHealth = 0;
 

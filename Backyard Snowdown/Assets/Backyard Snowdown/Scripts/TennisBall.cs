@@ -125,4 +125,35 @@ public class TennisBall : MonoBehaviour
         //stop sliding
         //rb.angularVelocity = Vector3.zero;
     }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag != "Ground" && col.gameObject.tag != "Character")
+        {
+            Vector3 v3 = new Vector3(-0.5f, -0.5f, -0.5f);
+            
+            rb.AddForce(transform.forward * 111.0f, ForceMode.Impulse);
+        }
+
+        else
+        {
+
+        }
+        //Player scpPlayer = gameObject.GetComponent<Player>();
+
+        //float fBallMagnitude = rb.velocity.magnitude;
+
+
+        //fBallMagnitude = (rb.velocity.magnitude - 2.0f);
+
+        //rb.velocity.magnitude = fBallMagnitude;
+
+        
+
+        //if (col.gameObject.tag == "TennisBall")
+        //{
+        //    scpAbilitySnowMan.bASnowManExists = false;
+        //    Destroy(gameObject);
+        //}
+    }
 }

@@ -5,10 +5,13 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using XboxCtrlrInput;       // Be sure to include this if you want an object to have Xbox input
 
+
 public class Global : MonoBehaviour
 {
     private float fResetTimer = 0.0f;
     public float fResetConfirmTime = 3.0f;
+
+    
     //static string strControl;
 
     ////-------------------------------
@@ -22,12 +25,20 @@ public class Global : MonoBehaviour
     {
         //bKeyboardControls = true;
         //strControl = "xbox";
+
+        // list then when the list is full, wait a second then change to the endround scene.
+        
+        // 
     }
 
     // Update is called once per frame
     void Update()
     {
         ResetGame();
+
+        // if(List.Size == 4)
+        //  timer for a second
+        // 
     }
 
     public void ResetGame()
