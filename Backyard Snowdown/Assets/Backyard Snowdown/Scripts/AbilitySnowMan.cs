@@ -7,7 +7,6 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class AbilitySnowMan : MonoBehaviour
 {
-
     //-----------------
     // Ability SnowMan
     //-----------------
@@ -57,7 +56,7 @@ public class AbilitySnowMan : MonoBehaviour
                 else if (fSnowManBeforeSpawnTimer >= fSnowManBeforeSpawn)
                 {
                     GameObject copy = Instantiate(m_SnowMan);
-                    copy.GetComponent<SnowMan>().player = gameObject.GetComponent<Player>();
+                    //copy.GetComponent<SnowMan>().player = gameObject.GetComponent<Player>();
                     copy.transform.position = transform.position + transform.forward;
                     bCreateSnowManBefore = false;
                     fSnowManBeforeSpawnTimer = 0.0f;

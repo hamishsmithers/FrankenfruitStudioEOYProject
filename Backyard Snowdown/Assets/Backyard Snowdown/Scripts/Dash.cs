@@ -9,7 +9,7 @@ public class Dash : MonoBehaviour
 {
     private const float MAX_TRG_SCL = 1.21f;
 
-    public float m_fDashSpeed = 10.0f;
+    public float m_fDashSpeed = 2.0f;
     public float fDashDuration = 0.5f;
     private float fDashTimer = 0.0f;
     public float fCoolDown = 0.8f;

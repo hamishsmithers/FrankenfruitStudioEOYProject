@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     private GameObject goTennisBall;
     [HideInInspector]
     public bool bCanShoot = true;
-
+    private bool bWasHit = false;
     //--------
     // Health
     //--------
@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
     public float fStun = 0.2f;
     private float fStunTimer = 0.0f;
     private bool bHit = false;
+
     //-------------
     // Ball Pickup
     //-------------
@@ -298,7 +299,6 @@ public class Player : MonoBehaviour
                         bBallPickUp = false;
                         bHasBall = false;
                     }
-
                 }
             }
         }
@@ -369,6 +369,7 @@ public class Player : MonoBehaviour
             if (scpTennisBall.bTooFast && bHasBall)
             {
                 bHasBall = false;
+                bWasHit = true;
                 GameObject copy = Instantiate(m_TennisBall);
                 copy.transform.position = transform.position + transform.forward;
             }

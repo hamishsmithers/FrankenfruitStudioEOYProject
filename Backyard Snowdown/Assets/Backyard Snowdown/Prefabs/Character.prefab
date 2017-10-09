@@ -403,7 +403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1ec51959e23cb46b5d991f2e3d84d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nSnowManHitCount: 2
+  m_SnowMan: {fileID: 1139900445632026, guid: 1c3765f161c38254eb911bd0c57cf449, type: 2}
+  fSnowManBeforeSpawn: 0.3
+  fSnowManAfterSpawn: 0.3
+  bASnowManExists: 0
 --- !u!114 &114350160294729074
 MonoBehaviour:
   m_ObjectHideFlags: 1
