@@ -1,49 +1,16 @@
 fileFormatVersion: 2
-guid: bc88cfc90d5a85149ab8c5dc8af59982
-timeCreated: 1507547754
-licenseType: Free
+guid: 42e7d115737e228499850b4ecf01b8e2
+timeCreated: 1507605847
+licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
-    100002: pCylinder18
-    100004: pPyramid4
-    100006: pPyramid5
-    100008: pPyramid6
-    100010: pPyramid7
-    100012: transform45
-    100014: transform46
-    100016: transform47
-    100018: transform48
-    100020: transform49
-    100022: Tree_001_Backyard_001_Small
-    100024: Leafset_1
-    100026: Leafset_2
-    100028: Leafset_3
-    100030: Leafset_4
-    100032: TreeTrunk
     400000: //RootNode
-    400002: pCylinder18
-    400004: pPyramid4
-    400006: pPyramid5
-    400008: pPyramid6
-    400010: pPyramid7
-    400012: transform45
-    400014: transform46
-    400016: transform47
-    400018: transform48
-    400020: transform49
-    400022: Tree_001_Backyard_001_Small
-    400024: Leafset_1
-    400026: Leafset_2
-    400028: Leafset_3
-    400030: Leafset_4
-    400032: TreeTrunk
     2300000: //RootNode
-    2300002: Tree_001_Backyard_001_Small
     3300000: //RootNode
-    3300002: Tree_001_Backyard_001_Small
-    4300000: Tree_001_Backyard_001_Small
+    4300000: Charachter_Base_Mesh_01
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -113,7 +80,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

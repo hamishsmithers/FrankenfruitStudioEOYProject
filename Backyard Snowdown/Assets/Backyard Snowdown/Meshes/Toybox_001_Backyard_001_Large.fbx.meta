@@ -17,6 +17,11 @@ ModelImporter:
     100018: transform42
     100020: transform43
     100022: transform44
+    100024: BackWood
+    100026: BaseWood
+    100028: FrontWood
+    100030: LeftWood
+    100032: RightWood
     400000: //RootNode
     400002: pCube18
     400004: pCube19
@@ -29,6 +34,11 @@ ModelImporter:
     400018: transform42
     400020: transform43
     400022: transform44
+    400024: BackWood
+    400026: BaseWood
+    400028: FrontWood
+    400030: LeftWood
+    400032: RightWood
     2300000: //RootNode
     2300002: Toybox_001_Backyard_001_Large
     3300000: //RootNode

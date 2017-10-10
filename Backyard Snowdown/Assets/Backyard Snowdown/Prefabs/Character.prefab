@@ -160,8 +160,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1001984826856994}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.92, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.88, y: -1.92, z: 4.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4164806739333848}
@@ -184,7 +184,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f8f7463984a915a4d84377e201d65a99, type: 2}
+  - {fileID: 2100000, guid: 990220e0059d69946b53ec18a6650158, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -216,7 +216,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a6ee1fa4c51a5ec42a12a1422284a8c0, type: 2}
+  - {fileID: 2100000, guid: 990220e0059d69946b53ec18a6650158, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -309,7 +309,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1093020421483726}
-  m_Mesh: {fileID: 4300000, guid: c7d6af4fa6558024ebfcc3ca3de2243e, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33288442167757102
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -345,7 +345,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 84
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &65620250731004514
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1ec51959e23cb46b5d991f2e3d84d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SnowMan: {fileID: 1139900445632026, guid: 1c3765f161c38254eb911bd0c57cf449, type: 2}
+  m_SnowMan: {fileID: 1478226630127566, guid: 8dd66ca7a6600b643920b11280f99122, type: 2}
   fSnowManBeforeSpawn: 0.3
   fSnowManAfterSpawn: 0.3
   bASnowManExists: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34cbfa493ac994c41abdaf2c3175cac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: 1
+  controller: 4
   m_fSpeed: 7.5
   m_fMaxSpeed: 7.5
   m_fDashSpeed: 12.5
@@ -437,7 +437,7 @@ MonoBehaviour:
   nSpawnHealth: 20
   nCurrentHealth: 20
   bAlive: 1
-  fStun: 0.5
+  fStun: 0
 --- !u!114 &114656729441924484
 MonoBehaviour:
   m_ObjectHideFlags: 1
