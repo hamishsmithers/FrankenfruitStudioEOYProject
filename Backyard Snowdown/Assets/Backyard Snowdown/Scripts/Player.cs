@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public float m_fCurrentSpeed = 5.0f;
     public GameObject m_PlayerModel = null;
-    bool bSpacePressed = false;
     [HideInInspector]
     public bool bMovementLock = false;
     [HideInInspector]
@@ -32,9 +31,7 @@ public class Player : MonoBehaviour
     float axisY;
     [HideInInspector]
     public Vector3 v3XboxDashDir;
-    private bool bSetToHealth = false;
     public float fSetToHealth = 0.3f;
-    private float fSetToHealthTimer = 0.0f;
 
     //-----------------------
     // Shooting / TennisBall
@@ -44,7 +41,6 @@ public class Player : MonoBehaviour
     // xbox max scale of trigger when pressed down
     private const float MAX_TRG_SCL = 1.21f;
     private bool bHasBall = false;
-    private GameObject goTennisBall;
     [HideInInspector]
     public bool bCanShoot = true;
     private bool bWasHit = false;
@@ -59,22 +55,24 @@ public class Player : MonoBehaviour
     public bool bAlive = true;
     public float fStun = 0.2f;
     private float fStunTimer = 0.0f;
-    //private bool bHit = false;
-
-    //-------------
-    // Ball Pickup
-    //-------------
-    //private bool bBallPickUp = false;
-    private bool bRightTriggerPressed = false;
+    private Collider colPlayer = null;
+    private Collider mrReticalCol = null;
 
     //---------------
     // Player Damage
     //---------------
     private Color mainColor = Color.white;
-    private MeshRenderer mr = null;
-    private MeshRenderer mr2 = null;
     private bool tookDmg = false;
     private float timer = 0.3f;
+    
+    //--------------
+    // Player Death
+    //--------------
+    private MeshRenderer mrCharacterMesh = null;
+    private MeshRenderer mrDirection = null;
+    private MeshRenderer mrWeapon = null;
+    private MeshRenderer mrColor = null;
+    private MeshRenderer mrRetical = null;
 
 
     //--------------------------------------------------------
@@ -82,34 +80,40 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void Start()
     {
-        mr = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
-        mr2 = gameObject.transform.GetChild(3).GetComponent<MeshRenderer>();
-
+        colPlayer = GetComponent<Collider>();
+        mrCharacterMesh = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
+        mrDirection = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
+        mrWeapon = gameObject.transform.GetChild(2).GetComponent<MeshRenderer>();
+        mrColor = gameObject.transform.GetChild(3).GetComponent<MeshRenderer>();
+        mrRetical = gameObject.transform.GetChild(4).GetComponent<MeshRenderer>();
+        mrReticalCol = gameObject.transform.GetChild(4).GetComponent<Collider>();
+        mrRetical.enabled = false;
+        mrReticalCol.enabled = false;
 
         switch (controller)
         {
             case XboxController.First:
                 mainColor = new Color32(66, 159, 68, 255);
-                mr.material.color = mainColor;
-                mr2.material.color = mainColor;
+                mrCharacterMesh.material.color = mainColor;
+                mrColor.material.color = mainColor;
                 break;
 
             case XboxController.Second:
                 mainColor = new Color32(5, 144, 213, 255);
-                mr.material.color = mainColor;
-                mr2.material.color = mainColor;
+                mrCharacterMesh.material.color = mainColor;
+                mrColor.material.color = mainColor;
                 break;
 
             case XboxController.Third:
                 mainColor = new Color32(83, 12, 101, 255);
-                mr.material.color = mainColor;
-                mr2.material.color = mainColor;
+                mrCharacterMesh.material.color = mainColor;
+                mrColor.material.color = mainColor;
                 break;
 
             case XboxController.Fourth:
                 mainColor = new Color32(225, 130, 44, 255);
-                mr.material.color = mainColor;
-                mr2.material.color = mainColor;
+                mrCharacterMesh.material.color = mainColor;
+                mrColor.material.color = mainColor;
                 break;
 
             default:
@@ -170,12 +174,12 @@ public class Player : MonoBehaviour
 
             if (timer <= 0.3f)
             {
-                mr.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
+                mrCharacterMesh.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
             }
             if (timer < 0.0f)
             {
                 tookDmg = false;
-                mr.material.color = mainColor;
+                mrCharacterMesh.material.color = mainColor;
                 timer = 0.3f;
             }
         }
@@ -413,7 +417,18 @@ public class Player : MonoBehaviour
 
             ScoreManager.PlayerFinish(((int)controller) - 1);
 
-            Destroy(gameObject);
+            //kill the player
+            //Destroy(gameObject);
+            mrCharacterMesh.enabled = false;
+            mrDirection.enabled = false;
+            mrWeapon.enabled = false;
+            mrColor.enabled = false;
+            mrRetical.enabled = true;
+            mrReticalCol.enabled = true;
+            colPlayer.enabled = false;
+
+            gameObject.transform.position = new Vector3(10.2f, 1.0f, -7.0f);
+
             nCurrentHealth = 0;
 
             //updating the health value onscreen
@@ -454,6 +469,7 @@ public class Player : MonoBehaviour
             TennisBall scpTennisBall = col.gameObject.GetComponent<TennisBall>();
             Dash scpDash = gameObject.GetComponent<Dash>();
 
+            //Ball is moving fast
             if (scpTennisBall.bTooFast)
             {
                 if (bHasBall)
@@ -468,7 +484,10 @@ public class Player : MonoBehaviour
                 }
                 else if (!bHasBall && scpDash.bDashing)
                 {
-                    TakeDamage();
+                    //TakeDamage();
+                    // The player has picked it up
+                    Destroy(col.gameObject);
+                    bHasBall = true;
                 }
                 else if (!scpDash.bDashing && !bHasBall)
                 {
@@ -477,7 +496,7 @@ public class Player : MonoBehaviour
                     fStunTimer = fStun;
                 }
             }
-            else
+            else //Ball is moving slow
             {
                 if (scpDash.bDashing)
                 {
@@ -493,6 +512,19 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    //void Test()
+    //{
+    //    Vector3 hit = new Vector3(10, 0, 10); //ignore these numbers, get position from collision impact
+
+    //    int playerLayer = 1 << LayerMask.NameToLayer("Player");
+    //    Collider[] players = Physics.OverlapSphere(hit, 20.0f, playerLayer);
+    //    for(int i = 0; i < players.Length; ++i)
+    //    {
+    //        Rigidbody rb = players[i].gameObject.GetComponent<Rigidbody>();
+    //        rb.AddExplosionForce(1000, hit, 20.0f, 1.0f, ForceMode.Impulse);
+    //    }
+    //}
 }
 
 
