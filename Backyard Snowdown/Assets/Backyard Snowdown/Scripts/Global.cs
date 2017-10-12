@@ -36,6 +36,9 @@ public class Global : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape) || XCI.GetButton(XboxButton.A, controller) && XCI.GetButton(XboxButton.B, controller) && XCI.GetButton(XboxButton.X, controller) && XCI.GetButton(XboxButton.Y, controller) && XCI.GetButton(XboxButton.LeftBumper, controller) && XCI.GetButton(XboxButton.RightBumper, controller))
+            Application.Quit();
+
         ResetGame();
 
         // if(List.Size == 4)
@@ -55,8 +58,8 @@ public class Global : MonoBehaviour
 
             //if (fResetTimer >= fResetConfirmTime)
             //{
-                SceneManager.LoadScene(0);
-             //   fResetTimer = 0.0f;
+            SceneManager.LoadScene(0);
+            //   fResetTimer = 0.0f;
             //}
         }
         //else { fResetTimer = 0.0f; }

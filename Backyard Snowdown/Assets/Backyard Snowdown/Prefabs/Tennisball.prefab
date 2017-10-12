@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23968123037436292}
   - component: {fileID: 54327428060983996}
   - component: {fileID: 114409638129579724}
-  - component: {fileID: 135849511707625876}
+  - component: {fileID: 135483463602575264}
   m_Layer: 0
   m_Name: Tennisball
   m_TagString: TennisBall
@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309105767843890}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -5.067236, y: -0.5715488, z: 0.66510105}
-  m_LocalScale: {x: 162.82628, y: 162.8261, z: 162.8261}
+  m_LocalPosition: {x: -2.98, y: -0.5715488, z: 0.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,8 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8f5ece1f20f04684595dda9bd4fa7110, type: 2}
-  - {fileID: 2100000, guid: e6f7266254136c14f9fa38811a699af6, type: 2}
+  - {fileID: 2100000, guid: 1f01051d0b45cb34c8fee13df4664868, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,7 +82,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309105767843890}
-  m_Mesh: {fileID: 4300000, guid: 3027e707bfe77d54d8cb81e6cf100cbd, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 7f1b0f59499ebd74bba291451c04f8ce, type: 3}
 --- !u!54 &54327428060983996
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -115,7 +114,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 08c5ef49389b86343a532bc48bc04983, type: 2}
   - {fileID: 2100000, guid: f9f2c97c51c93064093be154f9f05c9a, type: 2}
---- !u!135 &135849511707625876
+--- !u!135 &135483463602575264
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -125,5 +124,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.17199102
+  m_Center: {x: -0.000000037252903, y: -0.0000005736947, z: -0.00000011920929}

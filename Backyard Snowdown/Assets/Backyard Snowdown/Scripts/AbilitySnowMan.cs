@@ -11,6 +11,8 @@ public class AbilitySnowMan : MonoBehaviour
     // Ability SnowMan
     //-----------------
     public GameObject m_SnowMan = null;
+    [HideInInspector]
+    public GameObject copy;
 
     public float fSnowManBeforeSpawn = 0.3f;
     private float fSnowManBeforeSpawnTimer = 0.0f;
@@ -55,7 +57,7 @@ public class AbilitySnowMan : MonoBehaviour
                 //}
                 //else if (fSnowManBeforeSpawnTimer >= fSnowManBeforeSpawn)
                 //{
-                    GameObject copy = Instantiate(m_SnowMan);
+                    copy = Instantiate(m_SnowMan);
                     copy.GetComponent<SnowMan>().player = gameObject;
                     copy.transform.position = transform.position + transform.forward;
                     //bCreateSnowManBefore = false;

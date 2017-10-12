@@ -8,7 +8,7 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 public class SnowMan : MonoBehaviour
 {
     // Counts how many times it's been hit
-    //public int nSnowManHitCount = 2;
+    public int nSnowManHitCount = 2;
     public GameObject player;
 
     private int nCaseSwitch = 1;
@@ -64,8 +64,13 @@ public class SnowMan : MonoBehaviour
 
         if (col.gameObject.tag == "TennisBall")
         {
-            scpAbilitySnowMan.bASnowManExists = false;
-            Destroy(gameObject);
+            nSnowManHitCount -= 1;
+            if (nSnowManHitCount == 0)
+            {
+                scpAbilitySnowMan.bASnowManExists = false;
+                Destroy(gameObject);
+                nSnowManHitCount = 2;
+            }
         }
     }
 }

@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
     float axisY;
     [HideInInspector]
     public Vector3 v3XboxDashDir;
+    private bool bSetToHealth = false;
+    public float fSetToHealth = 0.3f;
+    private float fSetToHealthTimer = 0.0f;
 
     //-----------------------
     // Shooting / TennisBall
@@ -64,11 +67,55 @@ public class Player : MonoBehaviour
     //private bool bBallPickUp = false;
     private bool bRightTriggerPressed = false;
 
+    //---------------
+    // Player Damage
+    //---------------
+    private Color mainColor = Color.white;
+    private MeshRenderer mr = null;
+    private MeshRenderer mr2 = null;
+    private bool tookDmg = false;
+    private float timer = 0.3f;
+
+
     //--------------------------------------------------------
     // Use this for initialization
     //--------------------------------------------------------
     void Start()
     {
+        mr = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
+        mr2 = gameObject.transform.GetChild(3).GetComponent<MeshRenderer>();
+
+
+        switch (controller)
+        {
+            case XboxController.First:
+                mainColor = new Color32(66, 159, 68, 255);
+                mr.material.color = mainColor;
+                mr2.material.color = mainColor;
+                break;
+
+            case XboxController.Second:
+                mainColor = new Color32(5, 144, 213, 255);
+                mr.material.color = mainColor;
+                mr2.material.color = mainColor;
+                break;
+
+            case XboxController.Third:
+                mainColor = new Color32(83, 12, 101, 255);
+                mr.material.color = mainColor;
+                mr2.material.color = mainColor;
+                break;
+
+            case XboxController.Fourth:
+                mainColor = new Color32(225, 130, 44, 255);
+                mr.material.color = mainColor;
+                mr2.material.color = mainColor;
+                break;
+
+            default:
+                break;
+        }
+
         //Xbox Stick Axis'
         axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
         axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
@@ -117,6 +164,22 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void Update()
     {
+        if (tookDmg)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer <= 0.3f)
+            {
+                mr.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
+            }
+            if (timer < 0.0f)
+            {
+                tookDmg = false;
+                mr.material.color = mainColor;
+                timer = 0.3f;
+            }
+        }
+
         Dash scpDash = gameObject.GetComponent<Dash>();
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
 
@@ -166,9 +229,9 @@ public class Player : MonoBehaviour
             }*/
 
             TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
-            for(int i = 0; i < tennisBalls.Length; i++)
+            for (int i = 0; i < tennisBalls.Length; i++)
             {
-                Physics.IgnoreCollision(tennisBalls[i].gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>(),false);
+                Physics.IgnoreCollision(tennisBalls[i].gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>(), false);
             }
         }
 
@@ -302,7 +365,7 @@ public class Player : MonoBehaviour
                 if (bHasBall)
                 {
                     RaycastHit hit;
-                    if(Physics.Raycast(gameObject.transform.position,gameObject.transform.forward, out hit, 1))
+                    if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
                     {
                         GameObject copy = Instantiate(m_TennisBall);
                         copy.transform.position = transform.position + transform.forward * -1;
@@ -341,7 +404,9 @@ public class Player : MonoBehaviour
                 copy.transform.position = transform.position + transform.forward;
                 bHasBall = false;
             }
-                        
+
+            Destroy(gameObject.GetComponent<AbilitySnowMan>().copy);
+
             bAlive = false;
 
             //ScoreManager scpScoreManager = gameObject.GetComponent<ScoreManager>();
@@ -367,7 +432,13 @@ public class Player : MonoBehaviour
         txtHealth.text = "HP:" + nCurrentHealth.ToString();
     }
 
-
+    private void TakeDamage()
+    {
+        tookDmg = true;
+        nCurrentHealth = nCurrentHealth - TennisBall.nScoreValue;
+        // updating the health value onscreen
+        SetHealthText();
+    }
 
     //--------------------------------------------------------
     //
@@ -387,19 +458,21 @@ public class Player : MonoBehaviour
             {
                 if (bHasBall)
                 {
+                    TakeDamage();
+
                     //Drop ball
                     bHasBall = false;
                     bWasHit = true;
                     GameObject copy = Instantiate(m_TennisBall);
-                    copy.transform.position = transform.position + transform.forward;
+                    copy.transform.position = transform.position + transform.right;
                 }
-
-                if (!scpDash.bDashing)
+                else if (!bHasBall && scpDash.bDashing)
                 {
-                    nCurrentHealth = nCurrentHealth - TennisBall.nScoreValue;
-
-                    // updating the health value onscreen
-                    SetHealthText();
+                    TakeDamage();
+                }
+                else if (!scpDash.bDashing && !bHasBall)
+                {
+                    TakeDamage();
 
                     fStunTimer = fStun;
                 }

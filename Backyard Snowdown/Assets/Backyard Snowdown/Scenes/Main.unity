@@ -3225,11 +3225,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4387738462524756, guid: 7fdaa185c63eb4c4c8a42304e9d60abc, type: 2}
       propertyPath: m_LocalScale.y
-      value: 162.82602
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4387738462524756, guid: 7fdaa185c63eb4c4c8a42304e9d60abc, type: 2}
       propertyPath: m_LocalScale.z
-      value: 162.82602
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1309105767843890, guid: 7fdaa185c63eb4c4c8a42304e9d60abc, type: 2}
       propertyPath: m_Name
@@ -4613,6 +4613,17 @@ Prefab:
       propertyPath: txtHealth
       value: 
       objectReference: {fileID: 1463467447}
+    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
+        type: 2}
+      propertyPath: controller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114931677700266120, guid: a8f8748022449ef4388bad3c48b85778,
+        type: 2}
+      propertyPath: m_SnowMan
+      value: 
+      objectReference: {fileID: 1139900445632026, guid: 1c3765f161c38254eb911bd0c57cf449,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f8748022449ef4388bad3c48b85778, type: 2}
   m_IsPrefabParent: 0
@@ -4995,6 +5006,17 @@ Prefab:
       propertyPath: txtHealth
       value: 
       objectReference: {fileID: 807958862}
+    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
+        type: 2}
+      propertyPath: controller
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114457547078150360, guid: d421fa0e150dc67468c5f33fc7f220aa,
+        type: 2}
+      propertyPath: m_SnowMan
+      value: 
+      objectReference: {fileID: 1139900445632026, guid: 1c3765f161c38254eb911bd0c57cf449,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d421fa0e150dc67468c5f33fc7f220aa, type: 2}
   m_IsPrefabParent: 0
@@ -5219,6 +5241,12 @@ Prefab:
       propertyPath: txtHealth
       value: 
       objectReference: {fileID: 2134589153}
+    - target: {fileID: 114858961929391424, guid: cac88040a923a7f4395fe58f7df28b99,
+        type: 2}
+      propertyPath: m_SnowMan
+      value: 
+      objectReference: {fileID: 1139900445632026, guid: 1c3765f161c38254eb911bd0c57cf449,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cac88040a923a7f4395fe58f7df28b99, type: 2}
   m_IsPrefabParent: 0
@@ -5956,6 +5984,17 @@ Prefab:
       propertyPath: txtHealth
       value: 
       objectReference: {fileID: 1921913054}
+    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
+        type: 2}
+      propertyPath: controller
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114590982006936800, guid: 32b36135559a2e244b843a945f2beb8f,
+        type: 2}
+      propertyPath: m_SnowMan
+      value: 
+      objectReference: {fileID: 1139900445632026, guid: 1c3765f161c38254eb911bd0c57cf449,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32b36135559a2e244b843a945f2beb8f, type: 2}
   m_IsPrefabParent: 0

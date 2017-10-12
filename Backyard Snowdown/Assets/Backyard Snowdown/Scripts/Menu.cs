@@ -20,19 +20,19 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Player scpPlayer = player.gameObject.GetComponent<Player>();
-        if (Input.GetKeyDown(KeyCode.Escape) || (XCI.GetButtonDown(XboxButton.Start, controller)))
-        {
-            if (bEscapeToggle)
-            {
-                Time.timeScale = 0;
-                bEscapeToggle = false;
-            }
-            else if (!bEscapeToggle)
-            {
-                Time.timeScale = 1;
-                bEscapeToggle = true;
-            }
-        }
+    //    //Player scpPlayer = player.gameObject.GetComponent<Player>();
+    //    if (Input.GetKeyDown(KeyCode.Escape) || (XCI.GetButtonDown(XboxButton.Start, controller)))
+    //    {
+    //        if (bEscapeToggle)
+    //        {
+    //            Time.timeScale = 0;
+    //            bEscapeToggle = false;
+    //        }
+    //        else if (!bEscapeToggle)
+    //        {
+    //            Time.timeScale = 1;
+    //            bEscapeToggle = true;
+    //        }
+    //    }
     }
 }

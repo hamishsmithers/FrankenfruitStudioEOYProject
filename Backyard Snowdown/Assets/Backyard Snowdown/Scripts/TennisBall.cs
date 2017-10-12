@@ -16,12 +16,18 @@ public class TennisBall : MonoBehaviour
     //-------
     public static int nScoreValue = 2;
 
+
+    private Color mainColor = Color.white;
+    private MeshRenderer mr = null;
+
+
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rend = GetComponent<Renderer>();
-        rend.enabled = true;
+
+        mr = GetComponent<MeshRenderer>();
+        mainColor = mr.material.color;
     }
 
     // Update is called once per frame
@@ -29,9 +35,9 @@ public class TennisBall : MonoBehaviour
     {
         //if the ball is moving at a dangerous speed, let the player know!
         if (bTooFast)
-            rend.material = materials[1];
+            mr.material.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         else
-            rend.material = materials[0];
+            mr.material.color = mainColor;
 
         //Debug.Log(rb.velocity);
 
@@ -130,8 +136,8 @@ public class TennisBall : MonoBehaviour
     {
         if (col.gameObject.tag != "Ground" && col.gameObject.tag != "Character")
         {
-            if(rb)
-                rb.velocity = rb.velocity * 0.5f;
+            if (rb)
+                rb.velocity = rb.velocity * 1f;
         }
 
         else
@@ -148,7 +154,7 @@ public class TennisBall : MonoBehaviour
 
         //rb.velocity.magnitude = fBallMagnitude;
 
-        
+
 
         //if (col.gameObject.tag == "TennisBall")
         //{
