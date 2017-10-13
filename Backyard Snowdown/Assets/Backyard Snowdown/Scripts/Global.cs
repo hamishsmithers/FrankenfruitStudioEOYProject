@@ -58,6 +58,7 @@ public class Global : MonoBehaviour
 
             //if (fResetTimer >= fResetConfirmTime)
             //{
+            
             SceneManager.LoadScene(0);
             //   fResetTimer = 0.0f;
             //}
@@ -65,6 +66,15 @@ public class Global : MonoBehaviour
         //else { fResetTimer = 0.0f; }
     }
 
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
     //private void OnGUI()
     //{
     //    if (GUI.Button(new Rect(1760, 850, 150, 50), "Use " + strControl + " controls"))
