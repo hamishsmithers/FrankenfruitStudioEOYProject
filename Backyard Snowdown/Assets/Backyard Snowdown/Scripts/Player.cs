@@ -55,8 +55,6 @@ public class Player : MonoBehaviour
     public bool bAlive = true;
     public float fStun = 0.2f;
     private float fStunTimer = 0.0f;
-    private Collider colPlayer = null;
-    private Collider mrReticalCol = null;
 
     //---------------
     // Player Damage
@@ -68,11 +66,19 @@ public class Player : MonoBehaviour
     //--------------
     // Player Death
     //--------------
+    private Collider colPlayer = null;
     private MeshRenderer mrCharacterMesh = null;
-    private MeshRenderer mrDirection = null;
+    private MeshRenderer mrPlayerCircle = null;
     private MeshRenderer mrWeapon = null;
-    private MeshRenderer mrColor = null;
-    private MeshRenderer mrRetical = null;
+    private MeshRenderer mrReticle = null;
+    private Collider mrReticleCol = null;
+    //private MeshRenderer mrDirection = null;
+    //private MeshRenderer mrColor = null;
+
+    //-----------------
+    // Giant Snow Ball
+    //-----------------
+    public GameObject m_GiantSnowBall = null;
 
 
     //--------------------------------------------------------
@@ -82,43 +88,43 @@ public class Player : MonoBehaviour
     {
         colPlayer = GetComponent<Collider>();
         mrCharacterMesh = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
-        mrDirection = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
+        mrPlayerCircle = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
         mrWeapon = gameObject.transform.GetChild(2).GetComponent<MeshRenderer>();
-        mrColor = gameObject.transform.GetChild(3).GetComponent<MeshRenderer>();
-        mrRetical = gameObject.transform.GetChild(4).GetComponent<MeshRenderer>();
-        mrReticalCol = gameObject.transform.GetChild(4).GetComponent<Collider>();
-        mrRetical.enabled = false;
-        mrReticalCol.enabled = false;
+        mrReticle = gameObject.transform.GetChild(3).GetComponent<MeshRenderer>();
+        mrReticleCol = gameObject.transform.GetChild(3).GetComponent<Collider>();
 
-        switch (controller)
-        {
-            case XboxController.First:
-                mainColor = new Color32(66, 159, 68, 255);
-                mrCharacterMesh.material.color = mainColor;
-                mrColor.material.color = mainColor;
-                break;
+        mrReticle.enabled = false;
+        mrReticleCol.enabled = false;
 
-            case XboxController.Second:
-                mainColor = new Color32(5, 144, 213, 255);
-                mrCharacterMesh.material.color = mainColor;
-                mrColor.material.color = mainColor;
-                break;
+        //switch (controller)
+        //{
+        //    case XboxController.First:
+        //        mainColor = new Color32(66, 159, 68, 255);
+        //        mrCharacterMesh.material.color = mainColor;
+        //        mrColor.material.color = mainColor;
+        //        break;
 
-            case XboxController.Third:
-                mainColor = new Color32(83, 12, 101, 255);
-                mrCharacterMesh.material.color = mainColor;
-                mrColor.material.color = mainColor;
-                break;
+        //    case XboxController.Second:
+        //        mainColor = new Color32(5, 144, 213, 255);
+        //        mrCharacterMesh.material.color = mainColor;
+        //        mrColor.material.color = mainColor;
+        //        break;
 
-            case XboxController.Fourth:
-                mainColor = new Color32(225, 130, 44, 255);
-                mrCharacterMesh.material.color = mainColor;
-                mrColor.material.color = mainColor;
-                break;
+        //    case XboxController.Third:
+        //        mainColor = new Color32(83, 12, 101, 255);
+        //        mrCharacterMesh.material.color = mainColor;
+        //        mrColor.material.color = mainColor;
+        //        break;
 
-            default:
-                break;
-        }
+        //    case XboxController.Fourth:
+        //        mainColor = new Color32(225, 130, 44, 255);
+        //        mrCharacterMesh.material.color = mainColor;
+        //        mrColor.material.color = mainColor;
+        //        break;
+
+        //    default:
+        //        break;
+        //}
 
         //Xbox Stick Axis'
         axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
@@ -420,12 +426,13 @@ public class Player : MonoBehaviour
             //kill the player
             //Destroy(gameObject);
             mrCharacterMesh.enabled = false;
-            mrDirection.enabled = false;
-            mrWeapon.enabled = false;
-            mrColor.enabled = false;
-            mrRetical.enabled = true;
-            mrReticalCol.enabled = true;
             colPlayer.enabled = false;
+            mrWeapon.enabled = false;
+            mrPlayerCircle.enabled = false;
+            mrReticle.enabled = true;
+            mrReticleCol.enabled = true;
+            //mrDirection.enabled = false;
+            //mrColor.enabled = false;
 
             gameObject.transform.position = new Vector3(10.2f, 1.0f, -7.0f);
 
@@ -512,19 +519,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-    //void Test()
-    //{
-    //    Vector3 hit = new Vector3(10, 0, 10); //ignore these numbers, get position from collision impact
-
-    //    int playerLayer = 1 << LayerMask.NameToLayer("Player");
-    //    Collider[] players = Physics.OverlapSphere(hit, 20.0f, playerLayer);
-    //    for(int i = 0; i < players.Length; ++i)
-    //    {
-    //        Rigidbody rb = players[i].gameObject.GetComponent<Rigidbody>();
-    //        rb.AddExplosionForce(1000, hit, 20.0f, 1.0f, ForceMode.Impulse);
-    //    }
-    //}
 }
 
 

@@ -9,19 +9,20 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1248273355418154}
+  m_RootGameObject: {fileID: 1289892862503450}
   m_IsPrefabParent: 1
---- !u!1 &1248273355418154
+--- !u!1 &1289892862503450
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4896218103128626}
-  - component: {fileID: 33095627945239828}
-  - component: {fileID: 23941380945909640}
-  - component: {fileID: 114811122425152478}
+  - component: {fileID: 4895121028983756}
+  - component: {fileID: 33927421302265906}
+  - component: {fileID: 23176112894559054}
+  - component: {fileID: 135531079836474982}
+  - component: {fileID: 114116989282880986}
   m_Layer: 0
   m_Name: GiantSnowBall
   m_TagString: Untagged
@@ -29,25 +30,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4896218103128626
+--- !u!4 &4895121028983756
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1248273355418154}
+  m_GameObject: {fileID: 1289892862503450}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 7.5593204, y: 95.895, z: -17.672}
+  m_LocalPosition: {x: 4.37, y: 4.78, z: -6.52}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23941380945909640
+--- !u!23 &23176112894559054
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1248273355418154}
+  m_GameObject: {fileID: 1289892862503450}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -55,7 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 5b7510ecb5f62064c9185b141338d7d1, type: 2}
+  - {fileID: 2100000, guid: 6cc38c3e4a2e109498d319d404fa32f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,21 +75,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33095627945239828
+--- !u!33 &33927421302265906
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1248273355418154}
-  m_Mesh: {fileID: 4300000, guid: 76ff12b282a1cd340ae13590193dbf6f, type: 3}
---- !u!114 &114811122425152478
+  m_GameObject: {fileID: 1289892862503450}
+  m_Mesh: {fileID: 4300000, guid: b5b38600624d3ad4b9fc2d3a7ab99174, type: 3}
+--- !u!114 &114116989282880986
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1248273355418154}
+  m_GameObject: {fileID: 1289892862503450}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: def0b63f223f90b4c87fa99586f50660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fKnockbackForce: 10
+--- !u!135 &135531079836474982
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289892862503450}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.012708945
+  m_Center: {x: 0, y: 0, z: 0}

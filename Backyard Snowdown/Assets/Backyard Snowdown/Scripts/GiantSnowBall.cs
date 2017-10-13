@@ -21,18 +21,29 @@ public class GiantSnowBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //other.GetComponent<Rigidbody>().AddForce(Vector3.up * fKnockbackForce, ForceMode.Acceleration);
+        Knockback();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        //Vector3 v3Target = transform.position;
-        //other.GetComponent<Rigidbody>().transform.position += transform.LookAt(v3Target) * fKnockbackForce * Time.deltaTime;
-        other.GetComponent<Rigidbody>().AddForce(transform.forward * fKnockbackForce * 1, ForceMode.Acceleration);
+
     }
 
     private void OnTriggerExit(Collider other)
     {
 
+    }
+
+    void Knockback()
+    {
+        Vector3 hit = new Vector3(10, 0, 10); //ignore these numbers, get position from collision impact
+
+        int playerLayer = 1 << LayerMask.NameToLayer("Player");
+        Collider[] players = Physics.OverlapSphere(hit, 20.0f, playerLayer);
+        for (int i = 0; i < players.Length; ++i)
+        {
+            Rigidbody rb = players[i].gameObject.GetComponent<Rigidbody>();
+            rb.AddExplosionForce(1000, hit, 20.0f, 1.0f, ForceMode.Impulse);
+        }
     }
 }

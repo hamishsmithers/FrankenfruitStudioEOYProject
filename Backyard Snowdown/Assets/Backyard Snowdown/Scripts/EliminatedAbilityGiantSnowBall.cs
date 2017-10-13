@@ -25,5 +25,5 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
         {
 
         }
-    }
+    }   
 }
