@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: d4723a56331b12b44aa34aa59580fe2f
-timeCreated: 1507363756
+timeCreated: 1508049120
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_GiantSnowBall: {fileID: 1289892862503450, guid: 3ae9c9920fed20a4fa744cbcd8dbebdc,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

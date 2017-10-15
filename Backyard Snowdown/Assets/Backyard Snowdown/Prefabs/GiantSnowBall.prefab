@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fKnockbackForce: 10
+  bExists: 1
 --- !u!135 &135531079836474982
 SphereCollider:
   m_ObjectHideFlags: 1

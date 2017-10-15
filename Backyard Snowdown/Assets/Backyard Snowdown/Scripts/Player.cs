@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
     private Color mainColor = Color.white;
     private bool tookDmg = false;
     private float timer = 0.3f;
-    
+
     //--------------
     // Player Death
     //--------------
@@ -174,87 +174,35 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void Update()
     {
-        if (tookDmg)
-        {
-            timer -= Time.deltaTime;
-
-            if (timer <= 0.3f)
-            {
-                mrCharacterMesh.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
-            }
-            if (timer < 0.0f)
-            {
-                tookDmg = false;
-                mrCharacterMesh.material.color = mainColor;
-                timer = 0.3f;
-            }
-        }
-
         Dash scpDash = gameObject.GetComponent<Dash>();
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
+        EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
 
         Movement();
 
-        Aiming();
+        if (bAlive)
+        {
+            Aiming();
 
-        scpDash.DoDash();
+            scpDash.DoDash();
 
-        Shoot();
+            Shoot();
 
-        scpSnowMan.CreateSnowMan();
+            scpSnowMan.CreateSnowMan();
+
+            Projectiles();
+        }
 
         Health();
 
-        EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
-
-        scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
+        if (!bAlive)
+        {
+            scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
+        }
 
         //stop sliding
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-
-        ///////
-
-        TennisBall scpTennisBall = m_TennisBall.GetComponent<TennisBall>();
-        //Dash scpDash = gameObject.GetComponent<Dash>();
-
-        if (!scpTennisBall.bTooFast && bHasBall && !scpDash.bDashing)
-        {
-            /*if (GameObject.Find("Tennisball"))
-            {
-                goTennisBall = GameObject.Find("Tennisball");
-                Physics.IgnoreCollision(goTennisBall.GetComponent<Collider>(), GetComponent<Collider>(), false);
-            }
-
-            if (GameObject.Find("Tennisball (1)"))
-            {
-                goTennisBall = GameObject.Find("Tennisball (1)");
-                Physics.IgnoreCollision(goTennisBall.GetComponent<Collider>(), GetComponent<Collider>(), false);
-            }
-
-            if (GameObject.Find("Tennisball(Clone)"))
-            {
-                goTennisBall = GameObject.Find("Tennisball(Clone)");
-                Physics.IgnoreCollision(goTennisBall.GetComponent<Collider>(), GetComponent<Collider>(), false);
-            }*/
-
-            TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
-            for (int i = 0; i < tennisBalls.Length; i++)
-            {
-                Physics.IgnoreCollision(tennisBalls[i].gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>(), false);
-            }
-        }
-
-        if (fStunTimer > 0.0f)
-        {
-            fStunTimer -= Time.deltaTime;
-            bMovementLock = true;
-        }
-        else
-        {
-            fStunTimer = 0.0f;
-            bMovementLock = false;
-        }
     }
 
     //--------------------------------------------------------
@@ -406,8 +354,28 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Health()
     {
+        AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
+
+        if (tookDmg)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer <= 0.3f)
+            {
+                mrCharacterMesh.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
+            }
+            if (timer < 0.0f)
+            {
+                tookDmg = false;
+                mrCharacterMesh.material.color = mainColor;
+                timer = 0.3f;
+            }
+        }
+
         if (nCurrentHealth <= 0 && bAlive)
         {
+            scpSnowMan.bASnowManExists = false;
+
             if (bHasBall)
             {
                 GameObject copy = Instantiate(m_TennisBall);
@@ -433,6 +401,7 @@ public class Player : MonoBehaviour
             mrReticleCol.enabled = true;
             //mrDirection.enabled = false;
             //mrColor.enabled = false;
+            rb.rotation = Quaternion.identity;
 
             gameObject.transform.position = new Vector3(10.2f, 1.0f, -7.0f);
 
@@ -443,6 +412,33 @@ public class Player : MonoBehaviour
 
             //GameObject copy = Instantiate(scpSnowMan.m_SnowMan);
             //copy.transform.position = transform.position;
+        }
+    }
+
+    private void Projectiles()
+    {
+        Dash scpDash = gameObject.GetComponent<Dash>();
+        TennisBall scpTennisBall = m_TennisBall.GetComponent<TennisBall>();
+        //Dash scpDash = gameObject.GetComponent<Dash>();
+
+        if (!scpTennisBall.bTooFast && bHasBall && !scpDash.bDashing)
+        {
+            TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
+            for (int i = 0; i < tennisBalls.Length; i++)
+            {
+                Physics.IgnoreCollision(tennisBalls[i].gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>(), false);
+            }
+        }
+
+        if (fStunTimer > 0.0f)
+        {
+            fStunTimer -= Time.deltaTime;
+            bMovementLock = true;
+        }
+        else
+        {
+            fStunTimer = 0.0f;
+            bMovementLock = false;
         }
     }
 
