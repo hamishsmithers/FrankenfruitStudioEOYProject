@@ -8,12 +8,14 @@ public class ScoreManager : MonoBehaviour {
 
     static List<int> PlayerRank = new List<int>();
     static int nDeathCount = 0;
+    static int nRoundsWonCount = 0;
     public XboxController controller;
 
     // Use this for initialization
     void Start ()
     {
         nDeathCount = 0;
+        nRoundsWonCount = 0;
     }
 	
 	// Update is called once per frame
@@ -21,14 +23,27 @@ public class ScoreManager : MonoBehaviour {
     {
         if (nDeathCount > 2)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-        }
-
-        if (XCI.GetButton(XboxButton.Start, controller))
-        {
-            SceneManager.LoadScene(0);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         }
          
+    }
+
+
+
+
+    public static int GetnRoundsWonCount()
+    {
+        return nRoundsWonCount;
+    }
+
+    public static void SetnRoundsWonCount(int a)
+    {
+        nRoundsWonCount = a;
+    }
+
+    public static void IteratenRoundsWonCount()
+    {
+        ++nRoundsWonCount;
     }
 
     public static void Reset()

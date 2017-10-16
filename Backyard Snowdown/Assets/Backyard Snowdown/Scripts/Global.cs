@@ -10,6 +10,9 @@ public class Global : MonoBehaviour
 {
     public XboxController controller;
 
+    public GameObject goPauseCanvas = null;
+    public GameObject buFirstButton = null;
+
     private float fResetTimer = 0.0f;
     public float fResetConfirmTime = 3.0f;
 
@@ -25,6 +28,10 @@ public class Global : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //set the menu canvas to hidden
+        goPauseCanvas.SetActive(false);
+        
+
         //bKeyboardControls = true;
         //strControl = "xbox";
 
@@ -41,9 +48,37 @@ public class Global : MonoBehaviour
 
         ResetGame();
 
+
+        if (XCI.GetButtonDown(XboxButton.Start, controller))
+        {
+            if (!goPauseCanvas.activeInHierarchy)
+            {
+                //SceneManager.LoadScene(0);
+                goPauseCanvas.SetActive(true);
+                Time.timeScale = 0;
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(buFirstButton);
+            }
+            else
+            {
+                goPauseCanvas.SetActive(false);
+                Time.timeScale = 1;
+            }
+
+        }
         // if(List.Size == 4)
         //  timer for a second
         // 
+    }
+
+    public void PauseMenuContinue()
+    {
+        goPauseCanvas.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void PauseMenuExit()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void ResetGame()
@@ -75,6 +110,8 @@ public class Global : MonoBehaviour
     {
         Application.Quit();
     }
+
+
     //private void OnGUI()
     //{
     //    if (GUI.Button(new Rect(1760, 850, 150, 50), "Use " + strControl + " controls"))
