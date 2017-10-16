@@ -73,16 +73,21 @@ public class Player : MonoBehaviour
     private MeshRenderer mrCharacterMesh = null;
     private MeshRenderer mrPlayerCircle = null;
     private MeshRenderer mrWeapon = null;
-    private MeshRenderer mrReticle = null;
-    private Collider mrReticleCol = null;
-    //private MeshRenderer mrDirection = null;
-    //private MeshRenderer mrColor = null;
 
-    //-----------------
-    // Giant Snow Ball
-    //-----------------
-    public GameObject m_GiantSnowBall = null;
+    //----------------
+    // Giant SnowBall
+    //----------------
+    [HideInInspector]
+    public bool bHitByGiantSnowBall = false;
+    private float fHitTimer = 0.0f;
 
+    //----------------
+    // Player Reticle
+    //----------------
+    public GameObject m_PlayerReticle = null;
+
+    GameObject goPlayerReticleCopy = null;
+    PlayerRetical scpPlayerReticle;
 
     //--------------------------------------------------------
     // Use this for initialization
@@ -93,11 +98,11 @@ public class Player : MonoBehaviour
         mrCharacterMesh = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
         mrPlayerCircle = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
         mrWeapon = gameObject.transform.GetChild(2).GetComponent<MeshRenderer>();
-        mrReticle = gameObject.transform.GetChild(3).GetComponent<MeshRenderer>();
-        mrReticleCol = gameObject.transform.GetChild(3).GetComponent<Collider>();
 
-        mrReticle.enabled = false;
-        mrReticleCol.enabled = false;
+        goPlayerReticleCopy = Instantiate(m_PlayerReticle, new Vector3(10, 1, -7), Quaternion.identity);
+        goPlayerReticleCopy.SetActive(true);
+        scpPlayerReticle = goPlayerReticleCopy.GetComponent<PlayerRetical>();
+
 
         //switch (controller)
         //{
@@ -148,28 +153,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void FixedUpdate()
     {
-        //Dash scpDash = gameObject.GetComponent<Dash>();
-        //AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
 
-        //Movement();
-
-        //Aiming();
-
-        //scpDash.DoDash();
-
-        //Shoot();
-
-        //scpSnowMan.CreateSnowMan();
-
-        //Health();
-
-        //EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
-
-        //scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
-
-        ////stop sliding
-        //rb.velocity = Vector3.zero;
-        //rb.angularVelocity = Vector3.zero;
     }
 
     //--------------------------------------------------------
@@ -181,10 +165,10 @@ public class Player : MonoBehaviour
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
         EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
 
-        Movement();
-
-        if (bAlive)
+        if (bAlive && !bHitByGiantSnowBall)
         {
+            Movement();
+
             Aiming();
 
             scpDash.DoDash();
@@ -203,12 +187,23 @@ public class Player : MonoBehaviour
             scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
         }
 
+        if (bHitByGiantSnowBall)
+        {
+            fHitTimer += Time.deltaTime;
+        }
+
+        if (fHitTimer > 0.5f && rb.velocity.magnitude < 2.0f && bHitByGiantSnowBall)
+        {
+            bHitByGiantSnowBall = false;
+            fHitTimer = 0.0f;
+        }
+
         if (bHasBall)
         {
             m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRingFull; //set to new mat
         }
 
-        else if(!bHasBall)
+        else if (!bHasBall)
         {
             m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRing; //set to new mat
         }
@@ -375,6 +370,7 @@ public class Player : MonoBehaviour
 
             if (timer <= 0.3f)
             {
+                // color red hurt
                 mrCharacterMesh.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
             }
             if (timer < 0.0f)
@@ -405,18 +401,15 @@ public class Player : MonoBehaviour
             ScoreManager.PlayerFinish(((int)controller) - 1);
 
             //kill the player
-            //Destroy(gameObject);
-            mrCharacterMesh.enabled = false;
-            colPlayer.enabled = false;
-            mrWeapon.enabled = false;
-            mrPlayerCircle.enabled = false;
-            mrReticle.enabled = true;
-            mrReticleCol.enabled = true;
-            //mrDirection.enabled = false;
-            //mrColor.enabled = false;
-            rb.rotation = Quaternion.identity;
+            //mrCharacterMesh.enabled = false;
+            //colPlayer.enabled = false;
+            //mrWeapon.enabled = false;
+            //mrPlayerCircle.enabled = false;
+            //mrReticle.enabled = true;
+            //mrReticleCol.enabled = true;
+            //rb.rotation = Quaternion.identity;
 
-            gameObject.transform.position = new Vector3(10.2f, 1.0f, -7.0f);
+            //gameObject.transform.position = new Vector3(10.2f, 1.0f, -7.0f);
 
             nCurrentHealth = 0;
 
@@ -426,6 +419,27 @@ public class Player : MonoBehaviour
             //GameObject copy = Instantiate(scpSnowMan.m_SnowMan);
             //copy.transform.position = transform.position;
         }
+
+        if (!bAlive)
+        {
+            scpPlayerReticle.Movement();
+        }
+    }
+
+    //--------------------------------------------------------
+    // Updates the health value displayed onscreen
+    //--------------------------------------------------------
+    void SetHealthText()
+    {
+        txtHealth.text = "HP:" + nCurrentHealth.ToString();
+    }
+
+    private void TakeDamage()
+    {
+        tookDmg = true;
+        nCurrentHealth = nCurrentHealth - TennisBall.nScoreValue;
+        // updating the health value onscreen
+        SetHealthText();
     }
 
     private void Projectiles()
@@ -453,22 +467,6 @@ public class Player : MonoBehaviour
             fStunTimer = 0.0f;
             bMovementLock = false;
         }
-    }
-
-    //--------------------------------------------------------
-    // Updates the health value displayed onscreen
-    //--------------------------------------------------------
-    void SetHealthText()
-    {
-        txtHealth.text = "HP:" + nCurrentHealth.ToString();
-    }
-
-    private void TakeDamage()
-    {
-        tookDmg = true;
-        nCurrentHealth = nCurrentHealth - TennisBall.nScoreValue;
-        // updating the health value onscreen
-        SetHealthText();
     }
 
     //--------------------------------------------------------

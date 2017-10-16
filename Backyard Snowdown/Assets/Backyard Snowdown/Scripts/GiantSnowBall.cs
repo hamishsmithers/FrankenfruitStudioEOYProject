@@ -5,10 +5,7 @@ using UnityEngine;
 public class GiantSnowBall : MonoBehaviour
 {
     public float fKnockbackForce = 10.0f;
-    private bool bColliding = false;
-    [HideInInspector]
-    public bool bExists = false;
-
+    public float fAreaOfEffect = 3.0f;
     // Use this for initialization
     void Start()
     {
@@ -18,29 +15,17 @@ public class GiantSnowBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bColliding)
+        transform.position -= Vector3.up * 1;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+
+        if (other.gameObject.tag == "Ground")
         {
             Knockback();
+            gameObject.SetActive(false);
         }
-
-        Debug.Log(bExists);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        bColliding = true;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        bColliding = false;
-        Destroy(gameObject);
-        bExists = false;
     }
 
     void Knockback()
@@ -48,12 +33,14 @@ public class GiantSnowBall : MonoBehaviour
         Vector3 hit = transform.position; //ignore these numbers, get position from collision impact
 
         int playerLayer = 1 << LayerMask.NameToLayer("Player");
-        Collider[] players = Physics.OverlapSphere(hit, 20.0f, playerLayer);
+        Collider[] players = Physics.OverlapSphere(hit, fAreaOfEffect, playerLayer);
 
         for (int i = 0; i < players.Length; ++i)
         {
             Rigidbody rb = players[i].gameObject.GetComponent<Rigidbody>();
-            rb.AddExplosionForce(fKnockbackForce, hit, 20.0f, 1.0f, ForceMode.Impulse);
+            rb.AddExplosionForce(fKnockbackForce, hit, fAreaOfEffect, 1.0f, ForceMode.Impulse);
+            Player scpPlayer = players[i].GetComponent<Player>();
+            scpPlayer.bHitByGiantSnowBall = true;
         }
     }
 }
