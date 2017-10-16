@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 07076d8dc1a40e54a8a763aa12e434d4
-timeCreated: 1508123401
+guid: 0b08d94c40913e947aefcf5e2d58875f
+timeCreated: 1508121912
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Weapon_001_Player_001_Nerf
+    4300000: Snowball_001_Projectile_001_Small
   materials:
     importMaterials: 1
     materialName: 0
