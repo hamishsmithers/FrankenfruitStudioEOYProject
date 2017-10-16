@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     // Shooting / TennisBall
     //-----------------------
     public GameObject m_TennisBall = null;
+    public GameObject m_goPlayerCircle = null;
+    public Material m_matCharacterRing = null;
+    public Material m_matCharacterRingFull = null;
     public int nTennisBallSpeed = 1750;
     // xbox max scale of trigger when pressed down
     private const float MAX_TRG_SCL = 1.21f;
@@ -198,6 +201,16 @@ public class Player : MonoBehaviour
         if (!bAlive)
         {
             scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
+        }
+
+        if (bHasBall)
+        {
+            m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRingFull; //set to new mat
+        }
+
+        else if(!bHasBall)
+        {
+            m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRing; //set to new mat
         }
 
         //stop sliding
