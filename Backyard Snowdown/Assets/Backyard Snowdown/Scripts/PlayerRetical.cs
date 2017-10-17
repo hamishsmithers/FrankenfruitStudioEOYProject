@@ -7,14 +7,15 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class PlayerRetical : MonoBehaviour
 {
-    Rigidbody rb;
+    //Rigidbody rb;
     [HideInInspector]
     public Vector3 v3MovePos;
+    public GameObject player;
 
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -28,7 +29,6 @@ public class PlayerRetical : MonoBehaviour
     //--------------------------------------------------------
     public void Movement()
     {
-        GameObject player = GameObject.Find("CharacterTeddyBear");
         Player scpPlayer = player.GetComponent<Player>();
 
         Vector3 v3VerticalAxis = Vector3.zero;
@@ -71,12 +71,13 @@ public class PlayerRetical : MonoBehaviour
             v3MovePos += v3HorizontalAxis * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
 
             if (v3MovePos.magnitude > scpPlayer.m_fMaxSpeed * Time.deltaTime)
-            {   
+            {
                 v3MovePos.Normalize();
                 v3MovePos *= scpPlayer.m_fMaxSpeed * Time.deltaTime;
             }
 
-            rb.MovePosition(rb.position + v3MovePos);
+            transform.position += v3MovePos;
+            //rb.MovePosition(rb.position + v3MovePos);
         }
     }
 }
