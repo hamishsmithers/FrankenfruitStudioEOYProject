@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33915410725220726}
   - component: {fileID: 23687554943553678}
   - component: {fileID: 95369192180996574}
+  - component: {fileID: 136504954105417618}
   m_Layer: 0
   m_Name: Clothesline
   m_TagString: Untagged
@@ -98,3 +99,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!136 &136504954105417618
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1467114870136592}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.34
+  m_Height: 2.5271866
+  m_Direction: 1
+  m_Center: {x: 0.0008696914, y: 1.2635933, z: -0.0015100837}

@@ -86,10 +86,8 @@ public class Player : MonoBehaviour
     //----------------
     public GameObject m_PlayerReticle = null;
 
-    [HideInInspector]
-    public GameObject goPlayerReticleCopy = null;
-    [HideInInspector]
-    public PlayerRetical scpPlayerReticle;
+    GameObject goPlayerReticleCopy = null;
+    PlayerRetical scpPlayerReticle;
 
     //--------------------------------------------------------
     // Use this for initialization
@@ -101,8 +99,7 @@ public class Player : MonoBehaviour
         mrPlayerCircle = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
         mrWeapon = gameObject.transform.GetChild(2).GetComponent<MeshRenderer>();
 
-        goPlayerReticleCopy = Instantiate(m_PlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
-        goPlayerReticleCopy.GetComponent<PlayerRetical>().player = gameObject;
+        goPlayerReticleCopy = Instantiate(m_PlayerReticle, new Vector3(10, 1, -7), Quaternion.identity);
         goPlayerReticleCopy.SetActive(true);
         scpPlayerReticle = goPlayerReticleCopy.GetComponent<PlayerRetical>();
 
@@ -211,12 +208,9 @@ public class Player : MonoBehaviour
             m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRing; //set to new mat
         }
 
-        if (!bHitByGiantSnowBall)
-        {
-            //stop sliding
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
+        //stop sliding
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     //--------------------------------------------------------

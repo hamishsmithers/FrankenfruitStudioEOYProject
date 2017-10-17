@@ -11,7 +11,7 @@ public class SnowMan : MonoBehaviour
     public int nSnowManHitCount = 2;
     public GameObject player;
 
-    //private int nCaseSwitch = 1;
+    private int nCaseSwitch = 1;
 
     // Use this for initialization
     void Start()

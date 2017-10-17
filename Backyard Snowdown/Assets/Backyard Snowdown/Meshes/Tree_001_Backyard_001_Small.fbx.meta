@@ -45,6 +45,8 @@ ModelImporter:
     3300002: Tree_001_Backyard_001_Small
     4300000: Tree_001_Backyard_001_Small
     4300002: Toybox_001_Backyard_001_Large
+    4300004: Tree_001_Backyard_001_Medium2
+    4300006: Tree_001_Backyard_001_Medium
   materials:
     importMaterials: 1
     materialName: 0

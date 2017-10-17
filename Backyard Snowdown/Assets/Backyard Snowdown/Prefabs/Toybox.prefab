@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4592515913727528}
   - component: {fileID: 33498376334192924}
   - component: {fileID: 23126061309630166}
+  - component: {fileID: 65426398667032388}
   m_Layer: 0
   m_Name: Toybox
   m_TagString: Untagged
@@ -80,3 +81,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1753522142351858}
   m_Mesh: {fileID: 4300000, guid: 9ad7f4f1a2d0e7844bec412455be4cb8, type: 3}
+--- !u!65 &65426398667032388
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1753522142351858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0120687, y: 0.7047058, z: 1.0044605}
+  m_Center: {x: 0, y: 0, z: 0.00016844273}

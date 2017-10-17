@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4418894938771596}
   - component: {fileID: 33732875636090168}
   - component: {fileID: 23342961426871190}
+  - component: {fileID: 65903765348308276}
   m_Layer: 0
   m_Name: Kennel
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1518527867990044}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000058114523}
-  m_LocalPosition: {x: -3.7104154, y: -12.35, z: 10.6}
+  m_LocalPosition: {x: -3.7104154, y: -12.387, z: 10.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 405f7e5e8d7bb8945bf89fad70627dcb, type: 2}
+  - {fileID: 2100000, guid: 2b058c5648a84f341a7bea0870467977, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,3 +81,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1518527867990044}
   m_Mesh: {fileID: 4300000, guid: 49042efd9e7fbd34ba71c9ac30defa5b, type: 3}
+--- !u!65 &65903765348308276
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1518527867990044}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0626383, y: 1.0125657, z: 0.9966595}
+  m_Center: {x: -0.00020712614, y: 0.5058486, z: -0.00000011920929}
