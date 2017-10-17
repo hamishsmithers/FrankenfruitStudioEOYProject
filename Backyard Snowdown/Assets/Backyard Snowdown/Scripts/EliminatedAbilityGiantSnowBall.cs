@@ -36,8 +36,8 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
 
         if (XCI.GetButtonDown(XboxButton.LeftBumper, scpPlayer.controller))
         {
-            goPlayerReticle = GameObject.Find("Reticle");
-            Vector3 spawn = goPlayerReticle.transform.position;
+            Player scpPlayerReticleGetter = gameObject.GetComponent<Player>();
+            Vector3 spawn = scpPlayerReticleGetter.goPlayerReticleCopy.transform.position;
             spawn.y = 60.0f;
             copy.transform.position = spawn;
 
