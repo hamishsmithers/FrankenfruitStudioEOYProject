@@ -94,7 +94,6 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void Start()
     {
-        colPlayer = GetComponent<Collider>();
         mrCharacterMesh = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
         mrPlayerCircle = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
         mrWeapon = gameObject.transform.GetChild(2).GetComponent<MeshRenderer>();
@@ -383,6 +382,8 @@ public class Player : MonoBehaviour
 
         if (nCurrentHealth <= 0 && bAlive)
         {
+            txtHealth.text = null;
+
             scpSnowMan.bASnowManExists = false;
 
             if (bHasBall)
@@ -431,7 +432,8 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void SetHealthText()
     {
-        txtHealth.text = "HP:" + nCurrentHealth.ToString();
+        if(txtHealth)
+            txtHealth.text = "HP:" + nCurrentHealth.ToString();
     }
 
     private void TakeDamage()

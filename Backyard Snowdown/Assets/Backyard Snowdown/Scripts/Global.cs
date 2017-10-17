@@ -15,7 +15,7 @@ public class Global : MonoBehaviour
 
     private float fResetTimer = 0.0f;
     public float fResetConfirmTime = 3.0f;
-
+    private bool bOnce = true;
 
     //static string strControl;
 
@@ -29,8 +29,16 @@ public class Global : MonoBehaviour
     void Start()
     {
         //set the menu canvas to hidden
-        goPauseCanvas.SetActive(false);
-        
+        if(goPauseCanvas)
+            goPauseCanvas.SetActive(false);
+     
+
+        //GameObject goEventSystem = GameObject.Find("EventSystem");
+        //Event scpevntsys = goEventSystem.GetComponent<Event>();
+
+
+
+
 
         //bKeyboardControls = true;
         //strControl = "xbox";
@@ -43,6 +51,7 @@ public class Global : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Escape) || XCI.GetButton(XboxButton.A, controller) && XCI.GetButton(XboxButton.B, controller) && XCI.GetButton(XboxButton.X, controller) && XCI.GetButton(XboxButton.Y, controller) && XCI.GetButton(XboxButton.LeftBumper, controller) && XCI.GetButton(XboxButton.RightBumper, controller))
             Application.Quit();
 
@@ -62,6 +71,7 @@ public class Global : MonoBehaviour
             {
                 goPauseCanvas.SetActive(false);
                 Time.timeScale = 1;
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             }
 
         }
@@ -74,10 +84,12 @@ public class Global : MonoBehaviour
     {
         goPauseCanvas.SetActive(false);
         Time.timeScale = 1;
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void PauseMenuExit()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 
