@@ -106,3 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   v3MovePos: {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
+  TopLeft: {fileID: 1843135281426262, guid: 270345779192fc54a8e0549105f07f9f, type: 2}
+  TopRight: {fileID: 1216107731100710, guid: 5c6243e7adf5fae44b88910260943123, type: 2}
+  BotLeft: {fileID: 1561670832561964, guid: 41432ad0777c5fb4caaaf2f1b12a3e61, type: 2}
+  BotRight: {fileID: 1305825408401238, guid: a794fa22f17e74c4cac8b1d96240b7f3, type: 2}

@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4936551493122802}
   - component: {fileID: 33477835264089118}
   - component: {fileID: 23743295748954294}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OutsideGround
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
