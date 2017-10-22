@@ -12,16 +12,26 @@ public class PlayerRetical : MonoBehaviour
     public Vector3 v3MovePos;
     [HideInInspector]
     public GameObject player;
-    public GameObject TopLeft = null;
-    public GameObject TopRight = null;
-    public GameObject BotLeft = null;
-    public GameObject BotRight = null;
+
+    //public GameObject TopLeft = null;
+    //public GameObject TopRight = null;
+    //public GameObject BotLeft = null;
+    //public GameObject BotRight = null;
+
+    GameObject TL;
+    GameObject TR;
+    GameObject BL;
+    GameObject BR;
 
 
     // Use this for initialization
     void Start()
     {
         //rb = GetComponent<Rigidbody>();
+        TL = GameObject.Find("tl");
+        TR = GameObject.Find("tr");
+        BL = GameObject.Find("bl");
+        BR = GameObject.Find("br");
     }
 
     // Update is called once per frame
@@ -101,35 +111,35 @@ public class PlayerRetical : MonoBehaviour
             //Vector3 bottomLeft = Camera.main.transform.TransformVector(frustumCorners[0]) + Camera.main.transform.position;
 
             // Bot Left
-            if (newvec.x < BotLeft.transform.position.x)
-                newvec.x = BotLeft.transform.position.x;
-
-            if (newvec.z < BotLeft.transform.position.z)
-                newvec.z = BotLeft.transform.position.z;
+            if (newvec.x < BL.transform.position.x)
+                newvec.x = BL.transform.position.x;
+                           
+            if (newvec.z < BL.transform.position.z)
+                newvec.z = BL.transform.position.z;
 
             // Bot Right
-            if (newvec.x > BotRight.transform.position.x)
-                newvec.x = BotRight.transform.position.x;
-
-            if (newvec.z < BotRight.transform.position.z)
-                newvec.z = BotRight.transform.position.z;
+            if (newvec.x > BR.transform.position.x)
+                newvec.x = BR.transform.position.x;
+                           
+            if (newvec.z < BR.transform.position.z)
+                newvec.z = BR.transform.position.z;
 
             // Top Left
-            if (newvec.x < TopLeft.transform.position.x)
-                newvec.x = TopLeft.transform.position.x;
-
-            if (newvec.z > TopLeft.transform.position.z)
-                newvec.z = TopLeft.transform.position.z;
+            if (newvec.x < TL.transform.position.x)
+                newvec.x = TL.transform.position.x;
+                           
+            if (newvec.z > TL.transform.position.z)
+                newvec.z = TL.transform.position.z;
 
             // Top Right
-            if (newvec.x > TopRight.transform.position.x)
-                newvec.x = TopRight.transform.position.x;
-
-            if (newvec.z > TopRight.transform.position.z)
-                newvec.z = TopRight.transform.position.z;
+            if (newvec.x > TR.transform.position.x)
+                newvec.x = TR.transform.position.x;
+                           
+            if (newvec.z > TR.transform.position.z)
+                newvec.z = TR.transform.position.z;
 
             transform.position = newvec;
-            //transform.position = newvec;
+
             //}
 
             //Debug.DrawRay(Camera.main.transform.position, bottomLeft, Color.blue);
