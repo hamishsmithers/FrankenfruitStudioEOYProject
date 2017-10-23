@@ -62,7 +62,7 @@ public class SnowMan : MonoBehaviour
 
         AbilitySnowMan scpAbilitySnowMan = player.GetComponent<AbilitySnowMan>();
 
-        if (col.gameObject.tag == "TennisBall")
+        if (col.gameObject.tag == "Snowball")
         {
             nSnowManHitCount -= 1;
             if (nSnowManHitCount == 0)

@@ -22,11 +22,11 @@ GameObject:
   - component: {fileID: 33148029757808114}
   - component: {fileID: 23968123037436292}
   - component: {fileID: 54327428060983996}
-  - component: {fileID: 114409638129579724}
   - component: {fileID: 135483463602575264}
+  - component: {fileID: 114171085820170876}
   m_Layer: 0
   m_Name: Snowball
-  m_TagString: TennisBall
+  m_TagString: Snowball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &114409638129579724
+--- !u!114 &114171085820170876
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -106,14 +106,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1309105767843890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db54cd4a509e4dd4696618a4894caaa0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c497a246df6d13448e10c6cd416aa01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fDamageSpeed: 5
+  fDamageSpeed: 3
   bTooFast: 0
   materials:
+  - {fileID: 2100000, guid: 2ec82251ace17c8479adbae797aa6658, type: 2}
   - {fileID: 2100000, guid: 1f01051d0b45cb34c8fee13df4664868, type: 2}
-  - {fileID: 2100000, guid: c706ed9ef25a3d449973781f83340f25, type: 2}
 --- !u!135 &135483463602575264
 SphereCollider:
   m_ObjectHideFlags: 1

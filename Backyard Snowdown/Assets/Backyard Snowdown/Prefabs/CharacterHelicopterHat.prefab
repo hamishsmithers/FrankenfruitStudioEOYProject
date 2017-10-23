@@ -28,7 +28,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1541797428144246
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,13 +341,12 @@ MonoBehaviour:
   v3MovePos: {x: 0, y: 0, z: 0}
   v3XboxDashDir: {x: 0, y: 0, z: 1}
   fSetToHealth: 0.3
-  m_TennisBall: {fileID: 1309105767843890, guid: 7fdaa185c63eb4c4c8a42304e9d60abc,
-    type: 2}
+  m_Snowball: {fileID: 1309105767843890, guid: 7fdaa185c63eb4c4c8a42304e9d60abc, type: 2}
   m_goPlayerCircle: {fileID: 1826802707702842}
   m_matCharacterRing: {fileID: 2100000, guid: afc12c128545c8f44a3de166bc3bbe1f, type: 2}
   m_matCharacterRingFull: {fileID: 2100000, guid: 14bd6102af4788248a4f96639f45f4ac,
     type: 2}
-  nTennisBallSpeed: 1750
+  nSnowballSpeed: 1750
   bCanShoot: 1
   txtHealth: {fileID: 0}
   nSpawnHealth: 20
@@ -357,6 +356,8 @@ MonoBehaviour:
   bHitByGiantSnowBall: 0
   m_PlayerReticle: {fileID: 1112236485901864, guid: 2017fed6da7b39b42866dc0d050ecfd6,
     type: 2}
+  goPlayerReticleCopy: {fileID: 0}
+  scpPlayerReticle: {fileID: 0}
 --- !u!114 &114482434974896572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4723a56331b12b44aa34aa59580fe2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GiantSnowBall: {fileID: 1289892862503450, guid: 3ae9c9920fed20a4fa744cbcd8dbebdc,
+  m_GiantSnowBall: {fileID: 1189034543905652, guid: 3ae9c9920fed20a4fa744cbcd8dbebdc,
     type: 2}
 --- !u!114 &114858961929391424
 MonoBehaviour:

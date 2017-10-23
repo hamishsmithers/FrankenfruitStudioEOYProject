@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TennisBall : MonoBehaviour
+public class Snowball : MonoBehaviour
 {
     Rigidbody rb;
     public float fDamageSpeed = 3.0f;
@@ -156,7 +156,7 @@ public class TennisBall : MonoBehaviour
 
 
 
-        //if (col.gameObject.tag == "TennisBall")
+        //if (col.gameObject.tag == "Snowball")
         //{
         //    scpAbilitySnowMan.bASnowManExists = false;
         //    Destroy(gameObject);

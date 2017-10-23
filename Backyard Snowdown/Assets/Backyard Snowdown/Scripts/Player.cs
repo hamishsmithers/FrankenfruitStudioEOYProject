@@ -34,19 +34,21 @@ public class Player : MonoBehaviour
     public float fSetToHealth = 0.3f;
 
     //-----------------------
-    // Shooting / TennisBall
+    // Shooting / Snowball
     //-----------------------
-    public GameObject m_TennisBall = null;
+    public GameObject m_Snowball = null;
     public GameObject m_goPlayerCircle = null;
     public Material m_matCharacterRing = null;
     public Material m_matCharacterRingFull = null;
-    public int nTennisBallSpeed = 1750;
+    public int nSnowballSpeed = 1750;
     // xbox max scale of trigger when pressed down
     private const float MAX_TRG_SCL = 1.21f;
     private bool bHasBall = false;
     [HideInInspector]
-    public bool bCanShoot = true;
+    public bool bCanThrow = true;
     private bool bWasHit = false;
+    private bool bThrow = false;
+    private bool bThrown = false;
 
     //--------
     // Health
@@ -102,9 +104,8 @@ public class Player : MonoBehaviour
 
         goPlayerReticleCopy = Instantiate(m_PlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
         goPlayerReticleCopy.GetComponent<PlayerRetical>().player = gameObject;
-        goPlayerReticleCopy.SetActive(true);
         scpPlayerReticle = goPlayerReticleCopy.GetComponent<PlayerRetical>();
-
+        goPlayerReticleCopy.SetActive(false);
 
         //switch (controller)
         //{
@@ -324,38 +325,43 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Shoot()
     {
-        if (bCanShoot)
+        if (bCanThrow)
         {
             float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
-            bool bShoot = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
+            bThrow = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
 
             Dash scpDash = gameObject.GetComponent<Dash>();
 
-            if (bShoot && !scpDash.bDashing)
+            if (bThrow && !scpDash.bDashing)
             {
                 if (bHasBall)
                 {
-                    RaycastHit hit;
-                    if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
+
+
+                    if (!bThrown)
                     {
-                        GameObject copy = Instantiate(m_TennisBall);
-                        copy.transform.position = transform.position + transform.forward * -1;
-                        Rigidbody rb = copy.GetComponent<Rigidbody>();
-                        rb.AddForce(transform.forward * nTennisBallSpeed * -0.5f, ForceMode.Acceleration);
-                        copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                        // The ball is thrown so it becomes false
-                        bHasBall = false;
-                        Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
-                    }
-                    else
-                    {
-                        GameObject copy = Instantiate(m_TennisBall);
-                        copy.transform.position = transform.position + transform.forward * 1;
-                        Rigidbody rb = copy.GetComponent<Rigidbody>();
-                        rb.AddForce(transform.forward * nTennisBallSpeed, ForceMode.Acceleration);
-                        copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                        // The ball is thrown so it becomes false
-                        bHasBall = false;
+                        RaycastHit hit;
+                        if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
+                        {
+                            GameObject copy = Instantiate(m_Snowball);
+                            copy.transform.position = transform.position + transform.forward * -1;
+                            Rigidbody rb = copy.GetComponent<Rigidbody>();
+                            rb.AddForce(transform.forward * nSnowballSpeed * -0.5f, ForceMode.Acceleration);
+                            copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                            // The ball is thrown so it becomes false
+                            bHasBall = false;
+                            Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
+                        }
+                        else
+                        {
+                            GameObject copy = Instantiate(m_Snowball);
+                            copy.transform.position = transform.position + transform.forward * 1;
+                            Rigidbody rb = copy.GetComponent<Rigidbody>();
+                            rb.AddForce(transform.forward * nSnowballSpeed, ForceMode.Acceleration);
+                            copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                            // The ball is thrown so it becomes false
+                            bHasBall = false;
+                        }
                     }
                 }
             }
@@ -394,7 +400,7 @@ public class Player : MonoBehaviour
 
             if (bHasBall)
             {
-                GameObject copy = Instantiate(m_TennisBall);
+                GameObject copy = Instantiate(m_Snowball);
                 copy.transform.position = transform.position + transform.forward;
                 bHasBall = false;
             }
@@ -412,9 +418,9 @@ public class Player : MonoBehaviour
             //colPlayer.enabled = false;
             //mrWeapon.enabled = false;
             //mrPlayerCircle.enabled = false;
-            //mrReticle.enabled = true;
             //mrReticleCol.enabled = true;
             //rb.rotation = Quaternion.identity;
+            goPlayerReticleCopy.SetActive(true);
 
             //gameObject.transform.position = new Vector3(10.2f, 1.0f, -7.0f);
 
@@ -445,7 +451,7 @@ public class Player : MonoBehaviour
     private void TakeDamage()
     {
         tookDmg = true;
-        nCurrentHealth = nCurrentHealth - TennisBall.nScoreValue;
+        nCurrentHealth = nCurrentHealth - Snowball.nScoreValue;
         // updating the health value onscreen
         SetHealthText();
     }
@@ -453,15 +459,15 @@ public class Player : MonoBehaviour
     private void Projectiles()
     {
         Dash scpDash = gameObject.GetComponent<Dash>();
-        TennisBall scpTennisBall = m_TennisBall.GetComponent<TennisBall>();
+        Snowball scpSnowball = m_Snowball.GetComponent<Snowball>();
         //Dash scpDash = gameObject.GetComponent<Dash>();
 
-        if (!scpTennisBall.bTooFast && bHasBall && !scpDash.bDashing)
+        if (!scpSnowball.bTooFast && bHasBall && !scpDash.bDashing)
         {
-            TennisBall[] tennisBalls = FindObjectsOfType<TennisBall>();
-            for (int i = 0; i < tennisBalls.Length; i++)
+            Snowball[] arrSnowballs = FindObjectsOfType<Snowball>();
+            for (int i = 0; i < arrSnowballs.Length; i++)
             {
-                Physics.IgnoreCollision(tennisBalls[i].gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>(), false);
+                Physics.IgnoreCollision(arrSnowballs[i].gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>(), false);
             }
         }
 
@@ -486,13 +492,13 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "TennisBall")
+        if (col.gameObject.tag == "Snowball")
         {
-            TennisBall scpTennisBall = col.gameObject.GetComponent<TennisBall>();
+            Snowball scpSnowball = col.gameObject.GetComponent<Snowball>();
             Dash scpDash = gameObject.GetComponent<Dash>();
 
             //Ball is moving fast
-            if (scpTennisBall.bTooFast)
+            if (scpSnowball.bTooFast)
             {
                 if (bHasBall)
                 {
@@ -501,7 +507,7 @@ public class Player : MonoBehaviour
                     //Drop ball
                     bHasBall = false;
                     bWasHit = true;
-                    GameObject copy = Instantiate(m_TennisBall);
+                    GameObject copy = Instantiate(m_Snowball);
                     copy.transform.position = transform.position + transform.right;
                 }
                 else if (!bHasBall && scpDash.bDashing)

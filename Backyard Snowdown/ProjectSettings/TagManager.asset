@@ -11,6 +11,7 @@ TagManager:
   - Boundaries
   - Spawnbox
   - Projectiles
+  - Snowball
   layers:
   - Default
   - TransparentFX

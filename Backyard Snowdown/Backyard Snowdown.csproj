@@ -115,8 +115,8 @@
     <Compile Include="Assets\Backyard Snowdown\Scripts\PodiumButtonAction.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\PodiumPosition.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\ScoreManager.cs" />
+    <Compile Include="Assets\Backyard Snowdown\Scripts\Snowball.cs" />
     <Compile Include="Assets\Backyard Snowdown\Scripts\SnowMan.cs" />
-    <Compile Include="Assets\Backyard Snowdown\Scripts\TennisBall.cs" />
     <Compile Include="Assets\OBJExport\OBJExporter.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />
