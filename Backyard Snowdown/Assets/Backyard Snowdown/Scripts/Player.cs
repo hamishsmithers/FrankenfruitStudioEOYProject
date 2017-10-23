@@ -49,6 +49,11 @@ public class Player : MonoBehaviour
     private bool bWasHit = false;
     private bool bThrow = false;
     private bool bThrown = false;
+    private float fSpeedModifier = 0.0f;
+    public float fMinSpeed = 250.0f;
+    public float fMaxSpeed = 1750.0f;
+    private float fRangeSpeed = 0.0f;
+    private float fChargeTime = 2.0f;
 
     //--------
     // Health
@@ -106,6 +111,8 @@ public class Player : MonoBehaviour
         goPlayerReticleCopy.GetComponent<PlayerRetical>().player = gameObject;
         scpPlayerReticle = goPlayerReticleCopy.GetComponent<PlayerRetical>();
         goPlayerReticleCopy.SetActive(false);
+
+        fRangeSpeed = fMaxSpeed - fMinSpeed;
 
         //switch (controller)
         //{
@@ -329,16 +336,20 @@ public class Player : MonoBehaviour
         {
             float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
             bThrow = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
-
+            bThrown = (Input.GetKeyUp(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight > 1.0f);
             Dash scpDash = gameObject.GetComponent<Dash>();
+            Debug.Log(bThrown);
+
 
             if (bThrow && !scpDash.bDashing)
             {
                 if (bHasBall)
                 {
+                    fSpeedModifier += Time.deltaTime;
 
 
-                    if (!bThrown)
+
+                    if (bGo)
                     {
                         RaycastHit hit;
                         if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
@@ -351,6 +362,7 @@ public class Player : MonoBehaviour
                             // The ball is thrown so it becomes false
                             bHasBall = false;
                             Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
+                            bThrown = false;
                         }
                         else
                         {
@@ -361,6 +373,7 @@ public class Player : MonoBehaviour
                             copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
                             // The ball is thrown so it becomes false
                             bHasBall = false;
+                            bThrown = false;
                         }
                     }
                 }
