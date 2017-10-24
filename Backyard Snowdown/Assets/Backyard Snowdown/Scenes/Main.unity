@@ -6761,10 +6761,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd52100847798346991436ce210461e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Controller: 0
-  m_GoPauseCanvas: {fileID: 544495567}
-  m_BtnFirstButton: {fileID: 188999656}
-  m_fResetConfirmTime: 3
+  controller: 0
+  goPauseCanvas: {fileID: 544495567}
+  buFirstButton: {fileID: 188999656}
+  fResetConfirmTime: 3
 --- !u!4 &2061066234
 Transform:
   m_ObjectHideFlags: 0
