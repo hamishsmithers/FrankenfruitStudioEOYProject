@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     public GameObject m_goPlayerCircle = null;
     public Material m_matCharacterRing = null;
     public Material m_matCharacterRingFull = null;
-    public float m_nSnowballSpeed = 1750.0f;
+    public float m_fSnowballSpeed = 1750.0f;
     // xbox max scale of trigger when pressed down
     private const float m_MaxTriggerHeight = 1.21f;
     private bool m_bHasBall = false;
@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     private bool m_bGo = false;
     private float m_fIsChargedTimer = 0.0f;
     private float m_fIsChargedTimerLimit = 2.0f;
+    public float m_fSlowSpeed = 2.5f;
     // xbox controller trigger release
     private bool m_bHolding = false;
     private bool m_bReleased = false;
@@ -261,6 +262,11 @@ public class Player : MonoBehaviour
 
         if (!m_bMovementLock)
         {
+            if (m_bCharging)
+                m_fCurrentSpeed = m_fSlowSpeed;
+            else
+                m_fCurrentSpeed = m_fMaxSpeed;
+
             // Up and down movement
             m_v3MovePos = Vector3.zero;
 
@@ -280,6 +286,8 @@ public class Player : MonoBehaviour
                 m_v3MovePos.Normalize();
                 m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
             }
+
+
 
             m_rb.MovePosition(m_rb.position + m_v3MovePos);
         }
@@ -354,11 +362,11 @@ public class Player : MonoBehaviour
             m_bReleased = false;
 
         m_bGo = ((Input.GetKeyUp(KeyCode.Mouse0) && controller == XboxController.First) || m_bReleased);
-        
+
         Dash scpDash = gameObject.GetComponent<Dash>();
 
 
-        if (m_bThrow && !scpDash.m_bDashing || m_bGo)
+        if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bGo)
         {
             if (m_fChargeTimer < m_fMaxCharge)
             {
@@ -381,7 +389,7 @@ public class Player : MonoBehaviour
             if (m_bHasBall && !m_bCharging)
             {
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
-                m_nSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
+                m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
 
                 RaycastHit hit;
                 if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
@@ -389,7 +397,7 @@ public class Player : MonoBehaviour
                     GameObject copy = Instantiate(m_goSnowball);
                     copy.transform.position = transform.position + transform.forward * -1;
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
-                    rb.AddForce(transform.forward * m_nSnowballSpeed * -0.5f, ForceMode.Acceleration);
+                    rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
                     copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
                     // The ball is thrown so it becomes false
                     m_bHasBall = false;
@@ -401,7 +409,7 @@ public class Player : MonoBehaviour
                     GameObject copy = Instantiate(m_goSnowball);
                     copy.transform.position = transform.position + transform.forward * 1;
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
-                    rb.AddForce(transform.forward * m_nSnowballSpeed, ForceMode.Acceleration);
+                    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
                     copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
                     // The ball is thrown so it becomes false
                     m_bHasBall = false;
@@ -413,10 +421,10 @@ public class Player : MonoBehaviour
 
     private void ResetChargeThrow()
     {
-        m_bThrow = false;
         m_fChargeModifier = 0.0f;
+        m_bThrow = false;
         m_fChargeTimer = 0.0f;
-        m_bCharging = false;
+        m_bCharging = true;
         m_bGo = false;
     }
 
