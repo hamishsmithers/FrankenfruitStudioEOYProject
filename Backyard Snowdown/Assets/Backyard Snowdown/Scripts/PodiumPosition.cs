@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PodiumPosition : MonoBehaviour {
 
-    public GameObject[] PlayersArray;
-    public GameObject[] PodiumArray;
+    public GameObject[] m_ArrPlayers;
+    public GameObject[] m_ArrPodium;
 
     // Use this for initialization
     void Start ()
@@ -17,15 +17,15 @@ public class PodiumPosition : MonoBehaviour {
         //ScoreManager scpScoreManager = gameObject.GetComponent<ScoreManager>();
         for (int i = 0; i < 4; i++)
         {
-            PlayersArray[i].transform.parent = PodiumArray[3].transform;
-            PlayersArray[i].transform.localPosition = Vector3.zero;
+            m_ArrPlayers[i].transform.parent = m_ArrPodium[3].transform;
+            m_ArrPlayers[i].transform.localPosition = Vector3.zero;
         }
 
         for (int i = 0; i < ScoreManager.GetPlayerCount(); i++)
         {
             int nPlayer = ScoreManager.GetPodiumRank(i);
-            PlayersArray[nPlayer].transform.parent = PodiumArray[i].transform;
-            PlayersArray[nPlayer].transform.localPosition = Vector3.zero;
+            m_ArrPlayers[nPlayer].transform.parent = m_ArrPodium[i].transform;
+            m_ArrPlayers[nPlayer].transform.localPosition = Vector3.zero;
         }
     }
 	

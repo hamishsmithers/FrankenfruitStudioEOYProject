@@ -15,104 +15,109 @@ public class Player : MonoBehaviour
     public float m_fSpeed = 5.0f;
     public float m_fMaxSpeed = 5.0f;
     public float m_fDashSpeed = 10.0f;
-    public float fDashDuration = 0.5f;
+    public float m_fDashDuration = 0.5f;
     [HideInInspector]
     public float m_fCurrentSpeed = 5.0f;
-    public GameObject m_PlayerModel = null;
+    public GameObject m_goPlayerModel = null;
     [HideInInspector]
-    public bool bMovementLock = false;
+    public bool m_bMovementLock = false;
     [HideInInspector]
-    public bool bLeftTriggerPressed = false;
-    Vector3 v3DashDir;
+    public bool m_bLeftTriggerPressed = false;
+    Vector3 m_v3DashDir;
     [HideInInspector]
-    public Vector3 v3MovePos;
-    Rigidbody rb;
-    float axisX;
-    float axisY;
+    public Vector3 m_v3MovePos;
+    Rigidbody m_rb;
+    float m_axisX;
+    float m_axisY;
     [HideInInspector]
-    public Vector3 v3XboxDashDir;
-    public float fSetToHealth = 0.3f;
+    public Vector3 m_v3XboxDashDir;
+    public float m_fSetToHealth = 0.3f;
 
     //-----------------------
     // Shooting / Snowball
     //-----------------------
-    public GameObject m_Snowball = null;
+    public GameObject m_goSnowball = null;
     public GameObject m_goPlayerCircle = null;
     public Material m_matCharacterRing = null;
     public Material m_matCharacterRingFull = null;
-    public int nSnowballSpeed = 1750;
+    public float m_nSnowballSpeed = 1750.0f;
     // xbox max scale of trigger when pressed down
-    private const float MAX_TRG_SCL = 1.21f;
-    private bool bHasBall = false;
+    private const float m_MaxTriggerHeight = 1.21f;
+    private bool m_bHasBall = false;
     [HideInInspector]
-    public bool bCanThrow = true;
-    private bool bWasHit = false;
-    private bool bThrow = false;
-    private bool bThrown = false;
-    private float fSpeedModifier = 0.0f;
-    public float fMinSpeed = 250.0f;
-    public float fMaxSpeed = 1750.0f;
-    private float fRangeSpeed = 0.0f;
-    private float fChargeTime = 2.0f;
+    private bool m_bWasHit = false;
+    // charge power throw
+    private bool m_bThrow = false;
+    public float m_fMaxCharge = 2.0f;
+    private float m_fChargeModifier = 0.0f;
+    private float m_fChargeTimer = 0.0f;
+    public float m_fPowerMin = 250.0f;
+    public float m_fPowerMax = 1750.0f;
+    private float m_fPowerRange = 0.0f;
+    private bool m_bCharging = false;
+    private bool m_bGo = false;
+    private float m_fIsChargedTimer = 0.0f;
+    private float m_fIsChargedTimerLimit = 2.0f;
+    // xbox controller trigger release
+    private bool m_bHolding = false;
+    private bool m_bReleased = false;
 
     //--------
     // Health
     //--------
-    public Text txtHealth;
-    public int nSpawnHealth = 20;
-    public int nCurrentHealth;
+    public Text m_txtHealth;
+    public int m_nSpawnHealth = 20;
+    public int m_nCurrentHealth;
     [HideInInspector]
-    public bool bAlive = true;
-    public float fStun = 0.2f;
-    private float fStunTimer = 0.0f;
+    public bool m_bAlive = true;
+    public float m_fStun = 0.2f;
+    private float m_fStunTimer = 0.0f;
 
     //---------------
     // Player Damage
     //---------------
-    private Color mainColor = Color.white;
-    private bool tookDmg = false;
-    private float timer = 0.3f;
+    private Color m_mainColor = Color.white;
+    private bool m_tookDmg = false;
+    private float m_DamageTimer = 0.3f;
 
     //--------------
     // Player Death
     //--------------
-    private Collider colPlayer = null;
-    private MeshRenderer mrCharacterMesh = null;
-    private MeshRenderer mrPlayerCircle = null;
-    private MeshRenderer mrWeapon = null;
+    private Collider m_colPlayer = null;
+    private MeshRenderer m_mrCharacterMesh = null;
+    private MeshRenderer m_mrPlayerCircle = null;
+    private MeshRenderer m_mrWeapon = null;
 
     //----------------
     // Giant SnowBall
     //----------------
     [HideInInspector]
-    public bool bHitByGiantSnowBall = false;
-    private float fHitTimer = 0.0f;
+    public bool m_bHitByGiantSnowBall = false;
+    private float m_fHitTimer = 0.0f;
 
     //----------------
     // Player Reticle
     //----------------
-    public GameObject m_PlayerReticle = null;
+    public GameObject m_goPlayerReticle = null;
 
     [HideInInspector]
-    public GameObject goPlayerReticleCopy = null;
+    public GameObject m_goPlayerReticleCopy = null;
     [HideInInspector]
-    public PlayerRetical scpPlayerReticle;
+    public PlayerRetical m_scpPlayerReticle;
 
     //--------------------------------------------------------
     // Use this for initialization
     //--------------------------------------------------------
     void Start()
     {
-        mrCharacterMesh = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
-        mrPlayerCircle = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
-        mrWeapon = gameObject.transform.GetChild(2).GetComponent<MeshRenderer>();
+        m_mrCharacterMesh = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
+        m_mrPlayerCircle = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
+        m_mrWeapon = gameObject.transform.GetChild(2).GetComponent<MeshRenderer>();
 
-        goPlayerReticleCopy = Instantiate(m_PlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
-        goPlayerReticleCopy.GetComponent<PlayerRetical>().player = gameObject;
-        scpPlayerReticle = goPlayerReticleCopy.GetComponent<PlayerRetical>();
-        goPlayerReticleCopy.SetActive(false);
-
-        fRangeSpeed = fMaxSpeed - fMinSpeed;
+        m_goPlayerReticleCopy = Instantiate(m_goPlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
+        m_goPlayerReticleCopy.GetComponent<PlayerRetical>().m_player = gameObject;
+        m_scpPlayerReticle = m_goPlayerReticleCopy.GetComponent<PlayerRetical>();
+        m_goPlayerReticleCopy.SetActive(false);
 
         //switch (controller)
         //{
@@ -145,16 +150,16 @@ public class Player : MonoBehaviour
         //}
 
         //Xbox Stick Axis'
-        axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
-        axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
+        m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
+        m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
 
-        rb = GetComponent<Rigidbody>();
+        m_rb = GetComponent<Rigidbody>();
         m_fCurrentSpeed = m_fSpeed;
 
         //--------
         // Health
         //--------
-        nCurrentHealth = nSpawnHealth;
+        m_nCurrentHealth = m_nSpawnHealth;
         SetHealthText();
     }
 
@@ -175,7 +180,7 @@ public class Player : MonoBehaviour
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
         EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
 
-        if (bAlive && !bHitByGiantSnowBall)
+        if (m_bAlive && !m_bHitByGiantSnowBall)
         {
             Movement();
 
@@ -192,37 +197,37 @@ public class Player : MonoBehaviour
 
         Health();
 
-        if (!bAlive)
+        if (!m_bAlive)
         {
             scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
         }
 
-        if (bHitByGiantSnowBall)
+        if (m_bHitByGiantSnowBall)
         {
-            fHitTimer += Time.deltaTime;
+            m_fHitTimer += Time.deltaTime;
         }
 
-        if (fHitTimer > 0.5f && rb.velocity.magnitude < 2.0f && bHitByGiantSnowBall)
+        if (m_fHitTimer > 0.5f && m_rb.velocity.magnitude < 2.0f && m_bHitByGiantSnowBall)
         {
-            bHitByGiantSnowBall = false;
-            fHitTimer = 0.0f;
+            m_bHitByGiantSnowBall = false;
+            m_fHitTimer = 0.0f;
         }
 
-        if (bHasBall)
+        if (m_bHasBall)
         {
             m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRingFull; //set to new mat
         }
 
-        else if (!bHasBall)
+        else if (!m_bHasBall)
         {
             m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRing; //set to new mat
         }
 
-        if (!bHitByGiantSnowBall)
+        if (!m_bHitByGiantSnowBall)
         {
             //stop sliding
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            m_rb.velocity = Vector3.zero;
+            m_rb.angularVelocity = Vector3.zero;
         }
     }
 
@@ -254,29 +259,29 @@ public class Player : MonoBehaviour
         v3Pos.x = transform.position.x;
         v3Pos.z = transform.position.z;
 
-        if (!bMovementLock)
+        if (!m_bMovementLock)
         {
             // Up and down movement
-            v3MovePos = Vector3.zero;
+            m_v3MovePos = Vector3.zero;
 
-            v3MovePos += v3VerticalAxis * Time.deltaTime * m_fCurrentSpeed;
+            m_v3MovePos += v3VerticalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-            if (v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
+            if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
             {
-                v3MovePos.Normalize();
-                v3MovePos *= m_fMaxSpeed * Time.deltaTime;
+                m_v3MovePos.Normalize();
+                m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
             }
 
             // Left and right movement
-            v3MovePos += v3HorizontalAxis * Time.deltaTime * m_fCurrentSpeed;
+            m_v3MovePos += v3HorizontalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-            if (v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
+            if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
             {
-                v3MovePos.Normalize();
-                v3MovePos *= m_fMaxSpeed * Time.deltaTime;
+                m_v3MovePos.Normalize();
+                m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
             }
 
-            rb.MovePosition(rb.position + v3MovePos);
+            m_rb.MovePosition(m_rb.position + m_v3MovePos);
         }
     }
 
@@ -288,25 +293,25 @@ public class Player : MonoBehaviour
         //-------------------------
         // Xbox Right Stick Aiming
         //-------------------------
-        v3XboxDashDir = transform.forward;
-        if (!bLeftTriggerPressed)
+        m_v3XboxDashDir = transform.forward;
+        if (!m_bLeftTriggerPressed)
         {
-            axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
-            axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
+            m_axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
+            m_axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
 
             //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
 
-            if (axisX != 0.0f || axisY != 0.0f)
+            if (m_axisX != 0.0f || m_axisY != 0.0f)
             {
-                v3XboxDashDir = new Vector3(axisX, 0.0f, axisY);
-                transform.forward = v3XboxDashDir;
+                m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
+                transform.forward = m_v3XboxDashDir;
             }
         }
 
         //-------------- 
         // Mouse Aiming
         //--------------
-        if (!XCI.IsPluggedIn(1) && !bLeftTriggerPressed)
+        if (!XCI.IsPluggedIn(1) && !m_bLeftTriggerPressed)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -319,10 +324,10 @@ public class Player : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                v3DashDir = hit.point - transform.position;
-                v3DashDir.y = 0.0f;
-                v3DashDir.Normalize();
-                v3MovePos.Normalize();
+                m_v3DashDir = hit.point - transform.position;
+                m_v3DashDir.y = 0.0f;
+                m_v3DashDir.Normalize();
+                m_v3MovePos.Normalize();
             }
         }
     }
@@ -332,53 +337,91 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Shoot()
     {
-        if (bCanThrow)
+        //calculate the range of power to do the math on the charge power throw.
+        m_fPowerRange = m_fPowerMax - m_fPowerMin;
+
+        float rightTrigHeight = m_MaxTriggerHeight * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
+        m_bThrow = (Input.GetKey(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
+        if (rightTrigHeight < 1.0f)
+            m_bHolding = true;
+
+        if (m_bHolding && rightTrigHeight > 1.0f)
         {
-            float rightTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
-            bThrow = (Input.GetKeyDown(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
-            bThrown = (Input.GetKeyUp(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight > 1.0f);
-            Dash scpDash = gameObject.GetComponent<Dash>();
-            Debug.Log(bThrown);
+            m_bHolding = false;
+            m_bReleased = true;
+        }
+        else
+            m_bReleased = false;
+
+        m_bGo = ((Input.GetKeyUp(KeyCode.Mouse0) && controller == XboxController.First) || m_bReleased);
+        
+        Dash scpDash = gameObject.GetComponent<Dash>();
 
 
-            if (bThrow && !scpDash.bDashing)
+        if (m_bThrow && !scpDash.m_bDashing || m_bGo)
+        {
+            if (m_fChargeTimer < m_fMaxCharge)
             {
-                if (bHasBall)
+                m_fChargeTimer += Time.deltaTime;
+                m_bCharging = true;
+            }
+            else if (m_fChargeTimer >= m_fMaxCharge)
+            {
+                m_fChargeTimer = m_fMaxCharge;
+                m_bCharging = false;
+            }
+
+            if (m_bGo)
+            {
+                m_bCharging = false;
+                m_bGo = false;
+            }
+
+
+            if (m_bHasBall && !m_bCharging)
+            {
+                m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
+                m_nSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
+
+                RaycastHit hit;
+                if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
                 {
-                    fSpeedModifier += Time.deltaTime;
-
-
-
-                    if (bGo)
-                    {
-                        RaycastHit hit;
-                        if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
-                        {
-                            GameObject copy = Instantiate(m_Snowball);
-                            copy.transform.position = transform.position + transform.forward * -1;
-                            Rigidbody rb = copy.GetComponent<Rigidbody>();
-                            rb.AddForce(transform.forward * nSnowballSpeed * -0.5f, ForceMode.Acceleration);
-                            copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                            // The ball is thrown so it becomes false
-                            bHasBall = false;
-                            Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
-                            bThrown = false;
-                        }
-                        else
-                        {
-                            GameObject copy = Instantiate(m_Snowball);
-                            copy.transform.position = transform.position + transform.forward * 1;
-                            Rigidbody rb = copy.GetComponent<Rigidbody>();
-                            rb.AddForce(transform.forward * nSnowballSpeed, ForceMode.Acceleration);
-                            copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                            // The ball is thrown so it becomes false
-                            bHasBall = false;
-                            bThrown = false;
-                        }
-                    }
+                    GameObject copy = Instantiate(m_goSnowball);
+                    copy.transform.position = transform.position + transform.forward * -1;
+                    Rigidbody rb = copy.GetComponent<Rigidbody>();
+                    rb.AddForce(transform.forward * m_nSnowballSpeed * -0.5f, ForceMode.Acceleration);
+                    copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                    // The ball is thrown so it becomes false
+                    m_bHasBall = false;
+                    Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
+                    ResetChargeThrow();
+                }
+                else
+                {
+                    GameObject copy = Instantiate(m_goSnowball);
+                    copy.transform.position = transform.position + transform.forward * 1;
+                    Rigidbody rb = copy.GetComponent<Rigidbody>();
+                    rb.AddForce(transform.forward * m_nSnowballSpeed, ForceMode.Acceleration);
+                    copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                    // The ball is thrown so it becomes false
+                    m_bHasBall = false;
+                    ResetChargeThrow();
                 }
             }
         }
+    }
+
+    private void ResetChargeThrow()
+    {
+        m_bThrow = false;
+        m_fMaxCharge = 2.0f;
+        m_fChargeModifier = 0.0f;
+        m_fChargeTimer = 0.0f;
+        m_fPowerMin = 250.0f;
+        m_fPowerMax = 1750.0f;
+        m_fPowerRange = 0.0f;
+        m_bCharging = false;
+        m_bGo = false;
     }
 
     //--------------------------------------------------------
@@ -388,39 +431,39 @@ public class Player : MonoBehaviour
     {
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
 
-        if (tookDmg)
+        if (m_tookDmg)
         {
-            timer -= Time.deltaTime;
+            m_DamageTimer -= Time.deltaTime;
 
-            if (timer <= 0.3f)
+            if (m_DamageTimer <= 0.3f)
             {
                 // color red hurt
-                mrCharacterMesh.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
+                m_mrCharacterMesh.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
             }
-            if (timer < 0.0f)
+            if (m_DamageTimer < 0.0f)
             {
-                tookDmg = false;
-                mrCharacterMesh.material.color = mainColor;
-                timer = 0.3f;
+                m_tookDmg = false;
+                m_mrCharacterMesh.material.color = m_mainColor;
+                m_DamageTimer = 0.3f;
             }
         }
 
-        if (nCurrentHealth <= 0 && bAlive)
+        if (m_nCurrentHealth <= 0 && m_bAlive)
         {
-            txtHealth.text = null;
+            m_txtHealth.text = null;
 
-            scpSnowMan.bASnowManExists = false;
+            scpSnowMan.m_bASnowManExists = false;
 
-            if (bHasBall)
+            if (m_bHasBall)
             {
-                GameObject copy = Instantiate(m_Snowball);
+                GameObject copy = Instantiate(m_goSnowball);
                 copy.transform.position = transform.position + transform.forward;
-                bHasBall = false;
+                m_bHasBall = false;
             }
 
-            Destroy(gameObject.GetComponent<AbilitySnowMan>().copy);
+            Destroy(gameObject.GetComponent<AbilitySnowMan>().m_Copy);
 
-            bAlive = false;
+            m_bAlive = false;
 
             //ScoreManager scpScoreManager = gameObject.GetComponent<ScoreManager>();
 
@@ -433,22 +476,22 @@ public class Player : MonoBehaviour
             //mrPlayerCircle.enabled = false;
             //mrReticleCol.enabled = true;
             //rb.rotation = Quaternion.identity;
-            goPlayerReticleCopy.SetActive(true);
+            m_goPlayerReticleCopy.SetActive(true);
 
             //gameObject.transform.position = new Vector3(10.2f, 1.0f, -7.0f);
 
-            nCurrentHealth = 0;
+            m_nCurrentHealth = 0;
 
             //updating the health value onscreen
             SetHealthText();
 
-            //GameObject copy = Instantiate(scpSnowMan.m_SnowMan);
+            //GameObject copy = Instantiate(scpSnowMan.SnowMan);
             //copy.transform.position = transform.position;
         }
 
-        if (!bAlive)
+        if (!m_bAlive)
         {
-            scpPlayerReticle.Movement();
+            m_scpPlayerReticle.Movement();
         }
     }
 
@@ -457,14 +500,14 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void SetHealthText()
     {
-        if(txtHealth)
-            txtHealth.text = "HP:" + nCurrentHealth.ToString();
+        if (m_txtHealth)
+            m_txtHealth.text = "HP:" + m_nCurrentHealth.ToString();
     }
 
     private void TakeDamage()
     {
-        tookDmg = true;
-        nCurrentHealth = nCurrentHealth - Snowball.nScoreValue;
+        m_tookDmg = true;
+        m_nCurrentHealth = m_nCurrentHealth - Snowball.m_nScoreValue;
         // updating the health value onscreen
         SetHealthText();
     }
@@ -472,10 +515,10 @@ public class Player : MonoBehaviour
     private void Projectiles()
     {
         Dash scpDash = gameObject.GetComponent<Dash>();
-        Snowball scpSnowball = m_Snowball.GetComponent<Snowball>();
+        Snowball scpSnowball = m_goSnowball.GetComponent<Snowball>();
         //Dash scpDash = gameObject.GetComponent<Dash>();
 
-        if (!scpSnowball.bTooFast && bHasBall && !scpDash.bDashing)
+        if (!scpSnowball.m_bTooFast && m_bHasBall && !scpDash.m_bDashing)
         {
             Snowball[] arrSnowballs = FindObjectsOfType<Snowball>();
             for (int i = 0; i < arrSnowballs.Length; i++)
@@ -484,15 +527,15 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (fStunTimer > 0.0f)
+        if (m_fStunTimer > 0.0f)
         {
-            fStunTimer -= Time.deltaTime;
-            bMovementLock = true;
+            m_fStunTimer -= Time.deltaTime;
+            m_bMovementLock = true;
         }
         else
         {
-            fStunTimer = 0.0f;
-            bMovementLock = false;
+            m_fStunTimer = 0.0f;
+            m_bMovementLock = false;
         }
     }
 
@@ -511,44 +554,44 @@ public class Player : MonoBehaviour
             Dash scpDash = gameObject.GetComponent<Dash>();
 
             //Ball is moving fast
-            if (scpSnowball.bTooFast)
+            if (scpSnowball.m_bTooFast)
             {
-                if (bHasBall)
+                if (m_bHasBall)
                 {
                     TakeDamage();
 
                     //Drop ball
-                    bHasBall = false;
-                    bWasHit = true;
-                    GameObject copy = Instantiate(m_Snowball);
+                    m_bHasBall = false;
+                    m_bWasHit = true;
+                    GameObject copy = Instantiate(m_goSnowball);
                     copy.transform.position = transform.position + transform.right;
                 }
-                else if (!bHasBall && scpDash.bDashing)
+                else if (!m_bHasBall && scpDash.m_bDashing)
                 {
                     //TakeDamage();
                     // The player has picked it up
                     Destroy(col.gameObject);
-                    bHasBall = true;
+                    m_bHasBall = true;
                 }
-                else if (!scpDash.bDashing && !bHasBall)
+                else if (!scpDash.m_bDashing && !m_bHasBall)
                 {
                     TakeDamage();
 
-                    fStunTimer = fStun;
+                    m_fStunTimer = m_fStun;
                 }
             }
             else //Ball is moving slow
             {
-                if (scpDash.bDashing)
+                if (scpDash.m_bDashing)
                 {
                     Physics.IgnoreCollision(col.collider, GetComponent<Collider>(), true);
                 }
 
-                if (!bHasBall)
+                if (!m_bHasBall)
                 {
                     // The player has picked it up
                     Destroy(col.gameObject);
-                    bHasBall = true;
+                    m_bHasBall = true;
                 }
             }
         }
@@ -561,21 +604,21 @@ public class Player : MonoBehaviour
 ////-----------------
 //// Ability Snowball
 ////-----------------
-//public GameObject m_SnowBall = null;
-//public float m_fSnowballSpeed = 1000.0f;
-//public float m_fSlowSpeed = 2.5f;
-//private bool m_bSlow = false;
-//private float m_fSlowTimer = 0.0f;
+//public GameObject SnowBall = null;
+//public float fSnowballSpeed = 1000.0f;
+//public float fSlowSpeed = 2.5f;
+//private bool bSlow = false;
+//private float fSlowTimer = 0.0f;
 
 ////------------------
 //// Ability Snowball
 ////------------------
 //if (XCI.GetButtonDown(XboxButton.LeftBumper, controller))
 //{
-//    GameObject copy = Instantiate(m_SnowBall);
+//    GameObject copy = Instantiate(SnowBall);
 //    copy.transform.position = transform.position + (transform.forward * 0.5f) + transform.up;
 //    Rigidbody rb = copy.GetComponent<Rigidbody>();
-//    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+//    rb.AddForce(transform.forward * fSnowballSpeed, ForceMode.Acceleration);
 //}
 
 ////------------------
@@ -583,10 +626,10 @@ public class Player : MonoBehaviour
 ////------------------
 //if (Input.GetKeyDown(KeyCode.Mouse1))
 //{
-//    GameObject copy = Instantiate(m_SnowBall);
+//    GameObject copy = Instantiate(SnowBall);
 //    copy.transform.position = transform.position + transform.forward + transform.up;
 //    Rigidbody rb = copy.GetComponent<Rigidbody>();
-//    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+//    rb.AddForce(transform.forward * fSnowballSpeed, ForceMode.Acceleration);
 //}
 
 //// This is the function that slows the player when hit by SnowBall
@@ -594,22 +637,22 @@ public class Player : MonoBehaviour
 //{
 //    //float fSlowTemp = 0.0f;
 //    //float fOldSpeed = 0.0f;
-//    //fOldSpeed = m_fSpeed;
-//    //fSlowTemp = (m_fSpeed * m_fSlowSpeed);
-//    //m_fSpeed = fSlowTemp;
-//    m_bSlow = true;
-//    m_fSlowTimer = 0.0f;
-//    m_fCurrentSpeed = m_fSlowSpeed;
+//    //fOldSpeed = fSpeed;
+//    //fSlowTemp = (fSpeed * fSlowSpeed);
+//    //fSpeed = fSlowTemp;
+//    bSlow = true;
+//    fSlowTimer = 0.0f;
+//    fCurrentSpeed = fSlowSpeed;
 //    //Wait for 2 seconds here
-//    //m_fSpeed = fOldSpeed;
+//    //fSpeed = fOldSpeed;
 //}
 
-//    if (m_bSlow)
+//    if (bSlow)
 //    {
-//        m_fSlowSpeed += Time.deltaTime;
-//        if (m_fSlowSpeed > 2.0f)
+//        fSlowSpeed += Time.deltaTime;
+//        if (fSlowSpeed > 2.0f)
 //        {
-//            m_bSlow = false;
-//            m_fCurrentSpeed = m_fSpeed;
+//            bSlow = false;
+//            fCurrentSpeed = fSpeed;
 //        }
 //    }

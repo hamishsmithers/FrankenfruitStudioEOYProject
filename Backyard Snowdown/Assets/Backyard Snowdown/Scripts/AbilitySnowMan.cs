@@ -12,16 +12,16 @@ public class AbilitySnowMan : MonoBehaviour
     //-----------------
     public GameObject m_SnowMan = null;
     [HideInInspector]
-    public GameObject copy;
+    public GameObject m_Copy;
 
-    public float fSnowManBeforeSpawn = 0.3f;
-    private float fSnowManBeforeSpawnTimer = 0.0f;
-    public float fSnowManAfterSpawn = 0.3f;
-    private float fSnowManAfterSpawnTimer = 0.0f;
-    private bool bCreateSnowManBefore = false;
-    private bool bCreateSnowManAfter = false;
+    public float m_fSnowManBeforeSpawn = 0.3f;
+    private float m_fSnowManBeforeSpawnTimer = 0.0f;
+    public float m_fSnowManAfterSpawn = 0.3f;
+    private float m_fSnowManAfterSpawnTimer = 0.0f;
+    private bool m_bCreateSnowManBefore = false;
+    private bool m_bCreateSnowManAfter = false;
     [HideInInspector]
-    public bool bASnowManExists = false;
+    public bool m_bASnowManExists = false;
 
     // Use this for initialization
     void Start()
@@ -44,9 +44,9 @@ public class AbilitySnowMan : MonoBehaviour
 
         //Debug.Log(bASnowManExists);
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) || XCI.GetButtonDown(XboxButton.RightBumper, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftBumper, scpPlayer.controller) || bCreateSnowManBefore || bCreateSnowManAfter)
+        if (Input.GetKeyDown(KeyCode.LeftShift) || XCI.GetButtonDown(XboxButton.RightBumper, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftBumper, scpPlayer.controller) || m_bCreateSnowManBefore || m_bCreateSnowManAfter)
         {
-            if (!bASnowManExists)
+            if (!m_bASnowManExists)
             {
                 //if (fSnowManBeforeSpawnTimer <= fSnowManBeforeSpawn)
                 //{
@@ -57,12 +57,12 @@ public class AbilitySnowMan : MonoBehaviour
                 //}
                 //else if (fSnowManBeforeSpawnTimer >= fSnowManBeforeSpawn)
                 //{
-                    copy = Instantiate(m_SnowMan);
-                    copy.GetComponent<SnowMan>().player = gameObject;
-                    copy.transform.position = transform.position + transform.forward;
+                    m_Copy = Instantiate(m_SnowMan);
+                    m_Copy.GetComponent<SnowMan>().m_GoPlayer = gameObject;
+                    m_Copy.transform.position = transform.position + transform.forward;
                     //bCreateSnowManBefore = false;
                     //fSnowManBeforeSpawnTimer = 0.0f;
-                    bASnowManExists = true;
+                    m_bASnowManExists = true;
                 //}
 
                 //if (!bCreateSnowManBefore || bCreateSnowManAfter)

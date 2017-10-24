@@ -7,18 +7,18 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class EliminatedAbilityGiantSnowBall : MonoBehaviour
 {
-    public GameObject m_GiantSnowBall = null;
+    public GameObject m_goGiantSnowBall = null;
 
-    GameObject copy = null;
-    GiantSnowBall scpGiantSnowBall;
-    GameObject goPlayerReticle;
+    GameObject m_goCopy = null;
+    GiantSnowBall m_scpGiantSnowBall;
+    GameObject m_goPlayerReticle;
 
     // Use this for initialization
     void Start()
     {
-        copy = Instantiate(m_GiantSnowBall);
-        copy.SetActive(false);
-        scpGiantSnowBall = copy.GetComponent<GiantSnowBall>();
+        m_goCopy = Instantiate(m_goGiantSnowBall);
+        m_goCopy.SetActive(false);
+        m_scpGiantSnowBall = m_goCopy.GetComponent<GiantSnowBall>();
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
 
     public void DoEliminatedAbilityGiantSnowBall()
     {
-        if (copy.activeInHierarchy)
+        if (m_goCopy.activeInHierarchy)
             return;
 
         Player scpPlayer = GetComponent<Player>();
@@ -37,11 +37,11 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
         if (XCI.GetButtonDown(XboxButton.LeftBumper, scpPlayer.controller))
         {
             Player scpPlayerReticleGetter = gameObject.GetComponent<Player>();
-            Vector3 spawn = scpPlayerReticleGetter.goPlayerReticleCopy.transform.position;
+            Vector3 spawn = scpPlayerReticleGetter.m_goPlayerReticleCopy.transform.position;
             spawn.y = 60.0f;
-            copy.transform.position = spawn;
+            m_goCopy.transform.position = spawn;
 
-            copy.SetActive(true);
+            m_goCopy.SetActive(true);
         }
     }
 }

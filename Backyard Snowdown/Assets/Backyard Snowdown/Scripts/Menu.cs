@@ -7,10 +7,11 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class Menu : MonoBehaviour
 {
-    public XboxController controller;
+    public XboxController m_controller;
 
-    bool bEscapeToggle = false;
-    public GameObject player;
+    bool m_bEscapeToggle = false;
+    public GameObject m_GoPlayer;
+
     // Use this for initialization
     void Start()
     {
@@ -21,17 +22,17 @@ public class Menu : MonoBehaviour
     void Update()
     {
         //Player scpPlayer = player.gameObject.GetComponent<Player>();
-        if (Input.GetKeyDown(KeyCode.Escape) || (XCI.GetButtonDown(XboxButton.Start, controller)))
+        if (Input.GetKeyDown(KeyCode.Escape) || (XCI.GetButtonDown(XboxButton.Start, m_controller)))
         {
-            if (bEscapeToggle)
+            if (m_bEscapeToggle)
             {
                 Time.timeScale = 0;
-                bEscapeToggle = false;
+                m_bEscapeToggle = false;
             }
-            else if (!bEscapeToggle)
+            else if (!m_bEscapeToggle)
             {
                 Time.timeScale = 1;
-                bEscapeToggle = true;
+                m_bEscapeToggle = true;
             }
         }
     }

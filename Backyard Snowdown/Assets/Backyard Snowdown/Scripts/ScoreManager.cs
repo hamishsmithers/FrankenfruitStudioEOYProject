@@ -6,64 +6,60 @@ using XboxCtrlrInput;       // Be sure to include this if you want an object to 
 
 public class ScoreManager : MonoBehaviour {
 
-    static List<int> PlayerRank = new List<int>();
-    static int nDeathCount = 0;
-    static int nRoundsWonCount = 0;
-    public XboxController controller;
+    static List<int> m_LstPlayerRank = new List<int>();
+    static int m_nDeathCount = 0;
+    static int m_nRoundsWonCount = 0;
+    public XboxController m_Controller;
 
     // Use this for initialization
     void Start ()
     {
-        nDeathCount = 0;
-        nRoundsWonCount = 0;
+        m_nDeathCount = 0;
+        m_nRoundsWonCount = 0;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (nDeathCount > 2)
+        if (m_nDeathCount > 2)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         }
-         
     }
-
-
-
-
+    
     public static int GetnRoundsWonCount()
     {
-        return nRoundsWonCount;
+        return m_nRoundsWonCount;
     }
 
     public static void SetnRoundsWonCount(int a)
     {
-        nRoundsWonCount = a;
+        m_nRoundsWonCount = a;
     }
 
     public static void IteratenRoundsWonCount()
     {
-        ++nRoundsWonCount;
+        ++m_nRoundsWonCount;
     }
 
     public static void Reset()
     {
-        PlayerRank.Clear();
+        m_LstPlayerRank.Clear();
     }
 
     public static void PlayerFinish(int nPlayer)
     {
-        ++nDeathCount;
-        PlayerRank.Add(nPlayer);
+        ++m_nDeathCount;
+        m_LstPlayerRank.Add(nPlayer);
     }
 
     public static int GetPodiumRank(int nWhichRank)
     {
-        return PlayerRank[nWhichRank];
+        return m_LstPlayerRank[nWhichRank];
     }
 
     public static int GetPlayerCount()
     {
-        return PlayerRank.Count;
+        return m_LstPlayerRank.Count;
     }
 }

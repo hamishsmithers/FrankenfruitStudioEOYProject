@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AbilitySnowBall : MonoBehaviour
 {
-    public float fSlowDuration = 1.0f;
-    private float fSlowCount = 0.0f;
+    public float m_fSlowDuration = 1.0f;
+    private float m_fSlowCount = 0.0f;
 
     // Use this for initialization
     void Start()
@@ -27,14 +27,14 @@ public class AbilitySnowBall : MonoBehaviour
             //Make character slow for a public variable
             Player p = col.gameObject.GetComponent<Player>();
             // create a slow function in player and do p.slow
-            if (fSlowDuration > fSlowCount)
+            if (m_fSlowDuration > m_fSlowCount)
             {
                 //p.Slow();
-                fSlowCount += Time.deltaTime;
+                m_fSlowCount += Time.deltaTime;
             }
             else
             {
-                fSlowCount = 0.0f;
+                m_fSlowCount = 0.0f;
             }
         }
 

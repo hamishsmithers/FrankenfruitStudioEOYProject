@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GiantSnowBall : MonoBehaviour
 {
-    public float fKnockbackForce = 10.0f;
-    public float fAreaOfEffect = 3.0f;
+    public float m_fKnockbackForce = 10.0f;
+    public float m_fAreaOfEffect = 3.0f;
     // Use this for initialization
     void Start()
     {
@@ -33,14 +33,14 @@ public class GiantSnowBall : MonoBehaviour
         Vector3 hit = transform.position; //ignore these numbers, get position from collision impact
 
         int playerLayer = 1 << LayerMask.NameToLayer("Player");
-        Collider[] players = Physics.OverlapSphere(hit, fAreaOfEffect, playerLayer);
+        Collider[] players = Physics.OverlapSphere(hit, m_fAreaOfEffect, playerLayer);
 
         for (int i = 0; i < players.Length; ++i)
         {
             Rigidbody rb = players[i].gameObject.GetComponent<Rigidbody>();
-            rb.AddExplosionForce(fKnockbackForce, hit, fAreaOfEffect, 1.0f, ForceMode.Impulse);
+            rb.AddExplosionForce(m_fKnockbackForce, hit, m_fAreaOfEffect, 1.0f, ForceMode.Impulse);
             Player scpPlayer = players[i].GetComponent<Player>();
-            scpPlayer.bHitByGiantSnowBall = true;
+            scpPlayer.m_bHitByGiantSnowBall = true;
         }
     }
 }

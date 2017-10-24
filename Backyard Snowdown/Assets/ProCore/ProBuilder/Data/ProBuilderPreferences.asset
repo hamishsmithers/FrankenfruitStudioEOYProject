@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 146836576, guid: 0472bdc8d6d15384d98f22ee34302f9c, type: 3}
   m_Name: ProBuilderPreferences
   m_EditorClassIdentifier: 
-  m_Bool_keys: []
+  m_Bool_keys:
+  - pbCheckForProBuilderUpdates
   m_Int_keys:
   - pbDefaultEditLevel
   - pbDefaultSelectionMode
@@ -21,13 +22,15 @@ MonoBehaviour:
   m_String_keys:
   - pbVertexColorPrefs5
   - pbVertexColorPrefs8
+  - pbLastWebVersionChecked
   m_Color_keys: []
   m_Material_keys: []
-  m_Bool_values: 
+  m_Bool_values: 01
   m_Int_values: 00000000020000000000000000000000
   m_Float_values: []
   m_String_values:
   - RGBA(0.456, 0.456, 0.456, 1.000)
   - RGBA(0.521, 0.662, 0.662, 1.000)
+  - 2.9.7f5
   m_Color_values: []
   m_Material_values: []

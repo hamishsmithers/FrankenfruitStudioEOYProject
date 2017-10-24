@@ -6,7 +6,7 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class PodiumButtonAction : MonoBehaviour {
 
-    public XboxController controller;
+    public XboxController m_controller;
 
 
     // Use this for initialization
@@ -18,7 +18,7 @@ public class PodiumButtonAction : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (XCI.GetButtonDown(XboxButton.Start, controller) || XCI.GetButton(XboxButton.A, controller))
+        if (XCI.GetButtonDown(XboxButton.Start, m_controller) || XCI.GetButton(XboxButton.A, m_controller))
         {
             SceneManager.LoadScene(0);
         }

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Snowball : MonoBehaviour
 {
-    Rigidbody rb;
-    public float fDamageSpeed = 3.0f;
-    public bool bTooFast = false;
+    Rigidbody m_rb;
+    public float m_fDamageSpeed = 3.0f;
+    public bool m_bTooFast = false;
 
-    public Material[] materials;
-    private Renderer rend;
+    public Material[] m_materials;
+    private Renderer m_rend;
 
     //-------
     // Score
     //-------
-    public static int nScoreValue = 2;
+    public static int m_nScoreValue = 2;
 
 
     private Color mainColor = Color.white;
@@ -24,7 +24,7 @@ public class Snowball : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        m_rb = GetComponent<Rigidbody>();
 
         mr = GetComponent<MeshRenderer>();
         mainColor = mr.material.color;
@@ -34,7 +34,7 @@ public class Snowball : MonoBehaviour
     void Update()
     {
         //if the ball is moving at a dangerous speed, let the player know!
-        if (bTooFast)
+        if (m_bTooFast)
             mr.material.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         else
             mr.material.color = mainColor;
@@ -61,16 +61,16 @@ public class Snowball : MonoBehaviour
         //    }
         //}
 
-        if (rb.velocity.magnitude >= fDamageSpeed)
+        if (m_rb.velocity.magnitude >= m_fDamageSpeed)
         {
-            nScoreValue = 2;
-            bTooFast = true;
+            m_nScoreValue = 2;
+            m_bTooFast = true;
         }
 
-        else if (rb.velocity.magnitude < fDamageSpeed)
+        else if (m_rb.velocity.magnitude < m_fDamageSpeed)
         {
-            nScoreValue = 0;
-            bTooFast = false;
+            m_nScoreValue = 0;
+            m_bTooFast = false;
         }
 
         //if (rb.velocity.magnitude > fDamageSpeed)
@@ -136,8 +136,8 @@ public class Snowball : MonoBehaviour
     {
         if (col.gameObject.tag != "Ground" && col.gameObject.tag != "Character")
         {
-            if (rb)
-                rb.velocity = rb.velocity * 1f;
+            if (m_rb)
+                m_rb.velocity = m_rb.velocity * 1f;
         }
 
         else

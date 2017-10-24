@@ -9,29 +9,29 @@ public class PlayerRetical : MonoBehaviour
 {
     //Rigidbody rb;
     [HideInInspector]
-    public Vector3 v3MovePos;
+    public Vector3 m_v3MovePos;
     [HideInInspector]
-    public GameObject player;
+    public GameObject m_player;
 
     //public GameObject TopLeft = null;
     //public GameObject TopRight = null;
     //public GameObject BotLeft = null;
     //public GameObject BotRight = null;
 
-    GameObject TL;
-    GameObject TR;
-    GameObject BL;
-    GameObject BR;
+    GameObject m_TL;
+    GameObject m_TR;
+    GameObject m_BL;
+    GameObject m_BR;
 
 
     // Use this for initialization
     void Start()
     {
         //rb = GetComponent<Rigidbody>();
-        TL = GameObject.Find("tl");
-        TR = GameObject.Find("tr");
-        BL = GameObject.Find("bl");
-        BR = GameObject.Find("br");
+        m_TL = GameObject.Find("tl");
+        m_TR = GameObject.Find("tr");
+        m_BL = GameObject.Find("bl");
+        m_BR = GameObject.Find("br");
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class PlayerRetical : MonoBehaviour
     //--------------------------------------------------------
     public void Movement()
     {
-        Player scpPlayer = player.GetComponent<Player>();
+        Player scpPlayer = m_player.GetComponent<Player>();
 
         Vector3 v3VerticalAxis = Vector3.zero;
 
@@ -70,29 +70,29 @@ public class PlayerRetical : MonoBehaviour
         v3Pos.x = transform.position.x;
         v3Pos.z = transform.position.z;
 
-        if (!scpPlayer.bMovementLock)
+        if (!scpPlayer.m_bMovementLock)
         {
             // Up and down movement
-            v3MovePos = Vector3.zero;
+            m_v3MovePos = Vector3.zero;
 
-            v3MovePos += v3VerticalAxis * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
+            m_v3MovePos += v3VerticalAxis * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
 
-            if (v3MovePos.magnitude > scpPlayer.m_fMaxSpeed * Time.deltaTime)
+            if (m_v3MovePos.magnitude > scpPlayer.m_fMaxSpeed * Time.deltaTime)
             {
-                v3MovePos.Normalize();
-                v3MovePos *= scpPlayer.m_fMaxSpeed * Time.deltaTime;
+                m_v3MovePos.Normalize();
+                m_v3MovePos *= scpPlayer.m_fMaxSpeed * Time.deltaTime;
             }
 
             // Left and right movement
-            v3MovePos += v3HorizontalAxis * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
+            m_v3MovePos += v3HorizontalAxis * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
 
-            if (v3MovePos.magnitude > scpPlayer.m_fMaxSpeed * Time.deltaTime)
+            if (m_v3MovePos.magnitude > scpPlayer.m_fMaxSpeed * Time.deltaTime)
             {
-                v3MovePos.Normalize();
-                v3MovePos *= scpPlayer.m_fMaxSpeed * Time.deltaTime;
+                m_v3MovePos.Normalize();
+                m_v3MovePos *= scpPlayer.m_fMaxSpeed * Time.deltaTime;
             }
 
-            transform.position += v3MovePos;
+            transform.position += m_v3MovePos;
             //rb.MovePosition(rb.position + v3MovePos);
 
             //Constrain to camera
@@ -111,32 +111,32 @@ public class PlayerRetical : MonoBehaviour
             //Vector3 bottomLeft = Camera.main.transform.TransformVector(frustumCorners[0]) + Camera.main.transform.position;
 
             // Bot Left
-            if (newvec.x < BL.transform.position.x)
-                newvec.x = BL.transform.position.x;
+            if (newvec.x < m_BL.transform.position.x)
+                newvec.x = m_BL.transform.position.x;
                            
-            if (newvec.z < BL.transform.position.z)
-                newvec.z = BL.transform.position.z;
+            if (newvec.z < m_BL.transform.position.z)
+                newvec.z = m_BL.transform.position.z;
 
             // Bot Right
-            if (newvec.x > BR.transform.position.x)
-                newvec.x = BR.transform.position.x;
+            if (newvec.x > m_BR.transform.position.x)
+                newvec.x = m_BR.transform.position.x;
                            
-            if (newvec.z < BR.transform.position.z)
-                newvec.z = BR.transform.position.z;
+            if (newvec.z < m_BR.transform.position.z)
+                newvec.z = m_BR.transform.position.z;
 
             // Top Left
-            if (newvec.x < TL.transform.position.x)
-                newvec.x = TL.transform.position.x;
+            if (newvec.x < m_TL.transform.position.x)
+                newvec.x = m_TL.transform.position.x;
                            
-            if (newvec.z > TL.transform.position.z)
-                newvec.z = TL.transform.position.z;
+            if (newvec.z > m_TL.transform.position.z)
+                newvec.z = m_TL.transform.position.z;
 
             // Top Right
-            if (newvec.x > TR.transform.position.x)
-                newvec.x = TR.transform.position.x;
+            if (newvec.x > m_TR.transform.position.x)
+                newvec.x = m_TR.transform.position.x;
                            
-            if (newvec.z > TR.transform.position.z)
-                newvec.z = TR.transform.position.z;
+            if (newvec.z > m_TR.transform.position.z)
+                newvec.z = m_TR.transform.position.z;
 
             transform.position = newvec;
 

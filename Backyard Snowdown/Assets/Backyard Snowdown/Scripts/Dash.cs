@@ -7,19 +7,19 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class Dash : MonoBehaviour
 {
-    private const float MAX_TRG_SCL = 1.21f;
+    private const float m_MaxTriggerHeight = 1.21f;
 
     public float m_fDashSpeed = 2.0f;
-    public float fDashDuration = 0.5f;
-    private float fDashTimer = 0.0f;
-    public float fCoolDown = 0.8f;
-    private float fCoolDownTimer = 0.0f;
-    private bool bCoolDown = false;
+    public float m_fDashDuration = 0.5f;
+    private float m_fDashTimer = 0.0f;
+    public float m_fCoolDown = 0.8f;
+    private float m_fCoolDownTimer = 0.0f;
+    private bool m_bCoolDown = false;
     [HideInInspector]
-    public bool bDashing = false;
+    public bool m_bDashing = false;
     [HideInInspector]
-    public Vector3 v3DashDir;
-    private bool bStartTimer = false;
+    public Vector3 m_v3DashDir;
+    private bool m_bStartTimer = false;
 
 
     // Use this for initialization
@@ -36,56 +36,56 @@ public class Dash : MonoBehaviour
 
     public void DoDash()
     {
-        if(bStartTimer && fCoolDownTimer <= fCoolDown)
+        if(m_bStartTimer && m_fCoolDownTimer <= m_fCoolDown)
         {
-            fCoolDownTimer += Time.deltaTime;
-            bCoolDown = true;
-            bDashing = false;
+            m_fCoolDownTimer += Time.deltaTime;
+            m_bCoolDown = true;
+            m_bDashing = false;
         }
         else
         {
-            fCoolDownTimer = 0.0f;
-            bStartTimer = false;
-            bCoolDown = false;
+            m_fCoolDownTimer = 0.0f;
+            m_bStartTimer = false;
+            m_bCoolDown = false;
         }
 
-        if (!bCoolDown)
+        if (!m_bCoolDown)
         {
             Player scpPlayer = gameObject.GetComponent<Player>();
 
-            float leftTrigHeight = MAX_TRG_SCL * (1.0f - XCI.GetAxisRaw(XboxAxis.LeftTrigger, scpPlayer.controller));
+            float leftTrigHeight = m_MaxTriggerHeight * (1.0f - XCI.GetAxisRaw(XboxAxis.LeftTrigger, scpPlayer.controller));
 
-            if (leftTrigHeight < 1.0f || scpPlayer.bLeftTriggerPressed || Input.GetKeyDown(KeyCode.Space))
+            if (leftTrigHeight < 1.0f || scpPlayer.m_bLeftTriggerPressed || Input.GetKeyDown(KeyCode.Space))
             {
-                scpPlayer.bLeftTriggerPressed = true;
-                scpPlayer.bMovementLock = true;
+                scpPlayer.m_bLeftTriggerPressed = true;
+                scpPlayer.m_bMovementLock = true;
 
-                if (fDashDuration > fDashTimer)
+                if (m_fDashDuration > m_fDashTimer)
                 {
-                    bDashing = true;
-                    if (bDashing)
+                    m_bDashing = true;
+                    if (m_bDashing)
                     {
-                        transform.position += v3DashDir * m_fDashSpeed * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
-                        fDashTimer += Time.deltaTime;
-                        scpPlayer.m_PlayerModel.GetComponent<Animator>().SetBool("dashing", true);
+                        transform.position += m_v3DashDir * m_fDashSpeed * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
+                        m_fDashTimer += Time.deltaTime;
+                        scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", true);
                     }
                 }
                 else
                 {
-                    bStartTimer = true;
-                    scpPlayer.bLeftTriggerPressed = false;
-                    fDashTimer = 0.0f;
-                    scpPlayer.bMovementLock = false;
-                    scpPlayer.m_PlayerModel.GetComponent<Animator>().SetBool("dashing", false);
+                    m_bStartTimer = true;
+                    scpPlayer.m_bLeftTriggerPressed = false;
+                    m_fDashTimer = 0.0f;
+                    scpPlayer.m_bMovementLock = false;
+                    scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", false);
                 }
             }
 
             if (leftTrigHeight < 1.0f)
             {
-                v3DashDir = scpPlayer.v3XboxDashDir;
-                v3DashDir.y = 0.0f;
-                v3DashDir.Normalize();
-                scpPlayer.v3MovePos.Normalize();
+                m_v3DashDir = scpPlayer.m_v3XboxDashDir;
+                m_v3DashDir.y = 0.0f;
+                m_v3DashDir.Normalize();
+                scpPlayer.m_v3MovePos.Normalize();
             }
         }
     }

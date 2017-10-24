@@ -8,14 +8,13 @@ using XboxCtrlrInput;       // Be sure to include this if you want an object to 
 
 public class Global : MonoBehaviour
 {
-    public XboxController controller;
+    public XboxController m_Controller;
 
-    public GameObject goPauseCanvas = null;
-    public GameObject buFirstButton = null;
+    public GameObject m_GoPauseCanvas = null;
+    public GameObject m_BtnFirstButton = null;
 
-    private float fResetTimer = 0.0f;
-    public float fResetConfirmTime = 3.0f;
-    private bool bOnce = true;
+    private float m_fResetTimer = 0.0f;
+    public float m_fResetConfirmTime = 3.0f;
 
     //static string strControl;
 
@@ -29,9 +28,9 @@ public class Global : MonoBehaviour
     void Start()
     {
         //set the menu canvas to hidden
-        if(goPauseCanvas)
-            goPauseCanvas.SetActive(false);
-     
+        if (m_GoPauseCanvas)
+            m_GoPauseCanvas.SetActive(false);
+
 
         //GameObject goEventSystem = GameObject.Find("EventSystem");
         //Event scpevntsys = goEventSystem.GetComponent<Event>();
@@ -51,25 +50,25 @@ public class Global : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Escape) || XCI.GetButton(XboxButton.A, controller) && XCI.GetButton(XboxButton.B, controller) && XCI.GetButton(XboxButton.X, controller) && XCI.GetButton(XboxButton.Y, controller) && XCI.GetButton(XboxButton.LeftBumper, controller) && XCI.GetButton(XboxButton.RightBumper, controller))
+
+        if (Input.GetKeyDown(KeyCode.Escape) || XCI.GetButton(XboxButton.A, m_Controller) && XCI.GetButton(XboxButton.B, m_Controller) && XCI.GetButton(XboxButton.X, m_Controller) && XCI.GetButton(XboxButton.Y, m_Controller) && XCI.GetButton(XboxButton.LeftBumper, m_Controller) && XCI.GetButton(XboxButton.RightBumper, m_Controller))
             Application.Quit();
 
         ResetGame();
 
 
-        if (XCI.GetButtonDown(XboxButton.Start, controller))
+        if (XCI.GetButtonDown(XboxButton.Start, m_Controller))
         {
-            if (!goPauseCanvas.activeInHierarchy)
+            if (!m_GoPauseCanvas.activeInHierarchy)
             {
                 //SceneManager.LoadScene(0);
-                goPauseCanvas.SetActive(true);
+                m_GoPauseCanvas.SetActive(true);
                 Time.timeScale = 0;
-                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(buFirstButton);
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_BtnFirstButton);
             }
             else
             {
-                goPauseCanvas.SetActive(false);
+                m_GoPauseCanvas.SetActive(false);
                 Time.timeScale = 1;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             }
@@ -82,7 +81,7 @@ public class Global : MonoBehaviour
 
     public void PauseMenuContinue()
     {
-        goPauseCanvas.SetActive(false);
+        m_GoPauseCanvas.SetActive(false);
         Time.timeScale = 1;
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
     }
@@ -98,14 +97,14 @@ public class Global : MonoBehaviour
         //Player scpPlayer = gameObject.GetComponent<Player>();
         //Debug.Log(fResetTimer);
         //if (XCI.GetButton(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButtonDown(XboxButton.RightStick, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButton(XboxButton.RightStick, scpPlayer.controller))
-        if (XCI.GetButton(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))// || XCI.GetButtonDown(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))
+        if (XCI.GetButton(XboxButton.Start, m_Controller) && XCI.GetButton(XboxButton.Back, m_Controller))// || XCI.GetButtonDown(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))
         {
             //Debug.Log("START");
             //fResetTimer += Time.deltaTime;
 
             //if (fResetTimer >= fResetConfirmTime)
             //{
-            
+
             SceneManager.LoadScene(0);
             //   fResetTimer = 0.0f;
             //}

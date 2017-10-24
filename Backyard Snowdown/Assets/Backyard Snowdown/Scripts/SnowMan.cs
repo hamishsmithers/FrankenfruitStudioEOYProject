@@ -8,9 +8,9 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 public class SnowMan : MonoBehaviour
 {
     // Counts how many times it's been hit
-    public int nSnowManHitCount = 2;
-    public GameObject player;
-
+    public int m_nSnowManHitCount = 2;
+    [HideInInspector]
+    public GameObject m_GoPlayer = null;
     //private int nCaseSwitch = 1;
 
     // Use this for initialization
@@ -48,28 +48,16 @@ public class SnowMan : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-    //    if (GameObject.Find("Characterp1"))
-    //    {
-    //        player = GameObject.Find("Characterp1");
-    //        //Player scpSnowMan = GameObject.FindObjectOfType<Player>();
-    //    }
-
-    //    if (GameObject.Find("Characterp2"))
-    //    {
-    //        player = GameObject.Find("Characterp2");
-    //        //Player scpSnowMan = GameObject.FindObjectOfType<Player>();
-    //    }
-
-        AbilitySnowMan scpAbilitySnowMan = player.GetComponent<AbilitySnowMan>();
+        AbilitySnowMan scpAbilitySnowMan = m_GoPlayer.GetComponent<AbilitySnowMan>();
 
         if (col.gameObject.tag == "Snowball")
         {
-            nSnowManHitCount -= 1;
-            if (nSnowManHitCount == 0)
+            m_nSnowManHitCount -= 1;
+            if (m_nSnowManHitCount == 0)
             {
-                scpAbilitySnowMan.bASnowManExists = false;
+                scpAbilitySnowMan.m_bASnowManExists = false;
                 Destroy(gameObject);
-                nSnowManHitCount = 2;
+                m_nSnowManHitCount = 2;
             }
         }
     }

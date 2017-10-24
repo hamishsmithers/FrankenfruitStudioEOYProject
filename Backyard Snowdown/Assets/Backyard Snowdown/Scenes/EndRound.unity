@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c10491c9c3009f45b40caef1613d54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: 0
+  m_controller: 0
 --- !u!4 &615138801
 Transform:
   m_ObjectHideFlags: 0
@@ -1421,13 +1421,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921fbb0f3489af54e9d9ec170bd02245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayersArray:
+  m_ArrPlayers:
   - {fileID: 963016472}
   - {fileID: 2012885192}
   - {fileID: 260416301}
   - {fileID: 254295359}
-  PodiumArray:
-  - {fileID: 271248412}
-  - {fileID: 1593399750}
-  - {fileID: 1205404300}
-  - {fileID: 282438547}
+  m_ArrPodium:
+  - {fileID: 249515923}
+  - {fileID: 657077514}
+  - {fileID: 991656256}
+  - {fileID: 1542732383}
