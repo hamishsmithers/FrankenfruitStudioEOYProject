@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: CharacterTeddyBear
+  m_Name: CharacterHelicopterHat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 1ecec3aa74713c842b5a4dca9232142e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9420b62134f0ef44db56b9a69e3404a6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -39,15 +39,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ad40e85fecc0c68419e5a5cba52f50c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2b17fda67c9f5334fb0f1a3a917d2c70, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 580a6116454da6a49ab7d6b555f32749, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0e6dc9ecf19709a41b127d862eb13450, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: fc19b88467954da449f0e251295a7704, type: 3}
+        m_Texture: {fileID: 2800000, guid: 38f2a76a921bbd449b8d1241c2e9a3a8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:

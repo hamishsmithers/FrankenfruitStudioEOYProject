@@ -1,21 +1,15 @@
 fileFormatVersion: 2
-guid: 6d26a7c58debfc7419e272e0a2c8ed13
-timeCreated: 1508822787
+guid: b0f1b9708c25d0d49a60e1150b3d9ca9
+timeCreated: 1508822705
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Character_004_HelicopterHat_001_Propeller
     400000: //RootNode
-    400002: Character_004_HelicopterHat_001_Propeller
     2300000: //RootNode
-    2300002: Character_004_HelicopterHat_001_Propeller
     3300000: //RootNode
-    3300002: Character_004_HelicopterHat_001_Propeller
-    4300000: Character_004_HelicopterHat_001_Small
-    4300002: Character_004_Helicopterhat_001_Small
-    4300004: Character_004_HelicopterHat_001_Propeller
+    4300000: Character_004_HelicopterHat_001_Propeller
     9500000: //RootNode
   materials:
     importMaterials: 1

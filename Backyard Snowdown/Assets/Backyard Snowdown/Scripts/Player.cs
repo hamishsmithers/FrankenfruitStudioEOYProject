@@ -337,7 +337,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Shoot()
     {
-        //calculate the range of power to do the math on the charge power throw.
+        // calculate the range of power to do the math on the charge power throw.
         m_fPowerRange = m_fPowerMax - m_fPowerMin;
 
         float rightTrigHeight = m_MaxTriggerHeight * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
@@ -414,12 +414,8 @@ public class Player : MonoBehaviour
     private void ResetChargeThrow()
     {
         m_bThrow = false;
-        m_fMaxCharge = 2.0f;
         m_fChargeModifier = 0.0f;
         m_fChargeTimer = 0.0f;
-        m_fPowerMin = 250.0f;
-        m_fPowerMax = 1750.0f;
-        m_fPowerRange = 0.0f;
         m_bCharging = false;
         m_bGo = false;
     }
