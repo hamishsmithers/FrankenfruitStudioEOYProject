@@ -58,6 +58,8 @@ public class Player : MonoBehaviour
     private bool m_bGo = false;
     private float m_fIsChargedTimer = 0.0f;
     private float m_fIsChargedTimerLimit = 2.0f;
+    private bool bChargedLimitReached = false;
+    private bool bDuringMaxCharge = false;
     public float m_fSlowSpeed = 2.5f;
     // xbox controller trigger release
     private bool m_bHolding = false;
@@ -366,7 +368,7 @@ public class Player : MonoBehaviour
         Dash scpDash = gameObject.GetComponent<Dash>();
 
 
-        if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bGo)
+        if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bGo || bDuringMaxCharge)
         {
             if (m_fChargeTimer < m_fMaxCharge)
             {
@@ -376,13 +378,27 @@ public class Player : MonoBehaviour
             else if (m_fChargeTimer >= m_fMaxCharge)
             {
                 m_fChargeTimer = m_fMaxCharge;
-                m_bCharging = false;
             }
 
-            if (m_bGo)
+            if (m_fChargeTimer >= m_fMaxCharge && m_bThrow)
+            {
+                m_fIsChargedTimer += Time.deltaTime;
+                Debug.Log("AT MAX POWER " + m_fIsChargedTimer);
+
+                if (m_fIsChargedTimer <= m_fIsChargedTimerLimit)
+                {
+                    bDuringMaxCharge = true;
+                }
+                else if (m_fIsChargedTimer >= m_fIsChargedTimerLimit)
+                {
+                    m_bCharging = false;
+                    bChargedLimitReached = true;
+                }
+            }
+
+            if (m_bGo || bChargedLimitReached)
             {
                 m_bCharging = false;
-                m_bGo = false;
             }
 
 
@@ -424,8 +440,11 @@ public class Player : MonoBehaviour
         m_fChargeModifier = 0.0f;
         m_bThrow = false;
         m_fChargeTimer = 0.0f;
-        m_bCharging = true;
+        m_bCharging = false;
         m_bGo = false;
+        bDuringMaxCharge = false;
+        m_fIsChargedTimer = 0.0f;
+        bChargedLimitReached = false;
     }
 
     //--------------------------------------------------------
