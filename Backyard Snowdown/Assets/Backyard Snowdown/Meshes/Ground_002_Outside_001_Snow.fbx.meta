@@ -13,7 +13,7 @@ ModelImporter:
     3300000: Ground_002_Outside_001_Snow
     4300000: Ground_002_Outside_001_Snow
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:

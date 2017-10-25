@@ -48,7 +48,7 @@ ModelImporter:
     4300004: Tree_001_Backyard_001_Medium2
     4300006: Tree_001_Backyard_001_Medium
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
