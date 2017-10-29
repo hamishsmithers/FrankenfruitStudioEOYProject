@@ -10,12 +10,30 @@ public class Global : MonoBehaviour
 {
     public XboxController controller;
 
+    //--------------------------------------
+    // GameObject to store the pause canvas.
+    //--------------------------------------
+    [LabelOverride("Pause Canvas")]
+    [Tooltip("Stores the canvas for the pause overlay.")]
     public GameObject m_goPauseCanvas = null;
+
+    //-----------------------------------------------------
+    // GameObject to store the first button to be selected.
+    //-----------------------------------------------------
+    [LabelOverride("First Selected")]
+    [Tooltip("This is the first button that will be selected when the pause menu pops up.")]
     public GameObject m_btnFirstButton = null;
+
+    //---------------------
+    // Snowball GameObject.
+    //---------------------
+    [LabelOverride("Snowball")]
+    [Tooltip("Stores the Snowball GameObject.")]
     public GameObject m_goSnowball = null;
 
-    private float fResetTimer = 0.0f;
-    public float fResetConfirmTime = 3.0f;
+    //-------------------------------
+    // 
+    //-------------------------------
     private bool bOnce = true;
 
     //static string strControl;
@@ -26,7 +44,9 @@ public class Global : MonoBehaviour
     //static public bool bXboxControls = false;
     //static public bool bKeyboardControls = true;
 
+    //----------------------------
     // Use this for initialization
+    //----------------------------
     void Start()
     {
         //set the menu canvas to hidden
@@ -44,7 +64,9 @@ public class Global : MonoBehaviour
         // 
     }
 
+    //--------------------------------
     // Update is called once per frame
+    //--------------------------------
     void Update()
     {
 
