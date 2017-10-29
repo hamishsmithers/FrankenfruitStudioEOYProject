@@ -411,6 +411,13 @@ public class Player : MonoBehaviour
                 if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
                 {
                     GameObject copy = Instantiate(m_goSnowball);
+
+                    copy = ObjectPool.m_SharedInstance.GetPooledObject();
+                    if (copy != null)
+                    {
+                        copy.SetActive(true);
+                    }
+
                     copy.transform.position = transform.position + transform.forward * -1;
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
                     rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
@@ -423,6 +430,13 @@ public class Player : MonoBehaviour
                 else
                 {
                     GameObject copy = Instantiate(m_goSnowball);
+
+                    copy = ObjectPool.m_SharedInstance.GetPooledObject();
+                    if (copy != null)
+                    {
+                        copy.SetActive(true);
+                    }
+
                     copy.transform.position = transform.position + transform.forward * 1;
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
                     rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
@@ -576,7 +590,7 @@ public class Player : MonoBehaviour
             Snowball scpSnowball = col.gameObject.GetComponent<Snowball>();
             Dash scpDash = gameObject.GetComponent<Dash>();
 
-            //Ball is moving fast
+            // Ball is moving fast
             if (scpSnowball.m_bTooFast)
             {
                 if (m_bHasBall)
@@ -593,7 +607,8 @@ public class Player : MonoBehaviour
                 {
                     //TakeDamage();
                     // The player has picked it up
-                    Destroy(col.gameObject);
+                    col.gameObject.SetActive(false);
+                    //Destroy(col.gameObject);
                     m_bHasBall = true;
                 }
                 else if (!scpDash.m_bDashing && !m_bHasBall)
@@ -603,7 +618,7 @@ public class Player : MonoBehaviour
                     m_fStunTimer = m_fStun;
                 }
             }
-            else //Ball is moving slow
+            else // Ball is moving slow
             {
                 if (scpDash.m_bDashing)
                 {
@@ -613,7 +628,8 @@ public class Player : MonoBehaviour
                 if (!m_bHasBall)
                 {
                     // The player has picked it up
-                    Destroy(col.gameObject);
+                    col.gameObject.SetActive(false);
+                    //Destroy(col.gameObject);
                     m_bHasBall = true;
                 }
             }

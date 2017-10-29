@@ -11,6 +11,8 @@ public class Snowball : MonoBehaviour
     public Material[] m_materials;
     private Renderer m_rend;
 
+    private bool m_bOnce = true;
+
     //-------
     // Score
     //-------
@@ -23,6 +25,12 @@ public class Snowball : MonoBehaviour
 
     // Use this for initialization
     void Start()
+    {
+        //gameObject.SetActive(true);
+    }
+
+    // Use this for initialization each time the object is enabled
+    void OnEnable()
     {
         m_rb = GetComponent<Rigidbody>();
 

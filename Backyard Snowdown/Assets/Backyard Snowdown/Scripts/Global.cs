@@ -10,8 +10,9 @@ public class Global : MonoBehaviour
 {
     public XboxController controller;
 
-    public GameObject goPauseCanvas = null;
-    public GameObject buFirstButton = null;
+    public GameObject m_goPauseCanvas = null;
+    public GameObject m_btnFirstButton = null;
+    public GameObject m_goSnowball = null;
 
     private float fResetTimer = 0.0f;
     public float fResetConfirmTime = 3.0f;
@@ -29,16 +30,11 @@ public class Global : MonoBehaviour
     void Start()
     {
         //set the menu canvas to hidden
-        if(goPauseCanvas)
-            goPauseCanvas.SetActive(false);
-     
+        if (m_goPauseCanvas)
+            m_goPauseCanvas.SetActive(false);
 
         //GameObject goEventSystem = GameObject.Find("EventSystem");
         //Event scpevntsys = goEventSystem.GetComponent<Event>();
-
-
-
-
 
         //bKeyboardControls = true;
         //strControl = "xbox";
@@ -51,7 +47,7 @@ public class Global : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Escape) || XCI.GetButton(XboxButton.A, controller) && XCI.GetButton(XboxButton.B, controller) && XCI.GetButton(XboxButton.X, controller) && XCI.GetButton(XboxButton.Y, controller) && XCI.GetButton(XboxButton.LeftBumper, controller) && XCI.GetButton(XboxButton.RightBumper, controller))
             Application.Quit();
 
@@ -60,16 +56,16 @@ public class Global : MonoBehaviour
 
         if (XCI.GetButtonDown(XboxButton.Start, controller))
         {
-            if (!goPauseCanvas.activeInHierarchy)
+            if (!m_goPauseCanvas.activeInHierarchy)
             {
                 //SceneManager.LoadScene(0);
-                goPauseCanvas.SetActive(true);
+                m_goPauseCanvas.SetActive(true);
                 Time.timeScale = 0;
-                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(buFirstButton);
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_btnFirstButton);
             }
             else
             {
-                goPauseCanvas.SetActive(false);
+                m_goPauseCanvas.SetActive(false);
                 Time.timeScale = 1;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             }
@@ -82,7 +78,7 @@ public class Global : MonoBehaviour
 
     public void PauseMenuContinue()
     {
-        goPauseCanvas.SetActive(false);
+        m_goPauseCanvas.SetActive(false);
         Time.timeScale = 1;
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
     }
@@ -105,7 +101,7 @@ public class Global : MonoBehaviour
 
             //if (fResetTimer >= fResetConfirmTime)
             //{
-            
+
             SceneManager.LoadScene(0);
             //   fResetTimer = 0.0f;
             //}
@@ -113,7 +109,7 @@ public class Global : MonoBehaviour
         //else { fResetTimer = 0.0f; }
     }
 
-    
+
 
 
     //private void OnGUI()
