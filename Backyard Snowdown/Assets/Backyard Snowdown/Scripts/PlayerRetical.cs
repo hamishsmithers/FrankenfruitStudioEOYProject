@@ -30,10 +30,10 @@ public class PlayerRetical : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 2)
         {
             //rb = GetComponent<Rigidbody>();
-            m_TL = GameObject.Find("tl");
-            m_TR = GameObject.Find("tr");
-            m_BL = GameObject.Find("bl");
-            m_BR = GameObject.Find("br");
+            m_TL = GameObject.Find("Reticle Bounds Top Left");
+            m_TR = GameObject.Find("Reticle Bounds Top Right");
+            m_BL = GameObject.Find("Reticle Bounds Bottom Left");
+            m_BR = GameObject.Find("Reticle Bounds Bottom Right");
         }
     }
 

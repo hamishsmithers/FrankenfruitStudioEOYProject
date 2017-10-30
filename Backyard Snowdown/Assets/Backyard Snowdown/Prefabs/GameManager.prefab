@@ -9,30 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1962832662136328}
+  m_RootGameObject: {fileID: 1695645072331698}
   m_IsPrefabParent: 1
---- !u!1 &1962832662136328
+--- !u!1 &1695645072331698
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4728538718188300}
-  - component: {fileID: 114295150969899308}
+  - component: {fileID: 4992644117997168}
+  - component: {fileID: 114402089789818526}
+  - component: {fileID: 114313376669507072}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4728538718188300
+--- !u!4 &4992644117997168
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1962832662136328}
+  m_GameObject: {fileID: 1695645072331698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.694548, y: 12.687597, z: -15.03525}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,15 +41,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114295150969899308
+--- !u!114 &114313376669507072
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1962832662136328}
+  m_GameObject: {fileID: 1695645072331698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca907e8fa76bdf4ba580ecd11921f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_goObjectToPool: {fileID: 1309105767843890, guid: 7fdaa185c63eb4c4c8a42304e9d60abc,
+    type: 2}
+  m_nAmountToPool: 2
+--- !u!114 &114402089789818526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695645072331698}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddd52100847798346991436ce210461e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fResetConfirmTime: 3
+  controller: 0
+  m_goPauseCanvas: {fileID: 0}
+  m_btnFirstButton: {fileID: 0}
+  m_goSnowball: {fileID: 1309105767843890, guid: 7fdaa185c63eb4c4c8a42304e9d60abc,
+    type: 2}
+  m_SnowballLoc1: {fileID: 0}
+  m_SnowballLoc2: {fileID: 0}

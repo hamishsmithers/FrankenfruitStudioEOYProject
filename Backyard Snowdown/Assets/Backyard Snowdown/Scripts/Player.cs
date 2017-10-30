@@ -216,6 +216,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool m_bHitByGiantSnowBall = false;
     private float m_fHitTimer = 0.0f;
+    public float m_fGiantSnowballStunTime = 0.25f;
 
     //----------------
     // Player Reticle
@@ -312,9 +313,10 @@ public class Player : MonoBehaviour
 
             Aiming();
 
-            scpDash.DoDash();
+            if (!m_bCharging)
+                scpDash.DoDash();
 
-            if(scpDash.m_bDashing && m_bHasBall)
+            if (scpDash.m_bDashing && m_bHasBall)
                 gameObject.layer = LayerMask.NameToLayer("PlayerDash");
             else
                 gameObject.layer = LayerMask.NameToLayer("Player");
@@ -338,7 +340,7 @@ public class Player : MonoBehaviour
             m_fHitTimer += Time.deltaTime;
         }
 
-        if (m_fHitTimer > 0.5f && m_rb.velocity.magnitude < 2.0f && m_bHitByGiantSnowBall)
+        if (m_fHitTimer > m_fGiantSnowballStunTime && m_rb.velocity.magnitude < 2.0f && m_bHitByGiantSnowBall)
         {
             m_bHitByGiantSnowBall = false;
             m_fHitTimer = 0.0f;
@@ -353,6 +355,7 @@ public class Player : MonoBehaviour
         {
             m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRing; //set to new mat
         }
+
 
         if (!m_bHitByGiantSnowBall)
         {
@@ -416,8 +419,6 @@ public class Player : MonoBehaviour
                 m_v3MovePos.Normalize();
                 m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
             }
-
-
 
             m_rb.MovePosition(m_rb.position + m_v3MovePos);
         }
@@ -495,7 +496,6 @@ public class Player : MonoBehaviour
 
         Dash scpDash = gameObject.GetComponent<Dash>();
 
-
         if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bGo || bDuringMaxCharge)
         {
             if (m_fChargeTimer < m_fMaxCharge)
@@ -529,7 +529,6 @@ public class Player : MonoBehaviour
                 m_bCharging = false;
             }
 
-
             if (m_bHasBall && !m_bCharging)
             {
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
@@ -538,14 +537,7 @@ public class Player : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
                 {
-                    GameObject copy = Instantiate(m_goSnowball);
-
-                    copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                    if (copy != null)
-                    {
-                        copy.SetActive(true);
-                    }
-
+                    GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
                     copy.transform.position = transform.position + transform.forward * -1;
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
                     rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
@@ -557,13 +549,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    GameObject copy = Instantiate(m_goSnowball);
-
-                    copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                    if (copy != null)
-                    {
-                        copy.SetActive(true);
-                    }
+                    GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
 
                     copy.transform.position = transform.position + transform.forward * 1;
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
@@ -588,7 +574,7 @@ public class Player : MonoBehaviour
         m_fIsChargedTimer = 0.0f;
         bChargedLimitReached = false;
     }
-
+    
     //--------------------------------------------------------
     // Health
     //--------------------------------------------------------
@@ -621,7 +607,7 @@ public class Player : MonoBehaviour
 
             if (m_bHasBall)
             {
-                GameObject copy = Instantiate(m_goSnowball);
+                GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
                 copy.transform.position = transform.position + transform.forward;
                 m_bHasBall = false;
             }
@@ -728,7 +714,7 @@ public class Player : MonoBehaviour
                     //Drop ball
                     m_bHasBall = false;
                     //m_bWasHit = true;
-                    GameObject copy = Instantiate(m_goSnowball);
+                    GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
                     copy.transform.position = transform.position + transform.right;
                 }
                 else if (!m_bHasBall && scpDash.m_bDashing)

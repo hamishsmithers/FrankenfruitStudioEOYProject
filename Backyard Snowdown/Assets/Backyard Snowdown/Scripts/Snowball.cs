@@ -86,6 +86,13 @@ public class Snowball : MonoBehaviour
         //    }
         //}
 
+        if (m_rb.velocity.y > 5.0f)
+        {
+            Vector3 v3 = m_rb.velocity;
+            v3.y = 5.0f;
+            m_rb.velocity = v3;
+        }
+
         if (m_rb.velocity.magnitude >= m_fDamageSpeed)
         {
             m_nScoreValue = 2;

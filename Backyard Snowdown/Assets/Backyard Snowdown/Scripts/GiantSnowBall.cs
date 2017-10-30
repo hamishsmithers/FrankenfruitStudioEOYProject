@@ -9,7 +9,7 @@ public class GiantSnowBall : MonoBehaviour
     //----------------
     [LabelOverride("Knockback Force")]
     [Tooltip("The force that is applied to knockback when hit by giant snowball.")]
-    public float m_fKnockbackForce = 10.0f;
+    public float m_fKnockbackForce = 0.0f;
     //---------------
     // Area Of Effect
     //---------------
