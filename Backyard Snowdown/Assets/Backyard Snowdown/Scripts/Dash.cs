@@ -9,16 +9,40 @@ public class Dash : MonoBehaviour
 {
     private const float m_MaxTriggerHeight = 1.21f;
 
+    //------------------------------------------------------
+    // A float to store the speed that the player dashes at.
+    //------------------------------------------------------
+    [LabelOverride("Dash Speed")]
+    [Tooltip("The speed that the player dashes at in seconds.")]
     public float m_fDashSpeed = 2.0f;
+    //-------------------------------------------
+    // A float to store the duration of the dash.
+    //-------------------------------------------
+    [LabelOverride("Dash Duration")]
+    [Tooltip("A float to store the duration of the dash in seconds.")]
     public float m_fDashDuration = 0.5f;
-    private float m_fDashTimer = 0.0f;
+    //-------------------------------------------
+    // A float to store the cooldown on the dash. 
+    //-------------------------------------------
+    [LabelOverride("Dash Cooldown")]
+    [Tooltip("A float to store the duration of the dash cooldown in seconds.")]
     public float m_fCoolDown = 0.8f;
-    private float m_fCoolDownTimer = 0.0f;
-    private bool m_bCoolDown = false;
+    //------------------------------------------------------
+    // A bool to check whether the player is dashing or not. 
+    //------------------------------------------------------
     [HideInInspector]
     public bool m_bDashing = false;
+    //----------------------------------------------------------------
+    // A Vector3 to store the direction of the player while they dash.
+    //----------------------------------------------------------------
     [HideInInspector]
     public Vector3 m_v3DashDir;
+    //----------------------------------------
+    // A float to store the timer of the dash.
+    //----------------------------------------
+    private float m_fDashTimer = 0.0f;
+    private float m_fCoolDownTimer = 0.0f;
+    private bool m_bCoolDown = false;
     private bool m_bStartTimer = false;
 
 

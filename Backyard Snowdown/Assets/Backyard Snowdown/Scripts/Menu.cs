@@ -9,16 +9,29 @@ public class Menu : MonoBehaviour
 {
     public XboxController m_controller;
 
-    bool m_bEscapeToggle = false;
+    //----------------------------------------------
+    // Player GameObject.
+    //----------------------------------------------
+    [LabelOverride("Player")]
+    [Tooltip("Stores a Player GameObject.")]
     public GameObject m_GoPlayer;
 
+    //----------------------------------------------
+    // A bool to check whether esc has been pressed.
+    //----------------------------------------------
+    bool m_bEscapeToggle = false;
+
+    //----------------------------
     // Use this for initialization
+    //----------------------------
     void Start()
     {
 
     }
 
+    //--------------------------------
     // Update is called once per frame
+    //--------------------------------
     void Update()
     {
         //Player scpPlayer = player.gameObject.GetComponent<Player>();

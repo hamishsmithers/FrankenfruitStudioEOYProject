@@ -12,26 +12,79 @@ public class Player : MonoBehaviour
     //----------   
     // Movement
     //----------
+
+    //----------------------------------------------
+    // Player's Movement Speed.
+    //----------------------------------------------
+    [LabelOverride("Speed")]
+    [Tooltip("Player's Movement Speed.")]
     public float m_fSpeed = 5.0f;
+    //----------------------------------------------
+    // Player's Max Movement Speed.
+    //----------------------------------------------
+    [LabelOverride("Max Speed")]
+    [Tooltip("Player's maximum movement speed.")]
     public float m_fMaxSpeed = 5.0f;
+    //----------------------------------------------
+    // Dash Speed
+    //----------------------------------------------
+    [LabelOverride("Dash Speed")]
+    [Tooltip("The speed that the player moves while dashing.")]
     public float m_fDashSpeed = 10.0f;
+    //----------------------------------------------
+    // Dash Duration
+    //----------------------------------------------
+    [LabelOverride("Dash Duration")]
+    [Tooltip("The duration of the dash.")]
     public float m_fDashDuration = 0.5f;
+    //----------------------------------------------
+    // Player Model
+    //----------------------------------------------
+    [LabelOverride("Player Model")]
+    [Tooltip("Stores the player model")]
+    public GameObject m_goPlayerModel = null;
+
+    //-----------------------------------------------------------
+    // A float to store the current movement speed of the player.
+    //-----------------------------------------------------------
     [HideInInspector]
     public float m_fCurrentSpeed = 5.0f;
-    public GameObject m_goPlayerModel = null;
+    //-----------------------------------------------------------
+    // Stops the players being able to move.
+    //-----------------------------------------------------------
     [HideInInspector]
     public bool m_bMovementLock = false;
+    //---------------------------------------------------------
+    // Bool to check whether the left trigger has been pressed.
+    //---------------------------------------------------------
     [HideInInspector]
     public bool m_bLeftTriggerPressed = false;
-    Vector3 m_v3DashDir;
+    //--------------------------------------------------------------
+    // A Vector3 to store the current movement position of the player.
+    //--------------------------------------------------------------
     [HideInInspector]
     public Vector3 m_v3MovePos;
-    Rigidbody m_rb;
-    float m_axisX;
-    float m_axisY;
+    //-----------------------------------------
+    // Vector3 to hold the Xbox dash direction.
+    //-----------------------------------------
     [HideInInspector]
     public Vector3 m_v3XboxDashDir;
-    public float m_fSetToHealth = 0.3f;
+    //----------------------------
+    // A float to store the axis X
+    //----------------------------
+    private float m_axisX;
+    //----------------------------
+    // A float to store the axis Y
+    //----------------------------
+    private float m_axisY;
+    //-----------------------------------------------------------
+    // RIGIDBODY
+    //-----------------------------------------------------------
+    private Rigidbody m_rb;
+    //------------------------------------------------------
+    // Vector3 to store the direction of the player to dash.
+    //------------------------------------------------------
+    private Vector3 m_v3DashDir;
 
     //-----------------------
     // Shooting / Snowball
