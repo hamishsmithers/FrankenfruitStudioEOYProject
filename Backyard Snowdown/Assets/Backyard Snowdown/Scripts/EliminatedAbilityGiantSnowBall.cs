@@ -7,10 +7,21 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class EliminatedAbilityGiantSnowBall : MonoBehaviour
 {
+    //---------------
+    // Giant Snowball
+    //---------------
+    [LabelOverride("Giant Snowball")]
+    [Tooltip("A GameObject to store the Giant Snowball.")]
     public GameObject m_goGiantSnowBall = null;
 
-    GameObject m_goCopy = null;
-    GameObject m_goPlayerReticle;
+    //--------------
+    // Snowball Copy
+    //--------------
+    private GameObject m_goCopy = null;
+    //---------------
+    // Player Reticle
+    //---------------
+    private GameObject m_goPlayerReticle;
 
     // Use this for initialization
     void Start()

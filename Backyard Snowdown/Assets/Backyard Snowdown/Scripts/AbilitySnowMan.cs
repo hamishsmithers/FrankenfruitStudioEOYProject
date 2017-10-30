@@ -10,10 +10,22 @@ public class AbilitySnowMan : MonoBehaviour
     //-----------------
     // Ability SnowMan
     //-----------------
+    //-------------------
+    // Snowman GameObject
+    //-------------------
+    [LabelOverride("Snowman")]
+    [Tooltip("A GameObject that stores the snowman.")]
     public GameObject m_SnowMan = null;
+    //-------------
+    // Snowman Copy
+    //-------------
     [HideInInspector]
     public GameObject m_Copy;
-
+    //---------------------
+    // Snowman Before Spawn
+    //---------------------
+    [LabelOverride("Snowman Before Spawn")]
+    [Tooltip("")]
     public float m_fSnowManBeforeSpawn = 0.3f;
     //private float m_fSnowManBeforeSpawnTimer = 0.0f;
     public float m_fSnowManAfterSpawn = 0.3f;

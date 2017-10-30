@@ -19,7 +19,7 @@ public class Menu : MonoBehaviour
     //----------------------------------------------
     // A bool to check whether esc has been pressed.
     //----------------------------------------------
-    bool m_bEscapeToggle = false;
+    private bool m_bEscapeToggle = false;
 
     //----------------------------
     // Use this for initialization

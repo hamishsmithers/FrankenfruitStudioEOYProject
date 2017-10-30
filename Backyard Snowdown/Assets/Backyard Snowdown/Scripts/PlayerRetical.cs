@@ -18,10 +18,10 @@ public class PlayerRetical : MonoBehaviour
     //public GameObject BotLeft = null;
     //public GameObject BotRight = null;
 
-    GameObject m_TL;
-    GameObject m_TR;
-    GameObject m_BL;
-    GameObject m_BR;
+    private GameObject m_TL;
+    private GameObject m_TR;
+    private GameObject m_BL;
+    private GameObject m_BR;
 
 
     // Use this for initialization

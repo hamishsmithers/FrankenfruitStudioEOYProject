@@ -8,6 +8,11 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 public class SnowMan : MonoBehaviour
 {
     // Counts how many times it's been hit
+    //------------------
+    // Snowman Hit Count
+    //------------------
+    [LabelOverride("Snowman Hit Count")]
+    [Tooltip("Stores how many times a snowman has been hit.")]
     public int m_nSnowManHitCount = 2;
     [HideInInspector]
     public GameObject m_GoPlayer = null;

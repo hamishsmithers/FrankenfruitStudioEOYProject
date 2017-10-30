@@ -30,7 +30,17 @@ public class Global : MonoBehaviour
     [LabelOverride("Snowball")]
     [Tooltip("Stores the Snowball GameObject.")]
     public GameObject m_goSnowball = null;
+    //--------------------
+    // Snowball Location 1
+    //--------------------
+    [LabelOverride("Snowball Location 1")]
+    [Tooltip("Stores the Snowball Location 1 GameObject.")]
     public GameObject m_SnowballLoc1 = null;
+    //--------------------
+    // Snowball Location 2
+    //--------------------
+    [LabelOverride("Snowball Location 2")]
+    [Tooltip("Stores the Snowball Location 2 GameObject.")]
     public GameObject m_SnowballLoc2 = null;
 
 

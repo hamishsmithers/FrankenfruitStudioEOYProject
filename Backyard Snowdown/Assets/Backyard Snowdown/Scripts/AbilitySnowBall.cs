@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class AbilitySnowBall : MonoBehaviour
 {
+    //--------------
+    // Slow duration
+    //--------------
+    [LabelOverride("Slow Duration")]
+    [Tooltip("A float representing the duration of the slow in seconds.")]
     public float m_fSlowDuration = 1.0f;
+
     private float m_fSlowCount = 0.0f;
 
     // Use this for initialization

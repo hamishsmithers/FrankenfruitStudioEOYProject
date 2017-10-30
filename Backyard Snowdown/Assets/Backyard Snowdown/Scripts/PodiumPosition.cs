@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class PodiumPosition : MonoBehaviour {
 
+    //--------------
+    // Players Array
+    //--------------
+    [Tooltip("This list is filled with the character prefabs in the order of Elements: 0.TeddyBear 1.Supergirl 2.WinterClothes 3.HelicopterHat.")]
     public GameObject[] m_ArrPlayers;
+    //-------------
+    // Podium Array
+    //-------------
+    [Tooltip("This list is filled with the SpawnBox GameObjects in the order of Elements: 0.SpawnBox04 1.SpawnBox03 2.SpawnBox02 3.SpawnBox01.")]
     public GameObject[] m_ArrPodium;
 
     // Use this for initialization

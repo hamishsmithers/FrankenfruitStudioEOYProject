@@ -89,11 +89,63 @@ public class Player : MonoBehaviour
     //-----------------------
     // Shooting / Snowball
     //-----------------------
+    //----------
+    // Snowball
+    //----------
+    [LabelOverride("Snowball")]
+    [Tooltip("Stores the Snowball GameObject.")]
     public GameObject m_goSnowball = null;
+    //--------------
+    // Player Circle
+    //--------------
+    [LabelOverride("Player Circle")]
+    [Tooltip("A GameObject that stores the player circle.")]
     public GameObject m_goPlayerCircle = null;
+    //------------------------
+    // Character Ring Material
+    //------------------------
+    [LabelOverride("Character Ring Material")]
+    [Tooltip("A material that stores the character ring material.")]
     public Material m_matCharacterRing = null;
+    //--------------------
+    // Character Ring Full
+    //--------------------
+    [LabelOverride("Full Character Ring Material")]
+    [Tooltip("A material that stores the full character ring material.")]
     public Material m_matCharacterRingFull = null;
+    //---------------
+    // Snowball Speed
+    //---------------
+    [LabelOverride("Snowball Speed")]
+    [Tooltip("A float that stores the snowball's shoot speed.")]
     public float m_fSnowballSpeed = 1750.0f;
+    //-----------
+    // Max Charge
+    //-----------
+    [LabelOverride("Max Charge")]
+    [Tooltip("A float that stores the maximum charge length in seconds.")]
+    public float m_fMaxCharge = 2.0f;
+    //----------
+    // Min Power
+    //----------
+    [LabelOverride("Min Power")]
+    [Tooltip("A float that stores the minimum power of a shot at lowest charge.")]
+    public float m_fPowerMin = 250.0f;
+    //----------
+    // Max Power
+    //----------
+    [LabelOverride("Max Power")]
+    [Tooltip("A float that stores the maximum power of a shot at full charge.")]
+    public float m_fPowerMax = 1750.0f;
+    //-----------
+    // Slow Speed
+    //-----------
+    [LabelOverride("Slow Speed")]
+    [Tooltip("A float that represents how much slower the player is while charging up a shot.")]
+    public float m_fSlowSpeed = 2.5f;
+
+
+
     // xbox max scale of trigger when pressed down
     private const float m_MaxTriggerHeight = 1.21f;
     private bool m_bHasBall = false;
@@ -101,11 +153,8 @@ public class Player : MonoBehaviour
     //private bool m_bWasHit = false;
     // charge power throw
     private bool m_bThrow = false;
-    public float m_fMaxCharge = 2.0f;
     private float m_fChargeModifier = 0.0f;
     private float m_fChargeTimer = 0.0f;
-    public float m_fPowerMin = 250.0f;
-    public float m_fPowerMax = 1750.0f;
     private float m_fPowerRange = 0.0f;
     private bool m_bCharging = false;
     private bool m_bGo = false;
@@ -113,7 +162,6 @@ public class Player : MonoBehaviour
     private float m_fIsChargedTimerLimit = 2.0f;
     private bool bChargedLimitReached = false;
     private bool bDuringMaxCharge = false;
-    public float m_fSlowSpeed = 2.5f;
     // xbox controller trigger release
     private bool m_bHolding = false;
     private bool m_bReleased = false;
@@ -121,12 +169,33 @@ public class Player : MonoBehaviour
     //--------
     // Health
     //--------
+    //---------------
+    // Health UI Text
+    //---------------
+    [LabelOverride("UI Health Text")]
+    [Tooltip("This stores the UI text of the player's health.")]
     public Text m_txtHealth;
+    //-------------
+    // Spawn Health
+    //-------------
+    [LabelOverride("Spawn Health")]
+    [Tooltip("An int that is how much health the players spawn with.")]
     public int m_nSpawnHealth = 20;
+    //---------------
+    // Current Health
+    //---------------
+    [LabelOverride("Current Health")]
+    [Tooltip("An int that represents how much health the player currently has.")]
     public int m_nCurrentHealth;
+    //----------
+    // Stun Time
+    //----------
+    [LabelOverride("Stun Time On Hit")]
+    [Tooltip("This allocates how long the stun is when the players get hit by the snowball.")]
+    public float m_fStun = 0.2f;
+
     [HideInInspector]
     public bool m_bAlive = true;
-    public float m_fStun = 0.2f;
     private float m_fStunTimer = 0.0f;
 
     //---------------
@@ -151,6 +220,11 @@ public class Player : MonoBehaviour
     //----------------
     // Player Reticle
     //----------------
+    //---------------
+    // Player Reticle
+    //---------------
+    [LabelOverride("Player Reticle")]
+    [Tooltip("This stores the GameObject of the player reticle.")]
     public GameObject m_goPlayerReticle = null;
 
     [HideInInspector]

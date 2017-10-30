@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class GiantSnowBall : MonoBehaviour
 {
+    //----------------
+    // Knockback Force
+    //----------------
+    [LabelOverride("Knockback Force")]
+    [Tooltip("The force that is applied to knockback when hit by giant snowball.")]
     public float m_fKnockbackForce = 10.0f;
+    //---------------
+    // Area Of Effect
+    //---------------
+    [LabelOverride("Area of Effect")]
+    [Tooltip("A float to change the area effect of the giant snowball.")]
     public float m_fAreaOfEffect = 3.0f;
+
     // Use this for initialization
     void Start()
     {

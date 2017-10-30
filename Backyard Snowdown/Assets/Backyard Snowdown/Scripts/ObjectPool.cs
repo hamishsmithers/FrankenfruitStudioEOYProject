@@ -6,7 +6,17 @@ public class ObjectPool : MonoBehaviour
 {
     public static ObjectPool m_SharedInstance;
     private List<GameObject> m_lstPooledObjects;
+    //---------------
+    // Object to Pool
+    //---------------
+    [LabelOverride("Object To Pool")]
+    [Tooltip("This stores the object that will be used by the object pool.")]
     public GameObject m_goObjectToPool;
+    //---------------
+    // Amount to Pool
+    //---------------
+    [LabelOverride("Amount to Pool")]
+    [Tooltip("An int to choose how many object you want in the pool.")]
     public int m_nAmountToPool;
 
 
