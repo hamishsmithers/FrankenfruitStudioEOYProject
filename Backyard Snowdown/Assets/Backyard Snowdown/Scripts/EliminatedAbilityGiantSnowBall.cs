@@ -10,7 +10,6 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
     public GameObject m_goGiantSnowBall = null;
 
     GameObject m_goCopy = null;
-    GiantSnowBall m_scpGiantSnowBall;
     GameObject m_goPlayerReticle;
 
     // Use this for initialization
@@ -18,7 +17,6 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
     {
         m_goCopy = Instantiate(m_goGiantSnowBall);
         m_goCopy.SetActive(false);
-        m_scpGiantSnowBall = m_goCopy.GetComponent<GiantSnowBall>();
     }
 
     // Update is called once per frame

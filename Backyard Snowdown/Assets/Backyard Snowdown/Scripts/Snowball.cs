@@ -11,8 +11,6 @@ public class Snowball : MonoBehaviour
     public Material[] m_materials;
     private Renderer m_rend;
 
-    private bool m_bOnce = true;
-
     //-------
     // Score
     //-------

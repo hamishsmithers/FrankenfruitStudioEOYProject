@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
     private const float m_MaxTriggerHeight = 1.21f;
     private bool m_bHasBall = false;
     [HideInInspector]
-    private bool m_bWasHit = false;
+    //private bool m_bWasHit = false;
     // charge power throw
     private bool m_bThrow = false;
     public float m_fMaxCharge = 2.0f;
@@ -139,10 +139,7 @@ public class Player : MonoBehaviour
     //--------------
     // Player Death
     //--------------
-    private Collider m_colPlayer = null;
     private MeshRenderer m_mrCharacterMesh = null;
-    private MeshRenderer m_mrPlayerCircle = null;
-    private MeshRenderer m_mrWeapon = null;
 
     //----------------
     // Giant SnowBall
@@ -161,14 +158,13 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public PlayerRetical m_scpPlayerReticle;
 
+
     //--------------------------------------------------------
     // Use this for initialization
     //--------------------------------------------------------
     void Start()
     {
         m_mrCharacterMesh = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
-        m_mrPlayerCircle = gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
-        m_mrWeapon = gameObject.transform.GetChild(2).GetComponent<MeshRenderer>();
 
         m_goPlayerReticleCopy = Instantiate(m_goPlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
         m_goPlayerReticleCopy.GetComponent<PlayerRetical>().m_player = gameObject;
@@ -243,6 +239,11 @@ public class Player : MonoBehaviour
             Aiming();
 
             scpDash.DoDash();
+
+            if(scpDash.m_bDashing && m_bHasBall)
+                gameObject.layer = LayerMask.NameToLayer("PlayerDash");
+            else
+                gameObject.layer = LayerMask.NameToLayer("Player");
 
             Shoot();
 
@@ -652,7 +653,7 @@ public class Player : MonoBehaviour
 
                     //Drop ball
                     m_bHasBall = false;
-                    m_bWasHit = true;
+                    //m_bWasHit = true;
                     GameObject copy = Instantiate(m_goSnowball);
                     copy.transform.position = transform.position + transform.right;
                 }
@@ -673,10 +674,10 @@ public class Player : MonoBehaviour
             }
             else // Ball is moving slow
             {
-                if (scpDash.m_bDashing)
-                {
-                    Physics.IgnoreCollision(col.collider, GetComponent<Collider>(), true);
-                }
+                //if (scpDash.m_bDashing)
+                //{
+                //    Physics.IgnoreCollision(col.collider, GetComponent<Collider>(), true);
+                //}
 
                 if (!m_bHasBall)
                 {

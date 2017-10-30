@@ -24,17 +24,19 @@ public class Global : MonoBehaviour
     [Tooltip("This is the first button that will be selected when the pause menu pops up.")]
     public GameObject m_btnFirstButton = null;
 
-    //---------------------
-    // Snowball GameObject.
-    //---------------------
+    //----------
+    // Snowball
+    //----------
     [LabelOverride("Snowball")]
     [Tooltip("Stores the Snowball GameObject.")]
     public GameObject m_goSnowball = null;
+    public GameObject m_SnowballLoc1 = null;
+    public GameObject m_SnowballLoc2 = null;
+
 
     //-------------------------------
     // 
     //-------------------------------
-    private bool bOnce = true;
 
     //static string strControl;
 
@@ -52,6 +54,12 @@ public class Global : MonoBehaviour
         //set the menu canvas to hidden
         if (m_goPauseCanvas)
             m_goPauseCanvas.SetActive(false);
+
+        GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+        goSnowball.transform.position = m_SnowballLoc1.transform.position;
+        goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+        goSnowball.transform.position = m_SnowballLoc2.transform.position;
+
 
         //GameObject goEventSystem = GameObject.Find("EventSystem");
         //Event scpevntsys = goEventSystem.GetComponent<Event>();

@@ -15,9 +15,9 @@ public class AbilitySnowMan : MonoBehaviour
     public GameObject m_Copy;
 
     public float m_fSnowManBeforeSpawn = 0.3f;
-    private float m_fSnowManBeforeSpawnTimer = 0.0f;
+    //private float m_fSnowManBeforeSpawnTimer = 0.0f;
     public float m_fSnowManAfterSpawn = 0.3f;
-    private float m_fSnowManAfterSpawnTimer = 0.0f;
+    //private float m_fSnowManAfterSpawnTimer = 0.0f;
     private bool m_bCreateSnowManBefore = false;
     private bool m_bCreateSnowManAfter = false;
     [HideInInspector]

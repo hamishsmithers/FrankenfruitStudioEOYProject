@@ -32,7 +32,7 @@ public class GiantSnowBall : MonoBehaviour
     {
         Vector3 hit = transform.position; //ignore these numbers, get position from collision impact
 
-        int playerLayer = 1 << LayerMask.NameToLayer("Player");
+        int playerLayer = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("PlayerDash");
         Collider[] players = Physics.OverlapSphere(hit, m_fAreaOfEffect, playerLayer);
 
         for (int i = 0; i < players.Length; ++i)

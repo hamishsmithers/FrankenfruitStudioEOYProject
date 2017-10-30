@@ -23,9 +23,6 @@ public class AbilitySnowBall : MonoBehaviour
     {
         if (col.gameObject.tag == "Character")
         {
-            
-            //Make character slow for a public variable
-            Player p = col.gameObject.GetComponent<Player>();
             // create a slow function in player and do p.slow
             if (m_fSlowDuration > m_fSlowCount)
             {
