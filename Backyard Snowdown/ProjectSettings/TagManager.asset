@@ -12,6 +12,7 @@ TagManager:
   - Spawnbox
   - Projectiles
   - Snowball
+  - SeekWallPoint
   layers:
   - Default
   - TransparentFX

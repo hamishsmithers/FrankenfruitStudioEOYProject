@@ -616,6 +616,9 @@ public class Player : MonoBehaviour
 
             m_bAlive = false;
 
+            gameObject.AddComponent<PlayerAI>();
+
+
             //ScoreManager scpScoreManager = gameObject.GetComponent<ScoreManager>();
 
             ScoreManager.PlayerFinish(((int)controller) - 1);
