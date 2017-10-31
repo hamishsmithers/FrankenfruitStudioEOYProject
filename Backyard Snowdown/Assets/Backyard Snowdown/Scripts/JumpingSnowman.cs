@@ -88,7 +88,6 @@ public class JumpingSnowman : MonoBehaviour
 
             m_xLoc = Random.Range(m_TL.transform.position.x, m_TR.transform.position.x);
             m_zLoc = Random.Range(m_TL.transform.position.z, m_BL.transform.position.z);
-            m_v3Pos.Set(m_xLoc, 1.1f, m_zLoc);
         }
 
         if (m_fJumpCounter <= m_fTimeBetweenJumps && m_bCanJump)
