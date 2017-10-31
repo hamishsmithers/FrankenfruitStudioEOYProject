@@ -195,7 +195,6 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public bool m_bAlive = true;
-    private float m_fStunTimer = 0.0f;
 
     //---------------
     // Player Damage
@@ -690,8 +689,6 @@ public class Player : MonoBehaviour
                 else if (!scpDash.m_bDashing && !m_bHasBall)
                 {
                     TakeDamage();
-
-                    m_fStunTimer = m_fStun;
                 }
             }
             else // Ball is moving slow

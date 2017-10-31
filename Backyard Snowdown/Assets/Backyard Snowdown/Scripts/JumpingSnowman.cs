@@ -31,11 +31,15 @@ public class JumpingSnowman : MonoBehaviour
     private GameObject m_BL;
     private GameObject m_BR;
 
-    private Vector3 m_v3SpawnPos;
+    private Vector3 m_v3Pos;
     private float m_xLoc = 0.0f;
-    private float m_yLoc = 0.0f;
-    
-    
+    private float m_zLoc = 0.0f;
+
+    private float m_fJumpCounter = 0.0f;
+    public float m_fTimeBetweenJumps = 2.0f;
+    private bool m_bCanJump = false;
+
+
     // Use this for initialization
     void Awake()
     {
@@ -61,24 +65,46 @@ public class JumpingSnowman : MonoBehaviour
         m_fSpawnTime = Random.Range(m_fMin, m_fMax);
 
         m_xLoc = Random.Range(m_TL.transform.position.x, m_TR.transform.position.x);
-        m_yLoc = Random.Range(m_TL.transform.position.y, m_BL.transform.position.y);
+        m_zLoc = Random.Range(m_TL.transform.position.z, m_BL.transform.position.z);
 
-        m_v3SpawnPos.Set(m_xLoc, 1.0f, m_yLoc);
+        m_v3Pos.Set(m_xLoc, 1.1f, m_zLoc);
+        Debug.Log(m_fSpawnTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(m_fSpawnTime);
+
         if (m_fSpawnCount <= m_fSpawnTime)
         {
             m_fSpawnCount += Time.deltaTime;
         }
         else if (m_fSpawnCount > m_fSpawnTime)
         {
-            gameObject.transform.position = m_v3SpawnPos;
+            transform.position = m_v3Pos;
             c.enabled = true;
             mr.enabled = true;
+            m_bCanJump = true;
+
+            m_xLoc = Random.Range(m_TL.transform.position.x, m_TR.transform.position.x);
+            m_zLoc = Random.Range(m_TL.transform.position.z, m_BL.transform.position.z);
+            m_v3Pos.Set(m_xLoc, 1.1f, m_zLoc);
         }
+
+        if (m_fJumpCounter <= m_fTimeBetweenJumps && m_bCanJump)
+        {
+            m_fJumpCounter += Time.deltaTime;
+        }
+        else if (m_fJumpCounter > m_fTimeBetweenJumps)
+        {
+            transform.position = m_v3Pos;
+
+            m_xLoc = Random.Range(m_TL.transform.position.x, m_TR.transform.position.x);
+            m_zLoc = Random.Range(m_TL.transform.position.z, m_BL.transform.position.z);
+            m_v3Pos.Set(m_xLoc, 1.1f, m_zLoc);
+
+            m_fJumpCounter = 0.0f;
+        }
+
     }
 }
