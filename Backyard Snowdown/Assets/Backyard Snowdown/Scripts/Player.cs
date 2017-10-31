@@ -80,7 +80,8 @@ public class Player : MonoBehaviour
     //-----------------------------------------------------------
     // RIGIDBODY
     //-----------------------------------------------------------
-    private Rigidbody m_rb;
+    [HideInInspector]
+    public Rigidbody m_rb;
     //------------------------------------------------------
     // Vector3 to store the direction of the player to dash.
     //------------------------------------------------------
@@ -143,8 +144,6 @@ public class Player : MonoBehaviour
     [LabelOverride("Slow Speed")]
     [Tooltip("A float that represents how much slower the player is while charging up a shot.")]
     public float m_fSlowSpeed = 2.5f;
-
-
 
     // xbox max scale of trigger when pressed down
     private const float m_MaxTriggerHeight = 1.21f;
@@ -245,36 +244,6 @@ public class Player : MonoBehaviour
         m_goPlayerReticleCopy.GetComponent<PlayerRetical>().m_player = gameObject;
         m_scpPlayerReticle = m_goPlayerReticleCopy.GetComponent<PlayerRetical>();
         m_goPlayerReticleCopy.SetActive(false);
-
-        //switch (controller)
-        //{
-        //    case XboxController.First:
-        //        mainColor = new Color32(66, 159, 68, 255);
-        //        mrCharacterMesh.material.color = mainColor;
-        //        mrColor.material.color = mainColor;
-        //        break;
-
-        //    case XboxController.Second:
-        //        mainColor = new Color32(5, 144, 213, 255);
-        //        mrCharacterMesh.material.color = mainColor;
-        //        mrColor.material.color = mainColor;
-        //        break;
-
-        //    case XboxController.Third:
-        //        mainColor = new Color32(83, 12, 101, 255);
-        //        mrCharacterMesh.material.color = mainColor;
-        //        mrColor.material.color = mainColor;
-        //        break;
-
-        //    case XboxController.Fourth:
-        //        mainColor = new Color32(225, 130, 44, 255);
-        //        mrCharacterMesh.material.color = mainColor;
-        //        mrColor.material.color = mainColor;
-        //        break;
-
-        //    default:
-        //        break;
-        //}
 
         //Xbox Stick Axis'
         m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
@@ -420,7 +389,8 @@ public class Player : MonoBehaviour
                 m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
             }
 
-            m_rb.MovePosition(m_rb.position + m_v3MovePos);
+            m_rb.AddForce(m_v3MovePos*60, ForceMode.Impulse);
+            //m_rb.MovePosition(m_rb.position + m_v3MovePos);
         }
     }
 

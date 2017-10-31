@@ -25,15 +25,15 @@ public class PlayerRetical : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         if (SceneManager.GetActiveScene().buildIndex != 2)
         {
             //rb = GetComponent<Rigidbody>();
-            m_TL = GameObject.Find("Reticle Bounds Top Left");
             m_TR = GameObject.Find("Reticle Bounds Top Right");
-            m_BL = GameObject.Find("Reticle Bounds Bottom Left");
+            m_TL = GameObject.Find("Reticle Bounds Top Left");
             m_BR = GameObject.Find("Reticle Bounds Bottom Right");
+            m_BL = GameObject.Find("Reticle Bounds Bottom Left");
         }
     }
 
@@ -116,8 +116,9 @@ public class PlayerRetical : MonoBehaviour
                 //Vector3 bottomLeft = Camera.main.transform.TransformVector(frustumCorners[0]) + Camera.main.transform.position;
 
                 // Bot Left
-                if (newvec.x < m_BL.transform.position.x)
-                    newvec.x = m_BL.transform.position.x;
+                //if (newvec.x < m_BL.transform.position.x)
+                //    newvec.x = m_BL.transform.position.x;
+                
 
                 if (newvec.z < m_BL.transform.position.z)
                     newvec.z = m_BL.transform.position.z;

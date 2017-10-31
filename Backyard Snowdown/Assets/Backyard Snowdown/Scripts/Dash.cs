@@ -60,7 +60,7 @@ public class Dash : MonoBehaviour
 
     public void DoDash()
     {
-        if(m_bStartTimer && m_fCoolDownTimer <= m_fCoolDown)
+        if (m_bStartTimer && m_fCoolDownTimer <= m_fCoolDown)
         {
             m_fCoolDownTimer += Time.deltaTime;
             m_bCoolDown = true;
@@ -89,10 +89,11 @@ public class Dash : MonoBehaviour
                     m_bDashing = true;
                     //if (m_bDashing)
                     //{
-                        transform.position += m_v3DashDir * m_fDashSpeed * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
-                        m_fDashTimer += Time.deltaTime;
-                        scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", true);
-                        
+                    scpPlayer.m_rb.AddForce(m_v3DashDir * m_fDashSpeed * scpPlayer.m_fCurrentSpeed, ForceMode.Impulse);
+                    //transform.position += m_v3DashDir * m_fDashSpeed * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
+                    m_fDashTimer += Time.deltaTime;
+                    scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", true);
+
                     //}
                 }
                 else
