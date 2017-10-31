@@ -87,14 +87,10 @@ public class Dash : MonoBehaviour
                 if (m_fDashDuration > m_fDashTimer)
                 {
                     m_bDashing = true;
-                    //if (m_bDashing)
-                    //{
                     scpPlayer.m_rb.AddForce(m_v3DashDir * m_fDashSpeed * scpPlayer.m_fCurrentSpeed, ForceMode.Impulse);
                     //transform.position += m_v3DashDir * m_fDashSpeed * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
                     m_fDashTimer += Time.deltaTime;
                     scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", true);
-
-                    //}
                 }
                 else
                 {

@@ -362,36 +362,36 @@ public class Player : MonoBehaviour
         v3Pos.x = transform.position.x;
         v3Pos.z = transform.position.z;
 
-        if (!m_bMovementLock)
-        {
-            if (m_bCharging)
-                m_fCurrentSpeed = m_fSlowSpeed;
-            else
-                m_fCurrentSpeed = m_fMaxSpeed;
+		if (!m_bMovementLock) {
+			if (m_bCharging)
+				m_fCurrentSpeed = m_fSlowSpeed;
+			else
+				m_fCurrentSpeed = m_fMaxSpeed;
 
-            // Up and down movement
-            m_v3MovePos = Vector3.zero;
+			// Up and down movement
+			m_v3MovePos = Vector3.zero;
 
-            m_v3MovePos += v3VerticalAxis * Time.deltaTime * m_fCurrentSpeed;
+			m_v3MovePos += v3VerticalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-            if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
-            {
-                m_v3MovePos.Normalize();
-                m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
-            }
+			if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime) {
+				m_v3MovePos.Normalize ();
+				m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
+			}
 
-            // Left and right movement
-            m_v3MovePos += v3HorizontalAxis * Time.deltaTime * m_fCurrentSpeed;
+			// Left and right movement
+			m_v3MovePos += v3HorizontalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-            if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
-            {
-                m_v3MovePos.Normalize();
-                m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
-            }
+			if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime) {
+				m_v3MovePos.Normalize ();
+				m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
+			}
 
-            m_rb.AddForce(m_v3MovePos*60, ForceMode.Impulse);
-            //m_rb.MovePosition(m_rb.position + m_v3MovePos);
-        }
+			m_rb.AddForce (m_v3MovePos * 60, ForceMode.Impulse);
+			//m_rb.MovePosition(m_rb.position + m_v3MovePos);
+		} else
+		{
+			Debug.Log ("MOVEMENT IS LOCKED");
+		}
     }
 
     //--------------------------------------------------------
@@ -649,17 +649,6 @@ public class Player : MonoBehaviour
             {
                 Physics.IgnoreCollision(arrSnowballs[i].gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>(), false);
             }
-        }
-
-        if (m_fStunTimer > 0.0f)
-        {
-            m_fStunTimer -= Time.deltaTime;
-            m_bMovementLock = true;
-        }
-        else
-        {
-            m_fStunTimer = 0.0f;
-            m_bMovementLock = false;
         }
     }
 
