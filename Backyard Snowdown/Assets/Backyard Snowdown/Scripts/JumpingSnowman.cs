@@ -110,10 +110,11 @@ public class JumpingSnowman : MonoBehaviour
             c.enabled = true;
             mr.enabled = true;
             m_bCanJump = true;
-<<<<<<< .mine=======
+//<<<<<<< .mine=======
             m_xLoc = Random.Range(m_TL.transform.position.x, m_TR.transform.position.x);
             m_zLoc = Random.Range(m_TL.transform.position.z, m_BL.transform.position.z);
->>>>>>> .theirs        }
+//>>>>>>> .theirs        
+		}
 
         // Between Jumps
         if (m_fJumpCounter <= m_fTimeUntilNextJump && m_bCanJump && !m_bJumping)
