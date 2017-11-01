@@ -535,6 +535,8 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        else
+            m_fChargeTimer = 0.0f;
     }
 
     private void ResetChargeThrow()
