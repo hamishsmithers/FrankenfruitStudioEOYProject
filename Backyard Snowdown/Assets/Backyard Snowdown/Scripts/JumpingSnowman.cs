@@ -7,18 +7,25 @@ using UnityEngine.SceneManagement;
 public class JumpingSnowman : MonoBehaviour
 {
     //----------------------
-    // 
+    // Min spawn time
     //----------------------
-    [LabelOverride("tet")]
-    [Tooltip("tet")]
+    [LabelOverride("Min Spawn Time")]
+    [Tooltip("Minimum wait time between next spawn")]
     public float m_fMin = 20.0f;
 
     //----------------------
-    // 
+    // Max spawn time
     //----------------------
-    [LabelOverride("tet")]
-    [Tooltip("tet")]
+    [LabelOverride("Max Spawn Time")]
+    [Tooltip("Maximum wait time between next spawn")]
     public float m_fMax = 30.0f;
+
+    //----------------------
+    // Time between jumps
+    //----------------------
+    [LabelOverride("Time Between Jumps")]
+    [Tooltip("(Seconds) The time between the snowman's next jump.")]
+    public float m_fTimeBetweenJumps = 2.0f;
 
     private float m_fSpawnTime = 0.0f;
     private float m_fSpawnCount = 0.0f;
@@ -36,7 +43,6 @@ public class JumpingSnowman : MonoBehaviour
     private float m_zLoc = 0.0f;
 
     private float m_fJumpCounter = 0.0f;
-    public float m_fTimeBetweenJumps = 2.0f;
     private bool m_bCanJump = false;
 
 

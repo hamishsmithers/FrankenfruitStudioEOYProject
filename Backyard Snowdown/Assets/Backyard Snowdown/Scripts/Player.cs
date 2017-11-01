@@ -145,15 +145,17 @@ public class Player : MonoBehaviour
     [Tooltip("A float that represents how much slower the player is while charging up a shot.")]
     public float m_fSlowSpeed = 2.5f;
 
+    [HideInInspector]
+    public bool m_bHasBall = false;
+
     // xbox max scale of trigger when pressed down
     private const float m_MaxTriggerHeight = 1.21f;
-    private bool m_bHasBall = false;
-    [HideInInspector]
     //private bool m_bWasHit = false;
     // charge power throw
     private bool m_bThrow = false;
     private float m_fChargeModifier = 0.0f;
-    private float m_fChargeTimer = 0.0f;
+    [HideInInspector]
+    public float m_fChargeTimer = 0.0f;
     private float m_fPowerRange = 0.0f;
     private bool m_bCharging = false;
     private bool m_bGo = false;
@@ -271,6 +273,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void Update()
     {
+        
         Dash scpDash = gameObject.GetComponent<Dash>();
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
         EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
@@ -464,12 +467,14 @@ public class Player : MonoBehaviour
         m_bGo = ((Input.GetKeyUp(KeyCode.Mouse0) && controller == XboxController.First) || m_bReleased);
 
         Dash scpDash = gameObject.GetComponent<Dash>();
+        ChargeSlider scpSlider = gameObject.GetComponent<ChargeSlider>();
 
         if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bGo || bDuringMaxCharge)
         {
             if (m_fChargeTimer < m_fMaxCharge)
             {
                 m_fChargeTimer += Time.deltaTime;
+                //scpSlider.m_sliChargeSlider.value = m_fChargeTimer;
                 m_bCharging = true;
             }
             else if (m_fChargeTimer >= m_fMaxCharge)
