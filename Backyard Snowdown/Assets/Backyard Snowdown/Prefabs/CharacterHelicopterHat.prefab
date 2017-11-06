@@ -638,11 +638,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1907ce3dbb02f064fb0098a389f2647c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_imgBackground: {fileID: 0}
-  m_imgForeground: {fileID: 0}
+  m_imgBackground: {fileID: 114655605294244818}
+  m_imgForeground: {fileID: 114224314640473560}
   m_fMinCharge: 0
-  m_sprFullRing: {fileID: 0}
-  m_sprEmptyRing: {fileID: 0}
+  m_sprFullRing: {fileID: 21300000, guid: 9e343adf4e6129648b4f2bc53874e4ab, type: 3}
+  m_sprEmptyRing: {fileID: 21300000, guid: cbc7d0b5544476f4092df3903d639349, type: 3}
 --- !u!114 &114961482978914760
 MonoBehaviour:
   m_ObjectHideFlags: 1

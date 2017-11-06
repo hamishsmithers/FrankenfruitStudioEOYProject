@@ -7,8 +7,92 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: Character_004_HelicopterHat_001_Propeller
+    100004: Ankle_L
+    100006: Ankle_R
+    100008: Character_004_HelicopterHat_001_Small
+    100010: Clavical_L
+    100012: Clavical_R
+    100014: Elbow_L
+    100016: Elbow_R
+    100018: FingersEnd_L
+    100020: FingersEnd_R
+    100022: FingersKnuckle_L
+    100024: FingersKnuckle_R
+    100026: FingersMiddle_L
+    100028: FingersMiddle_R
+    100030: HairEnd
+    100032: HairMiddle
+    100034: HairTop
+    100036: Head
+    100038: Hip_L
+    100040: Hip_R
+    100042: Knee_L
+    100044: Knee_R
+    100046: Neck
+    100048: Palm_L
+    100050: Palm_R
+    100052: Pelvis
+    100054: Root
+    100056: Shoulder_L
+    100058: Shoulder_R
+    100060: Spine1
+    100062: Spine2
+    100064: ThumbCentre_L
+    100066: ThumbCentre_R
+    100068: ThumbEnd_L
+    100070: ThumbEnd_R
+    100072: ThumKnuckle_L
+    100074: ThumKnuckle_R
+    100076: Toes_L
+    100078: Toes_R
+    100080: Wrist_L
+    100082: Wrist_R
+    100084: WristExtendor_L
+    100086: WristExtendor_R
     400000: //RootNode
     400002: Character_004_HelicopterHat_001_Propeller
+    400004: Ankle_L
+    400006: Ankle_R
+    400008: Character_004_HelicopterHat_001_Small
+    400010: Clavical_L
+    400012: Clavical_R
+    400014: Elbow_L
+    400016: Elbow_R
+    400018: FingersEnd_L
+    400020: FingersEnd_R
+    400022: FingersKnuckle_L
+    400024: FingersKnuckle_R
+    400026: FingersMiddle_L
+    400028: FingersMiddle_R
+    400030: HairEnd
+    400032: HairMiddle
+    400034: HairTop
+    400036: Head
+    400038: Hip_L
+    400040: Hip_R
+    400042: Knee_L
+    400044: Knee_R
+    400046: Neck
+    400048: Palm_L
+    400050: Palm_R
+    400052: Pelvis
+    400054: Root
+    400056: Shoulder_L
+    400058: Shoulder_R
+    400060: Spine1
+    400062: Spine2
+    400064: ThumbCentre_L
+    400066: ThumbCentre_R
+    400068: ThumbEnd_L
+    400070: ThumbEnd_R
+    400072: ThumKnuckle_L
+    400074: ThumKnuckle_R
+    400076: Toes_L
+    400078: Toes_R
+    400080: Wrist_L
+    400082: Wrist_R
+    400084: WristExtendor_L
+    400086: WristExtendor_R
     2300000: //RootNode
     2300002: Character_004_HelicopterHat_001_Propeller
     3300000: //RootNode
@@ -17,6 +101,8 @@ ModelImporter:
     4300002: Character_004_Helicopterhat_001_Small
     4300004: Character_004_HelicopterHat_001_Propeller
     9500000: //RootNode
+    13700000: Character_004_HelicopterHat_001_Propeller
+    13700002: Character_004_HelicopterHat_001_Small
   materials:
     importMaterials: 0
     materialName: 0
