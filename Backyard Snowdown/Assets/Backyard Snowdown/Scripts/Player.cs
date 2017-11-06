@@ -8,139 +8,132 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 public class Player : MonoBehaviour
 {
     public XboxController controller;
-
-    //----------   
-    // Movement
-    //----------
-
-    //----------------------------------------------
-    // Player's Movement Speed.
-    //----------------------------------------------
+    
+    //-------------------------
+    // Player's Movement Speed
+    //-------------------------
     [LabelOverride("Speed")]
     [Tooltip("Player's Movement Speed.")]
     public float m_fSpeed = 5.0f;
-    //----------------------------------------------
-    // Player's Max Movement Speed.
-    //----------------------------------------------
+    //-----------------------------
+    // Player's Max Movement Speed
+    //-----------------------------
     [LabelOverride("Max Speed")]
     [Tooltip("Player's maximum movement speed.")]
     public float m_fMaxSpeed = 5.0f;
-    //----------------------------------------------
+    //------------
     // Dash Speed
-    //----------------------------------------------
+    //------------
     [LabelOverride("Dash Speed")]
     [Tooltip("The speed that the player moves while dashing.")]
     public float m_fDashSpeed = 10.0f;
-    //----------------------------------------------
+    //---------------
     // Dash Duration
-    //----------------------------------------------
+    //---------------
     [LabelOverride("Dash Duration")]
     [Tooltip("The duration of the dash.")]
     public float m_fDashDuration = 0.5f;
-    //----------------------------------------------
+    //--------------
     // Player Model
-    //----------------------------------------------
+    //--------------
     [LabelOverride("Player Model")]
     [Tooltip("Stores the player model")]
     public GameObject m_goPlayerModel = null;
 
     //-----------------------------------------------------------
-    // A float to store the current movement speed of the player.
+    // A float to store the current movement speed of the player
     //-----------------------------------------------------------
     [HideInInspector]
     public float m_fCurrentSpeed = 5.0f;
-    //-----------------------------------------------------------
-    // Stops the players being able to move.
-    //-----------------------------------------------------------
+    //--------------------------------------
+    // Stops the players being able to move
+    //--------------------------------------
     [HideInInspector]
     public bool m_bMovementLock = false;
     //---------------------------------------------------------
-    // Bool to check whether the left trigger has been pressed.
+    // Bool to check whether the left trigger has been pressed
     //---------------------------------------------------------
     [HideInInspector]
     public bool m_bLeftTriggerPressed = false;
-    //--------------------------------------------------------------
-    // A Vector3 to store the current movement position of the player.
-    //--------------------------------------------------------------
+    //----------------------------------------------------------------
+    // A Vector3 to store the current movement position of the player
+    //----------------------------------------------------------------
     [HideInInspector]
     public Vector3 m_v3MovePos;
     //-----------------------------------------
-    // Vector3 to hold the Xbox dash direction.
+    // Vector3 to hold the Xbox dash direction
     //-----------------------------------------
     [HideInInspector]
     public Vector3 m_v3XboxDashDir;
-    //----------------------------
+    //-----------------------------
     // A float to store the axis X
-    //----------------------------
+    //-----------------------------
     private float m_axisX;
-    //----------------------------
+    //-----------------------------
     // A float to store the axis Y
-    //----------------------------
+    //-----------------------------
     private float m_axisY;
-    //-----------------------------------------------------------
+    //-----------
     // RIGIDBODY
-    //-----------------------------------------------------------
+    //-----------
     [HideInInspector]
     public Rigidbody m_rb;
     //------------------------------------------------------
-    // Vector3 to store the direction of the player to dash.
+    // Vector3 to store the direction of the player to dash
     //------------------------------------------------------
     private Vector3 m_v3DashDir;
-
-    //-----------------------
-    // Shooting / Snowball
-    //-----------------------
+    
     //----------
     // Snowball
     //----------
     [LabelOverride("Snowball")]
     [Tooltip("Stores the Snowball GameObject.")]
     public GameObject m_goSnowball = null;
-    //--------------
+    //---------------
     // Player Circle
-    //--------------
+    //---------------
     [LabelOverride("Player Circle")]
     [Tooltip("A GameObject that stores the player circle.")]
     public GameObject m_goPlayerCircle = null;
-    //------------------------
+    //-------------------------
     // Character Ring Material
-    //------------------------
+    //-------------------------
     [LabelOverride("Character Ring Material")]
     [Tooltip("A material that stores the character ring material.")]
     public Material m_matCharacterRing = null;
-    //--------------------
+    //---------------------
     // Character Ring Full
-    //--------------------
+    //---------------------
     [LabelOverride("Full Character Ring Material")]
     [Tooltip("A material that stores the full character ring material.")]
     public Material m_matCharacterRingFull = null;
-    //---------------
+    //----------------
     // Snowball Speed
-    //---------------
+    //----------------
     [LabelOverride("Snowball Speed")]
     [Tooltip("A float that stores the snowball's shoot speed.")]
     public float m_fSnowballSpeed = 1750.0f;
-    //-----------
+    //------------
     // Max Charge
-    //-----------
+    //------------
     [LabelOverride("Max Charge")]
     [Tooltip("A float that stores the maximum charge length in seconds.")]
     public float m_fMaxCharge = 2.0f;
-    //----------
+    //-----------
     // Min Power
-    //----------
+    //-----------
     [LabelOverride("Min Power")]
     [Tooltip("A float that stores the minimum power of a shot at lowest charge.")]
     public float m_fPowerMin = 250.0f;
-    //----------
+    //-----------
     // Max Power
-    //----------
+    //-----------
     [LabelOverride("Max Power")]
     [Tooltip("A float that stores the maximum power of a shot at full charge.")]
     public float m_fPowerMax = 1750.0f;
-    //-----------
+    //------------
     // Slow Speed
-    //-----------
+    //------------
     [LabelOverride("Slow Speed")]
     [Tooltip("A float that represents how much slower the player is while charging up a shot.")]
     public float m_fSlowSpeed = 2.5f;
@@ -150,7 +143,7 @@ public class Player : MonoBehaviour
 
     // xbox max scale of trigger when pressed down
     private const float m_MaxTriggerHeight = 1.21f;
-    //private bool m_bWasHit = false;
+    // private bool m_bWasHit = false;
     // charge power throw
     private bool m_bThrow = false;
     private float m_fChargeModifier = 0.0f;
@@ -167,27 +160,27 @@ public class Player : MonoBehaviour
     private bool m_bHolding = false;
     private bool m_bReleased = false;
 
-    //---------------
+    //----------------
     // Health UI Text
-    //---------------
+    //----------------
     [LabelOverride("UI Health Text")]
     [Tooltip("This stores the UI text of the player's health.")]
     public Text m_txtHealth;
-    //-------------
+    //--------------
     // Spawn Health
-    //-------------
+    //--------------
     [LabelOverride("Spawn Health")]
     [Tooltip("An int that is how much health the players spawn with.")]
     public int m_nSpawnHealth = 20;
-    //---------------
+    //----------------
     // Current Health
-    //---------------
+    //----------------
     [LabelOverride("Current Health")]
     [Tooltip("An int that represents how much health the player currently has.")]
     public int m_nCurrentHealth;
-    //----------
+    //-----------
     // Stun Time
-    //----------
+    //-----------
     [LabelOverride("Stun Time On Hit")]
     [Tooltip("This allocates how long the stun is when the players get hit by the snowball.")]
     public float m_fStun = 0.2f;
@@ -205,7 +198,9 @@ public class Player : MonoBehaviour
     //--------------
     // Player Death
     //--------------
-    public SkinnedMeshRenderer m_mrCharacterMesh = null;
+    [LabelOverride("The Player's Mesh")]
+    [Tooltip("This is so the code knows which mesh to turn red when hurt.")]
+    public SkinnedMeshRenderer m_smrCharacterMesh = null;
 
     //----------------
     // Giant SnowBall
@@ -218,9 +213,6 @@ public class Player : MonoBehaviour
     //----------------
     // Player Reticle
     //----------------
-    //---------------
-    // Player Reticle
-    //---------------
     [LabelOverride("Player Reticle")]
     [Tooltip("This stores the GameObject of the player reticle.")]
     public GameObject m_goPlayerReticle = null;
@@ -230,16 +222,17 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public PlayerRetical m_scpPlayerReticle;
 
-    Animator m_Anim;
+    //----------
+    // Animator
+    //----------
+    private Animator m_Anim;
 
 
-    //--------------------------------------------------------
+    //-----------------------------
     // Use this for initialization
-    //--------------------------------------------------------
+    //-----------------------------
     void Start()
     {
-        //m_mrCharacterMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-
         m_goPlayerReticleCopy = Instantiate(m_goPlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
         m_goPlayerReticleCopy.GetComponent<PlayerRetical>().m_player = gameObject;
         m_scpPlayerReticle = m_goPlayerReticleCopy.GetComponent<PlayerRetical>();
@@ -572,12 +565,12 @@ public class Player : MonoBehaviour
             if (m_DamageTimer <= 0.3f)
             {
                 // color red hurt
-                m_mrCharacterMesh.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
+                m_smrCharacterMesh.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
             }
             if (m_DamageTimer < 0.0f)
             {
                 m_tookDmg = false;
-                m_mrCharacterMesh.material.color = m_mainColor;
+                m_smrCharacterMesh.material.color = m_mainColor;
                 m_DamageTimer = 0.3f;
             }
         }

@@ -102,7 +102,6 @@ public class JumpingSnowman : MonoBehaviour
         //Before spawn, happens once
         if (m_fSpawnCount <= m_fSpawnTime && !m_bCanJump)
         {
-            Debug.Log("IMHERE");
             m_fSpawnCount += Time.deltaTime;
         }
         else if (m_fSpawnCount > m_fSpawnTime && !m_bCanJump)

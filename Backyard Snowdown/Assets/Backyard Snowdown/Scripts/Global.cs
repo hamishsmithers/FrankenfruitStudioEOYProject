@@ -65,11 +65,13 @@ public class Global : MonoBehaviour
         if (m_goPauseCanvas)
             m_goPauseCanvas.SetActive(false);
 
-        GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-        goSnowball.transform.position = m_SnowballLoc1.transform.position;
-        goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-        goSnowball.transform.position = m_SnowballLoc2.transform.position;
-
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+            goSnowball.transform.position = m_SnowballLoc1.transform.position;
+            goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+            goSnowball.transform.position = m_SnowballLoc2.transform.position;
+        }
 
         //GameObject goEventSystem = GameObject.Find("EventSystem");
         //Event scpevntsys = goEventSystem.GetComponent<Event>();
