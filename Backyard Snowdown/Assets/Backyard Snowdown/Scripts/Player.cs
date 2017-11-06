@@ -167,9 +167,6 @@ public class Player : MonoBehaviour
     private bool m_bHolding = false;
     private bool m_bReleased = false;
 
-    //--------
-    // Health
-    //--------
     //---------------
     // Health UI Text
     //---------------
@@ -208,7 +205,7 @@ public class Player : MonoBehaviour
     //--------------
     // Player Death
     //--------------
-    private MeshRenderer m_mrCharacterMesh = null;
+    public SkinnedMeshRenderer m_mrCharacterMesh = null;
 
     //----------------
     // Giant SnowBall
@@ -233,13 +230,15 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public PlayerRetical m_scpPlayerReticle;
 
+    Animator m_Anim;
+
 
     //--------------------------------------------------------
     // Use this for initialization
     //--------------------------------------------------------
     void Start()
     {
-        m_mrCharacterMesh = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
+        //m_mrCharacterMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
 
         m_goPlayerReticleCopy = Instantiate(m_goPlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
         m_goPlayerReticleCopy.GetComponent<PlayerRetical>().m_player = gameObject;
@@ -258,22 +257,23 @@ public class Player : MonoBehaviour
         //--------
         m_nCurrentHealth = m_nSpawnHealth;
         SetHealthText();
+
+        m_Anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     //--------------------------------------------------------
     // FixedUpdate is called once per frame
     //--------------------------------------------------------
-    void FixedUpdate()
-    {
+    //void FixedUpdate()
+    //{
 
-    }
+    //}
 
     //--------------------------------------------------------
     //
     //--------------------------------------------------------
     void Update()
     {
-        
         Dash scpDash = gameObject.GetComponent<Dash>();
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
         EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
@@ -334,6 +334,8 @@ public class Player : MonoBehaviour
             m_rb.velocity = Vector3.zero;
             m_rb.angularVelocity = Vector3.zero;
         }
+        //Debug.Log(m_rb.velocity.magnitude);
+        //m_Anim.SetFloat("running", m_rb.velocity.magnitude);
     }
 
     //--------------------------------------------------------
@@ -364,36 +366,38 @@ public class Player : MonoBehaviour
         v3Pos.x = transform.position.x;
         v3Pos.z = transform.position.z;
 
-		if (!m_bMovementLock) {
-			if (m_bCharging)
-				m_fCurrentSpeed = m_fSlowSpeed;
-			else
-				m_fCurrentSpeed = m_fMaxSpeed;
+        if (!m_bMovementLock)
+        {
+            if (m_bCharging)
+                m_fCurrentSpeed = m_fSlowSpeed;
+            else
+                m_fCurrentSpeed = m_fMaxSpeed;
 
-			// Up and down movement
-			m_v3MovePos = Vector3.zero;
+            // Up and down movement
+            m_v3MovePos = Vector3.zero;
 
-			m_v3MovePos += v3VerticalAxis * Time.deltaTime * m_fCurrentSpeed;
+            m_v3MovePos += v3VerticalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-			if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime) {
-				m_v3MovePos.Normalize ();
-				m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
-			}
+            if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
+            {
+                m_v3MovePos.Normalize();
+                m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
+            }
 
-			// Left and right movement
-			m_v3MovePos += v3HorizontalAxis * Time.deltaTime * m_fCurrentSpeed;
+            // Left and right movement
+            m_v3MovePos += v3HorizontalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-			if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime) {
-				m_v3MovePos.Normalize ();
-				m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
-			}
+            if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
+            {
+                m_v3MovePos.Normalize();
+                m_v3MovePos *= m_fMaxSpeed * Time.deltaTime;
+            }
 
-			m_rb.AddForce (m_v3MovePos * 60, ForceMode.Impulse);
-			//m_rb.MovePosition(m_rb.position + m_v3MovePos);
-		} else
-		{
-			Debug.Log ("MOVEMENT IS LOCKED");
-		}
+            m_rb.AddForce(m_v3MovePos * 60, ForceMode.Impulse);
+            //m_rb.MovePosition(m_rb.position + m_v3MovePos);
+        }
+
+        m_Anim.SetFloat("running", m_v3MovePos.magnitude);
     }
 
     //--------------------------------------------------------
@@ -448,6 +452,9 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Shoot()
     {
+        // if not throwing set animation to false
+        m_Anim.SetBool("throwing", false);
+
         // calculate the range of power to do the math on the charge power throw.
         m_fPowerRange = m_fPowerMax - m_fPowerMin;
 
@@ -507,6 +514,7 @@ public class Player : MonoBehaviour
             {
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
+                m_Anim.SetBool("throwing", true);
 
                 RaycastHit hit;
                 if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
@@ -524,7 +532,6 @@ public class Player : MonoBehaviour
                 else
                 {
                     GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-
                     copy.transform.position = transform.position + transform.forward * 1;
                     Rigidbody rb = copy.GetComponent<Rigidbody>();
                     rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
@@ -550,7 +557,7 @@ public class Player : MonoBehaviour
         m_fIsChargedTimer = 0.0f;
         bChargedLimitReached = false;
     }
-    
+
     //--------------------------------------------------------
     // Health
     //--------------------------------------------------------
@@ -621,6 +628,7 @@ public class Player : MonoBehaviour
 
         if (!m_bAlive)
         {
+            m_fCurrentSpeed = m_fSpeed;
             m_scpPlayerReticle.Movement();
         }
     }
