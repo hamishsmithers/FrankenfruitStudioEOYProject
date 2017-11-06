@@ -6,12 +6,101 @@ ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Ankle_L
+    100004: Ankle_R
+    100006: Character_001_TeddyBear_001_Small1
+    100008: Clavical_L
+    100010: Clavical_R
+    100012: Elbow_L
+    100014: Elbow_R
+    100016: FingersEnd_L
+    100018: FingersEnd_R
+    100020: FingersKnuckle_L
+    100022: FingersKnuckle_R
+    100024: FingersMiddle_L
+    100026: FingersMiddle_R
+    100028: HairEnd
+    100030: HairMiddle
+    100032: HairTop
+    100034: Head
+    100036: Hip_L
+    100038: Hip_R
+    100040: Knee_L
+    100042: Knee_R
+    100044: Neck
+    100046: Palm_L
+    100048: Palm_R
+    100050: Pelvis
+    100052: Root
+    100054: Shoulder_L
+    100056: Shoulder_R
+    100058: Spine1
+    100060: Spine2
+    100062: ThumbCentre_L
+    100064: ThumbCentre_R
+    100066: ThumbEnd_L
+    100068: ThumbEnd_R
+    100070: ThumKnuckle_L
+    100072: ThumKnuckle_R
+    100074: Toes_L
+    100076: Toes_R
+    100078: Wrist_L
+    100080: Wrist_R
+    100082: WristExtendor_L
+    100084: WristExtendor_R
+    100086: Character_001_TeddyBear_001_Small
     400000: //RootNode
+    400002: Ankle_L
+    400004: Ankle_R
+    400006: Character_001_TeddyBear_001_Small1
+    400008: Clavical_L
+    400010: Clavical_R
+    400012: Elbow_L
+    400014: Elbow_R
+    400016: FingersEnd_L
+    400018: FingersEnd_R
+    400020: FingersKnuckle_L
+    400022: FingersKnuckle_R
+    400024: FingersMiddle_L
+    400026: FingersMiddle_R
+    400028: HairEnd
+    400030: HairMiddle
+    400032: HairTop
+    400034: Head
+    400036: Hip_L
+    400038: Hip_R
+    400040: Knee_L
+    400042: Knee_R
+    400044: Neck
+    400046: Palm_L
+    400048: Palm_R
+    400050: Pelvis
+    400052: Root
+    400054: Shoulder_L
+    400056: Shoulder_R
+    400058: Spine1
+    400060: Spine2
+    400062: ThumbCentre_L
+    400064: ThumbCentre_R
+    400066: ThumbEnd_L
+    400068: ThumbEnd_R
+    400070: ThumKnuckle_L
+    400072: ThumKnuckle_R
+    400074: Toes_L
+    400076: Toes_R
+    400078: Wrist_L
+    400080: Wrist_R
+    400082: WristExtendor_L
+    400084: WristExtendor_R
+    400086: Character_001_TeddyBear_001_Small
     2300000: //RootNode
     3300000: //RootNode
     4300000: Character_001_TeddyBear_001_Small
     4300002: Character_001_TeddyBear_001_Small1
+    7400000: Take 001
     9500000: //RootNode
+    13700000: Character_001_TeddyBear_001_Small1
+    13700002: Character_001_TeddyBear_001_Small
   materials:
     importMaterials: 0
     materialName: 0
