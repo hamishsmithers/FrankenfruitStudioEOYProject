@@ -857,6 +857,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 730827423}
+  - component: {fileID: 730827424}
   m_Layer: 2
   m_Name: Spawnboxes
   m_TagString: Untagged
@@ -881,6 +882,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &730827424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 730827422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921fbb0f3489af54e9d9ec170bd02245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ArrPlayers:
+  - {fileID: 634313554}
+  - {fileID: 1389232081}
+  - {fileID: 94261475}
+  - {fileID: 101811999}
+  m_ArrPodium:
+  - {fileID: 271248412}
+  - {fileID: 1593399750}
+  - {fileID: 1205404300}
+  - {fileID: 282438547}
 --- !u!1001 &777518747
 Prefab:
   m_ObjectHideFlags: 0
@@ -1530,7 +1552,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2068468446}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 921fbb0f3489af54e9d9ec170bd02245, type: 3}
   m_Name: 
