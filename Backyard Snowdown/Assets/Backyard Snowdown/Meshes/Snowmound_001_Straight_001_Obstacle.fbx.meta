@@ -10,6 +10,8 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Snowmound_001_Straight_001_Obstacle
+    4300002: SnowMound_001_Straight_001_Large
+    4300004: SnowMound_001_Straight_001_Obstacle
     9500000: //RootNode
   materials:
     importMaterials: 1
