@@ -8,7 +8,7 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 public class Player : MonoBehaviour
 {
     public XboxController controller;
-
+    
     //-------------------------
     // Player's Movement Speed
     //-------------------------
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
     // Vector3 to store the direction of the player to dash
     //------------------------------------------------------
     private Vector3 m_v3DashDir;
-
+    
     //----------
     // Snowball
     //----------
@@ -225,8 +225,7 @@ public class Player : MonoBehaviour
     //----------
     // Animator
     //----------
-    private Animator m_Animator;
-    private Animation m_Animation;
+    private Animator m_Anim;
 
 
     //-----------------------------
@@ -252,7 +251,7 @@ public class Player : MonoBehaviour
         m_nCurrentHealth = m_nSpawnHealth;
         SetHealthText();
 
-        m_Animator = transform.GetChild(0).GetComponent<Animator>();
+        m_Anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     //--------------------------------------------------------
@@ -332,11 +331,6 @@ public class Player : MonoBehaviour
         //m_Anim.SetFloat("running", m_rb.velocity.magnitude);
     }
 
-    void ThrowBall()
-    {
-        Debug.Log("NATHAN");
-    }
-
     //--------------------------------------------------------
     // Movement
     //--------------------------------------------------------
@@ -396,7 +390,7 @@ public class Player : MonoBehaviour
             //m_rb.MovePosition(m_rb.position + m_v3MovePos);
         }
 
-        m_Animator.SetFloat("running", m_v3MovePos.magnitude);
+        m_Anim.SetFloat("running", m_v3MovePos.magnitude);
     }
 
     //--------------------------------------------------------
@@ -452,7 +446,7 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
         // if not throwing set animation to false
-        m_Animator.SetBool("throwing", false);
+        m_Anim.SetBool("throwing", false);
 
         // calculate the range of power to do the math on the charge power throw.
         m_fPowerRange = m_fPowerMax - m_fPowerMin;
@@ -513,7 +507,7 @@ public class Player : MonoBehaviour
             {
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
-                m_Animator.SetBool("throwing", true);
+                m_Anim.SetBool("throwing", true);
 
                 RaycastHit hit;
                 if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))

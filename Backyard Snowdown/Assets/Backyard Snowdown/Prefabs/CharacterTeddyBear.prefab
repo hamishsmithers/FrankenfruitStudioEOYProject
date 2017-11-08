@@ -1668,7 +1668,7 @@ MonoBehaviour:
   m_fMaxSpeed: 5
   m_fDashSpeed: 10
   m_fDashDuration: 0.5
-  m_goPlayerModel: {fileID: 0}
+  m_goPlayerModel: {fileID: 1761240471889122}
   m_fCurrentSpeed: 5
   m_bMovementLock: 0
   m_bLeftTriggerPressed: 0
