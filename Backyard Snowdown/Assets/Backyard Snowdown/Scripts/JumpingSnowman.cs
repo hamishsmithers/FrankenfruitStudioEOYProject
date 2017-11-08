@@ -46,8 +46,8 @@ public class JumpingSnowman : MonoBehaviour
     //----------------------
     // 
     //----------------------
-    [LabelOverride("Time Until Next Jump")]
-    [Tooltip("Time until the next jump.")]
+    [LabelOverride("tet")]
+    [Tooltip("tet")]
     public float m_fTimeUntilNextJump = 2.0f;
     private bool m_bCanJump = false;
     private bool m_bBetweenJumps = false;
@@ -68,17 +68,6 @@ public class JumpingSnowman : MonoBehaviour
     private Vector3 centerPoint;
     private Vector3 startRelCenter;
     private Vector3 endRelCenter;
-
-
-    //-------------------------
-    // Nathan Temp------------------------------------------------------------------------------------------------------------------
-    //--------------------------------
-
-    //public GameObject m_GoPlayer = null;
-    private bool m_bASnowManExists = true;
-
-    private bool hit = false;
-    private int m_nSnowManHitCount = 2;
 
 
     // Use this for initialization
@@ -165,41 +154,5 @@ public class JumpingSnowman : MonoBehaviour
             m_bJumping = false;
             m_fJumpingTimer = 0.0f;
         }
-
-    }
-
-    private void OnCollisionEnter(Collision col)
-    {   
-        if (col.gameObject.tag == "Snowball")
-        {
-            m_nSnowManHitCount -= 1;
-            if (m_nSnowManHitCount == 0)
-            {
-                m_bASnowManExists = false;
-                SnowmanReset();
-            }
-        }
-    }
-
-    private void SnowmanReset()
-    {
-        m_nSnowManHitCount = 2;
-        m_fSpawnTime = 0;
-        m_fSpawnCount = 0;
-        m_fJumpCounter = 0;
-        //transform.position = new Vector3(-20, 0, 0);
-        //Destroy(gameObject);
-
-        c = gameObject.GetComponent<Collider>();
-        mr = gameObject.GetComponent<MeshRenderer>();
-
-        c.enabled = false;
-        mr.enabled = false;
-
-        m_fSpawnTime = Random.Range(m_fMin, m_fMax);
-        m_bCanJump = false;
-        m_bBetweenJumps = false;
-        m_bJumping = false;
-        m_fJumpingTimer = 0.0f;
     }
 }

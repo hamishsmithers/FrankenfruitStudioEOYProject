@@ -43,6 +43,7 @@ public class Global : MonoBehaviour
     [Tooltip("Stores the Snowball Location 2 GameObject.")]
     public GameObject m_SnowballLoc2 = null;
 
+
     //-------------------------------
     // 
     //-------------------------------

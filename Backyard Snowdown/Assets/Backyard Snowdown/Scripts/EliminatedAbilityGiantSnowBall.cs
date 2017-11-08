@@ -23,6 +23,13 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
     //---------------
     private GameObject m_goPlayerReticle;
 
+    //----------
+    // Cooldown
+    //----------
+    private float m_fCoolDownCount = 0.0f;
+    public float m_fCoolDownTime = 6.0f;
+    bool bSummonable = false;
+
     // Use this for initialization
     void Start()
     {
@@ -43,14 +50,29 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
 
         Player scpPlayer = GetComponent<Player>();
 
+        if (m_fCoolDownCount <= m_fCoolDownTime)
+        {
+            m_fCoolDownCount += Time.deltaTime;
+        }
+        else if (m_fCoolDownCount > m_fCoolDownTime)
+        {
+            bSummonable = true;
+        }
+
         if (XCI.GetButtonDown(XboxButton.LeftBumper, scpPlayer.controller))
         {
-            Player scpPlayerReticleGetter = gameObject.GetComponent<Player>();
-            Vector3 spawn = scpPlayerReticleGetter.m_goPlayerReticleCopy.transform.position;
-            spawn.y = 60.0f;
-            m_goCopy.transform.position = spawn;
+            if (bSummonable)
+            {
+                Player scpPlayerReticleGetter = gameObject.GetComponent<Player>();
+                Vector3 spawn = scpPlayerReticleGetter.m_goPlayerReticleCopy.transform.position;
+                spawn.y = 60.0f;
+                m_goCopy.transform.position = spawn;
 
-            m_goCopy.SetActive(true);
+                m_goCopy.SetActive(true);
+
+                m_fCoolDownCount = 0.0f;
+                bSummonable = false;
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ public class GiantSnowBall : MonoBehaviour
     [Tooltip("A float to change the area effect of the giant snowball.")]
     public float m_fAreaOfEffect = 3.0f;
 
+
     // Use this for initialization
     void Start()
     {

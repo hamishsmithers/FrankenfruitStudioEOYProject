@@ -8,7 +8,7 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 public class Player : MonoBehaviour
 {
     public XboxController controller;
-    
+
     //-------------------------
     // Player's Movement Speed
     //-------------------------
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
     // Vector3 to store the direction of the player to dash
     //------------------------------------------------------
     private Vector3 m_v3DashDir;
-    
+
     //----------
     // Snowball
     //----------
@@ -137,6 +137,9 @@ public class Player : MonoBehaviour
     [LabelOverride("Slow Speed")]
     [Tooltip("A float that represents how much slower the player is while charging up a shot.")]
     public float m_fSlowSpeed = 2.5f;
+
+    [HideInInspector]
+    public bool m_bThrowBall = false;
 
     [HideInInspector]
     public bool m_bHasBall = false;
@@ -225,7 +228,8 @@ public class Player : MonoBehaviour
     //----------
     // Animator
     //----------
-    private Animator m_Anim;
+    private Animator m_Animator;
+    private Animation m_Animation;
 
 
     //-----------------------------
@@ -251,7 +255,7 @@ public class Player : MonoBehaviour
         m_nCurrentHealth = m_nSpawnHealth;
         SetHealthText();
 
-        m_Anim = transform.GetChild(0).GetComponent<Animator>();
+        m_Animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     //--------------------------------------------------------
@@ -390,7 +394,7 @@ public class Player : MonoBehaviour
             //m_rb.MovePosition(m_rb.position + m_v3MovePos);
         }
 
-        m_Anim.SetFloat("running", m_v3MovePos.magnitude);
+        m_Animator.SetFloat("running", m_v3MovePos.magnitude);
     }
 
     //--------------------------------------------------------
@@ -446,7 +450,7 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
         // if not throwing set animation to false
-        m_Anim.SetBool("throwing", false);
+        m_Animator.SetBool("throwing", false);
 
         // calculate the range of power to do the math on the charge power throw.
         m_fPowerRange = m_fPowerMax - m_fPowerMin;
@@ -469,69 +473,72 @@ public class Player : MonoBehaviour
         Dash scpDash = gameObject.GetComponent<Dash>();
         ChargeSlider scpSlider = gameObject.GetComponent<ChargeSlider>();
 
-        if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bGo || bDuringMaxCharge)
+        if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bGo || bDuringMaxCharge || m_bThrowBall)
         {
-            if (m_fChargeTimer < m_fMaxCharge)
+            if (m_fChargeTimer < m_fMaxCharge && !m_bThrowBall)
             {
                 m_fChargeTimer += Time.deltaTime;
                 //scpSlider.m_sliChargeSlider.value = m_fChargeTimer;
                 m_bCharging = true;
             }
-            else if (m_fChargeTimer >= m_fMaxCharge)
+            else if (m_fChargeTimer >= m_fMaxCharge && !m_bThrowBall)
             {
                 m_fChargeTimer = m_fMaxCharge;
             }
 
-            if (m_fChargeTimer >= m_fMaxCharge && m_bThrow)
+            if (m_fChargeTimer >= m_fMaxCharge && m_bThrow && !m_bThrowBall)
             {
                 m_fIsChargedTimer += Time.deltaTime;
                 Debug.Log("AT MAX POWER " + m_fIsChargedTimer);
 
-                if (m_fIsChargedTimer <= m_fIsChargedTimerLimit)
+                if (m_fIsChargedTimer <= m_fIsChargedTimerLimit && !m_bThrowBall)
                 {
                     bDuringMaxCharge = true;
                 }
-                else if (m_fIsChargedTimer >= m_fIsChargedTimerLimit)
+                else if (m_fIsChargedTimer >= m_fIsChargedTimerLimit && !m_bThrowBall)
                 {
                     m_bCharging = false;
                     bChargedLimitReached = true;
                 }
             }
 
-            if (m_bGo || bChargedLimitReached)
+            if (m_bGo || bChargedLimitReached && !m_bThrowBall)
             {
                 m_bCharging = false;
             }
 
-            if (m_bHasBall && !m_bCharging)
+            if (m_bHasBall && !m_bCharging || m_bThrowBall)
             {
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
-                m_Anim.SetBool("throwing", true);
+                m_Animator.SetBool("throwing", true);
 
-                RaycastHit hit;
-                if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
+                if (m_bThrowBall)
                 {
-                    GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                    copy.transform.position = transform.position + transform.forward * -1;
-                    Rigidbody rb = copy.GetComponent<Rigidbody>();
-                    rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
-                    copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                    // The ball is thrown so it becomes false
-                    m_bHasBall = false;
-                    Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
-                    ResetChargeThrow();
-                }
-                else
-                {
-                    GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                    copy.transform.position = transform.position + transform.forward * 1;
-                    Rigidbody rb = copy.GetComponent<Rigidbody>();
-                    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-                    copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                    // The ball is thrown so it becomes false
-                    m_bHasBall = false;
-                    ResetChargeThrow();
+                    RaycastHit hit;
+                    if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
+                    {
+                        GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
+                        copy.transform.position = transform.position + transform.forward * -1;
+                        Rigidbody rb = copy.GetComponent<Rigidbody>();
+                        rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
+                        copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                        // The ball is thrown so it becomes false
+                        m_bHasBall = false;
+                        Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
+                        ResetChargeThrow();
+                    }
+                    else
+                    {
+                        GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
+                        copy.transform.position = transform.position + transform.forward * 1;
+                        Rigidbody rb = copy.GetComponent<Rigidbody>();
+                        rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+                        copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                        // The ball is thrown so it becomes false
+                        m_bHasBall = false;
+                        ResetChargeThrow();
+                    }
                 }
             }
         }
@@ -549,6 +556,7 @@ public class Player : MonoBehaviour
         bDuringMaxCharge = false;
         m_fIsChargedTimer = 0.0f;
         bChargedLimitReached = false;
+        m_bThrowBall = false;
     }
 
     //--------------------------------------------------------
