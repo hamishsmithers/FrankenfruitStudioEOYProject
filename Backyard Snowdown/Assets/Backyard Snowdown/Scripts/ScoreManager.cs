@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour {
     {
         if (m_nDeathCount > 2)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndRound");
         }
     }
     

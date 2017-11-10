@@ -1651,6 +1651,69 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &1141633527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1695645072331698, guid: ed91ab81d92cc86499daea942bb63224,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1141633530}
+  - component: {fileID: 1141633529}
+  - component: {fileID: 1141633528}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1141633528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114313376669507072, guid: ed91ab81d92cc86499daea942bb63224,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1141633527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1141633529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114402089789818526, guid: ed91ab81d92cc86499daea942bb63224,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1141633527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd52100847798346991436ce210461e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: 0
+  m_goPauseCanvas: {fileID: 0}
+  m_btnFirstButton: {fileID: 0}
+  m_goSnowball: {fileID: 1309105767843890, guid: 7fdaa185c63eb4c4c8a42304e9d60abc,
+    type: 2}
+  m_SnowballLoc1: {fileID: 0}
+  m_SnowballLoc2: {fileID: 0}
+--- !u!4 &1141633530
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4992644117997168, guid: ed91ab81d92cc86499daea942bb63224,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1141633527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.694548, y: 12.687597, z: -15.03525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313908394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,6 +2172,7 @@ MonoBehaviour:
   m_goOptionsButtons: {fileID: 1355701325}
   m_goMusicSlider: {fileID: 994774154}
   m_goPlayButton: {fileID: 322851478}
+  Scenes: []
 --- !u!114 &1355701327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2595,6 +2659,13 @@ MonoBehaviour:
   m_goOptionsButtons: {fileID: 1355701325}
   m_goMusicSlider: {fileID: 994774154}
   m_goPlayButton: {fileID: 322851478}
+  Scenes:
+  - Main_001
+  - Main_002
+  - Main_003
+  - Main_004
+  - Main_005
+  - Main_006
 --- !u!114 &1751239840
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,6 +29,13 @@ public class MainMenuButtons : MonoBehaviour {
     //----------------------------------------------
     [LabelOverride("Play Button")][Tooltip("Stores a Button GameObject that is the play button.")]
     public GameObject m_goPlayButton = null;
+
+    //----------------------------------------------------------------------------------
+    // The function to randomize the level to be loaded when the play button is pressed.
+    //----------------------------------------------------------------------------------
+    [LabelOverride("Scenes Array")]
+    [Tooltip("Write the names of each main scene in the array boxes, it will randomize loading between the scenes in the array.")]
+    public string[] Scenes;
     //--------------------------------------
     // Slider to change by the music volume.
     //--------------------------------------
@@ -61,14 +68,20 @@ public class MainMenuButtons : MonoBehaviour {
         //Debug.Log(m_sliMusicSlider.value);
     }
 
-
+    private string RandomizeLevel()
+    {
+        int Selector = Random.Range(0, Scenes.Length);
+        string strSceneToLoad = Scenes[Selector].ToString();
+        //SceneManager.LoadScene(strSceneToLoad);
+        return strSceneToLoad;
+    }
 
     //--------------------------------------------------------------------------------------------
     // PlayGame is the function that occurs when the Play Game button is pressed on the main menu.
     //--------------------------------------------------------------------------------------------
     public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(RandomizeLevel());
     }
 
     //-----------------------------------------------------------------------------------------
