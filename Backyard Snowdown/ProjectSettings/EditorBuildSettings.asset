@@ -8,12 +8,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Backyard Snowdown/Scenes/Main Menu.unity
     guid: 447919a4121e5df46b1f1a77df9d0088
-  - enabled: 0
-    path: Assets/Backyard Snowdown/Scenes/Main.unity
-    guid: 7e379b8620f8dc44da7aedebf1e260fc
   - enabled: 1
     path: Assets/Backyard Snowdown/Scenes/Main_001.unity
-    guid: b55788ec1187ce24595c17d23660eda1
+    guid: a17040e82eb863f4abb8c5cfc5d05fb5
+  - enabled: 1
+    path: Assets/Backyard Snowdown/Scenes/Main_002.unity
+    guid: ddbd6786bf37f26428c0f7d066563b64
+  - enabled: 1
+    path: Assets/Backyard Snowdown/Scenes/Main_003.unity
+    guid: 923e3dc0cd131c1429478264b9646b66
+  - enabled: 1
+    path: Assets/Backyard Snowdown/Scenes/Main_004.unity
+    guid: 1bf3740c0532f2642bd55f853822684e
+  - enabled: 1
+    path: Assets/Backyard Snowdown/Scenes/Main_005.unity
+    guid: b7ff4413702d93c4796cbdfbb8e938df
+  - enabled: 1
+    path: Assets/Backyard Snowdown/Scenes/Main_006.unity
+    guid: 0fbb945aff58bf245b288a06122e02cb
   - enabled: 1
     path: Assets/Backyard Snowdown/Scenes/EndRound.unity
     guid: 7fbcf0963447f604ea1a093891c92216
+  - enabled: 1
+    path: Assets/Backyard Snowdown/Scenes/Credits.unity
+    guid: 70da79b36efe67745a420984ea03a770

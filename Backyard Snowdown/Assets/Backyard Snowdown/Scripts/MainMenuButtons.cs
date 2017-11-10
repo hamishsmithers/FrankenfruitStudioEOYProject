@@ -98,4 +98,13 @@ public class MainMenuButtons : MonoBehaviour {
         m_goOptionsButtons.SetActive(false);
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_goPlayButton);
     }
+
+    //------------------------------------------------------------------------------------
+    // Credits is the function that will be triggered when they press the credits button.
+    // It takes you to a different scene that runs the credits.
+    //------------------------------------------------------------------------------------
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
 }
