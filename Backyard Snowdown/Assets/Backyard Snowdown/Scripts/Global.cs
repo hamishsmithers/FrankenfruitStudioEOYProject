@@ -128,7 +128,7 @@ public class Global : MonoBehaviour
     public void PauseMenuExit()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void ResetGame()
@@ -144,7 +144,7 @@ public class Global : MonoBehaviour
             //if (fResetTimer >= fResetConfirmTime)
             //{
 
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("Main Menu");
             //   fResetTimer = 0.0f;
             //}
         }

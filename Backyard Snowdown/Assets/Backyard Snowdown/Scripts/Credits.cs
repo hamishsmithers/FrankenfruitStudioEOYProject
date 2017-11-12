@@ -29,7 +29,7 @@ public class Credits : MonoBehaviour {
 
         if(XCI.GetButtonDown(XboxButton.Start, controller) || XCI.GetButtonDown(XboxButton.A, controller))
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("Main Menu");
         }
     }
 

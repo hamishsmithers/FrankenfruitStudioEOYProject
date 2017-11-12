@@ -1428,7 +1428,8 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &356953465 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 4989513093750770, guid: 40da5c5ceac7caf4abaae54815c6a1cb,
+    type: 2}
   m_PrefabInternal: {fileID: 356953464}
 --- !u!43 &363772251
 Mesh:
@@ -2126,7 +2127,8 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &442659198 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 4520013802103566, guid: d0a579fefbfb59844b865e949270ab3b,
+    type: 2}
   m_PrefabInternal: {fileID: 442659197}
 --- !u!1 &466348152
 GameObject:
@@ -2561,7 +2563,8 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &544066956 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 4060834542451896, guid: 521f32359d0e4764e8a38baefab54551,
+    type: 2}
   m_PrefabInternal: {fileID: 544066955}
 --- !u!1001 &545449287
 Prefab:
@@ -2819,7 +2822,8 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &570799577 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 4412373715598268, guid: 5ad6e5cd9656f124e89b2a4e57c727b8,
+    type: 2}
   m_PrefabInternal: {fileID: 570799576}
 --- !u!1 &574120691
 GameObject:
@@ -4730,7 +4734,8 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &1028417458 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 4942400750316264, guid: 1cf0dd58180e0e94191801ab83d5f29d,
+    type: 2}
   m_PrefabInternal: {fileID: 1028417457}
 --- !u!1001 &1030875928
 Prefab:
@@ -5316,12 +5321,42 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2061066233}
+    - target: {fileID: 114595618623659390, guid: 8b8699af51c1af649937500a9e846b24,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2061066233}
+    - target: {fileID: 114595618623659390, guid: 8b8699af51c1af649937500a9e846b24,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseMenuContinue
+      objectReference: {fileID: 0}
+    - target: {fileID: 114680034551324950, guid: 8b8699af51c1af649937500a9e846b24,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2061066233}
+    - target: {fileID: 114680034551324950, guid: 8b8699af51c1af649937500a9e846b24,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseMenuExit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b8699af51c1af649937500a9e846b24, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &1187650616 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224340057731357304, guid: 8b8699af51c1af649937500a9e846b24,
+    type: 2}
+  m_PrefabInternal: {fileID: 1187650615}
+--- !u!1 &1187650617 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1669237504648768, guid: 8b8699af51c1af649937500a9e846b24,
+    type: 2}
+  m_PrefabInternal: {fileID: 1187650615}
+--- !u!1 &1187650618 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1638035288177584, guid: 8b8699af51c1af649937500a9e846b24,
     type: 2}
   m_PrefabInternal: {fileID: 1187650615}
 --- !u!1001 &1188108723
@@ -6332,12 +6367,12 @@ Prefab:
         type: 2}
       propertyPath: m_goPauseCanvas
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1187650618}
     - target: {fileID: 114402089789818526, guid: ed91ab81d92cc86499daea942bb63224,
         type: 2}
       propertyPath: m_btnFirstButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1187650617}
     - target: {fileID: 114402089789818526, guid: ed91ab81d92cc86499daea942bb63224,
         type: 2}
       propertyPath: m_SnowballLoc1
@@ -6902,7 +6937,8 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &1535713816 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 4124138783534820, guid: c49cbcd6d2977664eb9d5c82a8dadc12,
+    type: 2}
   m_PrefabInternal: {fileID: 1535713815}
 --- !u!1 &1606856691
 GameObject:

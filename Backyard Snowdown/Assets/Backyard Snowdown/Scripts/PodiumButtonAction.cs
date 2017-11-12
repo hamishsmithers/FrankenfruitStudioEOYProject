@@ -20,7 +20,7 @@ public class PodiumButtonAction : MonoBehaviour {
     {
         if (XCI.GetButtonDown(XboxButton.Start, m_controller) || XCI.GetButton(XboxButton.A, m_controller))
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("Main Menu");
         }
     }
 }
