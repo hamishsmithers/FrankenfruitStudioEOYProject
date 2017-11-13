@@ -60,16 +60,15 @@ public class SnowMan : MonoBehaviour
     {
         //AbilitySnowMan scpAbilitySnowMan = gameObject.GetComponent<AbilitySnowMan>();
 
-        if (col.gameObject.tag == "Snowball")
-        {
-            m_nSnowManHitCount -= 1;
-            if (m_nSnowManHitCount == 0)
-            {
-                m_bASnowManExists = false;
-                AudioManager.m_SharedInstance.PlaySnowmanCrumble();
-                Destroy(gameObject);
-                m_nSnowManHitCount = 2;
-            }
-        }
+    //    if (col.gameObject.tag == "Snowball")
+    //    {
+    //        m_nSnowManHitCount -= 1;
+    //        if (m_nSnowManHitCount == 0)
+    //        {
+    //            scpAbilitySnowMan.m_bASnowManExists = false;
+    //            Destroy(gameObject);
+    //            m_nSnowManHitCount = 2;
+    //        }
+    //    }
     }
 }

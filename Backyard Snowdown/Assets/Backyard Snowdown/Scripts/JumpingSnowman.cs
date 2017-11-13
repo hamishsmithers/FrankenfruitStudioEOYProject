@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿// Franzi
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -77,12 +78,16 @@ public class JumpingSnowman : MonoBehaviour
     public float m_fHeightOfJump = 2.0f;
 
     private bool m_bSpawned = false;
+    private int m_nHealthPoints = 2;
+    private bool m_bDead = false;
+
+    private float m_fDeathTimer = 0.0f;
+    private float m_fDeathTime = 3.0f;
 
     // Use this for initialization
     void Awake()
     {
-        
-        if (SceneManager.GetActiveScene().buildIndex != 2)
+        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4 || SceneManager.GetActiveScene().buildIndex == 5 || SceneManager.GetActiveScene().buildIndex == 6)
         {
             //rb = GetComponent<Rigidbody>();
             m_goTR = GameObject.Find("Reticle Bounds Top Right");
@@ -116,7 +121,6 @@ public class JumpingSnowman : MonoBehaviour
         }
         else if (m_fSpawnCount > m_fSpawnTime && !m_bCanJump)
         {
-            // Snowman spawns
             m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x) - transform.position.x;
             // we minus the current location to keep the snowman in the map
             m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z) - transform.position.z;
@@ -125,21 +129,20 @@ public class JumpingSnowman : MonoBehaviour
             // move the snowman to the next location
             transform.position = m_v3Pos;
 
+            // Snowman spawns
             c.enabled = true;
             mr.enabled = true;
-            m_bCanJump = true;
-
             m_bSpawned = true;
         }
 
         // Between Jumps
-        if (m_bSpawned && m_fJumpCounter <= m_fTimeUntilNextJump && m_bCanJump && !m_bJumping)
+        if (!m_bDead && m_bSpawned && m_fJumpCounter <= m_fTimeUntilNextJump && !m_bJumping)
         {
             //Debug.Log("between");
             m_fJumpCounter += Time.deltaTime;
             m_bBetweenJumps = true;
         }
-        else if (m_bSpawned && m_fJumpCounter > m_fTimeUntilNextJump)
+        else if (!m_bDead && m_bSpawned && m_fJumpCounter > m_fTimeUntilNextJump)
         {
             m_bBetweenJumps = false;
             m_fJumpCounter = 0.0f;
@@ -148,7 +151,7 @@ public class JumpingSnowman : MonoBehaviour
             // we minus the current location to keep the snowman in the map
             m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z) - transform.position.z;
             // set the snowmans next location
-            m_v3NextPos.Set(m_xLoc, 0.0f, m_zLoc);
+            m_v3Pos.Set(m_xLoc, 1.0f, m_zLoc);
 
             int layer = 1 << LayerMask.NameToLayer("Obstacle");
 
@@ -165,7 +168,7 @@ public class JumpingSnowman : MonoBehaviour
         }
 
         // Jumping
-        if (m_bSpawned && m_fJumpingTimer <= m_fJumpingTime && !m_bBetweenJumps)
+        if (!m_bDead && m_bSpawned && m_fJumpingTimer <= m_fJumpingTime && !m_bBetweenJumps)
         {
             //Debug.Log("jumping");
             m_fJumpingTimer += Time.deltaTime;
@@ -182,6 +185,7 @@ public class JumpingSnowman : MonoBehaviour
             // move the snowman to the next location smoothly
             switch (m_nCurve)
             {
+                // snowman moves to the peak of its jump
                 case 1:
                     transform.position += m_v3Cm * Time.deltaTime;
                     if (m_fJumpingTimer > m_fJumpingTime / 2)
@@ -190,6 +194,7 @@ public class JumpingSnowman : MonoBehaviour
 
                 case 2:
                     // good job hamo nad mitcho
+                    // snowman moves from the peak of its jump vto the landing point
                     transform.position += (m_v3NextPos * Time.deltaTime) + (-transform.up * m_fHeightOfJump * Time.deltaTime);
                     if (m_fJumpingTimer >= m_fJumpingTime)
                     {
@@ -204,17 +209,49 @@ public class JumpingSnowman : MonoBehaviour
 
             m_bJumping = true;
         }
-        else if (m_bSpawned && m_fJumpingTimer > m_fJumpingTime)
+        else if (!m_bDead && m_bSpawned && m_fJumpingTimer > m_fJumpingTime)
         {
             m_bJumping = false;
             m_fJumpingTimer = 0.0f;
             m_bBoingSound = true;
         }
+
+        if (m_nHealthPoints <= 0)
+        {
+            c.enabled = false;
+            mr.enabled = false;
+            m_bSpawned = false;
+            m_bDead = true;
+        }
+
+        if (m_bDead && m_fDeathTimer <= m_fDeathTime)
+        {
+            m_fDeathTimer += Time.deltaTime;
+        }
+        else if (m_bDead && m_fDeathTimer > m_fDeathTime)
+        {
+            c.enabled = true;
+            mr.enabled = true;
+            m_bSpawned = true;
+            m_bDead = false;
+            m_fDeathTimer = 0.0f;
+
+            // restore life to franzi
+            m_nHealthPoints = 2;
+        }
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Snowball")
+        {
+            m_nHealthPoints = m_nHealthPoints - 1;
+        }
     }
 
     private void CreateCurve()
     {
-        //creating the centre of the curve
+        // creating the centre of the curve
         m_v3Cm = m_v3StartPos + m_v3NextPos / 2;
         m_v3Cm += transform.up * m_fHeightOfJump;
     }
