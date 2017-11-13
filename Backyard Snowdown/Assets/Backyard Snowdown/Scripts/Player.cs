@@ -138,6 +138,20 @@ public class Player : MonoBehaviour
     [Tooltip("A float that represents how much slower the player is while charging up a shot.")]
     public float m_fSlowSpeed = 2.5f;
 
+    //--------------------------------
+    // Power Towards Centre of Screen
+    //--------------------------------
+    [LabelOverride("Power Towards Centre of Screen")]
+    [Tooltip("When the player is hit whilst holding a ball, it throws it towards the SnowballTarget. This is that force.")]
+    public float m_fPowerOfTowardsCentre;
+
+    //-----------------
+    // Snowball Target
+    //-----------------
+    [LabelOverride("Snowball Target")]
+    [Tooltip("Snowball target that the ball will be thrown towards.")]
+    public GameObject m_goSnowBallTarget = null;
+
     [HideInInspector]
     public bool m_bThrowBall = false;
 
@@ -518,7 +532,7 @@ public class Player : MonoBehaviour
                 if (m_bThrowBall)
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
+                    if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f) && (hit.collider.gameObject.tag != "Character" && hit.collider.gameObject.tag != "Snowball"))
                     {
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
                         copy.transform.position = transform.position + transform.forward + (transform.up * 0.3f) * -1;
@@ -530,6 +544,18 @@ public class Player : MonoBehaviour
                         Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
                         ResetChargeThrow();
                     }
+                    //else if (hit.collider.gameObject.tag == "Character" || hit.collider.gameObject.tag == "Snowball")
+                    //{
+                    //    GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
+                    //    copy.transform.position = transform.position + transform.forward * 1;
+                    //    Rigidbody rb = copy.GetComponent<Rigidbody>();
+                    //    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+                    //    copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                    //    // The ball is thrown so it becomes false
+                    //    m_bHasBall = false;
+                    //    ResetChargeThrow();
+                    //}
+
                     else
                     {
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
@@ -694,7 +720,15 @@ public class Player : MonoBehaviour
                     m_bHasBall = false;
                     //m_bWasHit = true;
                     GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                    copy.transform.position = transform.position + transform.right;
+
+                    // Snowball is thrown towards centre
+                    Vector3 dir = m_goSnowBallTarget.transform.position - transform.position;
+                    dir.y = 0.0f;
+                    dir.Normalize();
+                    dir.y = 0.5f;
+                    dir.Normalize();
+                    copy.transform.position = transform.position + (transform.up * 2.0f);
+                    copy.GetComponent<Rigidbody>().AddForce(dir * 5.0f, ForceMode.Impulse);
                 }
                 else if (!m_bHasBall && scpDash.m_bDashing)
                 {

@@ -33,10 +33,12 @@ public class JumpingSnowman : MonoBehaviour
     private Collider c;
     private MeshRenderer mr;
 
-    private GameObject m_TL;
-    private GameObject m_TR;
-    private GameObject m_BL;
-    private GameObject m_BR;
+    private GameObject m_goTL;
+    private GameObject m_goTR;
+    private GameObject m_goBL;
+    private GameObject m_goBR;
+
+    private Vector3 m_v3Cm;
 
     private Vector3 m_v3Pos;
     private float m_xLoc = 0.0f;
@@ -46,9 +48,10 @@ public class JumpingSnowman : MonoBehaviour
     //----------------------
     // 
     //----------------------
-    [LabelOverride("tet")]
-    [Tooltip("tet")]
+    [LabelOverride("Time Until Next Jump")]
+    [Tooltip("The time until next jump")]
     public float m_fTimeUntilNextJump = 2.0f;
+
     private bool m_bCanJump = false;
     private bool m_bBetweenJumps = false;
     private bool m_bJumping = false;
@@ -61,13 +64,15 @@ public class JumpingSnowman : MonoBehaviour
     public float m_fJumpingTime = 1.0f;
     private Vector3 m_v3StartPos;
     private Vector3 m_v3NextPos;
-    
+
+    private int m_nCurve = 1;
+
     //----------------------
-    // Center Function 
+    // 
     //----------------------
-    private Vector3 centerPoint;
-    private Vector3 startRelCenter;
-    private Vector3 endRelCenter;
+    [LabelOverride("Height of Jump")]
+    [Tooltip("The height at which the Snowman reaches at the peak of it's jump.")]
+    public float m_fHeightOfJump = 2.0f;
 
 
     // Use this for initialization
@@ -76,10 +81,10 @@ public class JumpingSnowman : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 2)
         {
             //rb = GetComponent<Rigidbody>();
-            m_TR = GameObject.Find("Reticle Bounds Top Right");
-            m_TL = GameObject.Find("Reticle Bounds Top Left");
-            m_BR = GameObject.Find("Reticle Bounds Bottom Right");
-            m_BL = GameObject.Find("Reticle Bounds Bottom Left");
+            m_goTR = GameObject.Find("Reticle Bounds Top Right");
+            m_goTL = GameObject.Find("Reticle Bounds Top Left");
+            m_goBR = GameObject.Find("Reticle Bounds Bottom Right");
+            m_goBL = GameObject.Find("Reticle Bounds Bottom Left");
         }
     }
 
@@ -107,9 +112,9 @@ public class JumpingSnowman : MonoBehaviour
         else if (m_fSpawnCount > m_fSpawnTime && !m_bCanJump)
         {
             // Snowman spawns
-            m_xLoc = Random.Range(m_TL.transform.position.x, m_TR.transform.position.x) - transform.position.x;
+            m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x) - transform.position.x;
             // we minus the current location to keep the snowman in the map
-            m_zLoc = Random.Range(m_BL.transform.position.z, m_TL.transform.position.z) - transform.position.z;
+            m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z) - transform.position.z;
             // set the snowmans next location
             m_v3Pos.Set(m_xLoc, 1.0f, m_zLoc);
             // move the snowman to the next location
@@ -117,8 +122,8 @@ public class JumpingSnowman : MonoBehaviour
 
             c.enabled = true;
             mr.enabled = true;
-            m_bCanJump = true;        
-		}
+            m_bCanJump = true;
+        }
 
         // Between Jumps
         if (m_fJumpCounter <= m_fTimeUntilNextJump && m_bCanJump && !m_bJumping)
@@ -131,11 +136,11 @@ public class JumpingSnowman : MonoBehaviour
         {
             m_bBetweenJumps = false;
             m_fJumpCounter = 0.0f;
-            
+
             // Setting the next pos
-            m_xLoc = Random.Range(m_TL.transform.position.x, m_TR.transform.position.x) - transform.position.x;
+            m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x) - transform.position.x;
             // we minus the current location to keep the snowman in the map
-            m_zLoc = Random.Range(m_BL.transform.position.z, m_TL.transform.position.z) - transform.position.z;
+            m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z) - transform.position.z;
             // set the snowmans next location
             m_v3NextPos.Set(m_xLoc, 0.0f, m_zLoc);
         }
@@ -145,8 +150,29 @@ public class JumpingSnowman : MonoBehaviour
         {
             //Debug.Log("jumping");
             m_fJumpingTimer += Time.deltaTime;
+
+            CreateCurve();
+
             // move the snowman to the next location smoothly
-            transform.position += m_v3NextPos * Time.deltaTime;
+            switch (m_nCurve)
+            {
+                case 1:
+                    transform.position += m_v3Cm * Time.deltaTime;
+                    if (m_fJumpingTimer > m_fJumpingTime / 2)
+                        m_nCurve = 2;
+                    break;
+
+                case 2:
+                    // good job hamo nad mitcho
+                    transform.position += (m_v3NextPos * Time.deltaTime) + (-transform.up * m_fHeightOfJump * Time.deltaTime);
+                    if (m_fJumpingTimer >= m_fJumpingTime)
+                        m_nCurve = 1;
+                    break;
+
+                default:
+                    break;
+            }
+
             m_bJumping = true;
         }
         else if (m_fJumpingTimer > m_fJumpingTime)
@@ -154,5 +180,12 @@ public class JumpingSnowman : MonoBehaviour
             m_bJumping = false;
             m_fJumpingTimer = 0.0f;
         }
+    }
+
+    private void CreateCurve()
+    {
+        //creating the centre of the curve
+        m_v3Cm = m_v3StartPos + m_v3NextPos / 2;
+        m_v3Cm += transform.up * m_fHeightOfJump;
     }
 }
