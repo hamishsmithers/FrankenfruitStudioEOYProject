@@ -46,6 +46,8 @@ ModelImporter:
     100076: WristExtendor_L
     100078: WristExtendor_R
     100080: Character_003_WinterClothes_001_Small
+    100082: Root
+    100084: Spine
     400000: //RootNode
     400002: Ankle_L
     400004: Ankle_R
@@ -87,6 +89,8 @@ ModelImporter:
     400076: WristExtendor_L
     400078: WristExtendor_R
     400080: Character_003_WinterClothes_001_Small
+    400082: Root
+    400084: Spine
     2300000: //RootNode
     3300000: //RootNode
     4300000: Character_003_WinterClothes_001_Small

@@ -469,7 +469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4231287988367298}
   m_Layer: 0
-  m_Name: Root1
+  m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,6 +500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4522052006070504}
   - component: {fileID: 95427648080723732}
+  - component: {fileID: 114353502228141218}
   m_Layer: 0
   m_Name: Character_003_WinterClothes_001_Small
   m_TagString: Untagged
@@ -1613,7 +1614,7 @@ MonoBehaviour:
   m_fMaxSpeed: 5
   m_fDashSpeed: 10
   m_fDashDuration: 0.5
-  m_goPlayerModel: {fileID: 0}
+  m_goPlayerModel: {fileID: 1656302691439140}
   m_fCurrentSpeed: 5
   m_bMovementLock: 0
   m_bLeftTriggerPressed: 0
@@ -1639,13 +1640,24 @@ MonoBehaviour:
   m_nCurrentHealth: 0
   m_fStun: 0.1
   m_bAlive: 1
-  m_smrCharacterMesh: {fileID: 0}
+  m_smrCharacterMesh: {fileID: 137095140736492322}
   m_bHitByGiantSnowBall: 0
   m_fGiantSnowballStunTime: 0.25
   m_goPlayerReticle: {fileID: 1112236485901864, guid: 2017fed6da7b39b42866dc0d050ecfd6,
     type: 2}
   m_goPlayerReticleCopy: {fileID: 0}
   m_scpPlayerReticle: {fileID: 0}
+--- !u!114 &114353502228141218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656302691439140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da4cbba44fa4044abca7feb0689f71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114457547078150360
 MonoBehaviour:
   m_ObjectHideFlags: 1
