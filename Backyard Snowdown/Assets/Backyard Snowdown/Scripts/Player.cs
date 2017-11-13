@@ -289,8 +289,6 @@ public class Player : MonoBehaviour
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
         EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
 
-        Debug.Log(+(m_fChargeTimer));
-
         if (m_bAlive && !m_bHitByGiantSnowBall)
         {
             Movement();

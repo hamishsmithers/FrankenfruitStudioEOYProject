@@ -65,7 +65,7 @@ public class Global : MonoBehaviour
         if (m_goPauseCanvas)
             m_goPauseCanvas.SetActive(false);
 
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (m_SnowballLoc1 && m_SnowballLoc2)
         {
             GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
             goSnowball.transform.position = m_SnowballLoc1.transform.position;
