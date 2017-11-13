@@ -275,6 +275,8 @@ public class Player : MonoBehaviour
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
         EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
 
+        Debug.Log(+(m_fChargeTimer));
+
         if (m_bAlive && !m_bHitByGiantSnowBall)
         {
             Movement();
@@ -489,7 +491,7 @@ public class Player : MonoBehaviour
             if (m_fChargeTimer >= m_fMaxCharge && m_bThrow && !m_bThrowBall)
             {
                 m_fIsChargedTimer += Time.deltaTime;
-                Debug.Log("AT MAX POWER " + m_fIsChargedTimer);
+                //Debug.Log("AT MAX POWER " + m_fIsChargedTimer);
 
                 if (m_fIsChargedTimer <= m_fIsChargedTimerLimit && !m_bThrowBall)
                 {
@@ -519,7 +521,7 @@ public class Player : MonoBehaviour
                     if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f))
                     {
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                        copy.transform.position = transform.position + transform.forward * -1;
+                        copy.transform.position = transform.position + transform.forward + (transform.up * 0.3f) * -1;
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
                         rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
@@ -531,7 +533,7 @@ public class Player : MonoBehaviour
                     else
                     {
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                        copy.transform.position = transform.position + transform.forward * 1;
+                        copy.transform.position = transform.position + transform.forward + (transform.up * 0.3f) * 1;
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
                         rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
