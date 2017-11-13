@@ -555,18 +555,17 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "<size=25>Credits</size>\n\n<size=20>Design  & Production</size>\nEmma Wearing\nHamish
     Smithers\n\n<size=20>Programming</size>\nNathan Nette\nMitchell Cattini-Schultz\n\n<size=20>Art</size>\nDavid
-    Condello\nMarc Varvakis<size=8>\nMatthew Franzi</size>\n\n<i>Cheery Monday</i>
+    Condello\nMarc Varvakis\nMatthew Franzi\n\n<i>Cheery Monday</i> Kevin MacLeod
+    (incompetech.com) \r\nLicensed under Creative Commons: By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Teddy
+    Bear Waltz</i> Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons:
+    By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Run Amok</i>
     Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
-    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Teddy Bear Waltz</i>
-    Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
-    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Run Amok</i> Kevin MacLeod
-    (incompetech.com) \r\nLicensed under Creative Commons: By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Brightly
-    Fancy</i> Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons:
-    By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Peppy
-    Pepe</i> Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons:
-    By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Zazie</i>
-    Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
-    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/"
+    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Brightly Fancy</i> Kevin
+    MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
+    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Peppy Pepe</i> Kevin
+    MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
+    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Zazie</i> Kevin MacLeod
+    (incompetech.com) \r\nLicensed under Creative Commons: By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/"
 --- !u!222 &1530803227
 CanvasRenderer:
   m_ObjectHideFlags: 0
