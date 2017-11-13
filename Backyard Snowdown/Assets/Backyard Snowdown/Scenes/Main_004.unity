@@ -108,7 +108,7 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 23800000, guid: 0640d8fa01f550d429b36dadccc776bf, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 4d165ee7490da2749b7500143681d485, type: 2}
 --- !u!1 &33454983
 GameObject:
   m_ObjectHideFlags: 0
@@ -7073,12 +7073,12 @@ Prefab:
     - target: {fileID: 224558568768624766, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 249.245
+      value: 728.745
       objectReference: {fileID: 0}
     - target: {fileID: 224558568768624766, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -400.41
+      value: -939.41
       objectReference: {fileID: 0}
     - target: {fileID: 224558568768624766, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
@@ -7103,12 +7103,12 @@ Prefab:
     - target: {fileID: 224189472592683394, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 478.91498
+      value: 958.415
       objectReference: {fileID: 0}
     - target: {fileID: 224189472592683394, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -400.41
+      value: -939.41
       objectReference: {fileID: 0}
     - target: {fileID: 224189472592683394, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
@@ -7133,12 +7133,12 @@ Prefab:
     - target: {fileID: 224322827259446416, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 417.085
+      value: 896.58496
       objectReference: {fileID: 0}
     - target: {fileID: 224322827259446416, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -448
+      value: -987
       objectReference: {fileID: 0}
     - target: {fileID: 224322827259446416, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
@@ -7163,12 +7163,12 @@ Prefab:
     - target: {fileID: 224545961696313552, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 646.755
+      value: 1126.255
       objectReference: {fileID: 0}
     - target: {fileID: 224545961696313552, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -448
+      value: -987
       objectReference: {fileID: 0}
     - target: {fileID: 224545961696313552, guid: 022e910d63ca8cd4ea3d9e45d449aa95,
         type: 2}

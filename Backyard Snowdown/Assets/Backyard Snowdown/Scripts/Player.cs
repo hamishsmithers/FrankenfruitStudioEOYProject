@@ -590,7 +590,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Health()
     {
-        AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
+        SnowMan scpSnowMan = gameObject.GetComponent<SnowMan>();
 
         if (m_tookDmg)
         {
@@ -613,7 +613,7 @@ public class Player : MonoBehaviour
         {
             m_txtHealth.text = null;
 
-            scpSnowMan.m_bASnowManExists = false;
+            //scpSnowMan.m_bASnowManExists = false;
 
             if (m_bHasBall)
             {
@@ -622,7 +622,7 @@ public class Player : MonoBehaviour
                 m_bHasBall = false;
             }
 
-            Destroy(gameObject.GetComponent<AbilitySnowMan>().m_Copy);
+            Destroy(gameObject.GetComponent<SnowMan>());
 
             m_bAlive = false;
 

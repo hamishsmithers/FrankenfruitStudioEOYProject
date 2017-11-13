@@ -1640,8 +1640,10 @@ MonoBehaviour:
   m_fSnowballSpeed: 1750
   m_fMaxCharge: 1.5
   m_fPowerMin: 400
-  m_fPowerMax: 1750
+  m_fPowerMax: 2000
   m_fSlowSpeed: 2.5
+  m_fPowerOfTowardsCentre: 0
+  m_goSnowBallTarget: {fileID: 0}
   m_bThrowBall: 0
   m_bHasBall: 0
   m_fChargeTimer: 0
@@ -1650,7 +1652,7 @@ MonoBehaviour:
   m_nCurrentHealth: 0
   m_fStun: 0.1
   m_bAlive: 1
-  m_smrCharacterMesh: {fileID: 0}
+  m_smrCharacterMesh: {fileID: 137910900797707712}
   m_bHitByGiantSnowBall: 0
   m_fGiantSnowballStunTime: 0.25
   m_goPlayerReticle: {fileID: 1112236485901864, guid: 2017fed6da7b39b42866dc0d050ecfd6,
@@ -1663,7 +1665,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541797428144246}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4723a56331b12b44aa34aa59580fe2f, type: 3}
   m_Name: 

@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54057404367643604}
   - component: {fileID: 136602533879106020}
   - component: {fileID: 114233192121138210}
+  - component: {fileID: 114005824797585996}
   m_Layer: 0
   m_Name: JumpingSnowman
   m_TagString: Untagged
@@ -39,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039098989923858}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000028476119}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.1000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -118,6 +119,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114005824797585996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039098989923858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 937b0057bbafacb4d9f3a78edd827157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_nSnowManHitCount: 2
+  m_GoPlayer: {fileID: 0}
 --- !u!114 &114233192121138210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,8 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750a09b62a61887428bdbe3f03bad721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fMin: 20
-  m_fMax: 30
+  m_fMin: 2
+  m_fMax: 5
+  m_fTimeBetweenJumps: 2
+  m_fTimeUntilNextJump: 5
+  m_fJumpingTime: 1
+  m_fHeightOfJump: 4
 --- !u!136 &136602533879106020
 CapsuleCollider:
   m_ObjectHideFlags: 1

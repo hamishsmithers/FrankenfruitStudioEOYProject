@@ -1685,8 +1685,10 @@ MonoBehaviour:
   m_fSnowballSpeed: 1750
   m_fMaxCharge: 1.5
   m_fPowerMin: 400
-  m_fPowerMax: 2500
+  m_fPowerMax: 2000
   m_fSlowSpeed: 2.5
+  m_fPowerOfTowardsCentre: 0
+  m_goSnowBallTarget: {fileID: 0}
   m_bThrowBall: 0
   m_bHasBall: 0
   m_fChargeTimer: 0

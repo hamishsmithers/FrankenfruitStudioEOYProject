@@ -14,8 +14,13 @@ public class SnowMan : MonoBehaviour
     [LabelOverride("Snowman Hit Count")]
     [Tooltip("Stores how many times a snowman has been hit.")]
     public int m_nSnowManHitCount = 2;
-    [HideInInspector]
-    public GameObject m_GoPlayer = null;
+
+    public bool m_bASnowManExists;
+
+
+
+    //[HideInInspector]
+    //public GameObject m_GoPlayer = null;
     //private int nCaseSwitch = 1;
 
     // Use this for initialization
@@ -53,14 +58,14 @@ public class SnowMan : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        AbilitySnowMan scpAbilitySnowMan = m_GoPlayer.GetComponent<AbilitySnowMan>();
+        //AbilitySnowMan scpAbilitySnowMan = gameObject.GetComponent<AbilitySnowMan>();
 
         if (col.gameObject.tag == "Snowball")
         {
             m_nSnowManHitCount -= 1;
             if (m_nSnowManHitCount == 0)
             {
-                scpAbilitySnowMan.m_bASnowManExists = false;
+                m_bASnowManExists = false;
                 Destroy(gameObject);
                 m_nSnowManHitCount = 2;
             }

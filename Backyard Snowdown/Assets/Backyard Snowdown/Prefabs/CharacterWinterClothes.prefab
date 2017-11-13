@@ -1630,8 +1630,10 @@ MonoBehaviour:
   m_fSnowballSpeed: 1750
   m_fMaxCharge: 1.5
   m_fPowerMin: 400
-  m_fPowerMax: 1750
+  m_fPowerMax: 2000
   m_fSlowSpeed: 2.5
+  m_fPowerOfTowardsCentre: 0
+  m_goSnowBallTarget: {fileID: 0}
   m_bThrowBall: 0
   m_bHasBall: 0
   m_fChargeTimer: 0
@@ -1680,7 +1682,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1857929654395560}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4723a56331b12b44aa34aa59580fe2f, type: 3}
   m_Name: 
