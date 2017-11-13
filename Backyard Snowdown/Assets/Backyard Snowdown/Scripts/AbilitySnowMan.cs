@@ -53,7 +53,7 @@ public class AbilitySnowMan : MonoBehaviour
     public void CreateSnowMan()
     {
         Player scpPlayer = gameObject.GetComponent<Player>();
-
+    
         //Debug.Log(bASnowManExists);
 
         //if (Input.GetKeyDown(KeyCode.LeftShift) || XCI.GetButtonDown(XboxButton.RightBumper, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftBumper, scpPlayer.controller) || m_bCreateSnowManBefore || m_bCreateSnowManAfter)

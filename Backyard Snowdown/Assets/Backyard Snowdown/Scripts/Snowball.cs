@@ -85,5 +85,15 @@ public class Snowball : MonoBehaviour
             if (m_rb)
                 m_rb.velocity = m_rb.velocity * 1f;
         }
+
+        if (col.gameObject.tag != "Ground")
+        {
+            AudioManager.m_SharedInstance.PlaySnowBallHit();
+        }
+
+        if (col.gameObject.tag == "Character")
+        {
+            AudioManager.m_SharedInstance.PlayHurtAudio();
+        }
     }
 }

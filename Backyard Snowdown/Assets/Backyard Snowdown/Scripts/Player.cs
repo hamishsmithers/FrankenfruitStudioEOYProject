@@ -478,6 +478,7 @@ public class Player : MonoBehaviour
         {
             m_bHolding = false;
             m_bReleased = true;
+            AudioManager.m_SharedInstance.PlayThrowAudio();
         }
         else
             m_bReleased = false;

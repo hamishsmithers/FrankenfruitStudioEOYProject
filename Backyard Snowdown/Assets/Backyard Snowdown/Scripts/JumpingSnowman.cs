@@ -55,7 +55,9 @@ public class JumpingSnowman : MonoBehaviour
     private bool m_bCanJump = false;
     private bool m_bBetweenJumps = false;
     private bool m_bJumping = false;
+    private bool m_bBoingSound = true;
     private float m_fJumpingTimer = 0.0f;
+
     //----------------------
     // 
     //----------------------
@@ -79,6 +81,7 @@ public class JumpingSnowman : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        
         if (SceneManager.GetActiveScene().buildIndex != 2)
         {
             //rb = GetComponent<Rigidbody>();
@@ -99,6 +102,7 @@ public class JumpingSnowman : MonoBehaviour
         mr.enabled = false;
 
         m_fSpawnTime = Random.Range(m_fMin, m_fMax);
+        AudioManager.m_SharedInstance.PlaySnowmanSummon();
 
     }
 
@@ -166,6 +170,13 @@ public class JumpingSnowman : MonoBehaviour
             //Debug.Log("jumping");
             m_fJumpingTimer += Time.deltaTime;
 
+            // boing sound
+            if (m_bBoingSound)
+            {
+                AudioManager.m_SharedInstance.PlaySnowmanBoingAudio();
+                m_bBoingSound = false;
+            }
+
             CreateCurve();
 
             // move the snowman to the next location smoothly
@@ -197,6 +208,7 @@ public class JumpingSnowman : MonoBehaviour
         {
             m_bJumping = false;
             m_fJumpingTimer = 0.0f;
+            m_bBoingSound = true;
         }
     }
 

@@ -40,7 +40,7 @@ public class Dash : MonoBehaviour
     //----------------------------------------
     // A float to store the timer of the dash.
     //----------------------------------------
-    private float m_fDashTimer = 0.0f;
+    public float m_fDashTimer = 0.0f;
     private float m_fCoolDownTimer = 0.0f;
     private bool m_bCoolDown = false;
     private bool m_bStartTimer = false;
@@ -76,7 +76,6 @@ public class Dash : MonoBehaviour
         if (!m_bCoolDown)
         {
             Player scpPlayer = gameObject.GetComponent<Player>();
-
             float leftTrigHeight = m_MaxTriggerHeight * (1.0f - XCI.GetAxisRaw(XboxAxis.LeftTrigger, scpPlayer.controller));
 
             if (leftTrigHeight < 1.0f || scpPlayer.m_bLeftTriggerPressed || Input.GetKeyDown(KeyCode.Space))
@@ -86,6 +85,8 @@ public class Dash : MonoBehaviour
 
                 if (m_fDashDuration > m_fDashTimer)
                 {
+                    if(!m_bDashing)
+                        AudioManager.m_SharedInstance.PlayDashAudio();
                     m_bDashing = true;
                     scpPlayer.m_rb.AddForce(m_v3DashDir * m_fDashSpeed * scpPlayer.m_fCurrentSpeed, ForceMode.Impulse);
                     //transform.position += m_v3DashDir * m_fDashSpeed * Time.deltaTime * scpPlayer.m_fCurrentSpeed;

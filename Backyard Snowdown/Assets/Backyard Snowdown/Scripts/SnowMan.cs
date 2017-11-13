@@ -66,6 +66,7 @@ public class SnowMan : MonoBehaviour
             if (m_nSnowManHitCount == 0)
             {
                 m_bASnowManExists = false;
+                AudioManager.m_SharedInstance.PlaySnowmanCrumble();
                 Destroy(gameObject);
                 m_nSnowManHitCount = 2;
             }
