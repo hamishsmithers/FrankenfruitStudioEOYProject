@@ -13,6 +13,7 @@ TagManager:
   - Projectiles
   - Snowball
   - SeekWallPoint
+  - SnowmanKnockBack
   layers:
   - Default
   - TransparentFX

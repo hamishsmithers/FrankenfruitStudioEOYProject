@@ -27,30 +27,28 @@ public class GiantSnowBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position -= Vector3.up * 1;
+        //transform.position -= Vector3.up * 1;
     }
 
     private void OnCollisionEnter(Collision other)
     {
-
-        if (other.gameObject.tag == "Ground")
+        Debug.Log("MARC");
+        if (other.gameObject.tag == "SnowmanKnockBack")
         {
             Knockback();
-            gameObject.SetActive(false);
         }
-    }
+    }    
 
     void Knockback()
     {
         Vector3 hit = transform.position; //ignore these numbers, get position from collision impact
-
         int playerLayer = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("PlayerDash");
         Collider[] players = Physics.OverlapSphere(hit, m_fAreaOfEffect, playerLayer);
 
         for (int i = 0; i < players.Length; ++i)
         {
             Rigidbody rb = players[i].gameObject.GetComponent<Rigidbody>();
-            rb.AddExplosionForce(m_fKnockbackForce, hit, m_fAreaOfEffect, 1.0f, ForceMode.Impulse);
+            rb.AddExplosionForce(m_fKnockbackForce, hit, m_fAreaOfEffect, 1.0f, ForceMode.VelocityChange);
             Player scpPlayer = players[i].GetComponent<Player>();
             scpPlayer.m_bHitByGiantSnowBall = true;
         }
