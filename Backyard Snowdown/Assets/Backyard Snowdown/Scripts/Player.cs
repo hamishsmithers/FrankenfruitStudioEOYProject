@@ -238,6 +238,12 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool m_bHitByGiantSnowBall = false;
     private float m_fHitTimer = 0.0f;
+
+    //--------------------------
+    // Giant Snowball Stun Time
+    //--------------------------
+    [LabelOverride("Snowman Stun Time")]
+    [Tooltip("The time players are stunned after being knocked back by the Snowman.")]
     public float m_fGiantSnowballStunTime = 0.25f;
 
     //----------------
@@ -550,7 +556,7 @@ public class Player : MonoBehaviour
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
                 m_Animator.SetBool("throwing", true);
-                Debug.Log(m_fSnowballSpeed);
+
                 if (m_bThrowBall)
                 {
                     RaycastHit hit;

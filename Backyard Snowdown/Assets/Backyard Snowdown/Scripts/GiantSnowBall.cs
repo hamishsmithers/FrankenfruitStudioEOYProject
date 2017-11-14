@@ -32,12 +32,12 @@ public class GiantSnowBall : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("MARC");
+            Debug.Log("MARC");
         if (other.gameObject.tag == "SnowmanKnockBack")
         {
             Knockback();
         }
-    }    
+    }
 
     void Knockback()
     {
@@ -48,7 +48,7 @@ public class GiantSnowBall : MonoBehaviour
         for (int i = 0; i < players.Length; ++i)
         {
             Rigidbody rb = players[i].gameObject.GetComponent<Rigidbody>();
-            rb.AddExplosionForce(m_fKnockbackForce, hit, m_fAreaOfEffect, 1.0f, ForceMode.VelocityChange);
+            rb.AddExplosionForce(m_fKnockbackForce, hit, m_fAreaOfEffect, 1.0f, ForceMode.Impulse);
             Player scpPlayer = players[i].GetComponent<Player>();
             scpPlayer.m_bHitByGiantSnowBall = true;
         }

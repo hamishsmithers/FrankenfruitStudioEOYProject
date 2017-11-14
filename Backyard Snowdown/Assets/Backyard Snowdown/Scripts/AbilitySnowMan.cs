@@ -7,33 +7,33 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class AbilitySnowMan : MonoBehaviour
 {
-    //-----------------
-    // Ability SnowMan
-    //-----------------
-    //-------------------
-    // Snowman GameObject
-    //-------------------
-    [LabelOverride("Snowman")]
-    [Tooltip("A GameObject that stores the snowman.")]
-    public GameObject m_SnowMan = null;
-    //-------------
-    // Snowman Copy
-    //-------------
-    [HideInInspector]
-    public GameObject m_Copy;
-    //---------------------
-    // Snowman Before Spawn
-    //---------------------
-    [LabelOverride("Snowman Before Spawn")]
-    [Tooltip("")]
-    public float m_fSnowManBeforeSpawn = 0.3f;
-    //private float m_fSnowManBeforeSpawnTimer = 0.0f;
-    public float m_fSnowManAfterSpawn = 0.3f;
-    //private float m_fSnowManAfterSpawnTimer = 0.0f;
-    private bool m_bCreateSnowManBefore = false;
-    private bool m_bCreateSnowManAfter = false;
-    [HideInInspector]
-    public bool m_bASnowManExists = false;
+    ////-----------------
+    //// Ability SnowMan
+    ////-----------------
+    ////-------------------
+    //// Snowman GameObject
+    ////-------------------
+    //[LabelOverride("Snowman")]
+    //[Tooltip("A GameObject that stores the snowman.")]
+    //public GameObject m_SnowMan = null;
+    ////-------------
+    //// Snowman Copy
+    ////-------------
+    //[HideInInspector]
+    //public GameObject m_Copy;
+    ////---------------------
+    //// Snowman Before Spawn
+    ////---------------------
+    //[LabelOverride("Snowman Before Spawn")]
+    //[Tooltip("")]
+    //public float m_fSnowManBeforeSpawn = 0.3f;
+    ////private float m_fSnowManBeforeSpawnTimer = 0.0f;
+    //public float m_fSnowManAfterSpawn = 0.3f;
+    ////private float m_fSnowManAfterSpawnTimer = 0.0f;
+    //private bool m_bCreateSnowManBefore = false;
+    //private bool m_bCreateSnowManAfter = false;
+    //[HideInInspector]
+    //public bool m_bASnowManExists = false;
 
     // Use this for initialization
     void Start()
@@ -52,7 +52,7 @@ public class AbilitySnowMan : MonoBehaviour
     //--------------------------------------------------------
     public void CreateSnowMan()
     {
-        Player scpPlayer = gameObject.GetComponent<Player>();
+        //Player scpPlayer = gameObject.GetComponent<Player>();
     
         //Debug.Log(bASnowManExists);
 
