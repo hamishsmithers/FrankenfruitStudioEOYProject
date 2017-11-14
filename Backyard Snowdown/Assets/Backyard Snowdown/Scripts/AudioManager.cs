@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip sfxSnowManBoing = null;
     public AudioClip sfxSnowManCrumble = null;
     public AudioClip sfxSnowManSummon = null;
+    public AudioMixerGroup m_audmixMixer = null;
     public GameObject goSound = null;
     public AudioClip[] sfxThrow = null;
     public AudioClip[] sfxHitArray = null;
@@ -53,6 +55,7 @@ public class AudioManager : MonoBehaviour {
     {
         GameObject sound = Instantiate(goSound);
         AudioSource audSource = sound.GetComponent<AudioSource>();
+        audSource.outputAudioMixerGroup = m_audmixMixer;
         audSource.clip = sfxDash;
         audSource.Play();
         audSource.pitch = Random.Range(0.9f, 1.1f);
@@ -63,6 +66,7 @@ public class AudioManager : MonoBehaviour {
         GameObject sound = Instantiate(goSound);
         AudioSource audSource = sound.GetComponent<AudioSource>();
         int Selector = Random.Range(0, sfxThrow.Length);
+        audSource.outputAudioMixerGroup = m_audmixMixer;
         audSource.clip = sfxThrow[Selector];
         audSource.Play();
         audSource.pitch = Random.Range(0.9f, 1.1f);
@@ -72,6 +76,7 @@ public class AudioManager : MonoBehaviour {
     {
         GameObject sound = Instantiate(goSound);
         AudioSource audSource = sound.GetComponent<AudioSource>();
+        audSource.outputAudioMixerGroup = m_audmixMixer;
         audSource.clip = sfxSnowManBoing;
         audSource.Play();
         audSource.pitch = Random.Range(0.9f, 1.1f);
@@ -82,6 +87,7 @@ public class AudioManager : MonoBehaviour {
         GameObject sound = Instantiate(goSound);
         AudioSource audSource = sound.GetComponent<AudioSource>();
         int Selector = Random.Range(0, sfxHitArray.Length);
+        audSource.outputAudioMixerGroup = m_audmixMixer;
         audSource.clip = sfxHitArray[Selector];
         audSource.Play();
         audSource.pitch = Random.Range(0.9f, 1.1f);
@@ -92,6 +98,7 @@ public class AudioManager : MonoBehaviour {
         GameObject sound = Instantiate(goSound);
         AudioSource audSource = sound.GetComponent<AudioSource>();
         int Selector = Random.Range(0, sfxHurtArray.Length);
+        audSource.outputAudioMixerGroup = m_audmixMixer;
         audSource.clip = sfxHurtArray[Selector];
         audSource.Play();
         audSource.pitch = Random.Range(0.9f, 1.1f);
@@ -101,6 +108,7 @@ public class AudioManager : MonoBehaviour {
     {
         GameObject sound = Instantiate(goSound);
         AudioSource audSource = sound.GetComponent<AudioSource>();
+        audSource.outputAudioMixerGroup = m_audmixMixer;
         audSource.clip = sfxSnowManCrumble;
         audSource.Play();
         audSource.pitch = Random.Range(0.9f, 1.1f);
@@ -110,6 +118,7 @@ public class AudioManager : MonoBehaviour {
     {
         GameObject sound = Instantiate(goSound);
         AudioSource audSource = sound.GetComponent<AudioSource>();
+        audSource.outputAudioMixerGroup = m_audmixMixer;
         audSource.clip = sfxSnowManSummon;
         audSource.Play();
         audSource.pitch = Random.Range(0.9f, 1.1f);

@@ -243,14 +243,14 @@ public class Player : MonoBehaviour
     //----------------
     // Player Reticle
     //----------------
-    [LabelOverride("Player Reticle")]
-    [Tooltip("This stores the GameObject of the player reticle.")]
-    public GameObject m_goPlayerReticle = null;
+    //[LabelOverride("Player Reticle")]
+    //[Tooltip("This stores the GameObject of the player reticle.")]
+    //public GameObject m_goPlayerReticle = null;
 
-    [HideInInspector]
-    public GameObject m_goPlayerReticleCopy = null;
-    [HideInInspector]
-    public PlayerRetical m_scpPlayerReticle;
+    //[HideInInspector]
+    //public GameObject m_goPlayerReticleCopy = null;
+    //[HideInInspector]
+    //public PlayerRetical m_scpPlayerReticle;
 
     //----------
     // Animator
@@ -264,10 +264,10 @@ public class Player : MonoBehaviour
     //-----------------------------
     void Start()
     {
-        m_goPlayerReticleCopy = Instantiate(m_goPlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
-        m_goPlayerReticleCopy.GetComponent<PlayerRetical>().m_player = gameObject;
-        m_scpPlayerReticle = m_goPlayerReticleCopy.GetComponent<PlayerRetical>();
-        m_goPlayerReticleCopy.SetActive(false);
+        //m_goPlayerReticleCopy = Instantiate(m_goPlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
+        //m_goPlayerReticleCopy.GetComponent<PlayerRetical>().m_player = gameObject;
+        //m_scpPlayerReticle = m_goPlayerReticleCopy.GetComponent<PlayerRetical>();
+        //m_goPlayerReticleCopy.SetActive(false);
 
         //Xbox Stick Axis'
         m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
@@ -655,7 +655,7 @@ public class Player : MonoBehaviour
             //mrPlayerCircle.enabled = false;
             //mrReticleCol.enabled = true;
             //rb.rotation = Quaternion.identity;
-            m_goPlayerReticleCopy.SetActive(true);
+            //m_goPlayerReticleCopy.SetActive(true);
 
             //gameObject.transform.position = new Vector3(10.2f, 1.0f, -7.0f);
 
@@ -671,7 +671,7 @@ public class Player : MonoBehaviour
         if (!m_bAlive)
         {
             m_fCurrentSpeed = m_fSpeed;
-            m_scpPlayerReticle.Movement();
+            //m_scpPlayerReticle.Movement();
         }
     }
 
