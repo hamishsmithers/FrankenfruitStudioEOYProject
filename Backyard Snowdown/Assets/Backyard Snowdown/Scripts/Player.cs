@@ -533,8 +533,9 @@ public class Player : MonoBehaviour
                     RaycastHit hit;
                     if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f) && (hit.collider.gameObject.tag != "Character" && hit.collider.gameObject.tag != "Snowball"))
                     {
+                        // shoots out back
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                        copy.transform.position = transform.position + transform.forward + (transform.up * 0.3f) * -1;
+                        copy.transform.position = transform.position + -transform.forward + (transform.up * 1.0f);
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
                         rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
@@ -554,11 +555,11 @@ public class Player : MonoBehaviour
                     //    m_bHasBall = false;
                     //    ResetChargeThrow();
                     //}
-
                     else
                     {
+                        // shoots out front
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                        copy.transform.position = transform.position + transform.forward + (transform.up * 0.3f) * 1;
+                        copy.transform.position = transform.position + transform.forward + (transform.up * 1.0f) * 1;
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
                         rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;

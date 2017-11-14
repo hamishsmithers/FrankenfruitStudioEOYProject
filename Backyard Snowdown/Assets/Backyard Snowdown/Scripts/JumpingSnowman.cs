@@ -108,7 +108,6 @@ public class JumpingSnowman : MonoBehaviour
 
         m_fSpawnTime = Random.Range(m_fMin, m_fMax);
         AudioManager.m_SharedInstance.PlaySnowmanSummon();
-
     }
 
     // Update is called once per frame
