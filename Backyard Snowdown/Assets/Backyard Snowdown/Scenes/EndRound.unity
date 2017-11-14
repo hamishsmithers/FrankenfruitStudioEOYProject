@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 5072c671f5d9f4003a83241b424bb0f0, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -678,31 +678,31 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4936551493122802, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.52
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4936551493122802, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -7.22
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4936551493122802, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -12.07
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 4936551493122802, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.09229579
+      value: -0.048765995
       objectReference: {fileID: 0}
     - target: {fileID: 4936551493122802, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.70105743
+      value: 0.7054232
       objectReference: {fileID: 0}
     - target: {fileID: 4936551493122802, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.092295796
+      value: -0.048765976
       objectReference: {fileID: 0}
     - target: {fileID: 4936551493122802, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.7010575
+      value: 0.7054233
       objectReference: {fileID: 0}
     - target: {fileID: 4936551493122802, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}
       propertyPath: m_RootOrder
@@ -714,7 +714,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4936551493122802, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -15.000001
+      value: -7.9090004
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9d87c7dcbdc22b45b25853f89979218, type: 2}

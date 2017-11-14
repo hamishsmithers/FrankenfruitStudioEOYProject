@@ -627,6 +627,7 @@ public class Player : MonoBehaviour
         {
             //m_txtHealth.text = null;
 
+
             //scpSnowMan.m_bASnowManExists = false;
 
             if (m_bHasBall)
