@@ -33,7 +33,7 @@ public class Snowball : MonoBehaviour
     //------------
     [LabelOverride("Score Value")]
     [Tooltip("A static int that represents how much health a player loses when they are hit by the snowball.")]
-    public static int m_nScoreValue = 2;
+    public static int m_nScoreValue = 1;
 
 
     private Color mainColor = Color.white;
@@ -67,7 +67,7 @@ public class Snowball : MonoBehaviour
 
         if (m_rb.velocity.magnitude >= m_fDamageSpeed)
         {
-            m_nScoreValue = 2;
+            m_nScoreValue = 1;
             m_bTooFast = true;
         }
 
@@ -89,11 +89,6 @@ public class Snowball : MonoBehaviour
         if (col.gameObject.tag != "Ground")
         {
             AudioManager.m_SharedInstance.PlaySnowBallHit();
-        }
-
-        if (col.gameObject.tag == "Character")
-        {
-            AudioManager.m_SharedInstance.PlayHurtAudio();
         }
     }
 }

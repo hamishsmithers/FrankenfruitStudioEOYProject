@@ -151,6 +151,7 @@ public class Player : MonoBehaviour
     [LabelOverride("Snowball Target")]
     [Tooltip("Snowball target that the ball will be thrown towards.")]
     public GameObject m_goSnowBallTarget = null;
+    private Vector3 v3SnowballTarget;
 
     [HideInInspector]
     public bool m_bThrowBall = false;
@@ -176,13 +177,25 @@ public class Player : MonoBehaviour
     // xbox controller trigger release
     private bool m_bHolding = false;
     private bool m_bReleased = false;
+    //--------
+    // IFrame
+    //--------
+    //----------------
+    // Iframe Timer
+    //----------------
+    [LabelOverride("iFrame Timer")]
+    [Tooltip("This is the amount of time in seconds that the player is invincible for after being hit. Default is 0.5 seconds")]
+    public float m_fIFrame;
+    private bool m_bIFrame = false;
+    private float m_fIFrameTimer = 5f;
+    //private bool m_bCanPickUp = true;
 
     //----------------
     // Health UI Text
     //----------------
-    [LabelOverride("UI Health Text")]
-    [Tooltip("This stores the UI text of the player's health.")]
-    public Text m_txtHealth;
+    //[LabelOverride("UI Health Text")]
+    //[Tooltip("This stores the UI text of the player's health.")]
+    //public Text m_txtHealth;
     //--------------
     // Spawn Health
     //--------------
@@ -267,7 +280,7 @@ public class Player : MonoBehaviour
         // Health
         //--------
         m_nCurrentHealth = m_nSpawnHealth;
-        SetHealthText();
+        //SetHealthText();
 
         m_Animator = transform.GetChild(0).GetComponent<Animator>();
     }
@@ -312,6 +325,16 @@ public class Player : MonoBehaviour
 
         Health();
 
+        if (m_bIFrame)
+        {
+            m_fIFrameTimer += Time.deltaTime;
+            //m_bHasBall = false;
+            if (m_fIFrameTimer > m_fIFrame)
+            {
+                m_bIFrame = false;
+                m_fIFrameTimer = 0f;
+            }
+        }
         if (!m_bAlive)
         {
             scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
@@ -602,7 +625,7 @@ public class Player : MonoBehaviour
 
         if (m_nCurrentHealth <= 0 && m_bAlive)
         {
-            m_txtHealth.text = null;
+            //m_txtHealth.text = null;
 
             //scpSnowMan.m_bASnowManExists = false;
 
@@ -638,7 +661,7 @@ public class Player : MonoBehaviour
             m_nCurrentHealth = 0;
 
             //updating the health value onscreen
-            SetHealthText();
+            //SetHealthText();
 
             //GameObject copy = Instantiate(scpSnowMan.SnowMan);
             //copy.transform.position = transform.position;
@@ -654,18 +677,20 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     // Updates the health value displayed onscreen
     //--------------------------------------------------------
-    void SetHealthText()
-    {
-        if (m_txtHealth)
-            m_txtHealth.text = "HP:" + m_nCurrentHealth.ToString();
-    }
+    //void SetHealthText()
+    //{
+    //    if (m_txtHealth)
+    //        m_txtHealth.text = "HP:" + m_nCurrentHealth.ToString();
+    //}
 
     private void TakeDamage()
     {
+        m_bIFrame = true;
         m_tookDmg = true;
         m_nCurrentHealth = m_nCurrentHealth - Snowball.m_nScoreValue;
         // updating the health value onscreen
-        SetHealthText();
+        //SetHealthText();
+        AudioManager.m_SharedInstance.PlayHurtAudio();
     }
 
     private void Projectiles()
@@ -703,7 +728,8 @@ public class Player : MonoBehaviour
             {
                 if (m_bHasBall)
                 {
-                    TakeDamage();
+                    if(!m_bIFrame)
+                        TakeDamage();
 
                     //Drop ball
                     m_bHasBall = false;
@@ -727,7 +753,7 @@ public class Player : MonoBehaviour
                     //Destroy(col.gameObject);
                     m_bHasBall = true;
                 }
-                else if (!scpDash.m_bDashing && !m_bHasBall)
+                else if (!scpDash.m_bDashing && !m_bHasBall && !m_bIFrame)
                 {
                     TakeDamage();
                 }
@@ -738,14 +764,17 @@ public class Player : MonoBehaviour
                 //{
                 //    Physics.IgnoreCollision(col.collider, GetComponent<Collider>(), true);
                 //}
-
-                if (!m_bHasBall)
+                if (!m_bIFrame)
                 {
-                    // The player has picked it up
-                    col.gameObject.SetActive(false);
-                    //Destroy(col.gameObject);
-                    m_bHasBall = true;
+                    if (!m_bHasBall)
+                    {
+                        // The player has picked it up
+                        col.gameObject.SetActive(false);
+                        //Destroy(col.gameObject);
+                        m_bHasBall = true;
+                    }
                 }
+
             }
         }
     }

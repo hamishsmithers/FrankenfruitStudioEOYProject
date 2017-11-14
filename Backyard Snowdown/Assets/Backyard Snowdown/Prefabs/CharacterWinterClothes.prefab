@@ -626,6 +626,7 @@ GameObject:
   - component: {fileID: 114457547078150360}
   - component: {fileID: 114688167193321614}
   - component: {fileID: 114718905775648482}
+  - component: {fileID: 114651164631013046}
   - component: {fileID: 65744003636595364}
   - component: {fileID: 54872988089574936}
   m_Layer: 9
@@ -1637,8 +1638,9 @@ MonoBehaviour:
   m_bThrowBall: 0
   m_bHasBall: 0
   m_fChargeTimer: 0
+  m_fIFrame: 0.5
   m_txtHealth: {fileID: 0}
-  m_nSpawnHealth: 10
+  m_nSpawnHealth: 5
   m_nCurrentHealth: 0
   m_fStun: 0.1
   m_bAlive: 1
@@ -1676,6 +1678,24 @@ MonoBehaviour:
   m_fSnowManBeforeSpawn: 0.3
   m_fSnowManAfterSpawn: 0.3
   m_bASnowManExists: 0
+--- !u!114 &114651164631013046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1857929654395560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17f02242f071f242a584c5d0d5b0df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprHealth0: {fileID: 21300000, guid: 47712740f5c0769448ad0775dc3c29e6, type: 3}
+  sprHealth1: {fileID: 21300000, guid: f0945cdbb1db0b3459de4099b69c4675, type: 3}
+  sprHealth2: {fileID: 21300000, guid: 9afa5abf604cf9049aeff1b302eeb1cc, type: 3}
+  sprHealth3: {fileID: 21300000, guid: 8e9fd4d8a2bf53b4f83be241fefd7466, type: 3}
+  sprHealth4: {fileID: 21300000, guid: f1c50dd1f4aa74540bf3d9a742752612, type: 3}
+  sprHealth5: {fileID: 21300000, guid: 1e037cce0f182174891cd342449ff4c9, type: 3}
+  imgPlayer: {fileID: 0}
 --- !u!114 &114688167193321614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1718,7 +1738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.32156864, g: 0.047058824, b: 0.39607844, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

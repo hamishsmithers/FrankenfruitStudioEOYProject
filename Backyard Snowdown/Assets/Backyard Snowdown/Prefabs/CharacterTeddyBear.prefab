@@ -684,6 +684,7 @@ GameObject:
   - component: {fileID: 114931677700266120}
   - component: {fileID: 114637631861412122}
   - component: {fileID: 114899432547375920}
+  - component: {fileID: 114899684843584506}
   - component: {fileID: 65847069831109450}
   - component: {fileID: 54554819268122524}
   m_Layer: 9
@@ -1693,8 +1694,9 @@ MonoBehaviour:
   m_bThrowBall: 0
   m_bHasBall: 0
   m_fChargeTimer: 0
+  m_fIFrame: 0.5
   m_txtHealth: {fileID: 0}
-  m_nSpawnHealth: 10
+  m_nSpawnHealth: 5
   m_nCurrentHealth: 0
   m_fStun: 0.1
   m_bAlive: 1
@@ -1779,7 +1781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.25882354, g: 0.62352943, b: 0.26666668, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1821,6 +1823,24 @@ MonoBehaviour:
   m_fMinCharge: 0
   m_sprFullRing: {fileID: 21300000, guid: 9e343adf4e6129648b4f2bc53874e4ab, type: 3}
   m_sprEmptyRing: {fileID: 21300000, guid: cbc7d0b5544476f4092df3903d639349, type: 3}
+--- !u!114 &114899684843584506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1878649487498970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17f02242f071f242a584c5d0d5b0df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprHealth0: {fileID: 21300000, guid: 47712740f5c0769448ad0775dc3c29e6, type: 3}
+  sprHealth1: {fileID: 21300000, guid: f0945cdbb1db0b3459de4099b69c4675, type: 3}
+  sprHealth2: {fileID: 21300000, guid: 9afa5abf604cf9049aeff1b302eeb1cc, type: 3}
+  sprHealth3: {fileID: 21300000, guid: 8e9fd4d8a2bf53b4f83be241fefd7466, type: 3}
+  sprHealth4: {fileID: 21300000, guid: f1c50dd1f4aa74540bf3d9a742752612, type: 3}
+  sprHealth5: {fileID: 21300000, guid: 1e037cce0f182174891cd342449ff4c9, type: 3}
+  imgPlayer: {fileID: 0}
 --- !u!114 &114931677700266120
 MonoBehaviour:
   m_ObjectHideFlags: 1
