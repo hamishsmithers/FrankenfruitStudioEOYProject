@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
     //--------------------------------
     [LabelOverride("Power Towards Centre of Screen")]
     [Tooltip("When the player is hit whilst holding a ball, it throws it towards the SnowballTarget. This is that force.")]
-    public float m_fPowerOfTowardsCentre;
+    public float m_fPowerOfTowardsCentre = 5.0f;
 
     //-----------------
     // Snowball Target
@@ -527,7 +527,7 @@ public class Player : MonoBehaviour
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
                 m_Animator.SetBool("throwing", true);
-
+                Debug.Log(m_fSnowballSpeed);
                 if (m_bThrowBall)
                 {
                     RaycastHit hit;
@@ -544,17 +544,6 @@ public class Player : MonoBehaviour
                         Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
                         ResetChargeThrow();
                     }
-                    //else if (hit.collider.gameObject.tag == "Character" || hit.collider.gameObject.tag == "Snowball")
-                    //{
-                    //    GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                    //    copy.transform.position = transform.position + transform.forward * 1;
-                    //    Rigidbody rb = copy.GetComponent<Rigidbody>();
-                    //    rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-                    //    copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                    //    // The ball is thrown so it becomes false
-                    //    m_bHasBall = false;
-                    //    ResetChargeThrow();
-                    //}
                     else
                     {
                         // shoots out front
@@ -728,7 +717,7 @@ public class Player : MonoBehaviour
                     dir.y = 0.5f;
                     dir.Normalize();
                     copy.transform.position = transform.position + (transform.up * 2.0f);
-                    copy.GetComponent<Rigidbody>().AddForce(dir * 5.0f, ForceMode.Impulse);
+                    copy.GetComponent<Rigidbody>().AddForce(dir * m_fPowerOfTowardsCentre, ForceMode.Impulse);
                 }
                 else if (!m_bHasBall && scpDash.m_bDashing)
                 {
