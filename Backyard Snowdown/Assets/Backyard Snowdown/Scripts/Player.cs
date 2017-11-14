@@ -558,7 +558,7 @@ public class Player : MonoBehaviour
                     {
                         // shoots out back
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                        copy.transform.position = transform.position + -transform.forward + (transform.up * 1.0f);
+                        copy.transform.position = transform.position + -transform.forward + (transform.up * 0.6f);
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
                         rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
@@ -571,7 +571,7 @@ public class Player : MonoBehaviour
                     {
                         // shoots out front
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                        copy.transform.position = transform.position + transform.forward + (transform.up * 1.0f) * 1;
+                        copy.transform.position = transform.position + transform.forward + (transform.up * 0.6f) * 1;
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
                         rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;

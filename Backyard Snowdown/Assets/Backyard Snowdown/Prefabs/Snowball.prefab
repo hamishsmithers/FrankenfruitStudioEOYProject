@@ -253,7 +253,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fDamageSpeed: 5
   m_bTooFast: 0
-  m_materials: []
+  m_materials:
+  - {fileID: 2100000, guid: 1f01051d0b45cb34c8fee13df4664868, type: 2}
+  - {fileID: 2100000, guid: c706ed9ef25a3d449973781f83340f25, type: 2}
 --- !u!135 &135483463602575264
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -1233,16 +1235,16 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.17517301, g: 0.33803922, b: 0.88235295, a: 1}
-        key1: {r: 0.6985294, g: 0.9875253, b: 1, a: 1}
+        key0: {r: 0.14619377, g: 0.40639538, b: 0.7647059, a: 1}
+        key1: {r: 0.6985294, g: 0.8877283, b: 1, a: 1}
         key2: {r: 0.6985294, g: 0.9875253, b: 1, a: 0}
         key3: {r: 0.6985294, g: 0.9875253, b: 1, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 29876
-        ctime1: 53585
+        ctime0: 9445
+        ctime1: 57247
         ctime2: 53585
         ctime3: 53585
         ctime4: 0
@@ -1250,7 +1252,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 45875
+        atime1: 42212
         atime2: 65535
         atime3: 0
         atime4: 0
