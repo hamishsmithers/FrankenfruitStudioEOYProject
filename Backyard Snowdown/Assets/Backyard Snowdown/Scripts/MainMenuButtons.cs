@@ -81,7 +81,8 @@ public class MainMenuButtons : MonoBehaviour {
     //--------------------------------------------------------------------------------------------
     public void PlayGame()
     {
-        SceneManager.LoadScene(RandomizeLevel());
+        SceneManager.LoadSceneAsync("Main_001", LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync(RandomizeLevel(),LoadSceneMode.Additive);
     }
 
     //-----------------------------------------------------------------------------------------
