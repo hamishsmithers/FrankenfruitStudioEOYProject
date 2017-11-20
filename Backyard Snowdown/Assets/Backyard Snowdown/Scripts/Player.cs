@@ -177,6 +177,7 @@ public class Player : MonoBehaviour
     // xbox controller trigger release
     private bool m_bHolding = false;
     private bool m_bReleased = false;
+    private bool bAimOverride = false;
     //--------
     // IFrame
     //--------
@@ -445,34 +446,43 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Aiming()
     {
-        bool bAimOverride = false;
-
+        //if (!m_bMovementLock)
+        //{
         if (XCI.GetAxisRaw(XboxAxis.RightStickX, controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightStickY, controller) != 0)
         {
             bAimOverride = true;
         }
 
+        else
+        {
+            bAimOverride = false;
+        }
+
+
         if (!bAimOverride)
-        { 
+        {
             //-------------------------
             // Xbox Left Stick Aiming
             //-------------------------
+            m_v3XboxDashDir = transform.forward;
+            if (!m_bLeftTriggerPressed)
+            {
+                m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
+                m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
 
-            m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
-        m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
+                //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
 
-        //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+                if (m_axisX != 0.0f || m_axisY != 0.0f)
+                {
+                    m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
+                    transform.forward = m_v3XboxDashDir;
+                }
+            }
 
-        if (m_axisX != 0.0f || m_axisY != 0.0f)
-        {
-            m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
-            transform.forward = m_v3XboxDashDir;
         }
 
-        }
-         
         else
-        { 
+        {
             //-------------------------
             // Xbox Right Stick Aiming
             //-------------------------
@@ -514,6 +524,7 @@ public class Player : MonoBehaviour
                 m_v3MovePos.Normalize();
             }
         }
+        //}
     }
 
     //--------------------------------------------------------
@@ -584,10 +595,10 @@ public class Player : MonoBehaviour
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
                 m_Animator.SetBool("throwing", true);
-                AudioManager.m_SharedInstance.PlayThrowAudio();
 
                 if (m_bThrowBall)
                 {
+                    AudioManager.m_SharedInstance.PlayThrowAudio();
                     RaycastHit hit;
                     if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f) && (hit.collider.gameObject.tag != "Character" && hit.collider.gameObject.tag != "Snowball"))
                     {
@@ -764,7 +775,7 @@ public class Player : MonoBehaviour
             {
                 if (m_bHasBall)
                 {
-                    if(!m_bIFrame)
+                    if (!m_bIFrame)
                         TakeDamage();
 
                     //Drop ball

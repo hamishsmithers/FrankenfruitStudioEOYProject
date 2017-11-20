@@ -24,6 +24,8 @@ public class PlayerAI : MonoBehaviour {
         //Player player = gameObject.GetComponent<Player>();
         //Destroy(player);
 
+
+
         Dash dash = gameObject.GetComponent<Dash>();
         Destroy(dash);
 
@@ -41,6 +43,7 @@ public class PlayerAI : MonoBehaviour {
         goRight = GameObject.Find("Right Wall Point");
         goLeft = GameObject.Find("Left Wall Point");
 
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
     }
     
