@@ -1,0 +1,166 @@
+fileFormatVersion: 2
+guid: 2dfcbb3f003106e40b30aaa1861f2c96
+timeCreated: 1511150446
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Ankle_L
+    100002: Ankle_R
+    100004: Character_003_WinterClothes_001_Small
+    100006: //RootNode
+    100008: Clavical_L
+    100010: Clavical_R
+    100012: Elbow_L
+    100014: Elbow_R
+    100016: FingersEnd_L
+    100018: FingersEnd_R
+    100020: FingersKnuckle_L
+    100022: FingersKnuckle_R
+    100024: FingersMiddle_L
+    100026: FingersMiddle_R
+    100028: Head
+    100030: Hip_L
+    100032: Hip_R
+    100034: Knee_L
+    100036: Knee_R
+    100038: Neck
+    100040: Palm_L
+    100042: Palm_R
+    100044: Pelvis
+    100046: Root
+    100048: Shoulder_L
+    100050: Shoulder_R
+    100052: Spine
+    100054: Spine2
+    100056: ThumbCentre_L
+    100058: ThumbCentre_R
+    100060: ThumbEnd_L
+    100062: ThumbEnd_R
+    100064: ThumKnuckle_L
+    100066: ThumKnuckle_R
+    100068: Toes_L
+    100070: Toes_R
+    100072: Wrist_L
+    100074: Wrist_R
+    100076: WristExtendor_L
+    100078: WristExtendor_R
+    400000: Ankle_L
+    400002: Ankle_R
+    400004: Character_003_WinterClothes_001_Small
+    400006: //RootNode
+    400008: Clavical_L
+    400010: Clavical_R
+    400012: Elbow_L
+    400014: Elbow_R
+    400016: FingersEnd_L
+    400018: FingersEnd_R
+    400020: FingersKnuckle_L
+    400022: FingersKnuckle_R
+    400024: FingersMiddle_L
+    400026: FingersMiddle_R
+    400028: Head
+    400030: Hip_L
+    400032: Hip_R
+    400034: Knee_L
+    400036: Knee_R
+    400038: Neck
+    400040: Palm_L
+    400042: Palm_R
+    400044: Pelvis
+    400046: Root
+    400048: Shoulder_L
+    400050: Shoulder_R
+    400052: Spine
+    400054: Spine2
+    400056: ThumbCentre_L
+    400058: ThumbCentre_R
+    400060: ThumbEnd_L
+    400062: ThumbEnd_R
+    400064: ThumKnuckle_L
+    400066: ThumKnuckle_R
+    400068: Toes_L
+    400070: Toes_R
+    400072: Wrist_L
+    400074: Wrist_R
+    400076: WristExtendor_L
+    400078: WristExtendor_R
+    4300000: Character_003_WinterClothes_001_Small
+    7400000: Idle
+    9500000: //RootNode
+    13700000: Character_003_WinterClothes_001_Small
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

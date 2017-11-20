@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Characterp1
+  m_Name: Characterp3
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: dashing
@@ -364,7 +364,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 7949adefd491cf943ab4b68b17146896, type: 2}
+  m_Motion: {fileID: 7400000, guid: ce28575820b8eaa47a2dc02e08371a05, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
