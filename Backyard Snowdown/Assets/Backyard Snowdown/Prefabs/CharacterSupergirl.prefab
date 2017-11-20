@@ -1881,12 +1881,12 @@ MonoBehaviour:
   m_matCharacterRing: {fileID: 2100000, guid: afc12c128545c8f44a3de166bc3bbe1f, type: 2}
   m_matCharacterRingFull: {fileID: 2100000, guid: 14bd6102af4788248a4f96639f45f4ac,
     type: 2}
-  m_fSnowballSpeed: 1750
+  m_fSnowballSpeed: 900
   m_fMaxCharge: 1.5
   m_fPowerMin: 900
   m_fPowerMax: 2000
   m_fSlowSpeed: 2.5
-  m_fPowerOfTowardsCentre: 0
+  m_fPowerOfTowardsCentre: 5
   m_goSnowBallTarget: {fileID: 0}
   m_bThrowBall: 0
   m_bHasBall: 0
@@ -1899,10 +1899,6 @@ MonoBehaviour:
   m_smrCharacterMesh: {fileID: 137805486213274798}
   m_bHitByGiantSnowBall: 0
   m_fGiantSnowballStunTime: 0.25
-  m_goPlayerReticle: {fileID: 1112236485901864, guid: 2017fed6da7b39b42866dc0d050ecfd6,
-    type: 2}
-  m_goPlayerReticleCopy: {fileID: 0}
-  m_scpPlayerReticle: {fileID: 0}
 --- !u!114 &114590982006936800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1914,11 +1910,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1ec51959e23cb46b5d991f2e3d84d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SnowMan: {fileID: 1139900445632026, guid: 1c3765f161c38254eb911bd0c57cf449, type: 2}
-  m_Copy: {fileID: 0}
-  m_fSnowManBeforeSpawn: 0.3
-  m_fSnowManAfterSpawn: 0.3
-  m_bASnowManExists: 0
 --- !u!114 &114636830698670468
 MonoBehaviour:
   m_ObjectHideFlags: 1
