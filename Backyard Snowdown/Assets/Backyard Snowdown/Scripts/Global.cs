@@ -47,12 +47,7 @@ public class Global : MonoBehaviour
     [Tooltip("Stores the Snowball Location 2 GameObject.")]
     public GameObject m_SnowballLoc2 = null;
 
-
-    //-------------------------------
-    // 
-    //-------------------------------
-
-    //static string strControl;
+    public List<GameObject> m_goLstSnowballLoc = null;
 
     ////-------------------------------
     //// Use Xbox controls or keyboard
@@ -69,23 +64,23 @@ public class Global : MonoBehaviour
         if (m_goPauseCanvas)
             m_goPauseCanvas.SetActive(false);
 
-        if (m_SnowballLoc1 && m_SnowballLoc2)
+        if (m_goLstSnowballLoc.Count > 0)
         {
             GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-            goSnowball.transform.position = m_SnowballLoc1.transform.position;
-            goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-            goSnowball.transform.position = m_SnowballLoc2.transform.position;
+            for (int i = 0; i < m_goLstSnowballLoc.Count; i++)
+            {
+                goSnowball.transform.position = m_goLstSnowballLoc[i].transform.position;
+                goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+            }
         }
 
-        //GameObject goEventSystem = GameObject.Find("EventSystem");
-        //Event scpevntsys = goEventSystem.GetComponent<Event>();
-
-        //bKeyboardControls = true;
-        //strControl = "xbox";
-
-        // list then when the list is full, wait a second then change to the endround scene.
-
-        // 
+        //if (m_SnowballLoc1 && m_SnowballLoc2)
+        //{
+        //    GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+        //    goSnowball.transform.position = m_SnowballLoc1.transform.position;
+        //    goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+        //    goSnowball.transform.position = m_SnowballLoc2.transform.position;
+        //}
     }
 
     //---------------------------------
@@ -93,9 +88,6 @@ public class Global : MonoBehaviour
     //---------------------------------
     void Update()
     {
-
-
-
         if (XCI.GetButton(XboxButton.A, controller) && XCI.GetButton(XboxButton.B, controller) && XCI.GetButton(XboxButton.X, controller) && XCI.GetButton(XboxButton.Y, controller) && XCI.GetButton(XboxButton.LeftBumper, controller) && XCI.GetButton(XboxButton.RightBumper, controller))
             Application.Quit();
 
@@ -106,7 +98,6 @@ public class Global : MonoBehaviour
         {
             if (!m_goPauseCanvas.activeInHierarchy)
             {
-                //SceneManager.LoadScene(0);
                 m_goPauseCanvas.SetActive(true);
                 Time.timeScale = 0;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_btnFirstButton);
@@ -119,9 +110,6 @@ public class Global : MonoBehaviour
             }
 
         }
-        // if(List.Size == 4)
-        //  timer for a second
-        // 
     }
 
     public void PauseMenuContinue()
@@ -139,39 +127,9 @@ public class Global : MonoBehaviour
 
     public void ResetGame()
     {
-        //Player scpPlayer = gameObject.GetComponent<Player>();
-        //Debug.Log(fResetTimer);
-        //if (XCI.GetButton(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButtonDown(XboxButton.RightStick, scpPlayer.controller) || XCI.GetButtonDown(XboxButton.LeftStick, scpPlayer.controller) && XCI.GetButton(XboxButton.RightStick, scpPlayer.controller))
-        if (XCI.GetButton(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))// || XCI.GetButtonDown(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))
+        if (XCI.GetButton(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))
         {
-            //Debug.Log("START");
-            //fResetTimer += Time.deltaTime;
-
-            //if (fResetTimer >= fResetConfirmTime)
-            //{
-
             SceneManager.LoadScene("Main Menu");
-            //   fResetTimer = 0.0f;
-            //}
         }
-        //else { fResetTimer = 0.0f; }
     }
-
-
-
-
-    //private void OnGUI()
-    //{
-    //    if (GUI.Button(new Rect(1760, 850, 150, 50), "Use " + strControl + " controls"))
-    //    {
-    //        bXboxControls = !bXboxControls;
-    //        bKeyboardControls = !bKeyboardControls;
-
-    //        if (strControl == "xbox")
-    //            strControl = "keyboard";
-    //        else
-    //            strControl = "xbox";
-    //    }
-    //}
-
 }

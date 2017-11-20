@@ -299,7 +299,13 @@ public class Player : MonoBehaviour
     //{
 
     //}
-
+    void OnDrawGizmosSelected()
+    {
+        
+        //Debug.Log(transform.position);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(transform.position + m_v3XboxDashDir, 0.3f);
+    }
     //--------------------------------------------------------
     //
     //--------------------------------------------------------
@@ -311,6 +317,8 @@ public class Player : MonoBehaviour
 
         if (m_bAlive && !m_bHitByGiantSnowBall)
         {
+            transform.LookAt(transform.position + m_v3XboxDashDir * Time.deltaTime);
+
             Movement();
 
             Aiming();
@@ -449,14 +457,9 @@ public class Player : MonoBehaviour
         //if (!m_bMovementLock)
         //{
         if (XCI.GetAxisRaw(XboxAxis.RightStickX, controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightStickY, controller) != 0)
-        {
             bAimOverride = true;
-        }
-
         else
-        {
             bAimOverride = false;
-        }
 
 
         if (!bAimOverride)
@@ -478,7 +481,6 @@ public class Player : MonoBehaviour
                     transform.forward = m_v3XboxDashDir;
                 }
             }
-
         }
 
         else
