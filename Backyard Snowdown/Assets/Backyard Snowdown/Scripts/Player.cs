@@ -594,6 +594,7 @@ public class Player : MonoBehaviour
             {
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
+                AudioManager.m_SharedInstance.PlayThrowAudio();
                 m_Animator.SetBool("throwing", true);
 
                 if (m_bThrowBall)
@@ -765,6 +766,22 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void OnCollisionEnter(Collision col)
     {
+        if (col.gameObject.tag == "Character")
+        {
+            Player scpColPlayer = col.gameObject.GetComponent<Player>();
+            Dash scpColPlayerDash = col.gameObject.GetComponent<Dash>();
+
+            if (scpColPlayerDash.m_bDashing)
+            {
+                Debug.Log("Hit whilst dashing");
+                if (m_bHasBall && !scpColPlayer.m_bHasBall)
+                {
+                    m_bHasBall = false;
+                    scpColPlayer.m_bHasBall = true;
+                }
+            }
+        }
+
         if (col.gameObject.tag == "Snowball")
         {
             Snowball scpSnowball = col.gameObject.GetComponent<Snowball>();

@@ -30,9 +30,9 @@ public class GiantSnowBall : MonoBehaviour
         //transform.position -= Vector3.up * 1;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-            Debug.Log("MARC");
+        //Debug.Log("MARC");
         if (other.gameObject.tag == "SnowmanKnockBack")
         {
             Knockback();
