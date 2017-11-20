@@ -344,7 +344,7 @@ public class Player : MonoBehaviour
         }
         if (!m_bAlive)
         {
-            scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
+            //scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
         }
 
         if (m_bHitByGiantSnowBall)
