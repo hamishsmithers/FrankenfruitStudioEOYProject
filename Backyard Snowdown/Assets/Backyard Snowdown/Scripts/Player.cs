@@ -445,21 +445,50 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Aiming()
     {
-        //-------------------------
-        // Xbox Right Stick Aiming
-        //-------------------------
-        m_v3XboxDashDir = transform.forward;
-        if (!m_bLeftTriggerPressed)
+        bool bAimOverride = false;
+
+        if (XCI.GetAxisRaw(XboxAxis.RightStickX, controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightStickY, controller) != 0)
         {
-            m_axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
-            m_axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
+            bAimOverride = true;
+        }
 
-            //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+        if (!bAimOverride)
+        { 
+            //-------------------------
+            // Xbox Left Stick Aiming
+            //-------------------------
 
-            if (m_axisX != 0.0f || m_axisY != 0.0f)
+            m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
+        m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
+
+        //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+
+        if (m_axisX != 0.0f || m_axisY != 0.0f)
+        {
+            m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
+            transform.forward = m_v3XboxDashDir;
+        }
+
+        }
+         
+        else
+        { 
+            //-------------------------
+            // Xbox Right Stick Aiming
+            //-------------------------
+            m_v3XboxDashDir = transform.forward;
+            if (!m_bLeftTriggerPressed)
             {
-                m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
-                transform.forward = m_v3XboxDashDir;
+                m_axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
+                m_axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
+
+                //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+
+                if (m_axisX != 0.0f || m_axisY != 0.0f)
+                {
+                    m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
+                    transform.forward = m_v3XboxDashDir;
+                }
             }
         }
 
@@ -507,7 +536,6 @@ public class Player : MonoBehaviour
         {
             m_bHolding = false;
             m_bReleased = true;
-            AudioManager.m_SharedInstance.PlayThrowAudio();
         }
         else
             m_bReleased = false;
@@ -556,6 +584,7 @@ public class Player : MonoBehaviour
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
                 m_Animator.SetBool("throwing", true);
+                AudioManager.m_SharedInstance.PlayThrowAudio();
 
                 if (m_bThrowBall)
                 {
