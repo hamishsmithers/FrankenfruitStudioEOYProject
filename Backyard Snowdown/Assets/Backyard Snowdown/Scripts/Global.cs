@@ -6,8 +6,12 @@ using UnityEngine.SceneManagement;
 using XboxCtrlrInput;       // Be sure to include this if you want an object to have Xbox input
 
 
+
 public class Global : MonoBehaviour
 {
+    public static float MusicVolume = 0.5f;
+    public static float SFXVolume = 0.5f;
+
     public XboxController controller;
 
     //--------------------------------------
@@ -89,6 +93,8 @@ public class Global : MonoBehaviour
     //---------------------------------
     void Update()
     {
+
+
 
         if (XCI.GetButton(XboxButton.A, controller) && XCI.GetButton(XboxButton.B, controller) && XCI.GetButton(XboxButton.X, controller) && XCI.GetButton(XboxButton.Y, controller) && XCI.GetButton(XboxButton.LeftBumper, controller) && XCI.GetButton(XboxButton.RightBumper, controller))
             Application.Quit();

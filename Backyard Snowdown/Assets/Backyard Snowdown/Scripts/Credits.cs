@@ -8,6 +8,8 @@ public class Credits : MonoBehaviour {
 
     public XboxController controller;
 
+    public AudioSource CreditsMusic = null;
+
     //public GameObject CreditsText = null;
 
     //private Vector3 CreditTransform;
@@ -18,6 +20,7 @@ public class Credits : MonoBehaviour {
         //CreditTransform.x = 0;
         //CreditTransform.y = 0;
         //CreditTransform.z = 0;
+        CreditsMusic.volume = Global.MusicVolume;
     }
 	
 	// Update is called once per frame

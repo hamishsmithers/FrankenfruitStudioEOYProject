@@ -5,21 +5,22 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour {
 
     public AudioClip[] Music;
-    private AudioSource Source;
+    public AudioSource MusicSource;
 
 
 	// Use this for initialization
 	void Start ()
     {
-        Source = gameObject.GetComponent<AudioSource>();
+        MusicSource = gameObject.GetComponent<AudioSource>();
 
         int Selector = Random.Range(0, Music.Length);
-        Source.clip = Music[Selector];
-        Source.Play();
+        MusicSource.clip = Music[Selector];
+        MusicSource.Play();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-	}
+        MusicSource.volume = Global.MusicVolume;
+    }
 }

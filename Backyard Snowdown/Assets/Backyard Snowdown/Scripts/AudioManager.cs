@@ -13,11 +13,11 @@ public class AudioManager : MonoBehaviour {
     public AudioClip sfxSnowManSummon = null;
     public AudioMixerGroup m_audmixMixer = null;
     public GameObject goSound = null;
+    public AudioSource sfxSource = null;
     public AudioClip[] sfxThrow = null;
     public AudioClip[] sfxHitArray = null;
     public AudioClip[] sfxHurtArray = null;
 
-    private AudioSource sfxSource;
     private Player scpPlayer;
     private Dash scpDash;
 
@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
+        sfxSource.volume = Global.SFXVolume;
         //if (scpPlayer.m_bThrowBall)
         //{
         //    int Selector = Random.Range(0, sfxThrow.Length);
