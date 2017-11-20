@@ -594,7 +594,6 @@ public class Player : MonoBehaviour
             {
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
-                AudioManager.m_SharedInstance.PlayThrowAudio();
                 m_Animator.SetBool("throwing", true);
 
                 if (m_bThrowBall)
