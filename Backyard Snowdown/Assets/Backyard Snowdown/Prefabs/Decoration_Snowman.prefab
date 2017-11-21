@@ -28,19 +28,52 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1567920147944052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4253529175159986}
+  - component: {fileID: 33542340170940534}
+  - component: {fileID: 23639970919774356}
+  - component: {fileID: 95378024401698688}
+  m_Layer: 0
+  m_Name: sunglasses
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4253529175159986
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567920147944052}
+  m_LocalRotation: {x: -0.000000007450579, y: -0.030409835, z: -0.0000000037252894,
+    w: 0.9995376}
+  m_LocalPosition: {x: 0.102, y: 1.835, z: 0.29}
+  m_LocalScale: {x: 2.1105168, y: 2.1105168, z: 2.1105168}
+  m_Children: []
+  m_Father: {fileID: 4501062340545166}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -3.4850001, z: 0}
 --- !u!4 &4501062340545166
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460902670625768}
-  m_LocalRotation: {x: -0, y: 0.9910497, z: -0, w: -0.13349341}
-  m_LocalPosition: {x: -9.351, y: -2.724, z: 4.301}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_LocalRotation: {x: 0.05033678, y: 0.85566604, z: -0.119665146, w: -0.5009813}
+  m_LocalPosition: {x: 11.981, y: 1.017, z: 7.874}
+  m_LocalScale: {x: 1.1522951, y: 1.1522942, z: 1.1522951}
+  m_Children:
+  - {fileID: 4253529175159986}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 195.34299, z: 0}
+  m_LocalEulerAnglesHint: {x: 8.879001, y: 241.635, z: 12.037001}
 --- !u!23 &23435981271090714
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -54,7 +87,39 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: af4a556fac86ecd408fc09dd8dcdb1bd, type: 2}
+  - {fileID: 2100000, guid: 191d29d282ed1734c844bc187106c9ea, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!23 &23639970919774356
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567920147944052}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 0f0afd1824eb765429a53c24d362f4cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,3 +145,27 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460902670625768}
   m_Mesh: {fileID: 4300000, guid: 5fc35d293faf0074695956e40ee5cd52, type: 3}
+--- !u!33 &33542340170940534
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567920147944052}
+  m_Mesh: {fileID: 4300000, guid: 021fbb18adface449855ba81cd5d8802, type: 3}
+--- !u!95 &95378024401698688
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567920147944052}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 021fbb18adface449855ba81cd5d8802, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
