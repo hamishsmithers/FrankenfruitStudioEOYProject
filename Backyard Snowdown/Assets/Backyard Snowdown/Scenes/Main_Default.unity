@@ -1198,6 +1198,11 @@ Prefab:
       propertyPath: imgPlayer
       value: 
       objectReference: {fileID: 542673976}
+    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
+        type: 2}
+      propertyPath: m_fIFrame
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32b36135559a2e244b843a945f2beb8f, type: 2}
   m_IsPrefabParent: 0
@@ -2703,6 +2708,11 @@ Prefab:
       propertyPath: imgPlayer
       value: 
       objectReference: {fileID: 542673974}
+    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
+        type: 2}
+      propertyPath: m_fIFrame
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cac88040a923a7f4395fe58f7df28b99, type: 2}
   m_IsPrefabParent: 0
@@ -2863,7 +2873,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 353198860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.5, z: 1}
+  m_LocalPosition: {x: 1.5, y: 1.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 385425633}
@@ -3560,7 +3570,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 464012540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.5, z: -1}
+  m_LocalPosition: {x: 0, y: 1.5, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 385425633}
@@ -8538,7 +8548,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1017260272}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 1.5, z: 1}
+  m_LocalPosition: {x: -1.5, y: 1.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 385425633}
@@ -8994,6 +9004,11 @@ Prefab:
       propertyPath: imgPlayer
       value: 
       objectReference: {fileID: 542673975}
+    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
+        type: 2}
+      propertyPath: m_fIFrame
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d421fa0e150dc67468c5f33fc7f220aa, type: 2}
   m_IsPrefabParent: 0
@@ -10483,6 +10498,11 @@ Prefab:
       propertyPath: imgPlayer
       value: 
       objectReference: {fileID: 542673977}
+    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
+        type: 2}
+      propertyPath: m_fIFrame
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f8748022449ef4388bad3c48b85778, type: 2}
   m_IsPrefabParent: 0
@@ -11836,7 +11856,7 @@ Prefab:
     - target: {fileID: 114402089789818526, guid: ed91ab81d92cc86499daea942bb63224,
         type: 2}
       propertyPath: m_goLstSnowballLoc.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4992644117997168, guid: ed91ab81d92cc86499daea942bb63224, type: 2}
       propertyPath: m_LocalPosition.x
@@ -11893,7 +11913,7 @@ Prefab:
     - target: {fileID: 114079097203194172, guid: ed91ab81d92cc86499daea942bb63224,
         type: 2}
       propertyPath: m_nAmountToPool
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114402089789818526, guid: ed91ab81d92cc86499daea942bb63224,
         type: 2}

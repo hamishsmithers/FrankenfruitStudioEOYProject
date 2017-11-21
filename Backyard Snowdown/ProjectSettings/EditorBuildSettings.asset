@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Backyard Snowdown/Scenes/splashscreen_001.unity
+    guid: 1f44e3d863be2bc4ca4173a836470727
+  - enabled: 1
     path: Assets/Backyard Snowdown/Scenes/Main Menu.unity
     guid: 447919a4121e5df46b1f1a77df9d0088
   - enabled: 1

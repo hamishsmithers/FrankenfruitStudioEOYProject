@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent (typeof(AudioSource))]
 
 public class SplashScreen : MonoBehaviour {
 
 	public MovieTexture movie;
+
+    //Time until loading main menu
+    public float timeToDelay;
 
 	private AudioSource audio;
 
@@ -23,6 +27,10 @@ public class SplashScreen : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Time.time > timeToDelay){
+            SceneManager.LoadScene("Main Menu");
+        }
 
 
 		
