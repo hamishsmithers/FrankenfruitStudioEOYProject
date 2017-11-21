@@ -65,7 +65,9 @@ public class JumpingSnowman : MonoBehaviour
     [Tooltip("Time the Snowman spends jumping from position to destination.")]
     public float m_fJumpingTime = 1.0f;
     private Vector3 m_v3StartPos;
+    private Vector3 m_v3StartPosTangent;
     private Vector3 m_v3NextPos;
+    private Vector3 m_v3NextPosTangent;
 
     private int m_nCurve = 1;
 
@@ -86,7 +88,7 @@ public class JumpingSnowman : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 10)
+        if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 11)
         {
             //rb = GetComponent<Rigidbody>();
             m_goTR = GameObject.Find("Reticle Bounds Top Right");
@@ -259,3 +261,16 @@ public class JumpingSnowman : MonoBehaviour
         m_v3CurveMiddle += transform.up * m_fHeightOfJump;
     }
 }
+
+/*
+ * Start (snowmans pos)
+ * Randomly calculate an end
+ * Height
+ * 
+ * MidPoint = (Start + end) / 2
+ * Midpoint.y = height
+ * 
+ * Vector3 a = lerp (start, midpoint, t)
+ * Vector3 b = lerp(midpoint, end, t)
+ * Vector3 result = lerp (a, b, t)
+*/
