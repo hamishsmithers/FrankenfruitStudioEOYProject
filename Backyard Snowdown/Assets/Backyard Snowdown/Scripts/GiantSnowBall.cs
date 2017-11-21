@@ -18,17 +18,31 @@ public class GiantSnowBall : MonoBehaviour
     public float m_fAreaOfEffect = 3.0f;
 
     public GameObject m_goImpactParticles;
+    public GameObject m_goImpactParticlesCloud;
 
-
+    private ParticleSystem psSnowflake;
+    private ParticleSystem psCloud;
+    bool bOnce;
     // Use this for initialization
     void Start()
     {
-
+        psSnowflake = m_goImpactParticles.GetComponent<ParticleSystem>();
+        psCloud = m_goImpactParticlesCloud.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (bOnce)
+        {
+            
+            bOnce = false;
+        }
+        if(!bOnce)
+            //psSnowflake.enableEmission = false;
+
+        Debug.Log(psSnowflake.isPlaying);
+        //psCloud.Play();
         //transform.position -= Vector3.up * 1;
     }
 
@@ -37,14 +51,14 @@ public class GiantSnowBall : MonoBehaviour
         //Debug.Log("MARC");
         if (other.gameObject.tag == "SnowmanKnockBack")
         {
+            ParticleSystem.EmitParams myParams = new ParticleSystem.EmitParams();
+            myParams.startLifetime = 1.0f;
             Knockback();
-            ParticleSystem psSnowflake = m_goImpactParticles.GetComponent<ParticleSystem>();
-            ParticleSystem psCloud = m_goImpactParticles.transform.GetChild(0).GetComponent<ParticleSystem>();
 
-            //ParticleSystem.EmitParams emitOverride = new ParticleSystem.EmitParams();
-            //emitOverride.startLifetime = 1f;
-            psSnowflake.Emit(1);
-            psCloud.Emit(1);
+
+            psSnowflake.Play();
+            psCloud.Play();
+
         }
     }
 
