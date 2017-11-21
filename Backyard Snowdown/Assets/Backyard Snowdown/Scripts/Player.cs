@@ -534,6 +534,10 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Shoot()
     {
+        //if the player don't have a ball don't let them charge!
+        if (!m_bHasBall)
+            ResetChargeThrow();
+
         // if not throwing set animation to false
         m_Animator.SetBool("throwing", false);
 
@@ -598,7 +602,7 @@ public class Player : MonoBehaviour
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
                 m_Animator.SetBool("throwing", true);
 
-                if (m_bThrowBall)
+                if (m_bThrowBall && m_bHasBall)
                 {
                     AudioManager.m_SharedInstance.PlayThrowAudio();
                     RaycastHit hit;

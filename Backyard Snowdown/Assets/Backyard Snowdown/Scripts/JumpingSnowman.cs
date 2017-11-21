@@ -87,7 +87,7 @@ public class JumpingSnowman : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 4 || SceneManager.GetActiveScene().buildIndex == 5 || SceneManager.GetActiveScene().buildIndex == 6 || SceneManager.GetActiveScene().buildIndex == 7)
+        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 10)
         {
             //rb = GetComponent<Rigidbody>();
             m_goTR = GameObject.Find("Reticle Bounds Top Right");

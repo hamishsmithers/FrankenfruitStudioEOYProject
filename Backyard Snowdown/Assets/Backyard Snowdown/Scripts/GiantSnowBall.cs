@@ -22,7 +22,8 @@ public class GiantSnowBall : MonoBehaviour
 
     private ParticleSystem psSnowflake;
     private ParticleSystem psCloud;
-    bool bOnce;
+
+
     // Use this for initialization
     void Start()
     {
@@ -32,19 +33,7 @@ public class GiantSnowBall : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (bOnce)
-        {
-            
-            bOnce = false;
-        }
-        if(!bOnce)
-            //psSnowflake.enableEmission = false;
-
-        Debug.Log(psSnowflake.isPlaying);
-        //psCloud.Play();
-        //transform.position -= Vector3.up * 1;
-    }
+    { }
 
     private void OnTriggerEnter(Collider other)
     {
