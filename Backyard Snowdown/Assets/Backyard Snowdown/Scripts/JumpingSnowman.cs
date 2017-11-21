@@ -1,5 +1,4 @@
-﻿// Franzi
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -241,14 +240,13 @@ public class JumpingSnowman : MonoBehaviour
             m_bDead = false;
             m_fDeathTimer = 0.0f;
 
-            // restore life to franzi
             m_nHealthPoints = 2;
         }
     }
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Snowball")
+        if (col.gameObject.tag == "Snowball" && col.gameObject.GetComponent<Snowball>().m_bTooFast)
         {
             m_nHealthPoints = m_nHealthPoints - 1;
         }

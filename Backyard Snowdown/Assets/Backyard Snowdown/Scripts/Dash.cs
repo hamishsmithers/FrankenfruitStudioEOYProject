@@ -43,7 +43,9 @@ public class Dash : MonoBehaviour
     [HideInInspector]
     public float m_fDashTimer = 0.0f;
     private float m_fCoolDownTimer = 0.0f;
-    private bool m_bCoolDown = false;
+
+    [HideInInspector]
+    public bool m_bCoolDown = false;
     private bool m_bStartTimer = false;
 
 
@@ -86,13 +88,16 @@ public class Dash : MonoBehaviour
 
                 if (m_fDashDuration > m_fDashTimer)
                 {
-                    if(!m_bDashing)
-                        AudioManager.m_SharedInstance.PlayDashAudio();
-                    m_bDashing = true;
-                    scpPlayer.m_rb.AddForce(m_v3DashDir * m_fDashSpeed * scpPlayer.m_fCurrentSpeed, ForceMode.Impulse);
-                    //transform.position += m_v3DashDir * m_fDashSpeed * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
-                    m_fDashTimer += Time.deltaTime;
-                    scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", true);
+                    if (!scpPlayer.m_bHitByGiantSnowBall)
+                    {
+                        if (!m_bDashing)
+                            AudioManager.m_SharedInstance.PlayDashAudio();
+                        m_bDashing = true;
+                        scpPlayer.m_rb.AddForce(m_v3DashDir * m_fDashSpeed * scpPlayer.m_fCurrentSpeed, ForceMode.Impulse);
+                        //transform.position += m_v3DashDir * m_fDashSpeed * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
+                        m_fDashTimer += Time.deltaTime;
+                        scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", true);
+                    }
                 }
                 else
                 {

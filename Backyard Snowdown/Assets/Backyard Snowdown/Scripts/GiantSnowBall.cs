@@ -22,8 +22,6 @@ public class GiantSnowBall : MonoBehaviour
 
     private ParticleSystem psSnowflake;
     private ParticleSystem psCloud;
-
-
     // Use this for initialization
     void Start()
     {
@@ -33,7 +31,8 @@ public class GiantSnowBall : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { }
+    {
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -60,9 +59,18 @@ public class GiantSnowBall : MonoBehaviour
         for (int i = 0; i < players.Length; ++i)
         {
             Rigidbody rb = players[i].gameObject.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
             rb.AddExplosionForce(m_fKnockbackForce, hit, m_fAreaOfEffect, 1.0f, ForceMode.Impulse);
             Player scpPlayer = players[i].GetComponent<Player>();
+            //Dash scpDash = gameObject.GetComponent<Dash>();
             scpPlayer.m_bHitByGiantSnowBall = true;
+            //scpDash.m_bDashing = false;
+            //scpDash.m_bCoolDown = false;
+            //scpDash.m_fDashTimer = scpPlayer.GetComponent<Dash>().m_fDashDuration;
+            scpPlayer.GetComponent<Dash>().m_bDashing = false;
+            scpPlayer.GetComponent<Dash>().m_bCoolDown = false;
+            scpPlayer.GetComponent<Dash>().m_fDashTimer = scpPlayer.GetComponent<Dash>().m_fDashDuration;
+            scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", false);
         }
     }
 }

@@ -301,7 +301,7 @@ public class Player : MonoBehaviour
     //}
     void OnDrawGizmosSelected()
     {
-        
+
         //Debug.Log(transform.position);
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(transform.position + m_v3XboxDashDir, 0.3f);
@@ -315,7 +315,9 @@ public class Player : MonoBehaviour
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
         EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
 
-        if (m_bAlive && !m_bHitByGiantSnowBall)
+
+
+        if (m_bAlive)
         {
             transform.LookAt(transform.position + m_v3XboxDashDir * Time.deltaTime);
 
@@ -357,13 +359,20 @@ public class Player : MonoBehaviour
 
         if (m_bHitByGiantSnowBall)
         {
+            //try to make their velocity completely 0 and then knockback.
+            //if (scpDash.m_bDashing)
+            // scpDash.m_bDashing = false;
+
             m_fHitTimer += Time.deltaTime;
+            m_bMovementLock = true;
         }
 
         if (m_fHitTimer > m_fGiantSnowballStunTime && m_rb.velocity.magnitude < 2.0f && m_bHitByGiantSnowBall)
         {
             m_bHitByGiantSnowBall = false;
             m_fHitTimer = 0.0f;
+            m_bMovementLock = false;
+            scpDash.m_fDashTimer = scpDash.m_fDashDuration + 1.0f;
         }
 
         if (m_bHasBall)
@@ -382,6 +391,7 @@ public class Player : MonoBehaviour
             //stop sliding
             m_rb.velocity = Vector3.zero;
             m_rb.angularVelocity = Vector3.zero;
+
         }
         //Debug.Log(m_rb.velocity.magnitude);
         //m_Anim.SetFloat("running", m_rb.velocity.magnitude);
@@ -454,52 +464,55 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Aiming()
     {
-        //if (!m_bMovementLock)
-        //{
-        if (XCI.GetAxisRaw(XboxAxis.RightStickX, controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightStickY, controller) != 0)
-            bAimOverride = true;
-        else
-            bAimOverride = false;
-
-
-        if (!bAimOverride)
+        //if (m_bMovementLock)
+        //    Debug.Log("Hamo");
+        if (!m_bMovementLock)
         {
-            //-------------------------
-            // Xbox Left Stick Aiming
-            //-------------------------
-            m_v3XboxDashDir = transform.forward;
-            if (!m_bLeftTriggerPressed)
+            if (XCI.GetAxisRaw(XboxAxis.RightStickX, controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightStickY, controller) != 0)
+                bAimOverride = true;
+            else
+                bAimOverride = false;
+
+
+            if (!bAimOverride)
             {
-                m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
-                m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
-
-                //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
-
-                if (m_axisX != 0.0f || m_axisY != 0.0f)
+                //-------------------------
+                // Xbox Left Stick Aiming
+                //-------------------------
+                m_v3XboxDashDir = transform.forward;
+                if (!m_bLeftTriggerPressed)
                 {
-                    m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
-                    transform.forward = m_v3XboxDashDir;
+                    m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
+                    m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
+
+                    //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+
+                    if (m_axisX != 0.0f || m_axisY != 0.0f)
+                    {
+                        m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
+                        transform.forward = m_v3XboxDashDir;
+                    }
                 }
             }
-        }
 
-        else
-        {
-            //-------------------------
-            // Xbox Right Stick Aiming
-            //-------------------------
-            m_v3XboxDashDir = transform.forward;
-            if (!m_bLeftTriggerPressed)
+            else
             {
-                m_axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
-                m_axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
-
-                //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
-
-                if (m_axisX != 0.0f || m_axisY != 0.0f)
+                //-------------------------
+                // Xbox Right Stick Aiming
+                //-------------------------
+                m_v3XboxDashDir = transform.forward;
+                if (!m_bLeftTriggerPressed)
                 {
-                    m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
-                    transform.forward = m_v3XboxDashDir;
+                    m_axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
+                    m_axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
+
+                    //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
+
+                    if (m_axisX != 0.0f || m_axisY != 0.0f)
+                    {
+                        m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
+                        transform.forward = m_v3XboxDashDir;
+                    }
                 }
             }
         }
@@ -546,13 +559,18 @@ public class Player : MonoBehaviour
 
         float rightTrigHeight = m_MaxTriggerHeight * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
         m_bThrow = (Input.GetKey(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
-        if (rightTrigHeight < 1.0f)
+
+        if (rightTrigHeight < 1.0f && m_bHasBall)
+        {
             m_bHolding = true;
+            m_Animator.SetBool("throwing", true);
+        }
 
         if (m_bHolding && rightTrigHeight > 1.0f)
         {
             m_bHolding = false;
             m_bReleased = true;
+            m_Animator.SetBool("throwing", false);
         }
         else
             m_bReleased = false;
@@ -564,11 +582,14 @@ public class Player : MonoBehaviour
 
         if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bGo || bDuringMaxCharge || m_bThrowBall)
         {
+
+
             if (m_fChargeTimer < m_fMaxCharge && !m_bThrowBall)
             {
                 m_fChargeTimer += Time.deltaTime;
                 //scpSlider.m_sliChargeSlider.value = m_fChargeTimer;
                 m_bCharging = true;
+                m_Animator.SetBool("maxcharge", false);
             }
             else if (m_fChargeTimer >= m_fMaxCharge && !m_bThrowBall)
             {
@@ -588,6 +609,7 @@ public class Player : MonoBehaviour
                 {
                     m_bCharging = false;
                     bChargedLimitReached = true;
+                    m_Animator.SetBool("maxcharge", true);
                 }
             }
 
@@ -600,7 +622,7 @@ public class Player : MonoBehaviour
             {
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
-                m_Animator.SetBool("throwing", true);
+                //Debug.Log("throwing");
 
                 if (m_bThrowBall && m_bHasBall)
                 {
@@ -616,6 +638,7 @@ public class Player : MonoBehaviour
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
                         // The ball is thrown so it becomes false
                         m_bHasBall = false;
+                        m_Animator.SetBool("throwing", false);
                         Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
                         ResetChargeThrow();
                     }
@@ -629,6 +652,7 @@ public class Player : MonoBehaviour
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
                         // The ball is thrown so it becomes false
                         m_bHasBall = false;
+                        m_Animator.SetBool("throwing", false);
                         ResetChargeThrow();
                     }
                 }

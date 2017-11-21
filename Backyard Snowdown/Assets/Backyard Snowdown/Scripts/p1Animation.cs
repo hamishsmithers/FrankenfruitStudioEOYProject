@@ -22,4 +22,10 @@ public class p1Animation : MonoBehaviour
         Player scpPlayer = GetComponentInParent<Player>();
         scpPlayer.m_bThrowBall = true;
     }
+
+    public void StartThrowBall()
+    {
+        //Player scpPlayer = GetComponentInParent<Player>();
+        //scpPlayer.m_bThrowBall = true;
+    }
 }
