@@ -6,10 +6,19 @@ ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
+    100002: ShellPool_001_Outside_001_Obstacle
+    100004: ShellPool_001_Outside_002_Ice
     400000: //RootNode
+    400002: ShellPool_001_Outside_001_Obstacle
+    400004: ShellPool_001_Outside_002_Ice
     2300000: //RootNode
+    2300002: ShellPool_001_Outside_001_Obstacle
+    2300004: ShellPool_001_Outside_002_Ice
     3300000: //RootNode
+    3300002: ShellPool_001_Outside_001_Obstacle
+    3300004: ShellPool_001_Outside_002_Ice
     4300000: ShellPool_001_Outside_001_Obstacle
+    4300002: ShellPool_001_Outside_002_Ice
   materials:
     importMaterials: 1
     materialName: 0
