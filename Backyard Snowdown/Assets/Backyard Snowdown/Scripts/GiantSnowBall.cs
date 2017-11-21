@@ -17,6 +17,8 @@ public class GiantSnowBall : MonoBehaviour
     [Tooltip("A float to change the area effect of the giant snowball.")]
     public float m_fAreaOfEffect = 3.0f;
 
+    public GameObject m_goImpactParticles;
+
 
     // Use this for initialization
     void Start()
@@ -36,6 +38,13 @@ public class GiantSnowBall : MonoBehaviour
         if (other.gameObject.tag == "SnowmanKnockBack")
         {
             Knockback();
+            ParticleSystem psSnowflake = m_goImpactParticles.GetComponent<ParticleSystem>();
+            ParticleSystem psCloud = m_goImpactParticles.transform.GetChild(0).GetComponent<ParticleSystem>();
+
+            //ParticleSystem.EmitParams emitOverride = new ParticleSystem.EmitParams();
+            //emitOverride.startLifetime = 1f;
+            psSnowflake.Emit(1);
+            psCloud.Emit(1);
         }
     }
 
