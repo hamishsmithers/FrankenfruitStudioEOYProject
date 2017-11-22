@@ -65,11 +65,9 @@ public class JumpingSnowman : MonoBehaviour
     [Tooltip("Time the Snowman spends jumping from position to destination.")]
     public float m_fJumpingTime = 1.0f;
     private Vector3 m_v3StartPos;
-    private Vector3 m_v3StartPosTangent;
     private Vector3 m_v3NextPos;
-    private Vector3 m_v3NextPosTangent;
 
-    private int m_nCurve = 1;
+    //private int m_nCurve = 1;
 
     //----------------------
     // 
@@ -88,7 +86,7 @@ public class JumpingSnowman : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 11)
+        //if (SceneManager.GetActiveScene().name == "Main_Default" || SceneManager.GetActiveScene().buildIndex == 11)
         {
             //rb = GetComponent<Rigidbody>();
             m_goTR = GameObject.Find("Reticle Bounds Top Right");
@@ -110,8 +108,6 @@ public class JumpingSnowman : MonoBehaviour
         m_fSpawnTime = Random.Range(m_fMin, m_fMax);
         AudioManager.m_SharedInstance.PlaySnowmanSummon();
     }
-
-    private bool spawned = false;
 
     // Update is called once per frame
     void Update()
@@ -149,25 +145,28 @@ public class JumpingSnowman : MonoBehaviour
         }
         else if (!m_bDead && m_bSpawned && m_fJumpCounter > m_fTimeUntilNextJump)
         {
+            m_v3StartPos = transform.position;
+
             m_bBetweenJumps = false;
             m_fJumpCounter = 0.0f;
             // Setting the next pos
-            m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x) - transform.position.x;
+            m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x);
             // we minus the current location to keep the snowman in the map
-            m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z) - transform.position.z;
+            m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z);
             // set the snowmans next location
-            m_v3NextPos.Set(m_xLoc, 0.0f, m_zLoc);
+            m_v3NextPos.Set(m_xLoc, m_v3StartPos.y, m_zLoc);
+            CreateCurve();
 
             int layer = 1 << LayerMask.NameToLayer("Obstacle");
 
             while (Physics.CheckSphere(m_v3NextPos, 0.5682563f, layer))
             {
                 // Setting the next pos
-                m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x) - transform.position.x;
+                m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x);
                 // we minus the current location to keep the snowman in the map
-                m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z) - transform.position.z;
+                m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z);
                 // set the snowmans next location
-                m_v3NextPos.Set(m_xLoc, 0.9f, m_zLoc);
+                m_v3NextPos.Set(m_xLoc, m_v3StartPos.y, m_zLoc);
             }
 
         }
@@ -185,33 +184,35 @@ public class JumpingSnowman : MonoBehaviour
                 m_bBoingSound = false;
             }
 
-            CreateCurve();
+            
 
+            Vector3 v3P1 = Vector3.Lerp(m_v3StartPos, m_v3CurveMiddle, m_fJumpingTimer);
+            Vector3 v3P2 = Vector3.Lerp(m_v3CurveMiddle, m_v3NextPos, m_fJumpingTimer);
+            transform.position = Vector3.Lerp(v3P1, v3P2, m_fJumpingTimer);
             // move the snowman to the next location smoothly
-            switch (m_nCurve)
-            {
-                // snowman moves to the peak of its jump
-                case 1:
-                    transform.position += m_v3CurveMiddle * Time.deltaTime;
-                    if (m_fJumpingTimer > m_fJumpingTime / 2)
-                        m_nCurve = 2;
-                    break;
+            //switch (m_nCurve)
+            //{
+            //    // snowman moves to the peak of its jump
+            //    case 1:
+            //        transform.position += m_v3CurveMiddle * Time.deltaTime;
+            //        if (m_fJumpingTimer > m_fJumpingTime / 2)
+            //            m_nCurve = 2;
+            //        break;
 
-                case 2:
-                    // good job hamo nad mitcho
-                    // snowman moves from the peak of its jump to the landing point
-                    transform.position += (m_v3NextPos * Time.deltaTime) + m_fHeightOfJump * (-transform.up * Time.deltaTime);
-                    if (m_fJumpingTimer >= m_fJumpingTime)
-                    {
-                        m_nCurve = 1;
-                        transform.position = new Vector3(transform.position.x, 0.9f, transform.position.z);
-                    }
-                    break;
+            //    case 2:
+            //        // good job hamo nad mitcho
+            //        // snowman moves from the peak of its jump to the landing point
+            //        transform.position += (m_v3NextPos * Time.deltaTime) + m_fHeightOfJump * (-transform.up * Time.deltaTime);
+            //        if (m_fJumpingTimer >= m_fJumpingTime)
+            //        {
+            //            m_nCurve = 1;
+            //            transform.position = new Vector3(transform.position.x, 0.9f, transform.position.z);
+            //        }
+            //        break;
 
-                default:
-                    break;
-            }
-
+            //    default:
+            //        break;
+            //}
             m_bJumping = true;
         }
         else if (!m_bDead && m_bSpawned && m_fJumpingTimer > m_fJumpingTime)
