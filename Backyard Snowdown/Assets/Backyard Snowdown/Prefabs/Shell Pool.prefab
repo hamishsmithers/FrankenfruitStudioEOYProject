@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 33037255204449840}
   - component: {fileID: 23199496344601986}
   m_Layer: 0
-  m_Name: ShellPool_001_Outside_001_Obstacle
+  m_Name: Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 33490892894802156}
   - component: {fileID: 23834390171526992}
   m_Layer: 0
-  m_Name: ShellPool_001_Outside_002_Ice
+  m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
