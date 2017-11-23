@@ -83,6 +83,11 @@ public class JumpingSnowman : MonoBehaviour
     private float m_fDeathTimer = 0.0f;
     private float m_fDeathTime = 3.0f;
 
+    public GameObject m_goSpawnParticles;
+    private ParticleSystem psSpawn;
+
+    private bool bSpawnParticleEffectPlayed = false;
+    private bool bChooseNewSpawn = true;
     // Use this for initialization
     void Awake()
     {
@@ -99,6 +104,8 @@ public class JumpingSnowman : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        psSpawn = m_goSpawnParticles.GetComponent<ParticleSystem>();
+
         c = gameObject.GetComponent<Collider>();
         mr = gameObject.GetComponent<MeshRenderer>();
 
@@ -118,14 +125,29 @@ public class JumpingSnowman : MonoBehaviour
             if (m_fSpawnCount <= m_fSpawnTime && !m_bCanJump)
             {
                 m_fSpawnCount += Time.deltaTime;
+
+                if (bChooseNewSpawn)
+                {
+                    m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x) - transform.position.x;
+                    // we minus the current location to keep the snowman in the map
+                    m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z) - transform.position.z;
+                    // set the snowmans next location
+                    m_v3Pos.Set(m_xLoc, 0.9f, m_zLoc);
+                }
+            }
+            if (!bSpawnParticleEffectPlayed && m_fSpawnCount > (m_fSpawnTime - 1.0f) && !m_bCanJump)
+            {
+                Vector3 v3psSpawnPos = m_v3Pos;
+                v3psSpawnPos.y = 1.0f;
+                psSpawn.transform.position = v3psSpawnPos;
+
+                psSpawn.Play();
+
+                bSpawnParticleEffectPlayed = true;
+                bChooseNewSpawn = false;
             }
             else if (m_fSpawnCount > m_fSpawnTime && !m_bCanJump)
             {
-                m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x) - transform.position.x;
-                // we minus the current location to keep the snowman in the map
-                m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z) - transform.position.z;
-                // set the snowmans next location
-                m_v3Pos.Set(m_xLoc, 0.9f, m_zLoc);
                 // move the snowman to the next location
                 transform.position = m_v3Pos;
 
@@ -133,6 +155,7 @@ public class JumpingSnowman : MonoBehaviour
                 c.enabled = true;
                 mr.enabled = true;
                 m_bSpawned = true;
+                bChooseNewSpawn = true;
             }
         }
 
