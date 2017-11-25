@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ChargeSlider : MonoBehaviour {
 
     //----------------------------------------------
-    // Charge Shot Slider
+    // Charge Throw Slider
     //----------------------------------------------
     [LabelOverride("Charge Background")]
     public Image m_imgBackground = null;

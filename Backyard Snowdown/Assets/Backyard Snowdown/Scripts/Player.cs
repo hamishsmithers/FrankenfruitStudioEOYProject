@@ -123,19 +123,19 @@ public class Player : MonoBehaviour
     // Min Power
     //-----------
     [LabelOverride("Min Power")]
-    [Tooltip("A float that stores the minimum power of a shot at lowest charge.")]
+    [Tooltip("A float that stores the minimum power of a throw at lowest charge.")]
     public float m_fPowerMin = 250.0f;
     //-----------
     // Max Power
     //-----------
     [LabelOverride("Max Power")]
-    [Tooltip("A float that stores the maximum power of a shot at full charge.")]
+    [Tooltip("A float that stores the maximum power of a throw at full charge.")]
     public float m_fPowerMax = 1750.0f;
     //------------
     // Slow Speed
     //------------
     [LabelOverride("Slow Speed")]
-    [Tooltip("A float that represents how much slower the player is while charging up a shot.")]
+    [Tooltip("A float that represents how much slower the player is while charging up a throw.")]
     public float m_fSlowSpeed = 2.5f;
 
     //--------------------------------
@@ -263,7 +263,14 @@ public class Player : MonoBehaviour
     // Animator
     //----------
     private Animator m_Animator;
-    private Animation m_Animation;
+
+    //---------------------------
+    // Color of Thrown Snowballs
+    //---------------------------
+    Color m_clrTeddyBear = Color.green;
+    Color m_clrSuperGirl = Color.magenta;
+    Color m_clrWinterClothes = Color.blue;
+    Color m_clrHelicopterHat = Color.red;
 
 
     //-----------------------------
@@ -628,31 +635,61 @@ public class Player : MonoBehaviour
                 {
                     AudioManager.m_SharedInstance.PlayThrowAudio();
                     RaycastHit hit;
+                    // shoots out back
                     if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f) && (hit.collider.gameObject.tag != "Character" && hit.collider.gameObject.tag != "Snowball"))
                     {
-                        // shoots out back
+                        // get access to the snowball in the object pool
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
+                        // change the snowballs material to the players material
+
+                        // set the spawn point of the snowball at the players arm position
                         copy.transform.position = transform.position + -transform.forward + (transform.up * 0.6f);
+                        // get the snowballs rigidbody
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
+                        // apply a 'throwing' force to the snowball
                         rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
+                        // move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
                         // The ball is thrown so it becomes false
                         m_bHasBall = false;
+                        // tell the animator the ball is finished being thrown
                         m_Animator.SetBool("throwing", false);
-                        Debug.DrawLine(gameObject.transform.position, hit.point, Color.red);
+
                         ResetChargeThrow();
                     }
+                    // shoots out front
                     else
                     {
-                        // shoots out front
+                        // get access to the snowball in the object pool
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
+                        // change the snowballs material to the players material
+                        Snowball scpSnowball = copy.GetComponent<Snowball>();
+
+                        if (gameObject.name == "CharacterTeddyBear")
+                            scpSnowball.m_materials[1].color = m_clrTeddyBear;
+
+                        if (gameObject.name == "CharacterSupergirl")
+                            scpSnowball.m_materials[1].color = m_clrSuperGirl;
+
+                        if (gameObject.name == "CharacterWinterClothes")
+                            scpSnowball.m_materials[1].color = m_clrWinterClothes;
+
+                        if (gameObject.name == "CharacterHelicopterHat")
+                            scpSnowball.m_materials[1].color = m_clrHelicopterHat;
+
+                        // set the spawn point of the snowball at the players arm position
                         copy.transform.position = transform.position + transform.forward + (transform.up * 0.6f) * 1;
+                        // get the snowballs rigidbody
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
+                        // apply a 'throwing' force to the snowball
                         rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+                        // move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
                         // The ball is thrown so it becomes false
                         m_bHasBall = false;
+                        // tell the animator the ball is finished being thrown
                         m_Animator.SetBool("throwing", false);
+
                         ResetChargeThrow();
                     }
                 }
@@ -664,6 +701,7 @@ public class Player : MonoBehaviour
 
     private void ResetChargeThrow()
     {
+        // resets everything required for the charge throw to work
         m_fChargeModifier = 0.0f;
         m_bThrow = false;
         m_fChargeTimer = 0.0f;
@@ -802,7 +840,7 @@ public class Player : MonoBehaviour
 
             if (scpColPlayerDash.m_bDashing)
             {
-                Debug.Log("Hit whilst dashing");
+                //Debug.Log("Hit whilst dashing");
                 if (m_bHasBall && !scpColPlayer.m_bHasBall)
                 {
                     m_bHasBall = false;

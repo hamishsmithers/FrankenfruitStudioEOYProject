@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 using XboxCtrlrInput;       // Be sure to include this if you want an object to have Xbox input
 
 
-
 public class Global : MonoBehaviour
 {
     public static float MusicVolume = 0.5f;
@@ -34,26 +33,31 @@ public class Global : MonoBehaviour
     [LabelOverride("Snowball")]
     [Tooltip("Stores the Snowball GameObject.")]
     public GameObject m_goSnowball = null;
-    //--------------------
-    // Snowball Location 1
-    //--------------------
-    [LabelOverride("Snowball Location 1")]
-    [Tooltip("Stores the Snowball Location 1 GameObject.")]
-    public GameObject m_SnowballLoc1 = null;
-    //--------------------
-    // Snowball Location 2
-    //--------------------
-    [LabelOverride("Snowball Location 2")]
-    [Tooltip("Stores the Snowball Location 2 GameObject.")]
-    public GameObject m_SnowballLoc2 = null;
 
+    //-----------
+    // Snowballs 
+    //-----------
+    [LabelOverride("Snowball Gizmo")]
+    [Tooltip("Put the snowball gizmo objects in this array.")]
     public List<GameObject> m_goLstSnowballLoc = null;
+
+    //-----------------
+    // Death Snowballs 
+    //-----------------
+    [LabelOverride("Death Snowball Gizmo")]
+    [Tooltip("Put the death snowball gizmo objects in this array.")]
+    public List<GameObject> m_goLstDeathSnowballLoc = null;
+
+    public float m_fDeathSnowballTime = 20.0f;
+    private float m_fDeathSnowballCount = 0.0f;
+    private bool m_bDeathSnowballsSpawned = false;
 
     ////-------------------------------
     //// Use Xbox controls or keyboard
     ////-------------------------------
     //static public bool bXboxControls = false;
     //static public bool bKeyboardControls = true;
+
 
     //----------------------------
     // Use this for initialization
@@ -73,14 +77,6 @@ public class Global : MonoBehaviour
                 goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
             }
         }
-
-        //if (m_SnowballLoc1 && m_SnowballLoc2)
-        //{
-        //    GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-        //    goSnowball.transform.position = m_SnowballLoc1.transform.position;
-        //    goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-        //    goSnowball.transform.position = m_SnowballLoc2.transform.position;
-        //}
     }
 
     //---------------------------------
@@ -88,11 +84,26 @@ public class Global : MonoBehaviour
     //---------------------------------
     void Update()
     {
+        //if (!m_bDeathSnowballsSpawned && m_fDeathSnowballCount < m_fDeathSnowballTime)
+        //{
+        //    m_fDeathSnowballCount += Time.deltaTime;
+        //}
+        //else if (!m_bDeathSnowballsSpawned && m_fDeathSnowballCount > m_fDeathSnowballTime)
+        //{
+        //    for (int i = 0; i < m_goLstDeathSnowballLoc.Count; i++)
+        //    {
+        //        GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+        //        goSnowball.transform.position = m_goLstDeathSnowballLoc[i].transform.position;
+        //        goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+        //    }
+
+        //    m_bDeathSnowballsSpawned = true;
+        //}
+
         if (XCI.GetButton(XboxButton.A, controller) && XCI.GetButton(XboxButton.B, controller) && XCI.GetButton(XboxButton.X, controller) && XCI.GetButton(XboxButton.Y, controller) && XCI.GetButton(XboxButton.LeftBumper, controller) && XCI.GetButton(XboxButton.RightBumper, controller))
             Application.Quit();
 
         ResetGame();
-
 
         if (Input.GetKeyDown(KeyCode.Escape) || XCI.GetButtonDown(XboxButton.Start, controller))
         {
@@ -108,7 +119,6 @@ public class Global : MonoBehaviour
                 Time.timeScale = 1;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             }
-
         }
     }
 

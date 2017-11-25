@@ -48,17 +48,19 @@ public class Snowball : MonoBehaviour
         mr = GetComponent<MeshRenderer>();
         mainColor = mr.material.color;
     }
-    
+
     // Update is called once per frame
     void Update()
     {
         //if the ball is moving at a dangerous speed, let the player know!
         if (m_bTooFast)
-            //mr.material.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        {
             mr.material = m_materials[1];
+        }
         else
-            // mr.material.color = mainColor;
+        {
             mr.material = m_materials[0];
+        }
 
         if (m_rb.velocity.y > 5.0f)
         {
