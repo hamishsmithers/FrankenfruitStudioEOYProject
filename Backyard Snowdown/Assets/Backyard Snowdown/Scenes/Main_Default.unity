@@ -1274,6 +1274,26 @@ Prefab:
       propertyPath: m_fIFrame
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
+        type: 2}
+      propertyPath: m_matWinterClothes
+      value: 
+      objectReference: {fileID: 2100000, guid: 7005ff9a4b5370a40a4c15f88d023ba1, type: 2}
+    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
+        type: 2}
+      propertyPath: m_matTeddyBear
+      value: 
+      objectReference: {fileID: 2100000, guid: c350bc2d3bab6414cadaba31960e0366, type: 2}
+    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
+        type: 2}
+      propertyPath: m_matSuperGirl
+      value: 
+      objectReference: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
+    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
+        type: 2}
+      propertyPath: m_matHelicopterHat
+      value: 
+      objectReference: {fileID: 2100000, guid: e55ee70b4069a8b47b307124a73b1064, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32b36135559a2e244b843a945f2beb8f, type: 2}
   m_IsPrefabParent: 0
@@ -2937,6 +2957,26 @@ Prefab:
       propertyPath: m_fIFrame
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
+        type: 2}
+      propertyPath: m_matWinterClothes
+      value: 
+      objectReference: {fileID: 2100000, guid: 7005ff9a4b5370a40a4c15f88d023ba1, type: 2}
+    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
+        type: 2}
+      propertyPath: m_matTeddyBear
+      value: 
+      objectReference: {fileID: 2100000, guid: c350bc2d3bab6414cadaba31960e0366, type: 2}
+    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
+        type: 2}
+      propertyPath: m_matSuperGirl
+      value: 
+      objectReference: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
+    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
+        type: 2}
+      propertyPath: m_matHelicopterHat
+      value: 
+      objectReference: {fileID: 2100000, guid: e55ee70b4069a8b47b307124a73b1064, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cac88040a923a7f4395fe58f7df28b99, type: 2}
   m_IsPrefabParent: 0
@@ -9688,6 +9728,26 @@ Prefab:
       propertyPath: m_fIFrame
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
+        type: 2}
+      propertyPath: m_matWinterClothes
+      value: 
+      objectReference: {fileID: 2100000, guid: 7005ff9a4b5370a40a4c15f88d023ba1, type: 2}
+    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
+        type: 2}
+      propertyPath: m_matTeddyBear
+      value: 
+      objectReference: {fileID: 2100000, guid: c350bc2d3bab6414cadaba31960e0366, type: 2}
+    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
+        type: 2}
+      propertyPath: m_matSuperGirl
+      value: 
+      objectReference: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
+    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
+        type: 2}
+      propertyPath: m_matHelicopterHat
+      value: 
+      objectReference: {fileID: 2100000, guid: e55ee70b4069a8b47b307124a73b1064, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d421fa0e150dc67468c5f33fc7f220aa, type: 2}
   m_IsPrefabParent: 0
@@ -11190,6 +11250,26 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
+        type: 2}
+      propertyPath: m_matWinterClothes
+      value: 
+      objectReference: {fileID: 2100000, guid: 7005ff9a4b5370a40a4c15f88d023ba1, type: 2}
+    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
+        type: 2}
+      propertyPath: m_matTeddyBear
+      value: 
+      objectReference: {fileID: 2100000, guid: c350bc2d3bab6414cadaba31960e0366, type: 2}
+    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
+        type: 2}
+      propertyPath: m_matSuperGirl
+      value: 
+      objectReference: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
+    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
+        type: 2}
+      propertyPath: m_matHelicopterHat
+      value: 
+      objectReference: {fileID: 2100000, guid: e55ee70b4069a8b47b307124a73b1064, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f8748022449ef4388bad3c48b85778, type: 2}
   m_IsPrefabParent: 0
@@ -11879,7 +11959,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4670384081763970, guid: c4d5ecfea6e97914e857e9d5a2038d4c, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114393467196500956, guid: c4d5ecfea6e97914e857e9d5a2038d4c,
         type: 2}
@@ -17223,7 +17303,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4174031216426482, guid: 4e9655e71489dc547b06631c33e890d9, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114072181726002822, guid: 4e9655e71489dc547b06631c33e890d9,
         type: 2}

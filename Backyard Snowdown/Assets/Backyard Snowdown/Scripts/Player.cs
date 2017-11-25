@@ -264,13 +264,13 @@ public class Player : MonoBehaviour
     //----------
     private Animator m_Animator;
 
-    //---------------------------
-    // Color of Thrown Snowballs
-    //---------------------------
-    Color m_clrTeddyBear = Color.green;
-    Color m_clrSuperGirl = Color.magenta;
-    Color m_clrWinterClothes = Color.blue;
-    Color m_clrHelicopterHat = Color.red;
+    //------------------------------
+    // Material of Thrown Snowballs
+    //------------------------------
+    public Material m_matTeddyBear = null;
+    public Material m_matSuperGirl = null;
+    public Material m_matWinterClothes = null;
+    public Material m_matHelicopterHat = null;
 
 
     //-----------------------------
@@ -666,16 +666,16 @@ public class Player : MonoBehaviour
                         Snowball scpSnowball = copy.GetComponent<Snowball>();
 
                         if (gameObject.name == "CharacterTeddyBear")
-                            scpSnowball.m_materials[1].color = m_clrTeddyBear;
+                            scpSnowball.m_materials[1] = m_matTeddyBear;
 
                         if (gameObject.name == "CharacterSupergirl")
-                            scpSnowball.m_materials[1].color = m_clrSuperGirl;
+                            scpSnowball.m_materials[1] = m_matSuperGirl;
 
                         if (gameObject.name == "CharacterWinterClothes")
-                            scpSnowball.m_materials[1].color = m_clrWinterClothes;
+                            scpSnowball.m_materials[1] = m_matWinterClothes;
 
                         if (gameObject.name == "CharacterHelicopterHat")
-                            scpSnowball.m_materials[1].color = m_clrHelicopterHat;
+                            scpSnowball.m_materials[1] = m_matHelicopterHat;
 
                         // set the spawn point of the snowball at the players arm position
                         copy.transform.position = transform.position + transform.forward + (transform.up * 0.6f) * 1;
