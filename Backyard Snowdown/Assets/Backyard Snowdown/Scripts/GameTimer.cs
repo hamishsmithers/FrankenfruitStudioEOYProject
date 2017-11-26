@@ -16,28 +16,40 @@ public class GameTimer : MonoBehaviour
     void Start()
     {
         m_txtGameTime = GetComponent<Text>();
-        m_fGameTime = 1.0f;
+        m_fGameTime = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // If the next update is reached
-        if (Time.time >= nextUpdate)
-        {
-            // Change the next update (current second+1)
-            nextUpdate = Mathf.FloorToInt(Time.time) + 1;
-            string strMinutes = ((int)m_fGameTime / 60).ToString();
-            string strSeconds = (m_fGameTime % 60).ToString("f0");
+        string strMinutes = ((int)m_fGameTime / 60).ToString();
+        string strSeconds = (m_fGameTime % 60).ToString("f0");
+        m_txtGameTime.text = strMinutes + ":" + strSeconds;
+
+        // breaks when ticking over each minute
+        if (m_fGameTime % 60 > 9.5f)
             m_txtGameTime.text = strMinutes + ":" + strSeconds;
+        else
+            m_txtGameTime.text = strMinutes + ":0" + strSeconds;
 
-            // breaks when ticking over each minute
-            if (m_fGameTime % 60 > 9.5f)
-                m_txtGameTime.text = strMinutes + ":" + strSeconds;
-            else
-                m_txtGameTime.text = strMinutes + ":0" + strSeconds;
+        m_fGameTime += Time.deltaTime;
+        
+        //// If the next update is reached
+        //if (Time.time >= nextUpdate)
+        //{
+        //    // Change the next update (current second+1)
+        //    nextUpdate = Mathf.FloorToInt(Time.time) + 1;
+        //    string strMinutes = ((int)m_fGameTime / 60).ToString();
+        //    string strSeconds = (m_fGameTime % 60).ToString("f0");
+        //    m_txtGameTime.text = strMinutes + ":" + strSeconds;
 
-            m_fGameTime += 1.0f;
-        }
+        //    // breaks when ticking over each minute
+        //    if (m_fGameTime % 60 > 9.5f)
+        //        m_txtGameTime.text = strMinutes + ":" + strSeconds;
+        //    else
+        //        m_txtGameTime.text = strMinutes + ":0" + strSeconds;
+
+        //    m_fGameTime += 1.0f;
+        //}
     }
 }
