@@ -9020,7 +9020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_goObjectToPool: {fileID: 1309105767843890, guid: 7fdaa185c63eb4c4c8a42304e9d60abc,
     type: 2}
-  m_nAmountToPool: 3
+  m_nAmountToPool: 6
 --- !u!114 &992002621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17693,8 +17693,11 @@ MonoBehaviour:
   - {fileID: 353198860}
   - {fileID: 1017260272}
   - {fileID: 464012540}
-  m_goLstDeathSnowballLoc: []
-  m_fDeathSnowballTime: 2
+  m_goLstDeathSnowballLoc:
+  - {fileID: 368685706}
+  - {fileID: 1509043753}
+  - {fileID: 1914966911}
+  m_fDeathSnowballTime: 3
 --- !u!1 &2074537024
 GameObject:
   m_ObjectHideFlags: 0

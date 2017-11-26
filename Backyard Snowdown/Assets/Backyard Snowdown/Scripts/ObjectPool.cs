@@ -35,6 +35,7 @@ public class ObjectPool : MonoBehaviour
             GameObject goObj = Instantiate(m_goObjectToPool);
             goObj.SetActive(false);
             m_lstPooledObjects.Add(goObj);
+            //Debug.Log("spawned false");
         }
     }
 
@@ -53,6 +54,7 @@ public class ObjectPool : MonoBehaviour
             if (!m_lstPooledObjects[i].activeInHierarchy)
             {
                 m_lstPooledObjects[i].SetActive(true);
+                //Debug.Log("object pool activated");
                 return m_lstPooledObjects[i];
             }
         }

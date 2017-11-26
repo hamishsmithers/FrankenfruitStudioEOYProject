@@ -70,11 +70,11 @@ public class Global : MonoBehaviour
 
         if (m_goLstSnowballLoc.Count > 0)
         {
-            GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
             for (int i = 0; i < m_goLstSnowballLoc.Count; i++)
             {
+                GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
                 goSnowball.transform.position = m_goLstSnowballLoc[i].transform.position;
-                goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+                //Debug.Log("global getting object");
             }
         }
     }
@@ -84,21 +84,20 @@ public class Global : MonoBehaviour
     //---------------------------------
     void Update()
     {
-        //if (!m_bDeathSnowballsSpawned && m_fDeathSnowballCount < m_fDeathSnowballTime)
-        //{
-        //    m_fDeathSnowballCount += Time.deltaTime;
-        //}
-        //else if (!m_bDeathSnowballsSpawned && m_fDeathSnowballCount > m_fDeathSnowballTime)
-        //{
-        //    for (int i = 0; i < m_goLstDeathSnowballLoc.Count; i++)
-        //    {
-        //        GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-        //        goSnowball.transform.position = m_goLstDeathSnowballLoc[i].transform.position;
-        //        goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-        //    }
+        if (!m_bDeathSnowballsSpawned && m_fDeathSnowballCount < m_fDeathSnowballTime)
+        {
+            m_fDeathSnowballCount += Time.deltaTime;
+        }
+        else if (!m_bDeathSnowballsSpawned && m_fDeathSnowballCount > m_fDeathSnowballTime)
+        {
+            for (int i = 0; i < m_goLstDeathSnowballLoc.Count; i++)
+            {
+                GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+                goSnowball.transform.position = m_goLstDeathSnowballLoc[i].transform.position;
+            }
 
-        //    m_bDeathSnowballsSpawned = true;
-        //}
+            m_bDeathSnowballsSpawned = true;
+        }
 
         if (XCI.GetButton(XboxButton.A, controller) && XCI.GetButton(XboxButton.B, controller) && XCI.GetButton(XboxButton.X, controller) && XCI.GetButton(XboxButton.Y, controller) && XCI.GetButton(XboxButton.LeftBumper, controller) && XCI.GetButton(XboxButton.RightBumper, controller))
             Application.Quit();
