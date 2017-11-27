@@ -1,4 +1,4 @@
-﻿ using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,7 +40,7 @@ public class MainMenuButtons : MonoBehaviour {
     // Slider to change by the music volume.
     //--------------------------------------
     //public Slider m_sliMusicSlider;
-
+   
 
     //--------------------------------------
     // Use this for initialization
@@ -83,6 +83,7 @@ public class MainMenuButtons : MonoBehaviour {
     {
         SceneManager.LoadSceneAsync(RandomizeLevel(), LoadSceneMode.Single);
         SceneManager.LoadSceneAsync("Main_Default",LoadSceneMode.Additive);
+        
     }
 
     //-----------------------------------------------------------------------------------------

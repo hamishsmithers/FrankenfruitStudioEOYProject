@@ -285,7 +285,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &176962655
 MonoBehaviour:
@@ -1544,6 +1544,46 @@ MonoBehaviour:
   m_EffectColor: {r: 0.88235295, g: 0.88235295, b: 0.88235295, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!1 &791547843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 791547845}
+  - component: {fileID: 791547844}
+  m_Layer: 0
+  m_Name: Clear Podium Script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &791547844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 791547843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221b1cf22716ad3458a3a67bae5f5152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &791547845
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 791547843}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8501328, y: 7.7781215, z: 3.6969085}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &791819776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,8 +2044,9 @@ MonoBehaviour:
   m_btnFirstButton: {fileID: 0}
   m_goSnowball: {fileID: 1309105767843890, guid: 7fdaa185c63eb4c4c8a42304e9d60abc,
     type: 2}
-  m_SnowballLoc1: {fileID: 0}
-  m_SnowballLoc2: {fileID: 0}
+  m_goLstSnowballLoc: []
+  m_goLstDeathSnowballLoc: []
+  m_fDeathSnowballTime: 20
 --- !u!4 &1141633530
 Transform:
   m_ObjectHideFlags: 0
@@ -2018,7 +2059,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313908394
 GameObject:
@@ -2236,7 +2277,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1330482984
 AudioSource:
