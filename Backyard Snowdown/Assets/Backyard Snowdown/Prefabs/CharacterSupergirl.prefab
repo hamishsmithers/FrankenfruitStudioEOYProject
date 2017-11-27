@@ -1811,6 +1811,7 @@ MonoBehaviour:
   m_bDashing: 0
   m_v3DashDir: {x: 0, y: 0, z: 0}
   m_fDashTimer: 0
+  m_bCoolDown: 0
 --- !u!114 &114305297655502980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1899,6 +1900,11 @@ MonoBehaviour:
   m_smrCharacterMesh: {fileID: 137805486213274798}
   m_bHitByGiantSnowBall: 0
   m_fGiantSnowballStunTime: 0.25
+  m_matTeddyBear: {fileID: 0}
+  m_matSuperGirl: {fileID: 0}
+  m_matWinterClothes: {fileID: 0}
+  m_matHelicopterHat: {fileID: 0}
+  m_bIFrameFlickerTime: 0
 --- !u!114 &114590982006936800
 MonoBehaviour:
   m_ObjectHideFlags: 1
