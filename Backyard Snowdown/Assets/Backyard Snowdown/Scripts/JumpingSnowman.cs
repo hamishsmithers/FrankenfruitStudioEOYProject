@@ -88,6 +88,9 @@ public class JumpingSnowman : MonoBehaviour
 
     private bool bSpawnParticleEffectPlayed = false;
     private bool bChooseNewSpawn = true;
+    private bool m_bOnce = true;
+
+
     // Use this for initialization
     void Awake()
     {
@@ -113,7 +116,6 @@ public class JumpingSnowman : MonoBehaviour
         mr.enabled = false;
 
         m_fSpawnTime = Random.Range(m_fMin, m_fMax);
-        AudioManager.m_SharedInstance.PlaySnowmanSummon();
     }
 
     // Update is called once per frame
@@ -156,6 +158,12 @@ public class JumpingSnowman : MonoBehaviour
                 mr.enabled = true;
                 m_bSpawned = true;
                 bChooseNewSpawn = true;
+            }
+
+            if (m_bOnce && m_fSpawnCount > (m_fSpawnTime -1.5f))
+            {
+                AudioManager.m_SharedInstance.PlaySnowmanSummon();
+                m_bOnce = false;
             }
         }
 
@@ -207,35 +215,11 @@ public class JumpingSnowman : MonoBehaviour
                 m_bBoingSound = false;
             }
 
-            
-
+            // move the snowman to the next location smoothly over a curve
             Vector3 v3P1 = Vector3.Lerp(m_v3StartPos, m_v3CurveMiddle, m_fJumpingTimer);
             Vector3 v3P2 = Vector3.Lerp(m_v3CurveMiddle, m_v3NextPos, m_fJumpingTimer);
             transform.position = Vector3.Lerp(v3P1, v3P2, m_fJumpingTimer);
-            // move the snowman to the next location smoothly
-            //switch (m_nCurve)
-            //{
-            //    // snowman moves to the peak of its jump
-            //    case 1:
-            //        transform.position += m_v3CurveMiddle * Time.deltaTime;
-            //        if (m_fJumpingTimer > m_fJumpingTime / 2)
-            //            m_nCurve = 2;
-            //        break;
-
-            //    case 2:
-            //        // good job hamo nad mitcho
-            //        // snowman moves from the peak of its jump to the landing point
-            //        transform.position += (m_v3NextPos * Time.deltaTime) + m_fHeightOfJump * (-transform.up * Time.deltaTime);
-            //        if (m_fJumpingTimer >= m_fJumpingTime)
-            //        {
-            //            m_nCurve = 1;
-            //            transform.position = new Vector3(transform.position.x, 0.9f, transform.position.z);
-            //        }
-            //        break;
-
-            //    default:
-            //        break;
-            //}
+            
             m_bJumping = true;
         }
         else if (!m_bDead && m_bSpawned && m_fJumpingTimer > m_fJumpingTime)

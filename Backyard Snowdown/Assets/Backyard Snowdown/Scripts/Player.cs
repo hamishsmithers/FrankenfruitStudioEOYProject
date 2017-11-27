@@ -188,7 +188,7 @@ public class Player : MonoBehaviour
     [Tooltip("This is the amount of time in seconds that the player is invincible for after being hit. Default is 0.5 seconds")]
     public float m_fIFrame;
     private bool m_bIFrame = false;
-    private float m_fIFrameTimer = 5f;
+    private float m_fIFrameTimer = 0.0f;
     //private bool m_bCanPickUp = true;
 
     //----------------
@@ -272,6 +272,11 @@ public class Player : MonoBehaviour
     public Material m_matWinterClothes = null;
     public Material m_matHelicopterHat = null;
 
+    Vector3 v3;
+    private float m_bIframeFlickerCount = 0.0f;
+    private float m_bIFrameFlickerTime = 0.2f;
+    private bool m_bIFrameFlickerOn = true;
+
 
     //-----------------------------
     // Use this for initialization
@@ -308,11 +313,11 @@ public class Player : MonoBehaviour
     //}
     void OnDrawGizmosSelected()
     {
-
         //Debug.Log(transform.position);
         Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(transform.position + m_v3XboxDashDir, 0.3f);
+        Gizmos.DrawSphere(transform.position + v3, 0.3f);
     }
+
     //--------------------------------------------------------
     //
     //--------------------------------------------------------
@@ -321,8 +326,6 @@ public class Player : MonoBehaviour
         Dash scpDash = gameObject.GetComponent<Dash>();
         AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
         EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
-
-
 
         if (m_bAlive)
         {
@@ -349,16 +352,41 @@ public class Player : MonoBehaviour
 
         Health();
 
-        if (m_bIFrame)
+        if (m_bIFrame && m_fIFrameTimer <= m_fIFrame)
         {
             m_fIFrameTimer += Time.deltaTime;
-            //m_bHasBall = false;
-            if (m_fIFrameTimer > m_fIFrame)
+
+            if (m_bIFrameFlickerOn && m_bIframeFlickerCount <= m_bIFrameFlickerTime)
             {
-                m_bIFrame = false;
-                m_fIFrameTimer = 0f;
+                m_bIframeFlickerCount += Time.deltaTime;
+                gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
             }
+            else if (m_bIFrameFlickerOn && m_bIframeFlickerCount > m_bIFrameFlickerTime)
+            {
+                m_bIFrameFlickerOn = false;
+                m_bIframeFlickerCount = 0.0f;
+            }
+
+            if (!m_bIFrameFlickerOn && m_bIframeFlickerCount <= m_bIFrameFlickerTime)
+            {
+                m_bIframeFlickerCount += Time.deltaTime;
+                gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+            }
+            else if (!m_bIFrameFlickerOn && m_bIframeFlickerCount > m_bIFrameFlickerTime)
+            {
+                m_bIFrameFlickerOn = true;
+                m_bIframeFlickerCount = 0.0f;
+            }
+
         }
+        else if (m_fIFrameTimer > m_fIFrame)
+        {
+            gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+            m_bIFrame = false;
+            m_bIframeFlickerCount = 0.0f;
+            m_fIFrameTimer = 0.0f;
+        }
+
         if (!m_bAlive)
         {
             //scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
@@ -398,10 +426,7 @@ public class Player : MonoBehaviour
             //stop sliding
             m_rb.velocity = Vector3.zero;
             m_rb.angularVelocity = Vector3.zero;
-
         }
-        //Debug.Log(m_rb.velocity.magnitude);
-        //m_Anim.SetFloat("running", m_rb.velocity.magnitude);
     }
 
     //--------------------------------------------------------
@@ -471,8 +496,10 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Aiming()
     {
-        //if (m_bMovementLock)
-        //    Debug.Log("Hamo");
+        m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
+        m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
+        v3 = new Vector3(m_axisX, 0.0f, m_axisY);
+
         if (!m_bMovementLock)
         {
             if (XCI.GetAxisRaw(XboxAxis.RightStickX, controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightStickY, controller) != 0)
@@ -800,7 +827,6 @@ public class Player : MonoBehaviour
 
     private void TakeDamage()
     {
-        m_bIFrame = true;
         m_tookDmg = true;
         m_nCurrentHealth = m_nCurrentHealth - Snowball.m_nScoreValue;
         // updating the health value onscreen
@@ -857,10 +883,11 @@ public class Player : MonoBehaviour
             // Ball is moving fast
             if (scpSnowball.m_bTooFast)
             {
-                if (m_bHasBall)
+                if (m_bHasBall && !m_bIFrame)
                 {
-                    if (!m_bIFrame)
-                        TakeDamage();
+                    m_bIFrame = true;
+
+                    TakeDamage();
 
                     //Drop ball
                     m_bHasBall = false;
@@ -886,6 +913,8 @@ public class Player : MonoBehaviour
                 }
                 else if (!scpDash.m_bDashing && !m_bHasBall && !m_bIFrame)
                 {
+                    m_bIFrame = true;
+
                     TakeDamage();
                 }
             }
@@ -895,17 +924,13 @@ public class Player : MonoBehaviour
                 //{
                 //    Physics.IgnoreCollision(col.collider, GetComponent<Collider>(), true);
                 //}
-                if (!m_bIFrame)
+                if (!m_bHasBall)
                 {
-                    if (!m_bHasBall)
-                    {
-                        // The player has picked it up
-                        col.gameObject.SetActive(false);
-                        //Destroy(col.gameObject);
-                        m_bHasBall = true;
-                    }
+                    // The player has picked it up
+                    col.gameObject.SetActive(false);
+                    //Destroy(col.gameObject);
+                    m_bHasBall = true;
                 }
-
             }
         }
     }
