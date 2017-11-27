@@ -42,8 +42,8 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 0.72
-      radius: 0.64
+      intensity: 0.59
+      radius: 0.57
       sampleCount: 10
       downsampling: 1
       forceForwardCompatibility: 1
@@ -69,10 +69,10 @@ MonoBehaviour:
       screenEdgeMask:
         intensity: 0.03
   depthOfField:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      focusDistance: 10
-      aperture: 5.6
+      focusDistance: 3.92
+      aperture: 5.4
       focalLength: 50
       useCameraFov: 0
       kernelSize: 1
@@ -296,10 +296,10 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       mode: 0
-      color: {r: 0.3852184, g: 0.43452078, b: 0.5514706, a: 1}
-      center: {x: 0.5, y: 0.5}
-      intensity: 0.48
-      smoothness: 0.091
+      color: {r: 0.3671064, g: 0.5986546, b: 0.71323526, a: 1}
+      center: {x: 0.5, y: 0.44}
+      intensity: 0.168
+      smoothness: 0.583
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
