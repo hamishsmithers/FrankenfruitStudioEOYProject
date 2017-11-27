@@ -7,16 +7,69 @@ public class AudioManager : MonoBehaviour {
 
     public static AudioManager m_SharedInstance;
 
+
+    //--------------------------------------
+    // Sound Effect for Dash
+    //--------------------------------------
+    [LabelOverride("Dash SFX")]
+    [Tooltip("The sound effect for when the player dashes.")]
     public AudioClip sfxDash = null;
+    //--------------------------------------
+    // Sound Effect for Snowman Jumping
+    //--------------------------------------
+    [LabelOverride("Boing Snowman SFX")]
+    [Tooltip("The boing sound effect for when the snowman jumps.")]
     public AudioClip sfxSnowManBoing = null;
+    //--------------------------------------
+    // Sound Effect for Snowman Crumbling
+    //--------------------------------------
+    [LabelOverride("Crumble Snowman SFX")]
+    [Tooltip("The crumbling sound effect for when the snowman dies.")]
     public AudioClip sfxSnowManCrumble = null;
+    //-----------------------------------------
+    // Sound Effect for Snowman being Summoned
+    //-----------------------------------------
+    [LabelOverride("Summon Snowman SFX")]
+    [Tooltip("The sound effect for when the snowman is summoned.")]
     public AudioClip sfxSnowManSummon = null;
+    //--------------------------------------
+    // Audio Mixer for Sound Effects
+    //--------------------------------------
+    [LabelOverride("SFX Mixer")]
+    [Tooltip("The audio mixer titled SFX.")]
     public AudioMixerGroup m_audmixMixer = null;
+    //--------------------------------------
+    // Sound Effect for Sounds
+    //--------------------------------------
+    [LabelOverride("GameObject Sound")]
+    [Tooltip("")]
     public GameObject goSound = null;
+    //--------------------------------------
+    // Sound Effect for SFX Source
+    //--------------------------------------
+    [LabelOverride("")]
+    [Tooltip("")]
     public AudioSource sfxSource = null;
+    //--------------------------------------
+    // Sound Effect for Dash
+    //--------------------------------------
+    [LabelOverride("")]
+    [Tooltip("")]
     public AudioClip[] sfxThrow = null;
+    //--------------------------------------
+    // Sound Effect for Dash
+    //--------------------------------------
+    [LabelOverride("")]
+    [Tooltip("")]
     public AudioClip[] sfxHitArray = null;
+    //--------------------------------------
+    // Sound Effect for Dash
+    //--------------------------------------
+    [LabelOverride("")]
+    [Tooltip("")]
     public AudioClip[] sfxHurtArray = null;
+
+
 
     private Player scpPlayer;
     private Dash scpDash;

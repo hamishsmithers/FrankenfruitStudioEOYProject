@@ -11,6 +11,9 @@ public class AbilitySnowBall : MonoBehaviour
     [Tooltip("A float representing the duration of the slow in seconds.")]
     public float m_fSlowDuration = 1.0f;
 
+    //--------------
+    // Slow count
+    //--------------
     private float m_fSlowCount = 0.0f;
 
     // Use this for initialization
