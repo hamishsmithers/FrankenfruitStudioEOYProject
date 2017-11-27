@@ -108,7 +108,7 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 23800000, guid: ca81bd66d9880d24fbade57a3f5f384a, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 25fff7f3fe0466540814ed34e465e917, type: 2}
 --- !u!1001 &16300587
 Prefab:
   m_ObjectHideFlags: 0
