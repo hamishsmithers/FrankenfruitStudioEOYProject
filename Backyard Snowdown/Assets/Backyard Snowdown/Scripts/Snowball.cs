@@ -35,6 +35,7 @@ public class Snowball : MonoBehaviour
     [Tooltip("A static int that represents how much health a player loses when they are hit by the snowball.")]
     public static int m_nScoreValue = 1;
 
+    public ParticleSystem m_particleSparks;
 
     private Color mainColor = Color.white;
     private MeshRenderer mr = null;
@@ -47,19 +48,27 @@ public class Snowball : MonoBehaviour
 
         mr = GetComponent<MeshRenderer>();
         mainColor = mr.material.color;
+        m_particleSparks = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (m_particleSparks == null)
+        {
+            Debug.Log("NO SPARKS");
+        }
         //if the ball is moving at a dangerous speed, let the player know!
         if (m_bTooFast)
         {
             mr.material = m_materials[1];
+            m_particleSparks.Play();
         }
         else
         {
             mr.material = m_materials[0];
+            m_particleSparks.Stop();
         }
 
         if (m_rb.velocity.y > 5.0f)
@@ -80,6 +89,8 @@ public class Snowball : MonoBehaviour
             m_nScoreValue = 0;
             m_bTooFast = false;
         }
+
+
     }
 
     private void OnCollisionEnter(Collision col)
