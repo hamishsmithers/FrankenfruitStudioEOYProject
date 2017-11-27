@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4801730113321696}
   - component: {fileID: 198416169331408848}
   - component: {fileID: 199143881151286798}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Particle_PowerShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4586297630521404}
   - component: {fileID: 108391415378779558}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 4314050065997944}
   - component: {fileID: 198591968993039482}
   - component: {fileID: 199946541446358042}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Snow Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1639955224
+  randomSeed: 566106906
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4222,7 +4222,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 15
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4279,8 +4279,8 @@ ParticleSystem:
           outSlope: -0
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.14198908
-          value: 0.434444
+          time: 0.07156977
+          value: 0.57909733
           inSlope: 1.1610129
           outSlope: 1.1610129
           tangentMode: 0
@@ -4537,8 +4537,8 @@ ParticleSystem:
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 9445
-        ctime1: 57247
+        ctime0: 5204
+        ctime1: 33346
         ctime2: 53585
         ctime3: 53585
         ctime4: 0
@@ -4546,7 +4546,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 42212
+        atime1: 29491
         atime2: 65535
         atime3: 0
         atime4: 0

@@ -274,7 +274,7 @@ public class Player : MonoBehaviour
 
     Vector3 v3;
     private float m_bIframeFlickerCount = 0.0f;
-    private float m_bIFrameFlickerTime = 0.2f;
+   public float m_bIFrameFlickerTime = 0.05f;
     private bool m_bIFrameFlickerOn = true;
 
 
