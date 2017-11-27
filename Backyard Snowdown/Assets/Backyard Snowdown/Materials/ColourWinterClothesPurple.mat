@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ColourWinterClothesBlue
+  m_Name: ColourWinterClothesPurple
   m_Shader: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHABLEND_ON
   m_LightmapFlags: 4
@@ -79,5 +79,5 @@ Material:
     - _UseUIAlphaClip: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.294388, g: 0.49556446, b: 0.8897059, a: 1}
+    - _Color: {r: 0.49803925, g: 0.2784314, b: 0.8078432, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
