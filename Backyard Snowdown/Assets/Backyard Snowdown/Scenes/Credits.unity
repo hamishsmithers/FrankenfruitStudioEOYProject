@@ -531,8 +531,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.7, y: 706.21}
-  m_SizeDelta: {x: 477, y: 284}
+  m_AnchoredPosition: {x: 0, y: 676}
+  m_SizeDelta: {x: 632.6, y: 376.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1232766749
 MonoBehaviour:
@@ -601,7 +601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -803}
+  m_AnchoredPosition: {x: 0, y: -941}
   m_SizeDelta: {x: 622.11, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1530803226
@@ -624,7 +624,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: ff3a015580ef046ac85fa087703e0a2d, type: 3}
+    m_Font: {fileID: 12800000, guid: f1459076faf1afb4cbb9b5495184a324, type: 3}
     m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
@@ -636,8 +636,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<size=25>Credits</size>\n\n<size=20>Design  & Production</size>\nEmma Wearing\nHamish
-    Smithers\n\n<size=20>Programming</size>\nNathan Nette\nMitchell Cattini-Schultz\n\n<size=20>Art</size>\nDavid
+  m_Text: "<size=25>Credits</size>\n\n<size=20>Producer</size>\nHamish Smithers\n\n<size=20>Designer</size>\nEmma
+    Wearing\n\n<size=20>Programming</size>\nNathan Nette\nMitchell Cattini-Schultz\n\n<size=20>Art</size>\nDavid
     Condello\nMarc Varvakis\nMatthew Franzi\n\n\n<size=20>Additional Help & Resources</size>\n\nSoundsnap\nhttps://www.soundsnap.com/\n\nScene
     OBJ Exporter\nhttps://www.assetstore.unity3d.com/en/#!/content/22250\n\nProbuilder
     Basic\nhttps://www.assetstore.unity3d.com/en/#!/content/11919\n\nAllsky\nhttps://www.assetstore.unity3d.com/en/#!/content/10109\n\nPost
