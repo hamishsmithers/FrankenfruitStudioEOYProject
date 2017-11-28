@@ -1394,11 +1394,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
-        type: 2}
-      propertyPath: m_goSnowBallTarget
-      value: 
-      objectReference: {fileID: 1892961168}
     - target: {fileID: 114726186272815062, guid: 32b36135559a2e244b843a945f2beb8f,
         type: 2}
       propertyPath: imgPlayer
@@ -1406,48 +1401,9 @@ Prefab:
       objectReference: {fileID: 542673976}
     - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
         type: 2}
-      propertyPath: m_fIFrame
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
-        type: 2}
-      propertyPath: m_matWinterClothes
+      propertyPath: m_goSnowBallTarget
       value: 
-      objectReference: {fileID: 2100000, guid: 7005ff9a4b5370a40a4c15f88d023ba1, type: 2}
-    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
-        type: 2}
-      propertyPath: m_matTeddyBear
-      value: 
-      objectReference: {fileID: 2100000, guid: c350bc2d3bab6414cadaba31960e0366, type: 2}
-    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
-        type: 2}
-      propertyPath: m_matSuperGirl
-      value: 
-      objectReference: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
-    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
-        type: 2}
-      propertyPath: m_matHelicopterHat
-      value: 
-      objectReference: {fileID: 2100000, guid: e55ee70b4069a8b47b307124a73b1064, type: 2}
-    - target: {fileID: 4930197850406598, guid: 32b36135559a2e244b843a945f2beb8f, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.127
-      objectReference: {fileID: 0}
-    - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
-        type: 2}
-      propertyPath: m_bIFrameFlickerTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224164224196655750, guid: 32b36135559a2e244b843a945f2beb8f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 223760357218194848, guid: 32b36135559a2e244b843a945f2beb8f,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1892961168}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32b36135559a2e244b843a945f2beb8f, type: 2}
   m_IsPrefabParent: 0
@@ -2922,11 +2878,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
-        type: 2}
-      propertyPath: m_goSnowBallTarget
-      value: 
-      objectReference: {fileID: 1892961168}
     - target: {fileID: 114090061973678692, guid: cac88040a923a7f4395fe58f7df28b99,
         type: 2}
       propertyPath: imgPlayer
@@ -2934,44 +2885,9 @@ Prefab:
       objectReference: {fileID: 542673974}
     - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
         type: 2}
-      propertyPath: m_fIFrame
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
-        type: 2}
-      propertyPath: m_matWinterClothes
+      propertyPath: m_goSnowBallTarget
       value: 
-      objectReference: {fileID: 2100000, guid: 7005ff9a4b5370a40a4c15f88d023ba1, type: 2}
-    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
-        type: 2}
-      propertyPath: m_matTeddyBear
-      value: 
-      objectReference: {fileID: 2100000, guid: c350bc2d3bab6414cadaba31960e0366, type: 2}
-    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
-        type: 2}
-      propertyPath: m_matSuperGirl
-      value: 
-      objectReference: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
-    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
-        type: 2}
-      propertyPath: m_matHelicopterHat
-      value: 
-      objectReference: {fileID: 2100000, guid: e55ee70b4069a8b47b307124a73b1064, type: 2}
-    - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
-        type: 2}
-      propertyPath: m_bIFrameFlickerTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224705710913576088, guid: cac88040a923a7f4395fe58f7df28b99,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 223338843819948390, guid: cac88040a923a7f4395fe58f7df28b99,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1892961168}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cac88040a923a7f4395fe58f7df28b99, type: 2}
   m_IsPrefabParent: 0
@@ -3235,12 +3151,12 @@ Prefab:
     - target: {fileID: 224574922485711278, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 502
+      value: 877.5
       objectReference: {fileID: 0}
     - target: {fileID: 224574922485711278, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -76.34999
+      value: -287.34998
       objectReference: {fileID: 0}
     - target: {fileID: 224574922485711278, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
@@ -3265,12 +3181,12 @@ Prefab:
     - target: {fileID: 224531992397360060, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 502
+      value: 877.5
       objectReference: {fileID: 0}
     - target: {fileID: 224531992397360060, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -282.65
+      value: -493.65002
       objectReference: {fileID: 0}
     - target: {fileID: 224531992397360060, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
@@ -9732,11 +9648,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
-        type: 2}
-      propertyPath: m_goSnowBallTarget
-      value: 
-      objectReference: {fileID: 1892961168}
     - target: {fileID: 114651164631013046, guid: d421fa0e150dc67468c5f33fc7f220aa,
         type: 2}
       propertyPath: imgPlayer
@@ -9744,44 +9655,9 @@ Prefab:
       objectReference: {fileID: 542673975}
     - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
         type: 2}
-      propertyPath: m_fIFrame
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
-        type: 2}
-      propertyPath: m_matWinterClothes
+      propertyPath: m_goSnowBallTarget
       value: 
-      objectReference: {fileID: 2100000, guid: 7005ff9a4b5370a40a4c15f88d023ba1, type: 2}
-    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
-        type: 2}
-      propertyPath: m_matTeddyBear
-      value: 
-      objectReference: {fileID: 2100000, guid: c350bc2d3bab6414cadaba31960e0366, type: 2}
-    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
-        type: 2}
-      propertyPath: m_matSuperGirl
-      value: 
-      objectReference: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
-    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
-        type: 2}
-      propertyPath: m_matHelicopterHat
-      value: 
-      objectReference: {fileID: 2100000, guid: e55ee70b4069a8b47b307124a73b1064, type: 2}
-    - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
-        type: 2}
-      propertyPath: m_bIFrameFlickerTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224411470753647236, guid: d421fa0e150dc67468c5f33fc7f220aa,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 223872074864562478, guid: d421fa0e150dc67468c5f33fc7f220aa,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1892961168}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d421fa0e150dc67468c5f33fc7f220aa, type: 2}
   m_IsPrefabParent: 0
@@ -11260,65 +11136,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
-        type: 2}
-      propertyPath: m_goSnowBallTarget
-      value: 
-      objectReference: {fileID: 1892961168}
-    - target: {fileID: 23624163917259704, guid: a8f8748022449ef4388bad3c48b85778,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f8f7463984a915a4d84377e201d65a99, type: 2}
     - target: {fileID: 114899684843584506, guid: a8f8748022449ef4388bad3c48b85778,
         type: 2}
       propertyPath: imgPlayer
       value: 
       objectReference: {fileID: 542673977}
-    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
+    - target: {fileID: 23624163917259704, guid: a8f8748022449ef4388bad3c48b85778,
         type: 2}
-      propertyPath: m_fIFrame
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1506411162413898, guid: a8f8748022449ef4388bad3c48b85778, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
-        type: 2}
-      propertyPath: m_matWinterClothes
+      propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7005ff9a4b5370a40a4c15f88d023ba1, type: 2}
+      objectReference: {fileID: 2100000, guid: f8f7463984a915a4d84377e201d65a99, type: 2}
     - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
         type: 2}
-      propertyPath: m_matTeddyBear
+      propertyPath: m_goSnowBallTarget
       value: 
-      objectReference: {fileID: 2100000, guid: c350bc2d3bab6414cadaba31960e0366, type: 2}
-    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
-        type: 2}
-      propertyPath: m_matSuperGirl
-      value: 
-      objectReference: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
-    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
-        type: 2}
-      propertyPath: m_matHelicopterHat
-      value: 
-      objectReference: {fileID: 2100000, guid: e55ee70b4069a8b47b307124a73b1064, type: 2}
-    - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
-        type: 2}
-      propertyPath: m_bIFrameFlickerTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224071065631091712, guid: a8f8748022449ef4388bad3c48b85778,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 223563582167830658, guid: a8f8748022449ef4388bad3c48b85778,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1892961168}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f8748022449ef4388bad3c48b85778, type: 2}
   m_IsPrefabParent: 0

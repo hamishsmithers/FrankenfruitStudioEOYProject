@@ -277,6 +277,8 @@ public class Player : MonoBehaviour
    public float m_bIFrameFlickerTime = 0.05f;
     private bool m_bIFrameFlickerOn = true;
 
+    public ParticleSystem m_psDizzy;
+
 
     //-----------------------------
     // Use this for initialization
@@ -302,6 +304,8 @@ public class Player : MonoBehaviour
         //SetHealthText();
 
         m_Animator = transform.GetChild(0).GetComponent<Animator>();
+
+        m_psDizzy.Stop();
     }
 
     //--------------------------------------------------------
@@ -358,36 +362,40 @@ public class Player : MonoBehaviour
         if (m_bIFrame && m_fIFrameTimer <= m_fIFrame)
         {
             m_fIFrameTimer += Time.deltaTime;
-
-            if (m_bIFrameFlickerOn && m_bIframeFlickerCount <= m_bIFrameFlickerTime)
-            {
-                m_bIframeFlickerCount += Time.deltaTime;
-                gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
-            }
-            else if (m_bIFrameFlickerOn && m_bIframeFlickerCount > m_bIFrameFlickerTime)
-            {
-                m_bIFrameFlickerOn = false;
-                m_bIframeFlickerCount = 0.0f;
+            if (!m_psDizzy.isPlaying) {
+                m_psDizzy.Play();
             }
 
-            if (!m_bIFrameFlickerOn && m_bIframeFlickerCount <= m_bIFrameFlickerTime)
-            {
-                m_bIframeFlickerCount += Time.deltaTime;
-                gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
-            }
-            else if (!m_bIFrameFlickerOn && m_bIframeFlickerCount > m_bIFrameFlickerTime)
-            {
-                m_bIFrameFlickerOn = true;
-                m_bIframeFlickerCount = 0.0f;
-            }
+            //if (m_bIFrameFlickerOn && m_bIframeFlickerCount <= m_bIFrameFlickerTime)
+            //{
+            //    m_bIframeFlickerCount += Time.deltaTime;
+            //    gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = false;
+            //}
+            //else if (m_bIFrameFlickerOn && m_bIframeFlickerCount > m_bIFrameFlickerTime)
+            //{
+            //    m_bIFrameFlickerOn = false;
+            //    m_bIframeFlickerCount = 0.0f;
+            //}
+
+            //if (!m_bIFrameFlickerOn && m_bIframeFlickerCount <= m_bIFrameFlickerTime)
+            //{
+            //    m_bIframeFlickerCount += Time.deltaTime;
+            //    gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+            //}
+            //else if (!m_bIFrameFlickerOn && m_bIframeFlickerCount > m_bIFrameFlickerTime)
+            //{
+            //    m_bIFrameFlickerOn = true;
+            //    m_bIframeFlickerCount = 0.0f;
+            //}
 
         }
         else if (m_fIFrameTimer > m_fIFrame)
         {
-            gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
+            //gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
             m_bIFrame = false;
             m_bIframeFlickerCount = 0.0f;
             m_fIFrameTimer = 0.0f;
+            m_psDizzy.Stop();
         }
 
         if (!m_bAlive)

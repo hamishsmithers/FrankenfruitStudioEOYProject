@@ -45,6 +45,8 @@ ModelImporter:
     100074: Wrist_R
     100076: WristExtendor_L
     100078: WristExtendor_R
+    100080: Character_003_WinterClothes_001_Glasses1
+    100082: locator1
     400000: Ankle_L
     400002: Ankle_R
     400004: Character_003_WinterClothes_001_Small
@@ -85,7 +87,12 @@ ModelImporter:
     400074: Wrist_R
     400076: WristExtendor_L
     400078: WristExtendor_R
+    400080: Character_003_WinterClothes_001_Glasses1
+    400082: locator1
+    2300000: Character_003_WinterClothes_001_Glasses1
+    3300000: Character_003_WinterClothes_001_Glasses1
     4300000: Character_003_WinterClothes_001_Small
+    4300002: Character_003_WinterClothes_001_Glasses1
     9500000: //RootNode
     13700000: Character_003_WinterClothes_001_Small
   materials:
