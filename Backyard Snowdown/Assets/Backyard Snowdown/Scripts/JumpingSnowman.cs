@@ -89,7 +89,9 @@ public class JumpingSnowman : MonoBehaviour
     private bool bChooseNewSpawn = true;
     private bool m_bOnce = true;
     private bool m_bStart = false;
-
+    private bool m_bInitialSpawn = false;
+    private float m_fInitialSpawnCount = 0.0f;
+    private float m_fInitialSpawnTime = 3.0f;
 
     // Use this for initialization
     void Awake()
@@ -126,28 +128,13 @@ public class JumpingSnowman : MonoBehaviour
         if (m_bStart)
         {
             m_fSpawnCount = 0.0f;
-
-            //m_v3Pos;
-            //m_xLoc = 0.0f;
-            //m_zLoc = 0.0f;
-
             m_fJumpCounter = 0.0f;
-
             m_bCanJump = false;
             m_bBetweenJumps = false;
             m_bJumping = false;
             m_bBoingSound = true;
             m_fJumpingTimer = 0.0f;
-
-            //m_v3StartPos;
-            //m_v3NextPos;
-
-            // m_bSpawned = false;
             m_nHealthPoints = 2;
-            // m_bDead = false;
-
-            //m_fDeathTime = 3.0f;
-
             bSpawnParticleEffectPlayed = false;
             bChooseNewSpawn = true;
             m_bOnce = true;
@@ -157,6 +144,17 @@ public class JumpingSnowman : MonoBehaviour
 
         if (m_bDead)
         {
+            if (m_fInitialSpawnCount <= (m_fInitialSpawnTime - m_fSpawnTime) && m_bInitialSpawn)
+            {
+                m_fInitialSpawnCount += Time.deltaTime;
+                return;
+            }
+            else if (m_fInitialSpawnCount > (m_fInitialSpawnTime - m_fSpawnTime))
+            {
+                m_fInitialSpawnCount = 0.0f;
+                m_bInitialSpawn = false;
+            }
+
             //Before spawn, happens once
             if (m_fSpawnCount <= m_fSpawnTime)
             {
@@ -244,6 +242,7 @@ public class JumpingSnowman : MonoBehaviour
             mr.enabled = false;
             m_bDead = true;
             m_bStart = true;
+            m_bInitialSpawn = true;
         }
     }
 
