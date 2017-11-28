@@ -499,74 +499,111 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 2573, y: 937.125}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1232766747
-GameObject:
+--- !u!1001 &1235285850
+Prefab:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1232766748}
-  - component: {fileID: 1232766750}
-  - component: {fileID: 1232766749}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1232766748
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1530803225}
+    m_Modifications:
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 528.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: de341bd6aa885094db58914177158dc7, type: 2}
+  m_IsPrefabParent: 0
+--- !u!224 &1235285851 stripped
 RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1232766747}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1530803225}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 676}
-  m_SizeDelta: {x: 632.6, y: 376.6}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1232766749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1232766747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: ba4ae9752484cbc4d8a587aad03bad23, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 02061745e90f24742bce8420462bc4a1, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &1232766750
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1232766747}
+  m_PrefabParentObject: {fileID: 224764831058968538, guid: de341bd6aa885094db58914177158dc7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1235285850}
 --- !u!1 &1530803224
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +632,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1232766748}
+  - {fileID: 1235285851}
   m_Father: {fileID: 924236426}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -624,7 +661,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: f1459076faf1afb4cbb9b5495184a324, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
@@ -635,25 +672,24 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 1.05
   m_Text: "<size=25>Credits</size>\n\n<size=20>Producer</size>\nHamish Smithers\n\n<size=20>Designer</size>\nEmma
-    Wearing\n\n<size=20>Programming</size>\nNathan Nette\nMitchell Cattini-Schultz\n\n<size=20>Art</size>\nDavid
-    Condello\nMarc Varvakis\nMatthew Franzi\n\n\n<size=20>Additional Help & Resources</size>\n\nSoundsnap\nhttps://www.soundsnap.com/\n\nScene
-    OBJ Exporter\nhttps://www.assetstore.unity3d.com/en/#!/content/22250\n\nProbuilder
-    Basic\nhttps://www.assetstore.unity3d.com/en/#!/content/11919\n\nAllsky\nhttps://www.assetstore.unity3d.com/en/#!/content/10109\n\nPost
-    Processing Stack\nhttps://www.assetstore.unity3d.com/en/#!/content/83912\n\nCustom
-    Snowball Shader\nLaurence Schinina\n\n\n<size=20>Music</size>\n\n<i>Cheery Monday</i>
+    Wearing\n\n<size=20>Programmers</size>\nNathan Nette\nMitchell Cattini-Schultz\n\n<size=20>Artists</size>\nDavid
+    Condello\nMarc Varvakis\nMatthew Franzi\n\n\n<size=20>Additional Help & Resources</size>\n\nSoundsnap\n\nScene
+    OBJ Exporter - aaro4130\n\nProbuilder Basic - ProCore\n\nAllsky - rpgwhitelock\n\nPost
+    Processing Stack - Unity Technologies\n\nCustom Snowball Shader - Laurence Schinina\n\nXInputDotNet
+    - Remi Gillig\n\nGhastly Panic - Chad Savage\n\nFinger Paint - Ralph du Carrois\n\n<size=20>Music</size>\n\n<i>Cheery
+    Monday</i> Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons:
+    By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Teddy
+    Bear Waltz</i> Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons:
+    By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Run Amok</i>
     Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
-    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Teddy Bear Waltz</i>
-    Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
-    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Run Amok</i> Kevin MacLeod
-    (incompetech.com) \r\nLicensed under Creative Commons: By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Brightly
-    Fancy</i> Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons:
-    By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Peppy
-    Pepe</i> Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons:
-    By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Zazie</i>
-    Kevin MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
-    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/"
+    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Brightly Fancy</i> Kevin
+    MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
+    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Peppy Pepe</i> Kevin
+    MacLeod (incompetech.com) \r\nLicensed under Creative Commons: By Attribution
+    3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\n\n<i>Zazie</i> Kevin MacLeod
+    (incompetech.com) \r\nLicensed under Creative Commons: By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/"
 --- !u!222 &1530803227
 CanvasRenderer:
   m_ObjectHideFlags: 0
