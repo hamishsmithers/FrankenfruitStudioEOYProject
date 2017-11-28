@@ -1962,10 +1962,7 @@ MonoBehaviour:
   m_smrCharacterMesh: {fileID: 137805486213274798}
   m_bHitByGiantSnowBall: 0
   m_fGiantSnowballStunTime: 0.25
-  m_matTeddyBear: {fileID: 2100000, guid: c350bc2d3bab6414cadaba31960e0366, type: 2}
-  m_matSuperGirl: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
-  m_matWinterClothes: {fileID: 2100000, guid: 7005ff9a4b5370a40a4c15f88d023ba1, type: 2}
-  m_matHelicopterHat: {fileID: 2100000, guid: e55ee70b4069a8b47b307124a73b1064, type: 2}
+  m_matSnowball: {fileID: 2100000, guid: 2feccb9e88ae7074bb195a1c58235c55, type: 2}
   m_bIFrameFlickerTime: 0.1
   m_psDizzy: {fileID: 198756226801650558}
 --- !u!114 &114590982006936800

@@ -25,25 +25,25 @@ public class AbilitySnowBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Character")
-        {
-            // create a slow function in player and do p.slow
-            if (m_fSlowDuration > m_fSlowCount)
-            {
-                //p.Slow();
-                m_fSlowCount += Time.deltaTime;
-            }
-            else
-            {
-                m_fSlowCount = 0.0f;
-            }
-        }
+        //    if (col.gameObject.tag == "Character")
+        //    {
+        //        // create a slow function in player and do p.slow
+        //        if (m_fSlowDuration > m_fSlowCount)
+        //        {
+        //            //p.Slow();
+        //            m_fSlowCount += Time.deltaTime;
+        //        }
+        //        else
+        //        {
+        //            m_fSlowCount = 0.0f;
+        //        }
+        //    }
 
-        Destroy(gameObject);
+        //    Destroy(gameObject);
     }
 }

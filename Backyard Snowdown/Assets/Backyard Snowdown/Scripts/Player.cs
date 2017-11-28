@@ -78,11 +78,11 @@ public class Player : MonoBehaviour
     //-----------
     [HideInInspector]
     public Rigidbody m_rb;
+
     //------------------------------------------------------
     // Vector3 to store the direction of the player to dash
     //------------------------------------------------------
     private Vector3 m_v3DashDir;
-
     //----------
     // Snowball
     //----------
@@ -267,14 +267,15 @@ public class Player : MonoBehaviour
     //------------------------------
     // Material of Thrown Snowballs
     //------------------------------
-    public Material m_matTeddyBear = null;
-    public Material m_matSuperGirl = null;
-    public Material m_matWinterClothes = null;
-    public Material m_matHelicopterHat = null;
+    //public Material m_matTeddyBear = null;
+    //public Material m_matSuperGirl = null;
+    //public Material m_matWinterClothes = null;
+    //public Material m_matHelicopterHat = null;
+    public Material m_matSnowball = null;
 
     Vector3 v3;
     private float m_bIframeFlickerCount = 0.0f;
-   public float m_bIFrameFlickerTime = 0.05f;
+    public float m_bIFrameFlickerTime = 0.05f;
     private bool m_bIFrameFlickerOn = true;
 
     public ParticleSystem m_psDizzy;
@@ -362,7 +363,8 @@ public class Player : MonoBehaviour
         if (m_bIFrame && m_fIFrameTimer <= m_fIFrame)
         {
             m_fIFrameTimer += Time.deltaTime;
-            if (!m_psDizzy.isPlaying) {
+            if (!m_psDizzy.isPlaying)
+            {
                 m_psDizzy.Play();
             }
 
@@ -675,6 +677,20 @@ public class Player : MonoBehaviour
                         // get access to the snowball in the object pool
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
                         // change the snowballs material to the players material
+                        Snowball scpSnowball = copy.GetComponent<Snowball>();
+
+                        scpSnowball.m_materials[1] = m_matSnowball;
+                        //if (gameObject.name == "CharacterTeddyBear")
+                        //    scpSnowball.m_materials[1] = m_matTeddyBear;
+
+                        //if (gameObject.name == "CharacterSupergirl")
+                        //    scpSnowball.m_materials[1] = m_matSuperGirl;
+
+                        //if (gameObject.name == "CharacterWinterClothes")
+                        //    scpSnowball.m_materials[1] = m_matWinterClothes;
+
+                        //if (gameObject.name == "CharacterHelicopterHat")
+                        //    scpSnowball.m_materials[1] = m_matHelicopterHat;
 
                         // set the spawn point of the snowball at the players arm position
                         copy.transform.position = transform.position + -transform.forward + (transform.up * 0.6f);
@@ -699,17 +715,18 @@ public class Player : MonoBehaviour
                         // change the snowballs material to the players material
                         Snowball scpSnowball = copy.GetComponent<Snowball>();
 
-                        if (gameObject.name == "CharacterTeddyBear")
-                            scpSnowball.m_materials[1] = m_matTeddyBear;
+                        scpSnowball.m_materials[1] = m_matSnowball;
+                        //if (gameObject.name == "CharacterTeddyBear")
+                        //    scpSnowball.m_materials[1] = m_matTeddyBear;
 
-                        if (gameObject.name == "CharacterSupergirl")
-                            scpSnowball.m_materials[1] = m_matSuperGirl;
+                        //if (gameObject.name == "CharacterSupergirl")
+                        //    scpSnowball.m_materials[1] = m_matSuperGirl;
 
-                        if (gameObject.name == "CharacterWinterClothes")
-                            scpSnowball.m_materials[1] = m_matWinterClothes;
+                        //if (gameObject.name == "CharacterWinterClothes")
+                        //    scpSnowball.m_materials[1] = m_matWinterClothes;
 
-                        if (gameObject.name == "CharacterHelicopterHat")
-                            scpSnowball.m_materials[1] = m_matHelicopterHat;
+                        //if (gameObject.name == "CharacterHelicopterHat")
+                        //    scpSnowball.m_materials[1] = m_matHelicopterHat;
 
                         // set the spawn point of the snowball at the players arm position
                         copy.transform.position = transform.position + transform.forward + (transform.up * 0.6f) * 1;
@@ -894,7 +911,16 @@ public class Player : MonoBehaviour
                 {
                     m_bIFrame = true;
 
-                    TakeDamage();
+                    if (scpSnowball.m_materials[1] == m_matSnowball)
+                        Debug.Log("you hit your self you silly dufffer");
+                    //if (gameObject.name == "CharacterSupergirl" && scpSnowball.m_materials[1] == m_matSuperGirl)
+                    //    Debug.Log("you hit your self you silly dufffer");
+                    //if (gameObject.name == "CharacterWinterClothes" && scpSnowball.m_materials[1] == m_matWinterClothes)
+                    //    Debug.Log("you hit your self you silly dufffer");
+                    //if (gameObject.name == "CharacterHelicopterHat" && scpSnowball.m_materials[1] == m_matHelicopterHat)
+                    //    Debug.Log("you hit your self you silly dufffer");
+                    else
+                        TakeDamage();
 
                     //Drop ball
                     m_bHasBall = false;
@@ -922,7 +948,16 @@ public class Player : MonoBehaviour
                 {
                     m_bIFrame = true;
 
-                    TakeDamage();
+                    if (scpSnowball.m_materials[1] == m_matSnowball)
+                        Debug.Log("you hit your self you silly dufffer");
+                    //if (gameObject.name == "CharacterSupergirl" && scpSnowball.m_materials[1] == m_matSuperGirl)
+                    //    Debug.Log("you hit your self you silly dufffer");
+                    //if (gameObject.name == "CharacterWinterClothes" && scpSnowball.m_materials[1] == m_matWinterClothes)
+                    //    Debug.Log("you hit your self you silly dufffer");
+                    //if (gameObject.name == "CharacterHelicopterHat" && scpSnowball.m_materials[1] == m_matHelicopterHat)
+                    //    Debug.Log("you hit your self you silly dufffer");
+                    else
+                        TakeDamage();
                 }
             }
             else // Ball is moving slow
