@@ -6,19 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class JumpingSnowman : MonoBehaviour
 {
-    //----------------------
-    // Min spawn time
-    //----------------------
-    [LabelOverride("Min Spawn Time")]
+    public float m_fInitialSpawnTime = 5.0f;
+    //------------------
+    // Death spawn time
+    //------------------
+    [LabelOverride("Death Spawn Time")]
     [Tooltip("Minimum wait time between next spawn")]
-    public float m_fMin = 20.0f;
-
-    //----------------------
-    // Max spawn time
-    //----------------------
-    [LabelOverride("Max Spawn Time")]
-    [Tooltip("Maximum wait time between next spawn")]
-    public float m_fMax = 30.0f;
+    public float m_fDeathTime = 0.0f;
 
     //----------------------
     // Time between jumps
@@ -80,8 +74,6 @@ public class JumpingSnowman : MonoBehaviour
     private int m_nHealthPoints = 2;
     private bool m_bDead = true;
 
-    private float m_fDeathTime = 3.0f;
-
     public GameObject m_goSpawnParticles;
     private ParticleSystem psSpawn;
 
@@ -89,9 +81,7 @@ public class JumpingSnowman : MonoBehaviour
     private bool bChooseNewSpawn = true;
     private bool m_bOnce = true;
     private bool m_bStart = false;
-    private bool m_bInitialSpawn = false;
-    private float m_fInitialSpawnCount = 0.0f;
-    private float m_fInitialSpawnTime = 3.0f;
+
 
     // Use this for initialization
     void Awake()
@@ -119,7 +109,7 @@ public class JumpingSnowman : MonoBehaviour
         c.enabled = false;
         mr.enabled = false;
 
-        m_fSpawnTime = Random.Range(m_fMin, m_fMax);
+        m_fSpawnTime = m_fInitialSpawnTime;
     }
 
     // Update is called once per frame
@@ -144,17 +134,6 @@ public class JumpingSnowman : MonoBehaviour
 
         if (m_bDead)
         {
-            if (m_fInitialSpawnCount <= (m_fInitialSpawnTime - m_fSpawnTime) && m_bInitialSpawn)
-            {
-                m_fInitialSpawnCount += Time.deltaTime;
-                return;
-            }
-            else if (m_fInitialSpawnCount > (m_fInitialSpawnTime - m_fSpawnTime))
-            {
-                m_fInitialSpawnCount = 0.0f;
-                m_bInitialSpawn = false;
-            }
-
             //Before spawn, happens once
             if (m_fSpawnCount <= m_fSpawnTime)
             {
@@ -167,6 +146,7 @@ public class JumpingSnowman : MonoBehaviour
                     bChooseNewSpawn = false;
                 }
             }
+
             if (!bSpawnParticleEffectPlayed && m_fSpawnCount > (m_fSpawnTime - 1.0f))
             {
                 psSpawn.Play();
@@ -180,6 +160,7 @@ public class JumpingSnowman : MonoBehaviour
                 mr.enabled = true;
                 m_bDead = false;
                 bChooseNewSpawn = true;
+                m_fSpawnTime = m_fDeathTime;
             }
 
             if (m_bOnce && m_fSpawnCount > (m_fSpawnTime - 1.5f))
@@ -242,7 +223,6 @@ public class JumpingSnowman : MonoBehaviour
             mr.enabled = false;
             m_bDead = true;
             m_bStart = true;
-            m_bInitialSpawn = true;
         }
     }
 

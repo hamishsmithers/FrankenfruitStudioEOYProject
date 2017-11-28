@@ -6187,7 +6187,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_controller: 0
-  m_GoPlayer: {fileID: 0}
 --- !u!4 &706680258
 Transform:
   m_ObjectHideFlags: 0
@@ -15611,6 +15610,16 @@ Prefab:
     - target: {fileID: 4108351279883358, guid: abfddcf064df3b140b9e4f163d5ca838, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114233192121138210, guid: abfddcf064df3b140b9e4f163d5ca838,
+        type: 2}
+      propertyPath: m_fDeathTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114233192121138210, guid: abfddcf064df3b140b9e4f163d5ca838,
+        type: 2}
+      propertyPath: m_fInitialSpawnTime
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abfddcf064df3b140b9e4f163d5ca838, type: 2}
