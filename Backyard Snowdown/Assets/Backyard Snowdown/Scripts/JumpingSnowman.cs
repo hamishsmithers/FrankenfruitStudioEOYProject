@@ -66,6 +66,7 @@ public class JumpingSnowman : MonoBehaviour
     public float m_fJumpingTime = 1.0f;
     private Vector3 m_v3StartPos;
     private Vector3 m_v3NextPos;
+    private float m_fStartY;
 
     //private int m_nCurve = 1;
 
@@ -76,11 +77,9 @@ public class JumpingSnowman : MonoBehaviour
     [Tooltip("The height at which the Snowman reaches at the peak of it's jump.")]
     public float m_fHeightOfJump = 5.0f;
 
-    private bool m_bSpawned = false;
     private int m_nHealthPoints = 2;
-    private bool m_bDead = false;
+    private bool m_bDead = true;
 
-    private float m_fDeathTimer = 0.0f;
     private float m_fDeathTime = 3.0f;
 
     public GameObject m_goSpawnParticles;
@@ -89,6 +88,7 @@ public class JumpingSnowman : MonoBehaviour
     private bool bSpawnParticleEffectPlayed = false;
     private bool bChooseNewSpawn = true;
     private bool m_bOnce = true;
+    private bool m_bStart = false;
 
 
     // Use this for initialization
@@ -102,6 +102,8 @@ public class JumpingSnowman : MonoBehaviour
             m_goBR = GameObject.Find("Reticle Bounds Bottom Right");
             m_goBL = GameObject.Find("Reticle Bounds Bottom Left");
         }
+
+        m_fStartY = transform.position.y;
     }
 
     // Use this for initialization
@@ -121,46 +123,68 @@ public class JumpingSnowman : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!m_bSpawned)
+        if (m_bStart)
+        {
+            m_fSpawnCount = 0.0f;
+
+            //m_v3Pos;
+            //m_xLoc = 0.0f;
+            //m_zLoc = 0.0f;
+
+            m_fJumpCounter = 0.0f;
+
+            m_bCanJump = false;
+            m_bBetweenJumps = false;
+            m_bJumping = false;
+            m_bBoingSound = true;
+            m_fJumpingTimer = 0.0f;
+
+            //m_v3StartPos;
+            //m_v3NextPos;
+
+            // m_bSpawned = false;
+            m_nHealthPoints = 2;
+            // m_bDead = false;
+
+            //m_fDeathTime = 3.0f;
+
+            bSpawnParticleEffectPlayed = false;
+            bChooseNewSpawn = true;
+            m_bOnce = true;
+
+            m_bStart = false;
+        }
+
+        if (m_bDead)
         {
             //Before spawn, happens once
-            if (m_fSpawnCount <= m_fSpawnTime && !m_bCanJump)
+            if (m_fSpawnCount <= m_fSpawnTime)
             {
                 m_fSpawnCount += Time.deltaTime;
 
                 if (bChooseNewSpawn)
                 {
-                    m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x) - transform.position.x;
-                    // we minus the current location to keep the snowman in the map
-                    m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z) - transform.position.z;
-                    // set the snowmans next location
-                    m_v3Pos.Set(m_xLoc, 0.9f, m_zLoc);
+                    // move the snowman to the next location
+                    transform.position = FindValidSpawnPos();
+                    bChooseNewSpawn = false;
                 }
             }
-            if (!bSpawnParticleEffectPlayed && m_fSpawnCount > (m_fSpawnTime - 1.0f) && !m_bCanJump)
+            if (!bSpawnParticleEffectPlayed && m_fSpawnCount > (m_fSpawnTime - 1.0f))
             {
-                Vector3 v3psSpawnPos = m_v3Pos;
-                v3psSpawnPos.y = 1.0f;
-                psSpawn.transform.position = v3psSpawnPos;
-
                 psSpawn.Play();
 
                 bSpawnParticleEffectPlayed = true;
-                bChooseNewSpawn = false;
             }
-            else if (m_fSpawnCount > m_fSpawnTime && !m_bCanJump)
+            else if (m_fSpawnCount > m_fSpawnTime)
             {
-                // move the snowman to the next location
-                transform.position = m_v3Pos;
-
                 // Snowman spawns
                 c.enabled = true;
                 mr.enabled = true;
-                m_bSpawned = true;
+                m_bDead = false;
                 bChooseNewSpawn = true;
             }
 
-            if (m_bOnce && m_fSpawnCount > (m_fSpawnTime -1.5f))
+            if (m_bOnce && m_fSpawnCount > (m_fSpawnTime - 1.5f))
             {
                 AudioManager.m_SharedInstance.PlaySnowmanSummon();
                 m_bOnce = false;
@@ -168,42 +192,26 @@ public class JumpingSnowman : MonoBehaviour
         }
 
         // Between Jumps
-        if (!m_bDead && m_bSpawned && m_fJumpCounter <= m_fTimeUntilNextJump && !m_bJumping)
+        if (!m_bDead && m_fJumpCounter <= m_fTimeUntilNextJump && !m_bJumping)
         {
             //Debug.Log("between");
             m_fJumpCounter += Time.deltaTime;
             m_bBetweenJumps = true;
         }
-        else if (!m_bDead && m_bSpawned && m_fJumpCounter > m_fTimeUntilNextJump)
+        else if (!m_bDead && m_fJumpCounter > m_fTimeUntilNextJump)
         {
             m_v3StartPos = transform.position;
 
             m_bBetweenJumps = false;
             m_fJumpCounter = 0.0f;
-            // Setting the next pos
-            m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x);
-            // we minus the current location to keep the snowman in the map
-            m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z);
-            // set the snowmans next location
-            m_v3NextPos.Set(m_xLoc, m_v3StartPos.y, m_zLoc);
+
+            m_v3NextPos = FindValidSpawnPos();
+
             CreateCurve();
-
-            int layer = 1 << LayerMask.NameToLayer("Obstacle");
-
-            while (Physics.CheckSphere(m_v3NextPos, 0.5682563f, layer))
-            {
-                // Setting the next pos
-                m_xLoc = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x);
-                // we minus the current location to keep the snowman in the map
-                m_zLoc = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z);
-                // set the snowmans next location
-                m_v3NextPos.Set(m_xLoc, m_v3StartPos.y, m_zLoc);
-            }
-
         }
 
         // Jumping
-        if (!m_bDead && m_bSpawned && m_fJumpingTimer <= m_fJumpingTime && !m_bBetweenJumps)
+        if (!m_bDead && m_fJumpingTimer <= m_fJumpingTime && !m_bBetweenJumps)
         {
             //Debug.Log("jumping");
             m_fJumpingTimer += Time.deltaTime;
@@ -219,10 +227,10 @@ public class JumpingSnowman : MonoBehaviour
             Vector3 v3P1 = Vector3.Lerp(m_v3StartPos, m_v3CurveMiddle, m_fJumpingTimer);
             Vector3 v3P2 = Vector3.Lerp(m_v3CurveMiddle, m_v3NextPos, m_fJumpingTimer);
             transform.position = Vector3.Lerp(v3P1, v3P2, m_fJumpingTimer);
-            
+
             m_bJumping = true;
         }
-        else if (!m_bDead && m_bSpawned && m_fJumpingTimer > m_fJumpingTime)
+        else if (!m_bDead && m_fJumpingTimer > m_fJumpingTime)
         {
             m_bJumping = false;
             m_fJumpingTimer = 0.0f;
@@ -234,23 +242,8 @@ public class JumpingSnowman : MonoBehaviour
             // snowman is dead
             c.enabled = false;
             mr.enabled = false;
-            m_bSpawned = false;
             m_bDead = true;
-        }
-
-        if (m_bDead && m_fDeathTimer <= m_fDeathTime)
-        {
-            m_fDeathTimer += Time.deltaTime;
-        }
-        else if (m_bDead && m_fDeathTimer > m_fDeathTime)
-        {
-            c.enabled = true;
-            mr.enabled = true;
-            m_bSpawned = true;
-            m_bDead = false;
-            m_fDeathTimer = 0.0f;
-
-            m_nHealthPoints = 2;
+            m_bStart = true;
         }
     }
 
@@ -267,6 +260,22 @@ public class JumpingSnowman : MonoBehaviour
         // creating the centre of the curve
         m_v3CurveMiddle = m_v3StartPos + m_v3NextPos / 2;
         m_v3CurveMiddle += transform.up * m_fHeightOfJump;
+    }
+
+    private Vector3 FindValidSpawnPos()
+    {
+        Vector3 v3Result = Vector3.zero;
+        int layer = 1 << LayerMask.NameToLayer("Obstacle");
+
+        do
+        {
+            v3Result.x = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x);
+            v3Result.y = m_fStartY;
+            v3Result.z = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z);
+        }
+        while (Physics.CheckSphere(v3Result, 0.5682563f, layer));
+
+        return v3Result;
     }
 }
 

@@ -47,9 +47,9 @@ public class AudioManager : MonoBehaviour {
     //--------------------------------------
     // Sound Effect for SFX Source
     //--------------------------------------
-    [LabelOverride("SFX Audio Source")]
-    [Tooltip("")]
-    public AudioSource sfxSource = null;
+    //[LabelOverride("SFX Audio Source")]
+    //[Tooltip("")]
+    //public AudioSource sfxSource = null;
     //--------------------------------------
     // Sound Effect for Throw
     //--------------------------------------
@@ -92,7 +92,7 @@ public class AudioManager : MonoBehaviour {
     void Start ()
     {
         // Allocates the AudioSource class into the audio source called sfxSource
-        sfxSource = gameObject.GetComponent<AudioSource>();
+        //sfxSource = gameObject.GetComponent<AudioSource>();
 
         // Allocates the Player class into the scpPlayer to get the script and be able to use the script in this code.
         scpPlayer = gameObject.GetComponent<Player>();
@@ -106,7 +106,9 @@ public class AudioManager : MonoBehaviour {
     //---------------------------------
 	void Update ()
     {
-        sfxSource.volume = Global.SFXVolume;
+        //Convert 0 to 1 volume to -80 to 20 db
+        float volumeDB = Global.SFXVolume * 100.0f - 80.0f;
+        m_audmixMixer.audioMixer.SetFloat("SFXVolume", volumeDB);
     }
 
     //------------------------------------------------------------
@@ -116,6 +118,8 @@ public class AudioManager : MonoBehaviour {
     {
         // Instantiates the sound GameObject.
         GameObject sound = Instantiate(goSound);
+        AudioSource sfxSource = sound.GetComponent<AudioSource>();
+
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to the dash sound.
@@ -133,6 +137,8 @@ public class AudioManager : MonoBehaviour {
     {
         // Instantiates the sound GameObject.
         GameObject sound = Instantiate(goSound);
+        AudioSource sfxSource = sound.GetComponent<AudioSource>();
+
         // Creates an int that is randomised between 0 and the length of the throw array.
         int Selector = Random.Range(0, sfxThrow.Length);
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
@@ -152,6 +158,8 @@ public class AudioManager : MonoBehaviour {
     {
         // Instantiates the sound GameObject.
         GameObject sound = Instantiate(goSound);
+        AudioSource sfxSource = sound.GetComponent<AudioSource>();
+
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to the snowman boing sound.
@@ -169,6 +177,8 @@ public class AudioManager : MonoBehaviour {
     {
         // Instantiates the sound GameObject.
         GameObject sound = Instantiate(goSound);
+        AudioSource sfxSource = sound.GetComponent<AudioSource>();
+
         // Creates an int that is randomised between 0 and the length of the hit array.
         int Selector = Random.Range(0, sfxHitArray.Length);
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
@@ -188,6 +198,8 @@ public class AudioManager : MonoBehaviour {
     {
         // Instantiates the sound GameObject.
         GameObject sound = Instantiate(goSound);
+        AudioSource sfxSource = sound.GetComponent<AudioSource>();
+
         // Creates an int that is randomised between 0 and the length of the hurt array.
         int Selector = Random.Range(0, sfxHurtArray.Length);
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
@@ -207,6 +219,8 @@ public class AudioManager : MonoBehaviour {
     {
         // Instantiates the sound GameObject.
         GameObject sound = Instantiate(goSound);
+        AudioSource sfxSource = sound.GetComponent<AudioSource>();
+
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to the snowman crumble sound effect.
@@ -224,6 +238,8 @@ public class AudioManager : MonoBehaviour {
     {
         // Instantiates the sound GameObject.
         GameObject sound = Instantiate(goSound);
+        AudioSource sfxSource = sound.GetComponent<AudioSource>();
+
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to the snowman summon sound effect.

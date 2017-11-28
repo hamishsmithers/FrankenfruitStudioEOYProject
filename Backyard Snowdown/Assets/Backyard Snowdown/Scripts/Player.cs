@@ -321,6 +321,12 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     //
     //--------------------------------------------------------
+    void FixedUpdate()
+    {
+        Dash scpDash = gameObject.GetComponent<Dash>();
+        if (!m_bCharging)
+            scpDash.DoDash();
+    }
     void Update()
     {
         Dash scpDash = gameObject.GetComponent<Dash>();
@@ -335,8 +341,8 @@ public class Player : MonoBehaviour
 
             Aiming();
 
-            if (!m_bCharging)
-                scpDash.DoDash();
+            //if (!m_bCharging)
+            //    scpDash.DoDash();
 
             if (scpDash.m_bDashing && m_bHasBall)
                 gameObject.layer = LayerMask.NameToLayer("PlayerDash");
