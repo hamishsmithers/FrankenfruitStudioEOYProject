@@ -40,6 +40,8 @@ public class MainMenuButtons : MonoBehaviour {
     // Slider to change by the music volume.
     //--------------------------------------
     //public Slider m_sliMusicSlider;
+
+    private bool m_PlayPressed;
    
 
     //--------------------------------------
@@ -48,6 +50,7 @@ public class MainMenuButtons : MonoBehaviour {
     void Start ()
     {
         m_goOptionsButtons.SetActive(false);
+        m_PlayPressed = false;
     }
 
     //--------------------------------------
@@ -55,7 +58,8 @@ public class MainMenuButtons : MonoBehaviour {
     //--------------------------------------
     void Update ()
     {
-
+        if (m_PlayPressed)
+            gameObject.GetComponent<MainMenuButtons>().enabled = false;
 	}
 
 
@@ -81,6 +85,7 @@ public class MainMenuButtons : MonoBehaviour {
     //--------------------------------------------------------------------------------------------
     public void PlayGame()
     {
+        m_PlayPressed = true;
         SceneManager.LoadSceneAsync(RandomizeLevel(), LoadSceneMode.Single);
         SceneManager.LoadSceneAsync("Main_Default",LoadSceneMode.Additive);
         

@@ -311,12 +311,6 @@ public class Player : MonoBehaviour
     //{
 
     //}
-    void OnDrawGizmosSelected()
-    {
-        //Debug.Log(transform.position);
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(transform.position + v3, 0.3f);
-    }
 
     //--------------------------------------------------------
     //
@@ -502,10 +496,6 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Aiming()
     {
-        m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
-        m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
-        v3 = new Vector3(m_axisX, 0.0f, m_axisY);
-
         if (!m_bMovementLock)
         {
             if (XCI.GetAxisRaw(XboxAxis.RightStickX, controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightStickY, controller) != 0)

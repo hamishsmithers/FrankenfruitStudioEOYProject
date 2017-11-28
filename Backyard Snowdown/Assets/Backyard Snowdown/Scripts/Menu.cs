@@ -9,12 +9,12 @@ public class Menu : MonoBehaviour
 {
     public XboxController m_controller;
 
-    //----------------------------------------------
-    // Player GameObject.
-    //----------------------------------------------
-    [LabelOverride("Player")]
-    [Tooltip("Stores a Player GameObject.")]
-    public GameObject m_GoPlayer;
+    ////----------------------------------------------
+    //// Player GameObject.
+    ////----------------------------------------------
+    //[LabelOverride("Player")]
+    //[Tooltip("Stores a Player GameObject.")]
+    //public GameObject m_GoPlayer;
 
     //----------------------------------------------
     // A bool to check whether esc has been pressed.
