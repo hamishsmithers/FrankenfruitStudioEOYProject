@@ -317,9 +317,12 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     void FixedUpdate()
     {
-        Dash scpDash = gameObject.GetComponent<Dash>();
-        if (!m_bCharging)
-            scpDash.DoDash();
+        if (m_bAlive)
+        {
+            Dash scpDash = gameObject.GetComponent<Dash>();
+            if (!m_bCharging)
+                scpDash.DoDash();
+        }
     }
     void Update()
     {
@@ -954,6 +957,11 @@ public class Player : MonoBehaviour
 //    Rigidbody rb = copy.GetComponent<Rigidbody>();
 //    rb.AddForce(transform.forward * fSnowballSpeed, ForceMode.Acceleration);
 //}
+
+
+
+
+
 
 ////------------------
 //// Ability Snowball

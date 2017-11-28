@@ -287,7 +287,36 @@ MonoBehaviour:
   m_materials:
   - {fileID: 2100000, guid: 1f01051d0b45cb34c8fee13df4664868, type: 2}
   - {fileID: 2100000, guid: c706ed9ef25a3d449973781f83340f25, type: 2}
-  m_particleSparks: {fileID: 0}
+  m_ParticleSparks: {fileID: 0}
+  mstet:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
 --- !u!135 &135483463602575264
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -298,8 +327,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.20039307
-  m_Center: {x: 0.000000022351742, y: -0.00000047683716, z: -0.000000029802319}
+  m_Radius: 0.30058962
+  m_Center: {x: 0.000000029802322, y: 0, z: -0.000000044703484}
 --- !u!198 &198154299962512756
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -1436,7 +1436,7 @@ Prefab:
     - target: {fileID: 114455116117555360, guid: 32b36135559a2e244b843a945f2beb8f,
         type: 2}
       propertyPath: m_bIFrameFlickerTime
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 224164224196655750, guid: 32b36135559a2e244b843a945f2beb8f,
         type: 2}
@@ -2960,7 +2960,7 @@ Prefab:
     - target: {fileID: 114423113646744744, guid: cac88040a923a7f4395fe58f7df28b99,
         type: 2}
       propertyPath: m_bIFrameFlickerTime
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 224705710913576088, guid: cac88040a923a7f4395fe58f7df28b99,
         type: 2}
@@ -3235,12 +3235,12 @@ Prefab:
     - target: {fileID: 224574922485711278, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 451.5
+      value: 502
       objectReference: {fileID: 0}
     - target: {fileID: 224574922485711278, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -47.84999
+      value: -76.34999
       objectReference: {fileID: 0}
     - target: {fileID: 224574922485711278, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
@@ -3265,12 +3265,12 @@ Prefab:
     - target: {fileID: 224531992397360060, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 451.5
+      value: 502
       objectReference: {fileID: 0}
     - target: {fileID: 224531992397360060, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -254.15
+      value: -282.65
       objectReference: {fileID: 0}
     - target: {fileID: 224531992397360060, guid: 8b8699af51c1af649937500a9e846b24,
         type: 2}
@@ -9770,7 +9770,7 @@ Prefab:
     - target: {fileID: 114278564537720296, guid: d421fa0e150dc67468c5f33fc7f220aa,
         type: 2}
       propertyPath: m_bIFrameFlickerTime
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 224411470753647236, guid: d421fa0e150dc67468c5f33fc7f220aa,
         type: 2}
@@ -11307,7 +11307,7 @@ Prefab:
     - target: {fileID: 114333474326922584, guid: a8f8748022449ef4388bad3c48b85778,
         type: 2}
       propertyPath: m_bIFrameFlickerTime
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 224071065631091712, guid: a8f8748022449ef4388bad3c48b85778,
         type: 2}
@@ -17367,6 +17367,17 @@ Prefab:
       value: 
       objectReference: {fileID: 243705048344233082, guid: 18b75aaf4953f034285e670487b42d29,
         type: 2}
+    - target: {fileID: 114072181726002822, guid: 4e9655e71489dc547b06631c33e890d9,
+        type: 2}
+      propertyPath: m_audmixMixer
+      value: 
+      objectReference: {fileID: 243705048344233082, guid: 18b75aaf4953f034285e670487b42d29,
+        type: 2}
+    - target: {fileID: 82207766311626160, guid: 4e9655e71489dc547b06631c33e890d9,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e9655e71489dc547b06631c33e890d9, type: 2}
   m_IsPrefabParent: 0

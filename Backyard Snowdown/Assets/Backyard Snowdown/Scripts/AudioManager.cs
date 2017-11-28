@@ -7,7 +7,6 @@ public class AudioManager : MonoBehaviour {
 
     public static AudioManager m_SharedInstance;
 
-
     //--------------------------------------
     // Sound Effect for Dash
     //--------------------------------------
@@ -100,15 +99,28 @@ public class AudioManager : MonoBehaviour {
         // Allocates the Dash class into the scpDash to get the script and be able to use the script in this code.
         scpDash = gameObject.GetComponent<Dash>();
     }
-	
+
+    private float LinearToDecibel(float linear)
+    {
+        float dB;
+
+        if (linear != 0)
+            dB = 20.0f * Mathf.Log10(linear);
+        else
+            dB = -144.0f;
+
+        return dB;
+    }
+
     //---------------------------------
-	// Update is called once per frame
+    // Update is called once per frame
     //---------------------------------
-	void Update ()
+    void Update ()
     {
         //Convert 0 to 1 volume to -80 to 20 db
-        float volumeDB = Global.SFXVolume * 100.0f - 80.0f;
-        m_audmixMixer.audioMixer.SetFloat("SFXVolume", volumeDB);
+        //float fSFXVolumeDB = (1 - Global.SFXVolume) * -20f;
+        float fSFXVolumeDB = LinearToDecibel(Global.SFXVolume);
+        m_audmixMixer.audioMixer.SetFloat("SFXVolume", fSFXVolumeDB);
     }
 
     //------------------------------------------------------------
