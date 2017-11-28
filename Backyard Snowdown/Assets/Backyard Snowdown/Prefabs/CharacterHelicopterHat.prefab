@@ -707,6 +707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4194248104493010}
   - component: {fileID: 95527970627777174}
+  - component: {fileID: 114130744838494750}
   m_Layer: 0
   m_Name: Character_004_HelicopterHat_001_Small
   m_TagString: Untagged
@@ -1643,6 +1644,17 @@ MonoBehaviour:
   sprHealth4: {fileID: 21300000, guid: f1c50dd1f4aa74540bf3d9a742752612, type: 3}
   sprHealth5: {fileID: 21300000, guid: 1e037cce0f182174891cd342449ff4c9, type: 3}
   imgPlayer: {fileID: 0}
+--- !u!114 &114130744838494750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1855141999879172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da4cbba44fa4044abca7feb0689f71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114224314640473560
 MonoBehaviour:
   m_ObjectHideFlags: 1
