@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿//-------------------------------------------------------------------------------
+// Filename:        Menu.cs
+//
+// Description:     Pauses time when a player pauses the game.
+//
+// Author:          Mitchell Cattini-Schultz
+// Editors:         Mitchell Cattini-Schultz
+//-------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,17 +30,17 @@ public class Menu : MonoBehaviour
     //----------------------------------------------
     private bool m_bEscapeToggle = false;
 
-    //----------------------------
+    //--------------------------------------------------------------------------------------
     // Use this for initialization
-    //----------------------------
+    //--------------------------------------------------------------------------------------
     void Start()
     {
 
     }
 
-    //--------------------------------
+    //--------------------------------------------------------------------------------------
     // Update is called once per frame
-    //--------------------------------
+    //--------------------------------------------------------------------------------------
     void Update()
     {
         //Player scpPlayer = player.gameObject.GetComponent<Player>();

@@ -1,6 +1,12 @@
-﻿//---------------------------------------------------------
-// 
-//---------------------------------------------------------
+﻿//-------------------------------------------------------------------------------
+// Filename:        PlayerRetical.cs
+//
+// Description:     .
+//
+// Author:          Mitchell Cattini-Schultz
+// Editors:         Mitchell Cattini-Schultz
+//-------------------------------------------------------------------------------
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

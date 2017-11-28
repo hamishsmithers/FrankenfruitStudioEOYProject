@@ -1,4 +1,17 @@
-﻿using System.Collections;
+﻿//------------------------------------------------------------------------------------------
+// Filename:        Player.cs
+//
+// Description:     Players are the main feature of the game, they have health, can pick 
+//                  up snowballs and throw them to hurt other players, they have 
+//                  collision detection with multiple objects. 
+//                  This script holds all logic for the player minus the dash mechanic.
+//                  The player also handles changing the color of snowballs that it shoots.
+//
+// Author:          Mitchell Cattini-Schultz
+// Editors:         Mitchell Cattini-Schultz
+//------------------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -281,9 +294,9 @@ public class Player : MonoBehaviour
     public ParticleSystem m_psDizzy;
 
 
-    //-----------------------------
+    //--------------------------------------------------------------------------------------
     // Use this for initialization
-    //-----------------------------
+    //--------------------------------------------------------------------------------------
     void Start()
     {
         //m_goPlayerReticleCopy = Instantiate(m_goPlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
@@ -309,17 +322,10 @@ public class Player : MonoBehaviour
         m_psDizzy.Stop();
     }
 
-    //--------------------------------------------------------
-    // FixedUpdate is called once per frame
-    //--------------------------------------------------------
-    //void FixedUpdate()
-    //{
 
-    //}
-
-    //--------------------------------------------------------
-    //
-    //--------------------------------------------------------
+    //--------------------------------------------------------------------------------------
+    // An update runs 50 frames per second vs the usual 60, used for physics calculations.
+    //--------------------------------------------------------------------------------------
     void FixedUpdate()
     {
         if (m_bAlive)
@@ -329,6 +335,11 @@ public class Player : MonoBehaviour
                 scpDash.DoDash();
         }
     }
+
+
+    //--------------------------------------------------------------------------------------
+    // Update is called once per frame
+    //--------------------------------------------------------------------------------------
     void Update()
     {
         Dash scpDash = gameObject.GetComponent<Dash>();

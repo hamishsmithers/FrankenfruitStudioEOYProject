@@ -1,4 +1,15 @@
-﻿using System.Collections;
+﻿//-------------------------------------------------------------------------------
+// Filename:        Snowball.cs
+//
+// Description:     The Snowball is an essential element of the game. 
+//                  Players can pick it up, throw it, steal it and it also has 
+//                  awesome particle effects!
+//
+// Author:          Mitchell Cattini-Schultz
+// Editors:         Mitchell Cattini-Schultz
+//-------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,7 +53,9 @@ public class Snowball : MonoBehaviour
     
     public Gradient mstet = null;
 
+    //--------------------------------------------------------------------------------------
     // Use this for initialization
+    //--------------------------------------------------------------------------------------    
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
@@ -53,7 +66,9 @@ public class Snowball : MonoBehaviour
 
     }
 
+    //--------------------------------------------------------------------------------------
     // Update is called once per frame
+    //--------------------------------------------------------------------------------------
     void Update()
     {
         //var main = m_ParticleSparks.main;
@@ -93,16 +108,22 @@ public class Snowball : MonoBehaviour
             m_nScoreValue = 0;
             m_bTooFast = false;
         }
-
-
     }
 
+    //--------------------------------------------------------------------------------------
+    // Collision for the snowball object. If the snowball collides with anything that is
+    // not the players or the ground it slows the ball a little. If the ball collides with
+    // anything that is not the ground then the snowball hit sound plays.
+    //
+    // Param:
+    //      col: The col that the snowball hit.
+    //--------------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag != "Ground" && col.gameObject.tag != "Character")
         {
             if (m_rb)
-                m_rb.velocity = m_rb.velocity * 1f;
+                m_rb.velocity = m_rb.velocity * 1.0f;
         }
 
         if (col.gameObject.tag != "Ground")

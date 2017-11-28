@@ -1,4 +1,16 @@
-﻿using System.Collections;
+﻿//-------------------------------------------------------------------------------
+// Filename:        Global.cs
+//
+// Description:     Global handles various tasks such as: Spawning the first set
+//                  of snowballs and then the death snowballs.
+//                  Handles appearing the pause canvas and allow for exiting back
+//                  to the main menu.
+//
+// Author:          Mitchell Cattini-Schultz
+// Editors:         Mitchell Cattini-Schultz, Nathan Nette
+//-------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,16 +64,9 @@ public class Global : MonoBehaviour
     private float m_fDeathSnowballCount = 0.0f;
     private bool m_bDeathSnowballsSpawned = false;
 
-    ////-------------------------------
-    //// Use Xbox controls or keyboard
-    ////-------------------------------
-    //static public bool bXboxControls = false;
-    //static public bool bKeyboardControls = true;
-
-
-    //----------------------------
+    //--------------------------------------------------------------------------------------
     // Use this for initialization
-    //----------------------------
+    //--------------------------------------------------------------------------------------
     void Start()
     {
         //set the menu canvas to hidden
@@ -79,9 +84,9 @@ public class Global : MonoBehaviour
         }
     }
 
-    //---------------------------------
+    //--------------------------------------------------------------------------------------
     // Update is called once per frame
-    //---------------------------------
+    //--------------------------------------------------------------------------------------
     void Update()
     {
         if (!m_bDeathSnowballsSpawned && m_fDeathSnowballCount < m_fDeathSnowballTime)
@@ -121,6 +126,9 @@ public class Global : MonoBehaviour
         }
     }
 
+    //--------------------------------------------------------------------------------------
+    // 
+    //--------------------------------------------------------------------------------------
     public void PauseMenuContinue()
     {
         m_goPauseCanvas.SetActive(false);
@@ -128,12 +136,18 @@ public class Global : MonoBehaviour
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
     }
 
+    //--------------------------------------------------------------------------------------
+    // 
+    //--------------------------------------------------------------------------------------
     public void PauseMenuExit()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Main Menu");
     }
 
+    //--------------------------------------------------------------------------------------
+    // Resets the game by returning to the Main Menu scene.
+    //--------------------------------------------------------------------------------------
     public void ResetGame()
     {
         if (XCI.GetButton(XboxButton.Start, controller) && XCI.GetButton(XboxButton.Back, controller))

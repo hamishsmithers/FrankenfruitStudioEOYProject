@@ -1,4 +1,15 @@
-﻿using System.Collections;
+//-------------------------------------------------------------------------------
+// Filename:        ObjectPool.cs
+//
+// Description:     This Object Pool is used for handling the snowballs it firstly
+//                  instantiates objects equal to the 'number to pool' and then
+//                  toggles their active state on and off.
+//
+// Author:          Mitchell Cattini-Schultz
+// Editors:         Mitchell Cattini-Schultz
+//-------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +31,9 @@ public class ObjectPool : MonoBehaviour
     public int m_nAmountToPool;
 
 
-    // Use this for initialization
+    //--------------------------------------------------------------------------------------
+    // Use this for initialization, called even if the script is disabled.
+    //--------------------------------------------------------------------------------------
     void Awake()
     {
         m_SharedInstance = this;
@@ -35,11 +48,12 @@ public class ObjectPool : MonoBehaviour
             GameObject goObj = Instantiate(m_goObjectToPool);
             goObj.SetActive(false);
             m_lstPooledObjects.Add(goObj);
-            //Debug.Log("spawned false");
         }
     }
 
+    //--------------------------------------------------------------------------------------
     // Update is called once per frame
+    //--------------------------------------------------------------------------------------
     void Update()
     {
 
@@ -54,7 +68,7 @@ public class ObjectPool : MonoBehaviour
             if (!m_lstPooledObjects[i].activeInHierarchy)
             {
                 m_lstPooledObjects[i].SetActive(true);
-                //Debug.Log("object pool activated");
+                
                 return m_lstPooledObjects[i];
             }
         }

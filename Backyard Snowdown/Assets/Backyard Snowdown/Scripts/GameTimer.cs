@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿//-------------------------------------------------------------------------------
+// Filename:        GameTimer.cs
+//
+// Description:     Prints out the game timer text in a polished way.
+//
+// Author:          Hamish Smithers
+// Editors:         Hamish Smithers
+//-------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,21 +18,26 @@ public class GameTimer : MonoBehaviour
     public Text m_txtGameTime;
     private float m_fGameTime = 0.0f;
 
-	private int m_nSeconds=0;
-	private int m_nMinutes=0;
+	private int m_nSeconds = 0;
+	private int m_nMinutes = 0;
 	private float initialTime;
     
     // Next update in second
     private int nextUpdate = 1;
 
+
+    //--------------------------------------------------------------------------------------
     // Use this for initialization
+    //--------------------------------------------------------------------------------------
     void Start()
     {
         m_txtGameTime = GetComponent<Text>();
         m_fGameTime = 0.0f;
     }
 
+    //--------------------------------------------------------------------------------------
     // Update is called once per frame
+    //--------------------------------------------------------------------------------------
     void Update()
     {
 		m_fGameTime = Time.timeSinceLevelLoad;
@@ -42,19 +56,20 @@ public class GameTimer : MonoBehaviour
 		}
 
 
+        // Mitchell's attempt does not work
 
-//        string strMinutes = ((int)m_fGameTime / 60).ToString();
-//        string strSeconds = (m_fGameTime % 60).ToString("f0");
-//        m_txtGameTime.text = strMinutes + ":" + strSeconds;
-
+        //string strMinutes = ((int)m_fGameTime / 60).ToString();
+        //string strSeconds = (m_fGameTime % 60).ToString("f0");
+        //m_txtGameTime.text = strMinutes + ":" + strSeconds;
+        
         // breaks when ticking over each minute
-//        if (m_fGameTime % 60 > 9.5f)
-//            m_txtGameTime.text = strMinutes + ":" + strSeconds;
-//        else
-//            m_txtGameTime.text = strMinutes + ":0" + strSeconds;
-//		m_txtGameTime.text=Time.time.ToString();
-//
-//		m_fGameTime = Time.time;
+        //  if (m_fGameTime % 60 > 9.5f)
+        //      m_txtGameTime.text = strMinutes + ":" + strSeconds;
+        //  else
+        //      m_txtGameTime.text = strMinutes + ":0" + strSeconds;
+        //m_txtGameTime.text=Time.time.ToString();
+        //
+        //m_fGameTime = Time.time;
         
         //// If the next update is reached
         //if (Time.time >= nextUpdate)

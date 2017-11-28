@@ -1,4 +1,15 @@
-﻿using System.Collections;
+﻿//-------------------------------------------------------------------------------
+// Filename:        JumpingSnowman.cs
+//
+// Description:     The jumping snowman is a cool feature of the game, he spawns
+//                  in a couple minutes after the game has started, and with him 
+//                  the death snowballs spawn, this is the deathmatch section.
+//
+// Author:          Mitchell Cattini-Schultz
+// Editors:         Mitchell Cattini-Schultz
+//-------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -83,7 +94,9 @@ public class JumpingSnowman : MonoBehaviour
     private bool m_bStart = false;
 
 
-    // Use this for initialization
+    //--------------------------------------------------------------------------------------
+    // Use this for initialization, called even if the script is disabled.
+    //--------------------------------------------------------------------------------------
     void Awake()
     {
         //if (SceneManager.GetActiveScene().name == "Main_Default" || SceneManager.GetActiveScene().buildIndex == 11)
@@ -98,7 +111,9 @@ public class JumpingSnowman : MonoBehaviour
         m_fStartY = transform.position.y;
     }
 
+    //--------------------------------------------------------------------------------------
     // Use this for initialization
+    //--------------------------------------------------------------------------------------
     void Start()
     {
         psSpawn = m_goSpawnParticles.GetComponent<ParticleSystem>();
@@ -112,7 +127,9 @@ public class JumpingSnowman : MonoBehaviour
         m_fSpawnTime = m_fInitialSpawnTime;
     }
 
+    //--------------------------------------------------------------------------------------
     // Update is called once per frame
+    //--------------------------------------------------------------------------------------
     void Update()
     {
         if (m_bStart)
@@ -226,6 +243,12 @@ public class JumpingSnowman : MonoBehaviour
         }
     }
 
+    //--------------------------------------------------------------------------------------
+    // Checks if the Jumping Snowman was hit by a Snowball and deducts 1 health point.
+    //
+    // Param:
+    //      col: The object that the Jumping Snowman collided with.
+    //--------------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Snowball" && col.gameObject.GetComponent<Snowball>().m_bTooFast)
@@ -234,6 +257,9 @@ public class JumpingSnowman : MonoBehaviour
         }
     }
 
+    //--------------------------------------------------------------------------------------
+    // Create the 3 points of the curve that the lerps need to create a beizer for the jump.
+    //--------------------------------------------------------------------------------------
     private void CreateCurve()
     {
         // creating the centre of the curve
@@ -241,6 +267,13 @@ public class JumpingSnowman : MonoBehaviour
         m_v3CurveMiddle += transform.up * m_fHeightOfJump;
     }
 
+    //--------------------------------------------------------------------------------------
+    // Checks if the Jumping Snowman plotted next destination would be inside an obstacle
+    // and generates a new location, preventing weird jumps.
+    //
+    // Return:
+    //      Returns a Vector 3 which is the next destination he will jump to.
+    //--------------------------------------------------------------------------------------
     private Vector3 FindValidSpawnPos()
     {
         Vector3 v3Result = Vector3.zero;
@@ -259,6 +292,8 @@ public class JumpingSnowman : MonoBehaviour
 }
 
 /*
+ * How to Lerp!
+ *
  * Start (snowmans pos)
  * Randomly calculate an end
  * Height

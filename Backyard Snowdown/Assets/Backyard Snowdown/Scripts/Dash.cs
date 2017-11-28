@@ -1,4 +1,15 @@
-﻿using System.Collections;
+﻿//--------------------------------------------------------------------------------
+// Filename:        Dash.cs
+//
+// Description:     Dash allows the players to dash, which in turn allows players
+//                  to pickup snowballs, steal them from other players and catch
+//                  them mid-flight.
+//
+// Author:          Mitchell Cattini-Schultz
+// Editors:         Mitchell Cattini-Schultz
+//--------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,19 +59,25 @@ public class Dash : MonoBehaviour
     public bool m_bCoolDown = false;
     private bool m_bStartTimer = false;
 
-
+    //--------------------------------------------------------------------------------------
     // Use this for initialization
+    //--------------------------------------------------------------------------------------    
     void Start()
     {
 
     }
 
+    //--------------------------------------------------------------------------------------
     // Update is called once per frame
+    //-------------------------------------------------------------------------------------- 
     public void Update()
     {
 
     }
-
+    //--------------------------------------------------------------------------------------
+    // Makes the player dash forward a certain distance allowing for them to pickup, steal 
+    // and catch snowballs.
+    //--------------------------------------------------------------------------------------
     public void DoDash()
     {
         if (m_bStartTimer && m_fCoolDownTimer <= m_fCoolDown)

@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿//-------------------------------------------------------------------------------
+// Filename:        SnowMan.cs
+//
+// Description:     The Snowman .
+//
+// Author:          Mitchell Cattini-Schultz
+// Editors:         Mitchell Cattini-Schultz
+//-------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
