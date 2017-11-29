@@ -343,8 +343,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         Dash scpDash = gameObject.GetComponent<Dash>();
-        //AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
-        //EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
+        AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
+        EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
 
         if (m_bAlive)
         {

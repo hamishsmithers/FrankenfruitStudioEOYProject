@@ -114,7 +114,8 @@ public class Global : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape) || XCI.GetButtonDown(XboxButton.Start, controller))
         {
-            if (!m_goPauseCanvas.activeInHierarchy)
+            if (SceneManager.GetActiveScene().name != "EndRound")
+            //if (!m_goPauseCanvas.activeInHierarchy)
             {
                 m_goPauseCanvas.SetActive(true);
                 // game time is frozen
