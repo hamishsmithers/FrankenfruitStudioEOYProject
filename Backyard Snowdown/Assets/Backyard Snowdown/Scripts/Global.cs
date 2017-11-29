@@ -73,13 +73,14 @@ public class Global : MonoBehaviour
         if (m_goPauseCanvas)
             m_goPauseCanvas.SetActive(false);
 
+        // spawns the first set of snowballs
         if (m_goLstSnowballLoc.Count > 0)
         {
             for (int i = 0; i < m_goLstSnowballLoc.Count; i++)
             {
                 GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+                // putting the snowballs into the list
                 goSnowball.transform.position = m_goLstSnowballLoc[i].transform.position;
-                //Debug.Log("global getting object");
             }
         }
     }
@@ -89,6 +90,7 @@ public class Global : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
+        // spawns the second set of snowballs
         if (!m_bDeathSnowballsSpawned && m_fDeathSnowballCount < m_fDeathSnowballTime)
         {
             m_fDeathSnowballCount += Time.deltaTime;
@@ -98,6 +100,7 @@ public class Global : MonoBehaviour
             for (int i = 0; i < m_goLstDeathSnowballLoc.Count; i++)
             {
                 GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
+                // putting the snowballs into the list
                 goSnowball.transform.position = m_goLstDeathSnowballLoc[i].transform.position;
             }
 
@@ -114,12 +117,14 @@ public class Global : MonoBehaviour
             if (!m_goPauseCanvas.activeInHierarchy)
             {
                 m_goPauseCanvas.SetActive(true);
+                // game time is frozen
                 Time.timeScale = 0;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_btnFirstButton);
             }
             else
             {
                 m_goPauseCanvas.SetActive(false);
+                // game time is unfrozen
                 Time.timeScale = 1;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             }

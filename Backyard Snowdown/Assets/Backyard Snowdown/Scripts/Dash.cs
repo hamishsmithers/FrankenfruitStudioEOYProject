@@ -1,4 +1,4 @@
-﻿//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
 // Filename:        Dash.cs
 //
 // Description:     Dash allows the players to dash, which in turn allows players
@@ -61,7 +61,7 @@ public class Dash : MonoBehaviour
 
     //--------------------------------------------------------------------------------------
     // Use this for initialization
-    //--------------------------------------------------------------------------------------    
+    //--------------------------------------------------------------------------------------
     void Start()
     {
 
@@ -80,6 +80,7 @@ public class Dash : MonoBehaviour
     //--------------------------------------------------------------------------------------
     public void DoDash()
     {
+        // cooldown timer
         if (m_bStartTimer && m_fCoolDownTimer <= m_fCoolDown)
         {
             m_fCoolDownTimer += Time.deltaTime;
@@ -99,20 +100,25 @@ public class Dash : MonoBehaviour
             float leftTrigHeight = m_MaxTriggerHeight * (1.0f - XCI.GetAxisRaw(XboxAxis.LeftTrigger, scpPlayer.controller));
 
             if (leftTrigHeight < 1.0f || scpPlayer.m_bLeftTriggerPressed || Input.GetKeyDown(KeyCode.Space))
-            {
+            {                
                 scpPlayer.m_bLeftTriggerPressed = true;
+                // players cant move when they dash
                 scpPlayer.m_bMovementLock = true;
 
+                // how long a dash can last
                 if (m_fDashDuration > m_fDashTimer)
                 {
                     if (!scpPlayer.m_bHitByGiantSnowBall)
                     {
+                        // plays dash audio
                         if (!m_bDashing)
                             AudioManager.m_SharedInstance.PlayDashAudio();
+
                         m_bDashing = true;
+                        // push the player in the aim stick direction to dash
                         scpPlayer.m_rb.AddForce(m_v3DashDir * m_fDashSpeed * scpPlayer.m_fCurrentSpeed, ForceMode.Impulse);
-                        //transform.position += m_v3DashDir * m_fDashSpeed * Time.deltaTime * scpPlayer.m_fCurrentSpeed;
                         m_fDashTimer += Time.deltaTime;
+                        // play dash animaiton
                         scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", true);
                     }
                 }
@@ -121,7 +127,9 @@ public class Dash : MonoBehaviour
                     m_bStartTimer = true;
                     scpPlayer.m_bLeftTriggerPressed = false;
                     m_fDashTimer = 0.0f;
+                    // restore movement ot the player
                     scpPlayer.m_bMovementLock = false;
+                    // finish dash animation
                     scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", false);
                 }
             }
@@ -130,6 +138,7 @@ public class Dash : MonoBehaviour
             {
                 m_v3DashDir = scpPlayer.m_v3XboxDashDir;
                 m_v3DashDir.y = 0.0f;
+                // normalize to make things eaiser
                 m_v3DashDir.Normalize();
                 scpPlayer.m_v3MovePos.Normalize();
             }

@@ -3,7 +3,7 @@
 //
 // Description:     Prints out the game timer text in a polished way.
 //
-// Author:          Hamish Smithers
+// Author:          Mitchell Cattini-Schultz
 // Editors:         Hamish Smithers
 //-------------------------------------------------------------------------------
 
@@ -49,6 +49,7 @@ public class GameTimer : MonoBehaviour
 			m_nSeconds = 0;
 		}
 
+        // if the seconds are above 9 then chane the formatting so that it displays nicely
 		if (m_nSeconds < 10) {
 			m_txtGameTime.text = m_nMinutes + ":0" + m_nSeconds;
 		} else {

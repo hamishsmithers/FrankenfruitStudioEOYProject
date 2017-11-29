@@ -48,11 +48,13 @@ public class Menu : MonoBehaviour
         {
             if (m_bEscapeToggle)
             {
+                // game time is frozen
                 Time.timeScale = 0;
                 m_bEscapeToggle = false;
             }
             else if (!m_bEscapeToggle)
             {
+                // game time is unfrozen
                 Time.timeScale = 1;
                 m_bEscapeToggle = true;
             }

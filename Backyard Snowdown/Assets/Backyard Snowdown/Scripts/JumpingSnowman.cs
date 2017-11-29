@@ -51,7 +51,7 @@ public class JumpingSnowman : MonoBehaviour
 
     private float m_fJumpCounter = 0.0f;
     //----------------------
-    // 
+    // Time Until Next Jump
     //----------------------
     [LabelOverride("Time Until Next Jump")]
     [Tooltip("The time until next jump")]
@@ -64,7 +64,7 @@ public class JumpingSnowman : MonoBehaviour
     private float m_fJumpingTimer = 0.0f;
 
     //----------------------
-    // 
+    // Jump Time
     //----------------------
     [LabelOverride("Jump Time")]
     [Tooltip("Time the Snowman spends jumping from position to destination.")]
@@ -73,10 +73,8 @@ public class JumpingSnowman : MonoBehaviour
     private Vector3 m_v3NextPos;
     private float m_fStartY;
 
-    //private int m_nCurve = 1;
-
     //----------------------
-    // 
+    // Height of Jump
     //----------------------
     [LabelOverride("Height of Jump")]
     [Tooltip("The height at which the Snowman reaches at the peak of it's jump.")]
@@ -132,6 +130,7 @@ public class JumpingSnowman : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
+        // resets the script without having to destroy and instatiate a new Jumping Snowman each time
         if (m_bStart)
         {
             m_fSpawnCount = 0.0f;
@@ -166,6 +165,7 @@ public class JumpingSnowman : MonoBehaviour
 
             if (!bSpawnParticleEffectPlayed && m_fSpawnCount > (m_fSpawnTime - 1.0f))
             {
+                // particle system play
                 psSpawn.Play();
 
                 bSpawnParticleEffectPlayed = true;
@@ -182,6 +182,7 @@ public class JumpingSnowman : MonoBehaviour
 
             if (m_bOnce && m_fSpawnCount > (m_fSpawnTime - 1.5f))
             {
+                // summon sound
                 AudioManager.m_SharedInstance.PlaySnowmanSummon();
                 m_bOnce = false;
             }
@@ -190,26 +191,27 @@ public class JumpingSnowman : MonoBehaviour
         // Between Jumps
         if (!m_bDead && m_fJumpCounter <= m_fTimeUntilNextJump && !m_bJumping)
         {
-            //Debug.Log("between");
             m_fJumpCounter += Time.deltaTime;
             m_bBetweenJumps = true;
         }
         else if (!m_bDead && m_fJumpCounter > m_fTimeUntilNextJump)
         {
+            // sets the start pos so the curve can be created
             m_v3StartPos = transform.position;
 
             m_bBetweenJumps = false;
             m_fJumpCounter = 0.0f;
 
+            // finds a valid spawn position
             m_v3NextPos = FindValidSpawnPos();
 
+            // creates a curve based on the Jumping Snowmans pos and destination pos
             CreateCurve();
         }
 
         // Jumping
         if (!m_bDead && m_fJumpingTimer <= m_fJumpingTime && !m_bBetweenJumps)
         {
-            //Debug.Log("jumping");
             m_fJumpingTimer += Time.deltaTime;
 
             // boing sound
@@ -279,6 +281,7 @@ public class JumpingSnowman : MonoBehaviour
         Vector3 v3Result = Vector3.zero;
         int layer = 1 << LayerMask.NameToLayer("Obstacle");
 
+        // checks if the destination location is valid and if not finds a new one, rinse repeat
         do
         {
             v3Result.x = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x);

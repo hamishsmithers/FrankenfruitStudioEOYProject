@@ -38,6 +38,7 @@ public class p1Animation : MonoBehaviour
     public void ThrowBall()
     {
         Player scpPlayer = GetComponentInParent<Player>();
+        // releases the players grasp on the snowball
         scpPlayer.m_bThrowBall = true;
     }
 }
