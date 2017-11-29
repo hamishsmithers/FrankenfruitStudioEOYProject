@@ -36,9 +36,6 @@ public class Snowball : MonoBehaviour
     public Material[] m_materials;
     private Renderer m_rend;
 
-    //-------
-    // Score
-    //-------
     //------------
     // Score Value
     //------------
@@ -51,8 +48,6 @@ public class Snowball : MonoBehaviour
     //private Color mainColor = Color.white;
     private MeshRenderer mr = null;
 
-    public Gradient mstet = null;
-
     //--------------------------------------------------------------------------------------
     // Use this for initialization
     //--------------------------------------------------------------------------------------    
@@ -61,9 +56,8 @@ public class Snowball : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
 
         mr = GetComponent<MeshRenderer>();
-        //mainColor = mr.material.color;
+        // Grabs the particle system which is on the first child
         m_ParticleSparks = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
-
     }
 
     //--------------------------------------------------------------------------------------
@@ -75,28 +69,37 @@ public class Snowball : MonoBehaviour
         //if the ball is moving at a dangerous speed, let the player know!
         if (m_bTooFast)
         {
+            // red material
             mr.material = m_materials[1];
+            // plays the particle system sparks
             m_ParticleSparks.Play();
         }
         else
         {
+            // default material
             mr.material = m_materials[0];
+            // stops the particle system sparks
             m_ParticleSparks.Stop();
         }
 
+        // if the snowball going too high up, cap it
         if (m_rb.velocity.y > 5.0f)
         {
+            // doing a quick dirty hack to access the read-me only variable
+            // you cannot access a single axis at a time from rigidBody
+            // so we have to make a new vector for it.
             Vector3 v3 = m_rb.velocity;
             v3.y = 5.0f;
             m_rb.velocity = v3;
         }
 
+        // if moving too fast the damage is 1
         if (m_rb.velocity.magnitude >= m_fDamageSpeed)
         {
             m_nScoreValue = 1;
             m_bTooFast = true;
         }
-
+        // if not moving too fast the damage is 0
         else if (m_rb.velocity.magnitude < m_fDamageSpeed)
         {
             m_nScoreValue = 0;
