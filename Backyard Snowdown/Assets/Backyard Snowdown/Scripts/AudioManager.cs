@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿//------------------------------------------------------------------------------------------
+// Filename:        AudioManager.cs
+//
+// Description:     AudioManager is the script that controls the sound effects in the 
+//                  Main_Default scene.
+//
+// Author:          Nathan Nette
+// Editors:         Nathan Nette
+//------------------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -7,75 +17,65 @@ public class AudioManager : MonoBehaviour {
 
     public static AudioManager m_SharedInstance;
 
-    //--------------------------------------
+    //------------------------------------------------------------------------------------------
     // Sound Effect for Dash
-    //--------------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Dash SFX")]
     [Tooltip("The sound effect for when the player dashes.")]
     public AudioClip sfxDash = null;
-    //--------------------------------------
+
+    //------------------------------------------------------------------------------------------
     // Sound Effect for Snowman Jumping
-    //--------------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Boing Snowman SFX")]
     [Tooltip("The boing sound effect for when the snowman jumps.")]
     public AudioClip sfxSnowManBoing = null;
-    //--------------------------------------
+
+    //------------------------------------------------------------------------------------------
     // Sound Effect for Snowman Crumbling
-    //--------------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Crumble Snowman SFX")]
     [Tooltip("The crumbling sound effect for when the snowman dies.")]
     public AudioClip sfxSnowManCrumble = null;
-    //-----------------------------------------
+
+    //------------------------------------------------------------------------------------------
     // Sound Effect for Snowman being Summoned
-    //-----------------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Summon Snowman SFX")]
     [Tooltip("The sound effect for when the snowman is summoned.")]
     public AudioClip sfxSnowManSummon = null;
-    //--------------------------------------
+
+    //------------------------------------------------------------------------------------------
     // Audio Mixer for Sound Effects
-    //--------------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("SFX Mixer")]
     [Tooltip("The audio mixer titled SFX.")]
     public AudioMixerGroup m_audmixMixer = null;
-    //--------------------------------------
-    // Sound Effect for Sounds
-    //--------------------------------------
-    [LabelOverride("Sound GameObject")]
-    [Tooltip("")]
-    public GameObject goSound = null;
-    //--------------------------------------
-    // Sound Effect for SFX Source
-    //--------------------------------------
-    //[LabelOverride("SFX Audio Source")]
-    //[Tooltip("")]
-    //public AudioSource sfxSource = null;
-    //--------------------------------------
-    // Sound Effect for Throw
-    //--------------------------------------
-    [LabelOverride("")]
-    [Tooltip("")]
-    public AudioClip[] sfxThrow = null;
-    //----------------------------------------------------
-    // Array of AudioClips storing the varied hit sounds.
-    //----------------------------------------------------
-    [LabelOverride("")]
-    [Tooltip("")]
-    public AudioClip[] sfxHitArray = null;
-    //-----------------------------------------------------
-    // Array of AudioClips storing the varied hurt sounds.
-    //-----------------------------------------------------
-    [LabelOverride("")]
-    [Tooltip("")]
-    public AudioClip[] sfxHurtArray = null;
 
-    //-------------------------------------------------------------------------------
-    // Creating a new instance of the Player class to reference parts of the script.
-    //-------------------------------------------------------------------------------
-    private Player scpPlayer;
-    //-------------------------------------------------------------------------------
-    // Creating a new instance of the Player class to reference parts of the script.
-    //-------------------------------------------------------------------------------
-    private Dash scpDash;
+    //------------------------------------------------------------------------------------------
+    // Sound Effect for Sounds
+    //------------------------------------------------------------------------------------------
+    [LabelOverride("Sound GameObject")]
+    [Tooltip("Place the game object sound in here.")]
+    public GameObject goSound = null;
+
+    //------------------------------------------------------------------------------------------
+    // Sound Effect for Throw
+    //------------------------------------------------------------------------------------------
+    [Tooltip("An array for the various throw sounds.")]
+    public AudioClip[] sfxThrow = null;
+
+    //------------------------------------------------------------------------------------------
+    // Array of AudioClips storing the varied hit sounds.
+    //------------------------------------------------------------------------------------------
+    [Tooltip("An array for the various hit sounds.")]
+    public AudioClip[] sfxHitArray = null;
+
+    //------------------------------------------------------------------------------------------
+    // Array of AudioClips storing the varied hurt sounds.
+    //------------------------------------------------------------------------------------------
+    [Tooltip("An array for the various hurt sounds.")]
+    public AudioClip[] sfxHurtArray = null;
 
     //---------------------------
     // Awake is a Unity Function
@@ -90,16 +90,14 @@ public class AudioManager : MonoBehaviour {
     //-----------------------------
     void Start ()
     {
-        // Allocates the AudioSource class into the audio source called sfxSource
-        //sfxSource = gameObject.GetComponent<AudioSource>();
-
-        // Allocates the Player class into the scpPlayer to get the script and be able to use the script in this code.
-        scpPlayer = gameObject.GetComponent<Player>();
-
-        // Allocates the Dash class into the scpDash to get the script and be able to use the script in this code.
-        scpDash = gameObject.GetComponent<Dash>();
     }
-
+    //------------------------------------------------------------------------------------------
+    // Function that turns a float to decibels
+    //
+    //  Param: 
+    //      linear:
+    //          The slider float value
+    //------------------------------------------------------------------------------------------
     private float LinearToDecibel(float linear)
     {
         float dB;

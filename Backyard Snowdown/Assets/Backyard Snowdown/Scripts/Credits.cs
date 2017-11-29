@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿//------------------------------------------------------------------------------------------
+// Filename:        Credits.cs
+//
+// Description:     Credits does all of the functions in the credits scene. Simply, being
+//                  able to continue by pressing escape, start or a on the controller.
+//
+// Author:          Nathan Nette
+// Editors:         Nathan Nette
+//------------------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,34 +18,28 @@ public class Credits : MonoBehaviour {
 
     public XboxController controller;
 
+    //------------------------------------------------------------------------------------------
+    // Credits Music
+    //------------------------------------------------------------------------------------------
+    [LabelOverride("Credits Music")]
+    [Tooltip("The audio source for the credits music.")]
     public AudioSource CreditsMusic = null;
-
-    //public GameObject CreditsText = null;
-
-    //private Vector3 CreditTransform;
 
 	// Use this for initialization
 	void Start ()
     {
-        //CreditTransform.x = 0;
-        //CreditTransform.y = 0;
-        //CreditTransform.z = 0;
+        // Setting the music volume to the music volume singleton.
         CreditsMusic.volume = Global.MusicVolume;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        //CreditsText.transform.localPosition = CreditTransform;
-
-        //CreditTransform += Vector3.up * Time.deltaTime * 50;
-
-        if(XCI.GetButtonDown(XboxButton.Start, controller) || XCI.GetButtonDown(XboxButton.A, controller))
+        // The buttons that, when pressed, take you back to the menu.
+        if (Input.GetKey(KeyCode.Escape) || XCI.GetButtonDown(XboxButton.Start, controller) || XCI.GetButtonDown(XboxButton.A, controller))
         {
+            // Load the Main Menu 
             SceneManager.LoadScene("Main Menu");
         }
     }
-
-
-    
 }

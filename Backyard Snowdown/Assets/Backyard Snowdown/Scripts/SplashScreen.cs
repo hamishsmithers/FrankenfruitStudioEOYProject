@@ -13,16 +13,16 @@ public class SplashScreen : MonoBehaviour {
     //Time until loading main menu
     public float timeToDelay;
 
-	private AudioSource audio;
+	private AudioSource audSource;
 
 	// Use this for initialization
 	void Start () {
 
 		GetComponent<RawImage>().texture = movie as MovieTexture;
-		audio = GetComponent<AudioSource>();
-		audio.clip = movie.audioClip;
+		audSource = GetComponent<AudioSource>();
+		audSource.clip = movie.audioClip;
 		movie.Play();
-		audio.Play();
+		audSource.Play();
 	}
 	
 	// Update is called once per frame

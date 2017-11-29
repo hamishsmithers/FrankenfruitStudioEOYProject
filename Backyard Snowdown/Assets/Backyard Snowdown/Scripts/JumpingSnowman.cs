@@ -41,13 +41,13 @@ public class JumpingSnowman : MonoBehaviour
     private GameObject m_goTL;
     private GameObject m_goTR;
     private GameObject m_goBL;
-    private GameObject m_goBR;
+    //private GameObject m_goBR;
 
     private Vector3 m_v3CurveMiddle;
 
     private Vector3 m_v3Pos;
-    private float m_xLoc = 0.0f;
-    private float m_zLoc = 0.0f;
+    //private float m_xLoc = 0.0f;
+    //private float m_zLoc = 0.0f;
 
     private float m_fJumpCounter = 0.0f;
     //----------------------
@@ -57,7 +57,7 @@ public class JumpingSnowman : MonoBehaviour
     [Tooltip("The time until next jump")]
     public float m_fTimeUntilNextJump = 2.0f;
 
-    private bool m_bCanJump = false;
+    //private bool m_bCanJump = false;
     private bool m_bBetweenJumps = false;
     private bool m_bJumping = false;
     private bool m_bBoingSound = true;
@@ -104,7 +104,7 @@ public class JumpingSnowman : MonoBehaviour
             //rb = GetComponent<Rigidbody>();
             m_goTR = GameObject.Find("Reticle Bounds Top Right");
             m_goTL = GameObject.Find("Reticle Bounds Top Left");
-            m_goBR = GameObject.Find("Reticle Bounds Bottom Right");
+            //m_goBR = GameObject.Find("Reticle Bounds Bottom Right");
             m_goBL = GameObject.Find("Reticle Bounds Bottom Left");
         }
 
@@ -136,7 +136,7 @@ public class JumpingSnowman : MonoBehaviour
         {
             m_fSpawnCount = 0.0f;
             m_fJumpCounter = 0.0f;
-            m_bCanJump = false;
+            //m_bCanJump = false;
             m_bBetweenJumps = false;
             m_bJumping = false;
             m_bBoingSound = true;

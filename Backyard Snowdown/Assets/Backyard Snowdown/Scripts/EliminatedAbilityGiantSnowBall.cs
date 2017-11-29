@@ -1,13 +1,4 @@
-﻿//-------------------------------------------------------------------------------
-// Filename:        EliminatedAbilityGiantSnowBall.cs
-//
-// Description:     .
-//
-// Author:          Mitchell Cattini-Schultz
-// Editors:         Mitchell Cattini-Schultz
-//-------------------------------------------------------------------------------
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,9 +26,9 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
     //----------
     // Cooldown
     //----------
-    private float m_fCoolDownCount = 0.0f;
-    public float m_fCoolDownTime = 6.0f;
-    bool bSummonable = false;
+    //private float m_fCoolDownCount = 0.0f;
+    //public float m_fCoolDownTime = 6.0f;
+    //private bool bSummonable = false;
 
     // Use this for initialization
     void Start()

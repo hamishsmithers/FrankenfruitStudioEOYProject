@@ -7,8 +7,8 @@
 //                  This script holds all logic for the player minus the dash mechanic.
 //                  The player also handles changing the color of snowballs that it shoots.
 //
-// Author:          Mitchell Cattini-Schultz
-// Editors:         Mitchell Cattini-Schultz
+// Authors:         Mitchell Cattini-Schultz, Nathan Nette
+// Editors:         Mitchell Cattini-Schultz, Nathan Nette
 //------------------------------------------------------------------------------------------
 
 using System.Collections;
@@ -287,9 +287,9 @@ public class Player : MonoBehaviour
     public Material m_matSnowball = null;
 
     Vector3 v3;
-    private float m_bIframeFlickerCount = 0.0f;
+    //private float m_bIframeFlickerCount = 0.0f;
     public float m_bIFrameFlickerTime = 0.05f;
-    private bool m_bIFrameFlickerOn = true;
+    //private bool m_bIFrameFlickerOn = true;
 
     public ParticleSystem m_psDizzy;
 
@@ -343,8 +343,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         Dash scpDash = gameObject.GetComponent<Dash>();
-        AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
-        EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
+        //AbilitySnowMan scpSnowMan = gameObject.GetComponent<AbilitySnowMan>();
+        //EliminatedAbilityGiantSnowBall scpGiantSnowBall = gameObject.GetComponent<EliminatedAbilityGiantSnowBall>();
 
         if (m_bAlive)
         {
@@ -364,7 +364,7 @@ public class Player : MonoBehaviour
 
             Shoot();
 
-            scpSnowMan.CreateSnowMan();
+            //scpSnowMan.CreateSnowMan();
 
             Projectiles();
         }
@@ -406,7 +406,7 @@ public class Player : MonoBehaviour
         {
             //gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
             m_bIFrame = false;
-            m_bIframeFlickerCount = 0.0f;
+            //m_bIframeFlickerCount = 0.0f;
             m_fIFrameTimer = 0.0f;
             m_psDizzy.Stop();
         }
@@ -632,7 +632,7 @@ public class Player : MonoBehaviour
         m_bGo = ((Input.GetKeyUp(KeyCode.Mouse0) && controller == XboxController.First) || m_bReleased);
 
         Dash scpDash = gameObject.GetComponent<Dash>();
-        ChargeSlider scpSlider = gameObject.GetComponent<ChargeSlider>();
+        //ChargeSlider scpSlider = gameObject.GetComponent<ChargeSlider>();
 
         if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bGo || bDuringMaxCharge || m_bThrowBall)
         {
@@ -780,7 +780,7 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------
     private void Health()
     {
-        SnowMan scpSnowMan = gameObject.GetComponent<SnowMan>();
+        //SnowMan scpSnowMan = gameObject.GetComponent<SnowMan>();
 
         if (m_tookDmg)
         {

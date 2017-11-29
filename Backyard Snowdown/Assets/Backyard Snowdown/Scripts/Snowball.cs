@@ -48,9 +48,9 @@ public class Snowball : MonoBehaviour
 
     public ParticleSystem m_ParticleSparks;
 
-    private Color mainColor = Color.white;
+    //private Color mainColor = Color.white;
     private MeshRenderer mr = null;
-    
+
     public Gradient mstet = null;
 
     //--------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ public class Snowball : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
 
         mr = GetComponent<MeshRenderer>();
-        mainColor = mr.material.color;
+        //mainColor = mr.material.color;
         m_ParticleSparks = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
 
     }
@@ -71,13 +71,7 @@ public class Snowball : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        //var main = m_ParticleSparks.main;
-        //main.startColor = mstet;
-        
-        if (m_ParticleSparks == null)
-        {
-            Debug.Log("NO SPARKS");
-        }
+
         //if the ball is moving at a dangerous speed, let the player know!
         if (m_bTooFast)
         {
