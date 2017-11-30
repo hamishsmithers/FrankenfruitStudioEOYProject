@@ -172,14 +172,15 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool m_bHasBall = false;
 
+    [HideInInspector]
+    public float m_fChargeTimer = 0.0f;
+
     // xbox max scale of trigger when pressed down
     private const float m_MaxTriggerHeight = 1.21f;
     // private bool m_bWasHit = false;
     // charge power throw
     private bool m_bThrow = false;
     private float m_fChargeModifier = 0.0f;
-    [HideInInspector]
-    public float m_fChargeTimer = 0.0f;
     private float m_fPowerRange = 0.0f;
     private bool m_bCharging = false;
     private bool m_bGo = false;
@@ -204,12 +205,6 @@ public class Player : MonoBehaviour
     private float m_fIFrameTimer = 0.0f;
     //private bool m_bCanPickUp = true;
 
-    //----------------
-    // Health UI Text
-    //----------------
-    //[LabelOverride("UI Health Text")]
-    //[Tooltip("This stores the UI text of the player's health.")]
-    //public Text m_txtHealth;
     //--------------
     // Spawn Health
     //--------------

@@ -127,7 +127,7 @@ public class PlayerRetical : MonoBehaviour
     //            // Bot Left
     //            //if (newvec.x < m_BL.transform.position.x)
     //            //    newvec.x = m_BL.transform.position.x;
-                
+
 
     //            if (newvec.z < m_BL.transform.position.z)
     //                newvec.z = m_BL.transform.position.z;

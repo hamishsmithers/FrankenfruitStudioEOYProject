@@ -91,6 +91,7 @@ public class AudioManager : MonoBehaviour {
     void Start ()
     {
     }
+
     //------------------------------------------------------------------------------------------
     // Function that turns a float to decibels
     //
@@ -100,13 +101,18 @@ public class AudioManager : MonoBehaviour {
     //------------------------------------------------------------------------------------------
     private float LinearToDecibel(float linear)
     {
+        // A float for decibels.
         float dB;
 
+        // if the parsed in float is not equal to 0, do this.
         if (linear != 0)
             dB = 20.0f * Mathf.Log10(linear);
+
+        // Otherwise set it to -144
         else
             dB = -144.0f;
 
+        // return the decibel value.
         return dB;
     }
 
@@ -115,8 +121,8 @@ public class AudioManager : MonoBehaviour {
     //---------------------------------
     void Update ()
     {
-        //Convert 0 to 1 volume to -80 to 20 db
-        //float fSFXVolumeDB = (1 - Global.SFXVolume) * -20f;
+        // Convert 0 to 1 volume to -80 to 20 db
+        // float fSFXVolumeDB = (1 - Global.SFXVolume) * -20f;
         float fSFXVolumeDB = LinearToDecibel(Global.SFXVolume);
         m_audmixMixer.audioMixer.SetFloat("SFXVolume", fSFXVolumeDB);
     }

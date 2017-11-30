@@ -1,8 +1,21 @@
-﻿using System.Collections;
+﻿//------------------------------------------------------------------------------------------
+// Filename:        PodiumPosition.cs
+//
+// Description:     Podium position is the script that organises the placement of the
+//                  players in the order that they died in. It adds the player to the array
+//                  when they die then once the round is over, arranges them in the correct
+//                  order.
+//
+// Author:          Nathan Nette
+// Editors:         Nathan Nette
+//------------------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PodiumPosition : MonoBehaviour {
+public class PodiumPosition : MonoBehaviour
+{
 
     //--------------
     // Players Array
@@ -16,7 +29,7 @@ public class PodiumPosition : MonoBehaviour {
     public GameObject[] m_ArrPodium;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         // Character 1st in pos 1
         // Character 2nd in pos 2
@@ -36,19 +49,11 @@ public class PodiumPosition : MonoBehaviour {
             m_ArrPlayers[nPlayer].transform.localPosition = Vector3.zero;
         }
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		
-	}
 
-    //------------------------------------------------
-    // Implementation
-    //------------------------------------------------
-
-    // Create a list that holds which player got which spot. 
-    // When this scene loads, it puts the players in the different podium spawnboxes.
-
+    }
 
 }

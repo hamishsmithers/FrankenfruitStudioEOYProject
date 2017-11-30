@@ -133,20 +133,22 @@ public class Global : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
-    // 
+    // Function for when the continue button is pressed in the pause menu.
     //--------------------------------------------------------------------------------------
     public void PauseMenuContinue()
     {
+        // Hides the pause canvas and continues the game.
         m_goPauseCanvas.SetActive(false);
         Time.timeScale = 1;
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
     }
 
     //--------------------------------------------------------------------------------------
-    // 
+    // Function for when the exit button is pressed in the pause menu.
     //--------------------------------------------------------------------------------------
     public void PauseMenuExit()
     {
+        // Exits the current round and takes you back to the main menu.
         Time.timeScale = 1;
         SceneManager.LoadScene("Main Menu");
     }

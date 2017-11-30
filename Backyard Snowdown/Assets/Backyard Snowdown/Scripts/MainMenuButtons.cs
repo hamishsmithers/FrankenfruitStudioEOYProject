@@ -1,33 +1,48 @@
-﻿using System.Collections;
+﻿//-------------------------------------------------------------------------------
+// Filename:        MainMenuButtons.cs
+//
+// Description:     This script hold the functions for all of the main menu 
+//                  buttons.
+//                      
+// Author:          Nathan Nette
+// Editors:         Nathan Nette
+//-------------------------------------------------------------------------------
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenuButtons : MonoBehaviour {
+public class MainMenuButtons : MonoBehaviour
+{
 
-    //--------------------------------------
+    //-------------------------------------------------------------------------------
     // GameObject for the main menu buttons.
-    //--------------------------------------
-    [LabelOverride("Main Menu Buttons")][Tooltip("Stores Main Menu Buttons GameObject so that you can hide the buttons. This is for changing between Options and Main Menu.")]
+    //-------------------------------------------------------------------------------
+    [LabelOverride("Main Menu Buttons")]
+    [Tooltip("Stores Main Menu Buttons GameObject so that you can hide the buttons. This is for changing between Options and Main Menu.")]
     public GameObject m_goMainMenuButtons = null;
 
-    //-----------------------------------------
+    //-------------------------------------------------------------------------------
     // GameObject for the options menu buttons.
-    //-----------------------------------------
-    [LabelOverride("Options Buttons")][Tooltip("Stores Options Buttons GameObject so that you can hide the buttons. This is for changing between Options and Main Menu.")]
+    //-------------------------------------------------------------------------------
+    [LabelOverride("Options Buttons")]
+    [Tooltip("Stores Options Buttons GameObject so that you can hide the buttons. This is for changing between Options and Main Menu.")]
     public GameObject m_goOptionsButtons = null;
 
-    //--------------------------------------
+    //-------------------------------------------------------------------------------
     // Slider to change by the music volume.
-    //--------------------------------------
-    [LabelOverride("Music Slider")][Tooltip("Stores a Slider GameObject to control the level of music.")]
+    //-------------------------------------------------------------------------------
+    [LabelOverride("Music Slider")]
+    [Tooltip("Stores a Slider GameObject to control the level of music.")]
     public GameObject m_goMusicSlider = null;
 
-    //----------------------------------------------
+    //-------------------------------------------------------------------------------
     // Button that, when pressed, will start a game.
-    //----------------------------------------------
-    [LabelOverride("Play Button")][Tooltip("Stores a Button GameObject that is the play button.")]
+    //-------------------------------------------------------------------------------
+    [LabelOverride("Play Button")]
+    [Tooltip("Stores a Button GameObject that is the play button.")]
     public GameObject m_goPlayButton = null;
 
     //----------------------------------------------------------------------------------
@@ -36,18 +51,17 @@ public class MainMenuButtons : MonoBehaviour {
     [LabelOverride("Scenes Array")]
     [Tooltip("Write the names of each main scene in the array boxes, it will randomize loading between the scenes in the array.")]
     public string[] Scenes;
-    //--------------------------------------
-    // Slider to change by the music volume.
-    //--------------------------------------
-    //public Slider m_sliMusicSlider;
 
+    //-------------------------------------------------------------------------------
+    // Checking whether the play button is pressed.
+    //-------------------------------------------------------------------------------
     private bool m_PlayPressed;
-   
 
-    //--------------------------------------
+
+    //-------------------------------------------------------------------------------
     // Use this for initialization
-    //--------------------------------------
-    void Start ()
+    //-------------------------------------------------------------------------------
+    void Start()
     {
         m_goOptionsButtons.SetActive(false);
         m_PlayPressed = false;
@@ -56,27 +70,22 @@ public class MainMenuButtons : MonoBehaviour {
     //--------------------------------------
     // Update is called once per frame
     //--------------------------------------
-    void Update ()
+    void Update()
     {
         if (m_PlayPressed)
             gameObject.GetComponent<MainMenuButtons>().enabled = false;
-	}
-
-
-    //--------------------------------------
-    //Invoked when a submit button is clicked.
-    //--------------------------------------
-    public void SubmitSliderSetting()
-    {
-        //Displays the value of the slider in the console.
-        //Debug.Log(m_sliMusicSlider.value);
     }
 
+    //-------------------------------------------------------------------------------
+    // Randomizes which level will be selected to be loaded alongside main_default.
+    //-------------------------------------------------------------------------------
     private string RandomizeLevel()
     {
+        // Creates an int to store the selected scene number in the array.
         int Selector = Random.Range(0, Scenes.Length);
+        // Converts the name that's selected to a string.
         string strSceneToLoad = Scenes[Selector].ToString();
-        //SceneManager.LoadScene(strSceneToLoad);
+        // Returns the name of the scene to be loaded.
         return strSceneToLoad;
     }
 
@@ -87,8 +96,7 @@ public class MainMenuButtons : MonoBehaviour {
     {
         m_PlayPressed = true;
         SceneManager.LoadSceneAsync(RandomizeLevel(), LoadSceneMode.Single);
-        SceneManager.LoadSceneAsync("Main_Default",LoadSceneMode.Additive);
-        
+        SceneManager.LoadSceneAsync("Main_Default", LoadSceneMode.Additive);
     }
 
     //-----------------------------------------------------------------------------------------

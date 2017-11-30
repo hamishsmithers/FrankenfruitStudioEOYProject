@@ -138,7 +138,7 @@ public class Dash : MonoBehaviour
             {
                 m_v3DashDir = scpPlayer.m_v3XboxDashDir;
                 m_v3DashDir.y = 0.0f;
-                // normalize to make things eaiser
+                // normalize to make things easier
                 m_v3DashDir.Normalize();
                 scpPlayer.m_v3MovePos.Normalize();
             }
