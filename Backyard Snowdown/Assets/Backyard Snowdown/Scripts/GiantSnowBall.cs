@@ -14,24 +14,36 @@ using UnityEngine;
 
 public class GiantSnowBall : MonoBehaviour
 {
-    //----------------
+    //--------------------------------------------------------------------------------------
     // Knockback Force
-    //----------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Knockback Force")]
     [Tooltip("The force that is applied to knockback when hit by giant snowball.")]
     public float m_fKnockbackForce = 0.0f;
-    //---------------
+    
+    //--------------------------------------------------------------------------------------
     // Area Of Effect
-    //---------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Area of Effect")]
     [Tooltip("A float to change the area effect of the giant snowball.")]
     public float m_fAreaOfEffect = 3.0f;
 
+    //--------------------------------------------------------------------------------------
+    // Impact Particle System
+    //--------------------------------------------------------------------------------------
+    [LabelOverride("Impact Particle System")]
+    [Tooltip("Drag and drop the respective particle system onto here.")]
     public GameObject m_goImpactParticles;
+
+    //--------------------------------------------------------------------------------------
+    // Impact Cloud Particle System
+    //--------------------------------------------------------------------------------------
+    [LabelOverride("Impact Cloud Particle System")]
+    [Tooltip("Drag and drop the respective particle system onto here.")]
     public GameObject m_goImpactParticlesCloud;
 
-    private ParticleSystem psSnowflake;
     private ParticleSystem psCloud;
+    private ParticleSystem psSnowflake;
 
 
     //--------------------------------------------------------------------------------------
@@ -62,8 +74,10 @@ public class GiantSnowBall : MonoBehaviour
     {
         if (other.gameObject.tag == "SnowmanKnockBack")
         {
+            // setting the emit parameters for the particle system
             ParticleSystem.EmitParams myParams = new ParticleSystem.EmitParams();
             myParams.startLifetime = 1.0f;
+
             Knockback();
 
             // play the particle effect

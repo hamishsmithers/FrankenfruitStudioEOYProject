@@ -16,34 +16,41 @@ using UnityEngine;
 public class Snowball : MonoBehaviour
 {
     private Rigidbody m_rb;
-    //-------------
+    //--------------------------------------------------------------------------------------
     // Damage Speed
-    //-------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Damage Speed")]
     [Tooltip("This is the speed that will damage a player when they are hit by it.")]
     public float m_fDamageSpeed = 3.0f;
-    //---------
+
+    //--------------------------------------------------------------------------------------
     // Too Fast
-    //---------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Too Fast")]
     [Tooltip("A bool that checks whether the snowball is moving too fast or not.")]
     public bool m_bTooFast = false;
-    //----------------
+
+    //--------------------------------------------------------------------------------------
     // Materials Array
-    //----------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Material Array")]
     [Tooltip("An array to store materials.")]
     public Material[] m_materials;
     private Renderer m_rend;
 
-    //------------
+    //--------------------------------------------------------------------------------------
     // Score Value
-    //------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Score Value")]
     [Tooltip("A static int that represents how much health a player loses when they are hit by the snowball.")]
     public static int m_nScoreValue = 1;
 
-    public ParticleSystem m_ParticleSparks;
+    //--------------------------------------------------------------------------------------
+    // Spark Particle System
+    //--------------------------------------------------------------------------------------
+    [LabelOverride("Spark Particle System")]
+    [Tooltip("Drag and drop the respective particle system onto here.")]
+    private ParticleSystem m_ParticleSparks;
 
     //private Color mainColor = Color.white;
     private MeshRenderer mr = null;
@@ -117,12 +124,7 @@ public class Snowball : MonoBehaviour
     //--------------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag != "Ground" && col.gameObject.tag != "Character")
-        {
-            if (m_rb)
-                m_rb.velocity = m_rb.velocity * 1.0f;
-        }
-
+        // if the snowball collides with non ground objects play hit sound
         if (col.gameObject.tag != "Ground")
         {
             AudioManager.m_SharedInstance.PlaySnowBallHit();

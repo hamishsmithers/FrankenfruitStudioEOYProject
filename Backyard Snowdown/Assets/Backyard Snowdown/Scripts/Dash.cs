@@ -20,43 +20,50 @@ public class Dash : MonoBehaviour
 {
     private const float m_MaxTriggerHeight = 1.21f;
 
-    //------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     // A float to store the speed that the player dashes at
-    //------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Dash Speed")]
     [Tooltip("The speed that the player dashes at in seconds.")]
     public float m_fDashSpeed = 2.0f;
-    //-------------------------------------------
+
+    //--------------------------------------------------------------------------------------
     // A float to store the duration of the dash
-    //-------------------------------------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Dash Duration")]
     [Tooltip("A float to store the duration of the dash in seconds.")]
     public float m_fDashDuration = 0.5f;
-    //-------------------------------------------
+
+    //--------------------------------------------------------------------------------------
     // A float to store the cooldown on the dash
-    //-------------------------------------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Dash Cooldown")]
     [Tooltip("A float to store the duration of the dash cooldown in seconds.")]
     public float m_fCoolDown = 0.8f;
-    //------------------------------------------------------
+
+    //--------------------------------------------------------------------------------------
     // A bool to check whether the player is dashing or not
-    //------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     [HideInInspector]
     public bool m_bDashing = false;
-    //----------------------------------------------------------------
+
+    //--------------------------------------------------------------------------------------
     // A Vector3 to store the direction of the player while they dash
-    //----------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     [HideInInspector]
     public Vector3 m_v3DashDir;
-    //----------------------------------------
+
+    //--------------------------------------------------------------------------------------
     // A float to store the timer of the dash
-    //----------------------------------------
+    //--------------------------------------------------------------------------------------
     [HideInInspector]
     public float m_fDashTimer = 0.0f;
+
     private float m_fCoolDownTimer = 0.0f;
 
     [HideInInspector]
     public bool m_bCoolDown = false;
+
     private bool m_bStartTimer = false;
 
     //--------------------------------------------------------------------------------------
@@ -96,9 +103,11 @@ public class Dash : MonoBehaviour
 
         if (!m_bCoolDown)
         {
+            //  we get the player script because we use it for various things here
             Player scpPlayer = gameObject.GetComponent<Player>();
             float leftTrigHeight = m_MaxTriggerHeight * (1.0f - XCI.GetAxisRaw(XboxAxis.LeftTrigger, scpPlayer.controller));
 
+            // if the left trigger is pressed down
             if (leftTrigHeight < 1.0f || scpPlayer.m_bLeftTriggerPressed || Input.GetKeyDown(KeyCode.Space))
             {                
                 scpPlayer.m_bLeftTriggerPressed = true;
@@ -136,9 +145,11 @@ public class Dash : MonoBehaviour
 
             if (leftTrigHeight < 1.0f)
             {
+                // the dash direction is set here from the players dash direction vector3
                 m_v3DashDir = scpPlayer.m_v3XboxDashDir;
+                // make sure they don't dash into the sky
                 m_v3DashDir.y = 0.0f;
-                // normalize to make things easier
+                // normalize so we can add force and not have it go crazy (too powerful)
                 m_v3DashDir.Normalize();
                 scpPlayer.m_v3MovePos.Normalize();
             }

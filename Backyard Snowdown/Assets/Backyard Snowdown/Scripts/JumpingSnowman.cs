@@ -9,20 +9,22 @@
 // Editors:         Mitchell Cattini-Schultz
 //-------------------------------------------------------------------------------
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class JumpingSnowman : MonoBehaviour
 {
+    //------------------
+    // Initial Spawn Time
+    //------------------
+    [LabelOverride("Initial Spawn Time")]
+    [Tooltip("How long until the snowman spawns for the first time.")]
     public float m_fInitialSpawnTime = 5.0f;
+
     //------------------
     // Death spawn time
     //------------------
     [LabelOverride("Death Spawn Time")]
-    [Tooltip("Minimum wait time between next spawn")]
+    [Tooltip("Minimum wait time between next spawn.")]
     public float m_fDeathTime = 0.0f;
 
     //----------------------
@@ -35,8 +37,8 @@ public class JumpingSnowman : MonoBehaviour
     private float m_fSpawnTime = 0.0f;
     private float m_fSpawnCount = 0.0f;
 
-    private Collider c;
-    private MeshRenderer mr;
+    private Collider m_Collider;
+    private MeshRenderer m_MeshRenderer;
 
     private GameObject m_goTL;
     private GameObject m_goTR;
@@ -45,7 +47,7 @@ public class JumpingSnowman : MonoBehaviour
 
     private Vector3 m_v3CurveMiddle;
 
-    private Vector3 m_v3Pos;
+    //private Vector3 m_v3Pos;
     //private float m_xLoc = 0.0f;
     //private float m_zLoc = 0.0f;
 
@@ -83,7 +85,13 @@ public class JumpingSnowman : MonoBehaviour
     private int m_nHealthPoints = 2;
     private bool m_bDead = true;
 
+    //----------------------
+    // Spawn Particle System
+    //----------------------
+    [LabelOverride("Spawn Particle System")]
+    [Tooltip("Drag and drop the respective particle system onto here.")]
     public GameObject m_goSpawnParticles;
+
     private ParticleSystem psSpawn;
 
     private bool bSpawnParticleEffectPlayed = false;
@@ -114,14 +122,18 @@ public class JumpingSnowman : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Start()
     {
+        // getting and assigning the particle system
         psSpawn = m_goSpawnParticles.GetComponent<ParticleSystem>();
 
-        c = gameObject.GetComponent<Collider>();
-        mr = gameObject.GetComponent<MeshRenderer>();
+        // getting and assigning the collider and mesh renderer
+        m_Collider = gameObject.GetComponent<Collider>();
+        m_MeshRenderer = gameObject.GetComponent<MeshRenderer>();
 
-        c.enabled = false;
-        mr.enabled = false;
+        // setting the collider and mesh renderer to false, to make the jumping snowman appear dead
+        m_Collider.enabled = false;
+        m_MeshRenderer.enabled = false;
 
+        // assigning the initial spawn time
         m_fSpawnTime = m_fInitialSpawnTime;
     }
 
@@ -135,7 +147,6 @@ public class JumpingSnowman : MonoBehaviour
         {
             m_fSpawnCount = 0.0f;
             m_fJumpCounter = 0.0f;
-            //m_bCanJump = false;
             m_bBetweenJumps = false;
             m_bJumping = false;
             m_bBoingSound = true;
@@ -173,8 +184,8 @@ public class JumpingSnowman : MonoBehaviour
             else if (m_fSpawnCount > m_fSpawnTime)
             {
                 // Snowman spawns
-                c.enabled = true;
-                mr.enabled = true;
+                m_Collider.enabled = true;
+                m_MeshRenderer.enabled = true;
                 m_bDead = false;
                 bChooseNewSpawn = true;
                 m_fSpawnTime = m_fDeathTime;
@@ -214,14 +225,14 @@ public class JumpingSnowman : MonoBehaviour
         {
             m_fJumpingTimer += Time.deltaTime;
 
-            // boing sound
             if (m_bBoingSound)
             {
+                // boing sound
                 AudioManager.m_SharedInstance.PlaySnowmanBoingAudio();
                 m_bBoingSound = false;
             }
 
-            // move the snowman to the next location smoothly over a curve
+            // move the snowman to the next location smoothly over a curve (lerp)
             Vector3 v3P1 = Vector3.Lerp(m_v3StartPos, m_v3CurveMiddle, m_fJumpingTimer);
             Vector3 v3P2 = Vector3.Lerp(m_v3CurveMiddle, m_v3NextPos, m_fJumpingTimer);
             transform.position = Vector3.Lerp(v3P1, v3P2, m_fJumpingTimer);
@@ -238,8 +249,8 @@ public class JumpingSnowman : MonoBehaviour
         if (m_nHealthPoints <= 0)
         {
             // snowman is dead
-            c.enabled = false;
-            mr.enabled = false;
+            m_Collider.enabled = false;
+            m_MeshRenderer.enabled = false;
             m_bDead = true;
             m_bStart = true;
         }
@@ -284,6 +295,9 @@ public class JumpingSnowman : MonoBehaviour
         // checks if the destination location is valid and if not finds a new one, rinse repeat
         do
         {
+            // finds a random float value based on the range of the x values that belong to the 
+            // top left, top right, bottom left and top left reticle bounds, then uses those values 
+            // to create a new vector 3 location for the jumping snowman to jump to.
             v3Result.x = Random.Range(m_goTL.transform.position.x, m_goTR.transform.position.x);
             v3Result.y = m_fStartY;
             v3Result.z = Random.Range(m_goBL.transform.position.z, m_goTL.transform.position.z);

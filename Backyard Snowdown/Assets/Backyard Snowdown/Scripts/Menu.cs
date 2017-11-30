@@ -18,17 +18,17 @@ public class Menu : MonoBehaviour
 {
     public XboxController m_controller;
 
-    ////----------------------------------------------
+    //--------------------------------------------------------------------------------------
     //// Player GameObject.
-    ////----------------------------------------------
+    //--------------------------------------------------------------------------------------
     //[LabelOverride("Player")]
     //[Tooltip("Stores a Player GameObject.")]
     //public GameObject m_GoPlayer;
 
-    //----------------------------------------------
+    //--------------------------------------------------------------------------------------
     // A bool to check whether esc has been pressed.
-    //----------------------------------------------
-    private bool m_bEscapeToggle = false;
+    //--------------------------------------------------------------------------------------
+    //private bool m_bEscapeToggle = false;
 
     //--------------------------------------------------------------------------------------
     // Use this for initialization
@@ -43,21 +43,21 @@ public class Menu : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        //Player scpPlayer = player.gameObject.GetComponent<Player>();
-        if (Input.GetKeyDown(KeyCode.Escape) || (XCI.GetButtonDown(XboxButton.Start, m_controller)))
-        {
-            if (m_bEscapeToggle)
-            {
-                // game time is frozen
-                Time.timeScale = 0;
-                m_bEscapeToggle = false;
-            }
-            else if (!m_bEscapeToggle)
-            {
-                // game time is unfrozen
-                Time.timeScale = 1;
-                m_bEscapeToggle = true;
-            }
-        }
+    //    //Player scpPlayer = player.gameObject.GetComponent<Player>();
+    //    if (Input.GetKeyDown(KeyCode.Escape) || (XCI.GetButtonDown(XboxButton.Start, m_controller)))
+    //    {
+    //        if (m_bEscapeToggle)
+    //        {
+    //            // game time is frozen
+    //            Time.timeScale = 0;
+    //            m_bEscapeToggle = false;
+    //        }
+    //        else if (!m_bEscapeToggle)
+    //        {
+    //            // game time is unfrozen
+    //            Time.timeScale = 1;
+    //            m_bEscapeToggle = true;
+    //        }
+    //    }
     }
 }
