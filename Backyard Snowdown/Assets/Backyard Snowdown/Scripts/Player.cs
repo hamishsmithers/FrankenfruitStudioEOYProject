@@ -22,166 +22,166 @@ public class Player : MonoBehaviour
 {
     public XboxController controller;
 
-    //-------------------------
+    //------------------------------------------------------------------------------------------
     // Player's Movement Speed
     // we have exposed m_fSpeed to the designers so they can bug test
-    //-------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Speed")]
     [Tooltip("Player's Movement Speed.")]
     public float m_fSpeed = 5.0f;
 
-    //-----------------------------
+    //------------------------------------------------------------------------------------------
     // Player's Max Movement Speed
-    //-----------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Max Speed")]
     [Tooltip("Player's maximum movement speed.")]
     public float m_fMaxSpeed = 5.0f;
 
-    //------------
+    //------------------------------------------------------------------------------------------
     // Dash Speed
-    //------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Dash Speed")]
     [Tooltip("The speed that the player moves while dashing.")]
     public float m_fDashSpeed = 10.0f;
 
-    //---------------
+    //------------------------------------------------------------------------------------------
     // Dash Duration
-    //---------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Dash Duration")]
     [Tooltip("The duration of the dash.")]
     public float m_fDashDuration = 0.5f;
 
-    //--------------
+    //------------------------------------------------------------------------------------------
     // Player Model
-    //--------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Player Model")]
     [Tooltip("Stores the player model")]
     public GameObject m_goPlayerModel = null;
 
-    //-----------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // A float to store the current movement speed of the player
-    //-----------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     [HideInInspector]
     public float m_fCurrentSpeed = 5.0f;
 
-    //--------------------------------------
+    //------------------------------------------------------------------------------------------
     // Stops the players being able to move
-    //--------------------------------------
+    //------------------------------------------------------------------------------------------
     [HideInInspector]
     public bool m_bMovementLock = false;
 
-    //---------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Bool to check whether the left trigger has been pressed
-    //---------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     [HideInInspector]
     public bool m_bLeftTriggerPressed = false;
 
-    //----------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // A Vector3 to store the current movement position of the player
-    //----------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     [HideInInspector]
     public Vector3 m_v3MovePos;
 
-    //-----------------------------------------
+    //------------------------------------------------------------------------------------------
     // Vector3 to hold the Xbox dash direction
-    //-----------------------------------------
+    //------------------------------------------------------------------------------------------
     [HideInInspector]
     public Vector3 m_v3XboxDashDir;
 
-    //-----------------------------
+    //------------------------------------------------------------------------------------------
     // A float to store the axis X
-    //-----------------------------
+    //------------------------------------------------------------------------------------------
     private float m_axisX;
 
-    //-----------------------------
+    //------------------------------------------------------------------------------------------
     // A float to store the axis Y
-    //-----------------------------
+    //------------------------------------------------------------------------------------------
     private float m_axisY;
 
-    //-----------
+    //------------------------------------------------------------------------------------------
     // RIGIDBODY
-    //-----------
+    //------------------------------------------------------------------------------------------
     [HideInInspector]
     public Rigidbody m_rb;
 
-    //------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Vector3 to store the direction of the player to dash
-    //------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private Vector3 m_v3DashDir;
 
-    //----------
+    //------------------------------------------------------------------------------------------
     // Snowball
-    //----------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Snowball")]
     [Tooltip("Stores the Snowball GameObject.")]
     public GameObject m_goSnowball = null;
 
-    //---------------
+    //------------------------------------------------------------------------------------------
     // Player Circle
-    //---------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Player Circle")]
     [Tooltip("A GameObject that stores the player circle.")]
     public GameObject m_goPlayerCircle = null;
 
-    //-------------------------
+    //------------------------------------------------------------------------------------------
     // Character Ring Material
-    //-------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Character Ring Material")]
     [Tooltip("A material that stores the character ring material.")]
     public Material m_matCharacterRing = null;
 
-    //---------------------
+    //------------------------------------------------------------------------------------------
     // Character Ring Full
-    //---------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Full Character Ring Material")]
     [Tooltip("A material that stores the full character ring material.")]
     public Material m_matCharacterRingFull = null;
 
-    //----------------
+    //------------------------------------------------------------------------------------------
     // Snowball Speed
-    //----------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Snowball Speed")]
     [Tooltip("A float that stores the snowball's shoot speed.")]
     public float m_fSnowballSpeed = 1750.0f;
 
-    //------------
+    //------------------------------------------------------------------------------------------
     // Max Charge
-    //------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Max Charge")]
     [Tooltip("A float that stores the maximum charge length in seconds.")]
     public float m_fMaxCharge = 2.0f;
 
-    //-----------
+    //------------------------------------------------------------------------------------------
     // Min Power
-    //-----------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Min Power")]
     [Tooltip("A float that stores the minimum power of a throw at lowest charge.")]
     public float m_fPowerMin = 250.0f;
 
-    //-----------
+    //------------------------------------------------------------------------------------------
     // Max Power
-    //-----------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Max Power")]
     [Tooltip("A float that stores the maximum power of a throw at full charge.")]
     public float m_fPowerMax = 1750.0f;
 
-    //------------
+    //------------------------------------------------------------------------------------------
     // Slow Speed
-    //------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Slow Speed")]
     [Tooltip("A float that represents how much slower the player is while charging up a throw.")]
     public float m_fSlowSpeed = 2.5f;
 
-    //--------------------------------
+    //------------------------------------------------------------------------------------------
     // Power Towards Centre of Screen
-    //--------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Power Towards Centre of Screen")]
     [Tooltip("When the player is hit whilst holding a ball, it throws it towards the SnowballTarget. This is that force.")]
     public float m_fPowerOfTowardsCentre = 5.0f;
 
-    //-----------------
+    //------------------------------------------------------------------------------------------
     // Snowball Target
-    //-----------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Snowball Target")]
     [Tooltip("Snowball target that the ball will be thrown towards.")]
     public GameObject m_goSnowBallTarget = null;
@@ -207,9 +207,9 @@ public class Player : MonoBehaviour
     private bool m_bReleased = false;
     private bool bAimOverride = false;
 
-    //----------------
+    //------------------------------------------------------------------------------------------
     // Iframe Timer
-    //----------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("iFrame Timer")]
     [Tooltip("This is the amount of time in seconds that the player is invincible for after being hit. Default is 0.5 seconds")]
     public float m_fIFrame;
@@ -218,25 +218,25 @@ public class Player : MonoBehaviour
     //private bool m_bCanPickUp = true;
 
 
-    //--------------
+    //------------------------------------------------------------------------------------------
     // Spawn Health
     // we have exposed this variable to the desginers so that they can test with different start healths
-    //--------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Spawn Health")]
     [Tooltip("An int that is how much health the players spawn with.")]
     public int m_nSpawnHealth = 20;
 
-    //----------------
+    //------------------------------------------------------------------------------------------
     // Current health
     // this variable is so they can kill players at anytime for simpler testing
-    //----------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Current Health")]
     [Tooltip("An int that represents how much health the player currently has.")]
     public int m_nCurrentHealth;
 
-    //-----------
+    //------------------------------------------------------------------------------------------
     // Stun Time
-    //-----------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Stun Time On Hit")]
     [Tooltip("This allocates how long the stun is when the players get hit by the snowball.")]
     public float m_fStun = 0.2f;
@@ -244,37 +244,37 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool m_bAlive = true;
 
-    //---------------
+    //------------------------------------------------------------------------------------------
     // Player Damage
-    //---------------
+    //------------------------------------------------------------------------------------------
     private Color m_mainColor = Color.white;
     private bool m_tookDmg = false;
     private float m_DamageTimer = 0.3f;
 
-    //--------------
+    //------------------------------------------------------------------------------------------
     // Player Death
-    //--------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("The Player's Mesh")]
     [Tooltip("This is so the code knows which mesh to turn red when hurt.")]
     public SkinnedMeshRenderer m_smrCharacterMesh = null;
 
-    //----------------
+    //------------------------------------------------------------------------------------------
     // Giant SnowBall
-    //----------------
+    //------------------------------------------------------------------------------------------
     [HideInInspector]
     public bool m_bHitByGiantSnowBall = false;
     private float m_fHitTimer = 0.0f;
 
-    //--------------------------
+    //------------------------------------------------------------------------------------------
     // Giant Snowball Stun Time
-    //--------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Snowman Stun Time")]
     [Tooltip("The time players are stunned after being knocked back by the Snowman.")]
     public float m_fGiantSnowballStunTime = 0.25f;
 
-    //----------------
+    //------------------------------------------------------------------------------------------
     // Player Reticle
-    //----------------
+    //------------------------------------------------------------------------------------------
     //[LabelOverride("Player Reticle")]
     //[Tooltip("This stores the GameObject of the player reticle.")]
     //public GameObject m_goPlayerReticle = null;
@@ -284,36 +284,36 @@ public class Player : MonoBehaviour
     //[HideInInspector]
     //public PlayerRetical m_scpPlayerReticle;
 
-    //----------
+    //------------------------------------------------------------------------------------------
     // Animator
-    //----------
+    //------------------------------------------------------------------------------------------
     private Animator m_Animator;
 
-    //------------------------------
+    //------------------------------------------------------------------------------------------
     // Material of Thrown Snowballs
-    //------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Material of Thrown Snowball")]
     [Tooltip("Drag and drop the respective material here.")]
     public Material m_matSnowball = null;
 
-    //------------------------------
+    //------------------------------------------------------------------------------------------
     // IFrame Flicker Rate
-    //------------------------------
+    //------------------------------------------------------------------------------------------
     //[LabelOverride("IFrame Flicker Rate")]
     //[Tooltip("Per Second.")]
     //public float m_bIFrameFlickerTime = 0.05f;
 
-    //------------------------------
+    //------------------------------------------------------------------------------------------
     // Dizzy Particle System
-    //------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Dizzy Particle System")]
     [Tooltip("Drag and drop the respective particle system here.")]
     public ParticleSystem m_psDizzy;
 
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Use this for initialization
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     void Start()
     {
         //m_goPlayerReticleCopy = Instantiate(m_goPlayerReticle, new Vector3(10.0f, 1.01f, -7.0f), Quaternion.Euler(90.0f, 0.0f, 0.0f));
@@ -341,9 +341,9 @@ public class Player : MonoBehaviour
     }
 
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // An update runs 50 frames per second vs the usual 60, used for physics calculations.
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     void FixedUpdate()
     {
         if (m_bAlive)
@@ -355,9 +355,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Update is called once per frame
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     void Update()
     {
         Dash scpDash = gameObject.GetComponent<Dash>();
@@ -488,10 +488,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // The movement function controls the players by using xbox or keyboard input, you can 
     // move with the left analog stick.
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void Movement()
     {
         Vector3 v3VerticalAxis = Vector3.zero;
@@ -551,12 +551,12 @@ public class Player : MonoBehaviour
         m_Animator.SetFloat("running", m_v3MovePos.magnitude);
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // The aiming function controls how player can be rotated to face enemies or anything 
     // they choose. You can aim with both sticks, if you are only using the left stick you 
     // aim and move with it, as soon as the right stick is being used that overrides the 
     // left stick and becomes an independent aiming stick.
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void Aiming()
     {
         if (!m_bMovementLock)
@@ -638,9 +638,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Shoot allows players to charge their snowballs and then throw them at other players
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void Shoot()
     {
         //if the player don't have a ball don't let them charge!
@@ -789,9 +789,9 @@ public class Player : MonoBehaviour
             // not charging, don't remember the last charge power
             m_fChargeTimer = 0.0f;
     }
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Resets the values used for charge throw, so that players can throw again and again
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void ResetChargeThrow()
     {
         // resets everything required for the charge throw to work
@@ -804,9 +804,9 @@ public class Player : MonoBehaviour
         m_bThrowBall = false;
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // The health function keeps track of the health
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void Health()
     {
         //SnowMan scpSnowMan = gameObject.GetComponent<SnowMan>();
@@ -878,18 +878,18 @@ public class Player : MonoBehaviour
         //}
     }
 
-    //--------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Updates the health value displayed onscreen (text)
-    //--------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     //void SetHealthText()
     //{
     //    if (m_txtHealth)
     //        m_txtHealth.text = "HP:" + m_nCurrentHealth.ToString();
     //}
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // TakeDamage deducts health points and plays the hurt audio
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void TakeDamage()
     {
         m_tookDmg = true;
@@ -900,9 +900,9 @@ public class Player : MonoBehaviour
         AudioManager.m_SharedInstance.PlayHurtAudio();
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Allows players to dash and phase right through snowballs
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void Projectiles()
     {
         Dash scpDash = gameObject.GetComponent<Dash>();
@@ -923,7 +923,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // This collision detection checks various things such as when players collide with
     // snowballs and players. If you dash into a player with a snowball you will steal it.
     // If you collide with a snowball you'll pick it up unless you have a snowball already.
@@ -932,7 +932,7 @@ public class Player : MonoBehaviour
     //
     //    Param:
     //          col: The object that the player collided with.
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col)
     {
         // if the player collided with another player

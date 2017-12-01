@@ -45,9 +45,10 @@ public class MainMenuButtons : MonoBehaviour
     [Tooltip("Stores a Button GameObject that is the play button.")]
     public GameObject m_goPlayButton = null;
 
-    //----------------------------------------------------------------------------------
-    // The function to randomize the level to be loaded when the play button is pressed.
-    //----------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
+    // The function to randomize the level to be loaded when the play button is 
+    // pressed.
+    //-------------------------------------------------------------------------------
     [LabelOverride("Scenes Array")]
     [Tooltip("Write the names of each main scene in the array boxes, it will randomize loading between the scenes in the array.")]
     public string[] Scenes;
@@ -67,18 +68,18 @@ public class MainMenuButtons : MonoBehaviour
         m_PlayPressed = false;
     }
 
-    //--------------------------------------
+    //------------------------------------------------------------------------------------------
     // Update is called once per frame
-    //--------------------------------------
+    //------------------------------------------------------------------------------------------
     void Update()
     {
         if (m_PlayPressed)
             gameObject.GetComponent<MainMenuButtons>().enabled = false;
     }
 
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Randomizes which level will be selected to be loaded alongside main_default.
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private string RandomizeLevel()
     {
         // Creates an int to store the selected scene number in the array.
@@ -89,9 +90,10 @@ public class MainMenuButtons : MonoBehaviour
         return strSceneToLoad;
     }
 
-    //--------------------------------------------------------------------------------------------
-    // PlayGame is the function that occurs when the Play Game button is pressed on the main menu.
-    //--------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    // PlayGame is the function that occurs when the Play Game button is pressed on the main 
+    // menu.
+    //------------------------------------------------------------------------------------------
     public void PlayGame()
     {
         m_PlayPressed = true;
@@ -99,9 +101,9 @@ public class MainMenuButtons : MonoBehaviour
         SceneManager.LoadSceneAsync("Main_Default", LoadSceneMode.Additive);
     }
 
-    //-----------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Options is the function that occurs when the Options button is pressed on the main menu.
-    //-----------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     public void Options()
     {
         m_goOptionsButtons.SetActive(true);
@@ -109,17 +111,18 @@ public class MainMenuButtons : MonoBehaviour
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_goMusicSlider);
     }
 
-    //---------------------------------------------------------------------------------------------
-    // Quit Game is the function that occurs when the Quit Game button is pressed on the main menu.
-    //---------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    // Quit Game is the function that occurs when the Quit Game button is pressed on the main 
+    // menu.
+    //------------------------------------------------------------------------------------------
     public void QuitGame()
     {
         Application.Quit();
     }
 
-    //-----------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Back is the function that occurs when the Back button is pressed on the main menu.
-    //-----------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     public void Back()
     {
         m_goMainMenuButtons.SetActive(true);
@@ -127,10 +130,11 @@ public class MainMenuButtons : MonoBehaviour
         UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_goPlayButton);
     }
 
-    //------------------------------------------------------------------------------------
-    // Credits is the function that will be triggered when they press the credits button.
+    //------------------------------------------------------------------------------------------
+    // Credits is the function that will be triggered when they press the credits 
+    // button.
     // It takes you to a different scene that runs the credits.
-    //------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     public void Credits()
     {
         SceneManager.LoadScene("Credits");

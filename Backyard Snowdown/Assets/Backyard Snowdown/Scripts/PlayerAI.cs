@@ -16,20 +16,22 @@ using UnityEngine.AI;
 public class PlayerAI : MonoBehaviour
 {
 
-    //------------------------------------------
+    //-------------------------------------------------------------------------------
     // GameObject to store the Right wall point.
-    //------------------------------------------
+    //-------------------------------------------------------------------------------
     [LabelOverride("Right Wall Point")]
     [Tooltip("Stores the GameObject for the Right wall point.")]
     public GameObject goRight = null;
-    //-----------------------------------------
+    //-------------------------------------------------------------------------------
     // GameObject to store the Left wall point.
-    //-----------------------------------------
+    //-------------------------------------------------------------------------------
     [LabelOverride("Left Wall Point")]
     [Tooltip("Stores the GameObject for the Left wall point.")]
     public GameObject goLeft = null;
 
+    //-------------------------------------------------------------------------------
     // Use this for initialization
+    //-------------------------------------------------------------------------------
     void Awake()
     {
         // Deletes the dash component off the player.
@@ -60,8 +62,9 @@ public class PlayerAI : MonoBehaviour
 
     }
 
-
+    //-------------------------------------------------------------------------------
     // Update is called once per frame
+    //-------------------------------------------------------------------------------
     void Update()
     {
         // Seeks Right

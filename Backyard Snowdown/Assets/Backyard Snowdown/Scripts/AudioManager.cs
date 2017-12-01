@@ -13,8 +13,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour {
-
+public class AudioManager : MonoBehaviour
+{
+    //------------------------------------------------------------------------------------------
+    // A singleton that creates a shared instance of the audio manager.
+    //------------------------------------------------------------------------------------------
     public static AudioManager m_SharedInstance;
 
     //------------------------------------------------------------------------------------------
@@ -77,18 +80,18 @@ public class AudioManager : MonoBehaviour {
     [Tooltip("An array for the various hurt sounds.")]
     public AudioClip[] sfxHurtArray = null;
 
-    //---------------------------
+    //------------------------------------------------------------------------------------------
     // Awake is a Unity Function
-    //---------------------------
+    //------------------------------------------------------------------------------------------
     void Awake()
     {
         m_SharedInstance = this;
     }
 
-    //-----------------------------
+    //------------------------------------------------------------------------------------------
     // Use this for initialization
-    //-----------------------------
-    void Start ()
+    //------------------------------------------------------------------------------------------
+    void Start()
     {
     }
 
@@ -116,10 +119,10 @@ public class AudioManager : MonoBehaviour {
         return dB;
     }
 
-    //---------------------------------
+    //------------------------------------------------------------------------------------------
     // Update is called once per frame
-    //---------------------------------
-    void Update ()
+    //------------------------------------------------------------------------------------------
+    void Update()
     {
         // Convert 0 to 1 volume to -80 to 20 db
         // float fSFXVolumeDB = (1 - Global.SFXVolume) * -20f;
@@ -127,9 +130,9 @@ public class AudioManager : MonoBehaviour {
         m_audmixMixer.audioMixer.SetFloat("SFXVolume", fSFXVolumeDB);
     }
 
-    //------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // PlayDashAudio is the function called when a player dashes. 
-    //------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     public void PlayDashAudio()
     {
         // Instantiates the sound GameObject.
@@ -146,9 +149,9 @@ public class AudioManager : MonoBehaviour {
         sfxSource.pitch = Random.Range(0.9f, 1.1f);
     }
 
-    //------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // PlayThrowAudio is the function called when a player throws a snowball. 
-    //------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     public void PlayThrowAudio()
     {
         // Instantiates the sound GameObject.
@@ -167,9 +170,9 @@ public class AudioManager : MonoBehaviour {
         sfxSource.pitch = Random.Range(0.9f, 1.1f);
     }
 
-    //------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // PlaySnowmanBoingAudio is the function called when the snowman jumps.
-    //------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     public void PlaySnowmanBoingAudio()
     {
         // Instantiates the sound GameObject.
@@ -186,9 +189,9 @@ public class AudioManager : MonoBehaviour {
         sfxSource.pitch = Random.Range(0.9f, 1.1f);
     }
 
-    //--------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // PlaySnowBallHit is the function called when the snowball hits something.
-    //--------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     public void PlaySnowBallHit()
     {
         // Instantiates the sound GameObject.
@@ -207,9 +210,9 @@ public class AudioManager : MonoBehaviour {
         sfxSource.pitch = Random.Range(0.9f, 1.1f);
     }
 
-    //--------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // PlayHurtAudio is the function called when the player loses health.
-    //--------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     public void PlayHurtAudio()
     {
         // Instantiates the sound GameObject.
@@ -228,9 +231,9 @@ public class AudioManager : MonoBehaviour {
         sfxSource.pitch = Random.Range(0.9f, 1.1f);
     }
 
-    //-----------------------------------------------------------------
-    // PlaySnowmanCrumble is the function called when the snowman dies
-    //-----------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    // PlaySnowmanCrumble is the function called when the snowman dies.
+    //------------------------------------------------------------------------------------------
     public void PlaySnowmanCrumble()
     {
         // Instantiates the sound GameObject.
@@ -247,9 +250,9 @@ public class AudioManager : MonoBehaviour {
         sfxSource.pitch = Random.Range(0.9f, 1.1f);
     }
 
-    //-----------------------------------------------------------------------
-    // PlaySnowmanSummon is the function called when the snowman is summoned
-    //-----------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    // PlaySnowmanSummon is the function called when the snowman is summoned.
+    //------------------------------------------------------------------------------------------
     public void PlaySnowmanSummon()
     {
         // Instantiates the sound GameObject.

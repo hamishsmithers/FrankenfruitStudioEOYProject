@@ -35,8 +35,9 @@ public class MusicManager : MonoBehaviour {
     [Tooltip("The audio mixer titled Music.")]
     public AudioMixerGroup m_audmixMixer = null;
 
-
+    //-------------------------------------------------------------------------------
     // Use this for initialization
+    //-------------------------------------------------------------------------------
     void Start ()
     {
         // Allocates the AudioSource class into the MusicSource.

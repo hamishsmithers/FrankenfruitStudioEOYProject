@@ -54,21 +54,21 @@ public class MainMenuSFX : MonoBehaviour {
     public AudioClip buttonBack = null;
 
 
-    //--------------------------------------
+    //-------------------------------------------------------------------------------
     // Audio Mixer for Sound Effects
-    //--------------------------------------
+    //-------------------------------------------------------------------------------
     [LabelOverride("SFX Mixer")]
     [Tooltip("The audio mixer titled Music.")]
     public AudioMixerGroup m_audmixMixer = null;
 
 
-    //------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
     // Function that turns a float to decibels
     //
     //  Param: 
     //      linear:
     //          The slider float value
-    //------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
     private float LinearToDecibel(float linear)
     {
         // A float for decibels.
@@ -86,18 +86,18 @@ public class MainMenuSFX : MonoBehaviour {
         return dB;
     }
 
-    //------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
     // Use this for initialization
-    //------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
     void Start()
     {
         // Sets the initial value of the slider to be the SFXVolume value.
         sliSFXSlider.value = Global.SFXVolume;
     }
 
-    //------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
     // Update is called once per frame
-    //------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
     void Update()
     {
         // The sfx's volume = the sfx slider.
@@ -108,9 +108,10 @@ public class MainMenuSFX : MonoBehaviour {
         m_audmixMixer.audioMixer.SetFloat("SFXVolume", fSFXVolumeDB);
         
     }
-    //---------------------------------------------------------------------------------------------
-    // When a button is selected, set the audio source's clip to button selected clip and play it.
-    //---------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
+    // When a button is selected, set the audio source's clip to button selected clip
+    // and play it.
+    //-------------------------------------------------------------------------------
     public void OnButtonSelect()
     {
         //change audiosource clip to select and play.
@@ -118,9 +119,10 @@ public class MainMenuSFX : MonoBehaviour {
         SFXAudioSource.Play();
     }
 
-    //---------------------------------------------------------------------------------------------
-    // When a button is clicked, set the audio source's clip to be buttonClicked and play it.
-    //---------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
+    // When a button is clicked, set the audio source's clip to be buttonClicked and 
+    // play it.
+    //-------------------------------------------------------------------------------
     public void OnButtonClick()
     {
         //change audiosource clip to select and play.
@@ -128,9 +130,10 @@ public class MainMenuSFX : MonoBehaviour {
         SFXAudioSource.Play();
     }
 
-    //---------------------------------------------------------------------------------------------
-    // When a bacck button is clicked, set the audio source's clip to be buttonBack and play it.
-    //---------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
+    // When a bacck button is clicked, set the audio source's clip to be buttonBack 
+    // and play it.
+    //-------------------------------------------------------------------------------
     public void OnButtonBack()
     {
         //change audiosource clip to select and play.

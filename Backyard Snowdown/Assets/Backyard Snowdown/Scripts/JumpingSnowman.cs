@@ -13,23 +13,23 @@ using UnityEngine;
 
 public class JumpingSnowman : MonoBehaviour
 {
-    //------------------
+    //------------------------------------------------------------------------------------------
     // Initial Spawn Time
-    //------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Initial Spawn Time")]
     [Tooltip("How long until the snowman spawns for the first time.")]
     public float m_fInitialSpawnTime = 5.0f;
 
-    //------------------
+    //------------------------------------------------------------------------------------------
     // Death spawn time
-    //------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Death Spawn Time")]
     [Tooltip("Minimum wait time between next spawn.")]
     public float m_fDeathTime = 0.0f;
 
-    //----------------------
+    //------------------------------------------------------------------------------------------
     // Time between jumps
-    //----------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Time Between Jumps")]
     [Tooltip("(Seconds) Time between the snowman jumps.")]
     public float m_fTimeBetweenJumps = 2.0f;
@@ -65,9 +65,9 @@ public class JumpingSnowman : MonoBehaviour
     private bool m_bBoingSound = true;
     private float m_fJumpingTimer = 0.0f;
 
-    //----------------------
+    //------------------------------------------------------------------------------------------
     // Jump Time
-    //----------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Jump Time")]
     [Tooltip("Time the Snowman spends jumping from position to destination.")]
     public float m_fJumpingTime = 1.0f;
@@ -75,9 +75,9 @@ public class JumpingSnowman : MonoBehaviour
     private Vector3 m_v3NextPos;
     private float m_fStartY;
 
-    //----------------------
+    //------------------------------------------------------------------------------------------
     // Height of Jump
-    //----------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Height of Jump")]
     [Tooltip("The height at which the Snowman reaches at the peak of it's jump.")]
     public float m_fHeightOfJump = 5.0f;
@@ -85,9 +85,9 @@ public class JumpingSnowman : MonoBehaviour
     private int m_nHealthPoints = 2;
     private bool m_bDead = true;
 
-    //----------------------
+    //------------------------------------------------------------------------------------------
     // Spawn Particle System
-    //----------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Spawn Particle System")]
     [Tooltip("Drag and drop the respective particle system onto here.")]
     public GameObject m_goSpawnParticles;

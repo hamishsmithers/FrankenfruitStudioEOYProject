@@ -20,6 +20,11 @@ using XboxCtrlrInput;       // Be sure to include this if you want an object to 
 
 public class Global : MonoBehaviour
 {
+    //------------------------------------------------------------------------------------------
+    // Static variables that represent the volume of each mixer. These are used for changing
+    // the volume of the game through sliders and maintaining the same volume from what is
+    // set from the options menu.
+    //------------------------------------------------------------------------------------------
     public static float MusicVolume = 0.5f;
     public static float SFXVolume = 0.5f;
 

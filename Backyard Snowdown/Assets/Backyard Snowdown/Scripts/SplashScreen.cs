@@ -18,13 +18,19 @@ using UnityEngine.SceneManagement;
 
 public class SplashScreen : MonoBehaviour
 {
+    //-------------------------------------------------------------------------------
     // The splashscreen movie.
+    //-------------------------------------------------------------------------------
     public MovieTexture movie;
 
+    //-------------------------------------------------------------------------------
     //Time until loading main menu.
+    //-------------------------------------------------------------------------------
     public float timeToDelay;
 
-    // An audiosource to play the sound effet of the splat.
+    //-------------------------------------------------------------------------------
+    // An audiosource to play the sound effect of the splat.
+    //-------------------------------------------------------------------------------
     private AudioSource audSource;
 
     //-------------------------------------------------------------------------------
