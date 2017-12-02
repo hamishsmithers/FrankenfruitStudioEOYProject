@@ -1,11 +1,11 @@
-﻿//-------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------
 // Filename:        SnowMan.cs
 //
 // Description:     The Snowman .
 //
 // Author:          Mitchell Cattini-Schultz
 // Editors:         Mitchell Cattini-Schultz
-//-------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,9 +17,9 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 public class SnowMan : MonoBehaviour
 {
     // Counts how many times it's been hit
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Snowman Hit Count
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Snowman Hit Count")]
     [Tooltip("Stores how many times a snowman has been hit.")]
     public int m_nSnowManHitCount = 2;
@@ -30,17 +30,17 @@ public class SnowMan : MonoBehaviour
     //public GameObject m_GoPlayer = null;
     //private int nCaseSwitch = 1;
 
-    //-------------------------------------------------------------------------------
-    // Use this for initialization
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    // Use this for initialization, called when the script is first accessed.
+    //------------------------------------------------------------------------------------------
     void Start()
     {
 
     }
 
-    //-------------------------------------------------------------------------------
-    // Update is called once per frame
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    // Update is called once per frame.
+    //------------------------------------------------------------------------------------------
     void Update()
     {
         //switch (nCaseSwitch)
@@ -67,10 +67,10 @@ public class SnowMan : MonoBehaviour
         //}
     }
 
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // On collision enter is a unity function that occurs when a collision on this
     // object happens.
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col)
     {
         //AbilitySnowMan scpAbilitySnowMan = gameObject.GetComponent<AbilitySnowMan>();

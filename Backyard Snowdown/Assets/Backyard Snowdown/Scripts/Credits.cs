@@ -26,18 +26,18 @@ public class Credits : MonoBehaviour {
     public AudioSource m_CreditsMusic = null;
 
     //------------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //------------------------------------------------------------------------------------------
-    void Start ()
+    void Start()
     {
         // Setting the music volume to the music volume singleton.
         m_CreditsMusic.volume = Global.m_fMusicVolume;
     }
 
     //------------------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //------------------------------------------------------------------------------------------
-    void Update ()
+    void Update()
     {
         // The buttons that, when pressed, take you back to the menu.
         if (Input.GetKey(KeyCode.Escape) || XCI.GetButtonDown(XboxButton.Start, controller) || XCI.GetButtonDown(XboxButton.A, controller))

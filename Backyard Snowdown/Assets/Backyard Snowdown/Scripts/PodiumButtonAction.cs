@@ -20,7 +20,7 @@ public class PodiumButtonAction : MonoBehaviour
     public XboxController m_controller;
 
     //------------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //------------------------------------------------------------------------------------------
     void Start()
     {
@@ -28,7 +28,7 @@ public class PodiumButtonAction : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //------------------------------------------------------------------------------------------
     void Update()
     {

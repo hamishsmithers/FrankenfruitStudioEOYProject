@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------
 // Filename:        JumpingSnowman.cs
 //
 // Description:     The jumping snowman is a cool feature of the game, he spawns
@@ -7,28 +7,28 @@
 //
 // Author:          Mitchell Cattini-Schultz
 // Editors:         Mitchell Cattini-Schultz
-//-------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
 
 using UnityEngine;
 
 public class JumpingSnowman : MonoBehaviour
 {
     //------------------------------------------------------------------------------------------
-    // Initial Spawn Time
+    // Initial spawn time.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Initial Spawn Time")]
     [Tooltip("How long until the snowman spawns for the first time.")]
     public float m_fInitialSpawnTime = 5.0f;
 
     //------------------------------------------------------------------------------------------
-    // Death spawn time
+    // Death spawn time.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Death Spawn Time")]
     [Tooltip("Minimum wait time between next spawn.")]
     public float m_fDeathTime = 0.0f;
 
     //------------------------------------------------------------------------------------------
-    // Time between jumps
+    // Time between jumps.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Time Between Jumps")]
     [Tooltip("(Seconds) Time between the snowman jumps.")]
@@ -52,9 +52,9 @@ public class JumpingSnowman : MonoBehaviour
     //private float m_zLoc = 0.0f;
 
     private float m_fJumpCounter = 0.0f;
-    //----------------------
-    // Time Until Next Jump
-    //----------------------
+    //------------------------------------------------------------------------------------------
+    // Time Until Next Jump.
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Time Until Next Jump")]
     [Tooltip("The time until next jump")]
     public float m_fTimeUntilNextJump = 2.0f;
@@ -100,9 +100,9 @@ public class JumpingSnowman : MonoBehaviour
     private bool m_bStart = false;
 
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Use this for initialization, called even if the script is disabled.
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     void Awake()
     {
         //if (SceneManager.GetActiveScene().name == "Main_Default" || SceneManager.GetActiveScene().buildIndex == 11)
@@ -117,9 +117,9 @@ public class JumpingSnowman : MonoBehaviour
         m_fStartY = transform.position.y;
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Use this for initialization, called when the script is first accessed.
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     void Start()
     {
         // getting and assigning the particle system
@@ -137,9 +137,9 @@ public class JumpingSnowman : MonoBehaviour
         m_fSpawnTime = m_fInitialSpawnTime;
     }
 
-    //--------------------------------------------------------------------------------------
-    // Update is called once per frame
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    // Update is called once per frame.
+    //------------------------------------------------------------------------------------------
     void Update()
     {
         // resets the script without having to destroy and instatiate a new Jumping Snowman each time
@@ -161,14 +161,14 @@ public class JumpingSnowman : MonoBehaviour
 
         if (m_bDead)
         {
-            //Before spawn, happens once
+            // Before spawn, happens once.
             if (m_fSpawnCount <= m_fSpawnTime)
             {
                 m_fSpawnCount += Time.deltaTime;
 
                 if (m_bChooseNewSpawn)
                 {
-                    // move the snowman to the next location
+                    // Move the snowman to the next location.
                     transform.position = FindValidSpawnPos();
                     m_bChooseNewSpawn = false;
                 }
@@ -176,14 +176,14 @@ public class JumpingSnowman : MonoBehaviour
 
             if (!m_bSpawnParticleEffectPlayed && m_fSpawnCount > (m_fSpawnTime - 1.0f))
             {
-                // particle system play
+                // Particle system play.
                 m_psSpawn.Play();
 
                 m_bSpawnParticleEffectPlayed = true;
             }
+            // Snowman spawns.
             else if (m_fSpawnCount > m_fSpawnTime)
             {
-                // Snowman spawns
                 m_Collider.enabled = true;
                 m_MeshRenderer.enabled = true;
                 m_bDead = false;
@@ -193,13 +193,13 @@ public class JumpingSnowman : MonoBehaviour
 
             if (m_bOnce && m_fSpawnCount > (m_fSpawnTime - 1.5f))
             {
-                // summon sound
+                // Summon sound.
                 AudioManager.m_SharedInstance.PlaySnowmanSummon();
                 m_bOnce = false;
             }
         }
 
-        // Between Jumps
+        // Between Jumps.
         if (!m_bDead && m_fJumpCounter <= m_fTimeUntilNextJump && !m_bJumping)
         {
             m_fJumpCounter += Time.deltaTime;
@@ -207,32 +207,32 @@ public class JumpingSnowman : MonoBehaviour
         }
         else if (!m_bDead && m_fJumpCounter > m_fTimeUntilNextJump)
         {
-            // sets the start pos so the curve can be created
+            // Sets the start pos so the curve can be created.
             m_v3StartPos = transform.position;
 
             m_bBetweenJumps = false;
             m_fJumpCounter = 0.0f;
 
-            // finds a valid spawn position
+            // Finds a valid spawn position.
             m_v3NextPos = FindValidSpawnPos();
 
-            // creates a curve based on the Jumping Snowmans pos and destination pos
+            // Creates a curve based on the Jumping Snowmans pos and destination pos.
             CreateCurve();
         }
 
-        // Jumping
+        // Jumping.
         if (!m_bDead && m_fJumpingTimer <= m_fJumpingTime && !m_bBetweenJumps)
         {
             m_fJumpingTimer += Time.deltaTime;
 
             if (m_bBoingSound)
             {
-                // boing sound
+                // Boing sound.
                 AudioManager.m_SharedInstance.PlaySnowmanBoingAudio();
                 m_bBoingSound = false;
             }
 
-            // move the snowman to the next location smoothly over a curve (lerp)
+            // Move the snowman to the next location smoothly over a curve (lerp).
             Vector3 v3P1 = Vector3.Lerp(m_v3StartPos, m_v3CurveMiddle, m_fJumpingTimer);
             Vector3 v3P2 = Vector3.Lerp(m_v3CurveMiddle, m_v3NextPos, m_fJumpingTimer);
             transform.position = Vector3.Lerp(v3P1, v3P2, m_fJumpingTimer);
@@ -248,7 +248,7 @@ public class JumpingSnowman : MonoBehaviour
 
         if (m_nHealthPoints <= 0)
         {
-            // snowman is dead
+            // Snowman is dead.
             m_Collider.enabled = false;
             m_MeshRenderer.enabled = false;
             m_bDead = true;
@@ -256,12 +256,12 @@ public class JumpingSnowman : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Checks if the Jumping Snowman was hit by a Snowball and deducts 1 health point.
     //
     // Param:
     //      col: The object that the Jumping Snowman collided with.
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Snowball" && col.gameObject.GetComponent<Snowball>().m_bTooFast)
@@ -270,9 +270,9 @@ public class JumpingSnowman : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Create the 3 points of the curve that the lerps need to create a beizer for the jump.
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private void CreateCurve()
     {
         // creating the centre of the curve
@@ -280,13 +280,13 @@ public class JumpingSnowman : MonoBehaviour
         m_v3CurveMiddle += transform.up * m_fHeightOfJump;
     }
 
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // Checks if the Jumping Snowman plotted next destination would be inside an obstacle
     // and generates a new location, preventing weird jumps.
     //
     // Return:
     //      Returns a Vector 3 which is the next destination he will jump to.
-    //--------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     private Vector3 FindValidSpawnPos()
     {
         Vector3 v3Result = Vector3.zero;

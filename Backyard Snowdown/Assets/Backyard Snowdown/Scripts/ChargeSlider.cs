@@ -14,7 +14,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChargeSlider : MonoBehaviour {
+public class ChargeSlider : MonoBehaviour
+{
 
     //------------------------------------------------------------------------------------------
     // Charge Throw Slider
@@ -64,9 +65,9 @@ public class ChargeSlider : MonoBehaviour {
     }
 
     //------------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //------------------------------------------------------------------------------------------
-    void Start ()
+    void Start()
     {
         // Allocates the player class into the script to get values and functions in Player 
         // script.
@@ -78,7 +79,7 @@ public class ChargeSlider : MonoBehaviour {
     //------------------------------------------------------------------------------------------
     // Update is called once per frame
     //------------------------------------------------------------------------------------------
-    void Update ()
+    void Update()
     {
         // If max charge is equal to 0, do nothing.
         if (m_fMaxCharge == 0.0f)
@@ -86,15 +87,15 @@ public class ChargeSlider : MonoBehaviour {
 
         // Sets the slider fill amount to the charge timer divided by max charge.
         m_imgForeground.fillAmount = m_scpPlayer.m_fChargeTimer / m_fMaxCharge;
-        
+
         // If the player has a ball, set the player circle to full ring sprite.
-        if(m_scpPlayer.m_bHasBall)
+        if (m_scpPlayer.m_bHasBall)
         {
             m_imgBackground.sprite = m_sprFullRing;
             m_imgForeground.sprite = m_sprFullRing;
         }
         // If they don't have a ball then keep the player circle as the empty sprite.
-        else 
+        else
         {
             m_imgBackground.sprite = m_sprEmptyRing;
             m_imgForeground.sprite = m_sprEmptyRing;

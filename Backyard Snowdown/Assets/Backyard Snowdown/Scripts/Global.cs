@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------
 // Filename:        Global.cs
 //
 // Description:     Global handles various tasks such as: Spawning the first set
@@ -8,7 +8,7 @@
 //
 // Author:          Mitchell Cattini-Schultz
 // Editors:         Mitchell Cattini-Schultz, Nathan Nette
-//-------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Generic;
@@ -20,11 +20,11 @@ using XboxCtrlrInput;       // Be sure to include this if you want an object to 
 
 public class Global : MonoBehaviour
 {
-    //------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     // Static variables that represent the volume of each mixer. These are used for changing
     // the volume of the game through sliders and maintaining the same volume from what is
     // set from the options menu.
-    //------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     public static float m_fMusicVolume = 0.5f;
     public static float m_fSFXVolume = 0.5f;
 
@@ -76,32 +76,32 @@ public class Global : MonoBehaviour
     private bool m_bDeathSnowballsSpawned = false;
 
     //--------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //--------------------------------------------------------------------------------------
     void Start()
     {
-        //set the menu canvas to hidden
+        // Set the menu canvas to hidden.
         if (m_goPauseCanvas)
             m_goPauseCanvas.SetActive(false);
 
-        // spawns the first set of snowballs
+        // Spawns the first set of snowballs.
         if (m_goLstSnowballLoc.Count > 0)
         {
             for (int i = 0; i < m_goLstSnowballLoc.Count; i++)
             {
                 GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-                // putting the snowballs into the list
+                // Putting the snowballs into the list.
                 goSnowball.transform.position = m_goLstSnowballLoc[i].transform.position;
             }
         }
     }
 
     //--------------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //--------------------------------------------------------------------------------------
     void Update()
     {
-        // spawns the second set of snowballs
+        // Spawns the second set of snowballs.
         if (!m_bDeathSnowballsSpawned && m_fDeathSnowballCount < m_fDeathSnowballTime)
         {
             m_fDeathSnowballCount += Time.deltaTime;
@@ -111,39 +111,39 @@ public class Global : MonoBehaviour
             for (int i = 0; i < m_goLstDeathSnowballLoc.Count; i++)
             {
                 GameObject goSnowball = ObjectPool.m_SharedInstance.GetPooledObject();
-                // putting the snowballs into the list
+                // Putting the snowballs into the list.
                 goSnowball.transform.position = m_goLstDeathSnowballLoc[i].transform.position;
             }
 
             m_bDeathSnowballsSpawned = true;
         }
 
-        // wf all these random buttons are pressed the game quits, we are realising we should have removed this from the build.
+        // With all these random buttons are pressed the game quits, we are realising we should have removed this from the build.
         if (XCI.GetButton(XboxButton.A, controller) && XCI.GetButton(XboxButton.B, controller) && XCI.GetButton(XboxButton.X, controller) && XCI.GetButton(XboxButton.Y, controller) && XCI.GetButton(XboxButton.LeftBumper, controller) && XCI.GetButton(XboxButton.RightBumper, controller))
             Application.Quit();
 
-        // if start and back are pressed, restart game
+        // If start and back are pressed, restart game.
         ResetGame();
 
         if (Input.GetKeyDown(KeyCode.Escape) || XCI.GetButtonDown(XboxButton.Start, controller))
         {
-            // if you press start in the main menu or end round the pause menu won't show because it will just return out
+            // If you press start in the main menu or end round the pause menu won't show because it will just return out.
             if (SceneManager.GetActiveScene().name == "EndRound" || SceneManager.GetActiveScene().name == "Main Menu")
                 return;
 
-            // after start is pressed if the pause canvas is inactive in the hierarchy set it to active
+            // After start is pressed if the pause canvas is inactive in the hierarchy set it to active.
             if (!m_goPauseCanvas.activeInHierarchy)
             {
                 m_goPauseCanvas.SetActive(true);
-                // game time is frozen
+                // Game time is frozen.
                 Time.timeScale = 0;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_btnFirstButton);
             }
-            // after start is pressed if the pause canvas is active in the hierarchy set it to inactive
+            // After start is pressed if the pause canvas is active in the hierarchy set it to inactive.
             else
             {
                 m_goPauseCanvas.SetActive(false);
-                // game time is unfrozen
+                // Game time is unfrozen.
                 Time.timeScale = 1;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             }

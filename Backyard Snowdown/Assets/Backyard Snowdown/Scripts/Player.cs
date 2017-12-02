@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     //------------------------------------------------------------------------------------------
     // Player's Movement Speed
-    // we have exposed m_fSpeed to the designers so they can bug test
+    // Ee have exposed m_fSpeed to the designers so they can bug test.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Speed")]
     [Tooltip("Player's Movement Speed.")]
@@ -59,53 +59,53 @@ public class Player : MonoBehaviour
     public GameObject m_goPlayerModel = null;
 
     //------------------------------------------------------------------------------------------
-    // A float to store the current movement speed of the player
+    // A float to store the current movement speed of the player.
     //------------------------------------------------------------------------------------------
     [HideInInspector]
     public float m_fCurrentSpeed = 5.0f;
 
     //------------------------------------------------------------------------------------------
-    // Stops the players being able to move
+    // Stops the players being able to move.
     //------------------------------------------------------------------------------------------
     [HideInInspector]
     public bool m_bMovementLock = false;
 
     //------------------------------------------------------------------------------------------
-    // Bool to check whether the left trigger has been pressed
+    // Bool to check whether the left trigger has been pressed.
     //------------------------------------------------------------------------------------------
     [HideInInspector]
     public bool m_bLeftTriggerPressed = false;
 
     //------------------------------------------------------------------------------------------
-    // A Vector3 to store the current movement position of the player
+    // A Vector3 to store the current movement position of the player.
     //------------------------------------------------------------------------------------------
     [HideInInspector]
     public Vector3 m_v3MovePos;
 
     //------------------------------------------------------------------------------------------
-    // Vector3 to hold the Xbox dash direction
+    // Vector3 to hold the Xbox dash direction.
     //------------------------------------------------------------------------------------------
     [HideInInspector]
     public Vector3 m_v3XboxDashDir;
 
     //------------------------------------------------------------------------------------------
-    // A float to store the axis X
+    // A float to store the axis X.
     //------------------------------------------------------------------------------------------
     private float m_axisX;
 
     //------------------------------------------------------------------------------------------
-    // A float to store the axis Y
+    // A float to store the axis Y.
     //------------------------------------------------------------------------------------------
     private float m_axisY;
 
     //------------------------------------------------------------------------------------------
-    // RIGIDBODY
+    // Player's RigidBody.
     //------------------------------------------------------------------------------------------
     [HideInInspector]
     public Rigidbody m_rb;
 
     //------------------------------------------------------------------------------------------
-    // Vector3 to store the direction of the player to dash
+    // Vector3 to store the direction of the player to dash.
     //------------------------------------------------------------------------------------------
     private Vector3 m_v3DashDir;
 
@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public float m_fChargeTimer = 0.0f;
 
-    // xbox max scale of trigger when pressed down
+    // Xbox max scale of trigger when pressed down.
     private const float m_MaxTriggerHeight = 1.21f;
     private bool m_bThrow = false;
     private float m_fChargeModifier = 0.0f;
@@ -220,7 +220,8 @@ public class Player : MonoBehaviour
 
     //------------------------------------------------------------------------------------------
     // Spawn Health
-    // we have exposed this variable to the desginers so that they can test with different start healths
+    // We have exposed this variable to the desginers so that they can test with different 
+    // start healths.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Spawn Health")]
     [Tooltip("An int that is how much health the players spawn with.")]
@@ -228,7 +229,7 @@ public class Player : MonoBehaviour
 
     //------------------------------------------------------------------------------------------
     // Current health
-    // this variable is so they can kill players at anytime for simpler testing
+    // This variable is so they can kill players at anytime for simpler testing.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Current Health")]
     [Tooltip("An int that represents how much health the player currently has.")]
@@ -312,7 +313,7 @@ public class Player : MonoBehaviour
 
 
     //------------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //------------------------------------------------------------------------------------------
     void Start()
     {
@@ -325,10 +326,10 @@ public class Player : MonoBehaviour
         m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
         m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
 
-        // getting the rigidBody of the players so we can move them
+        // Getting the rigidBody of the players so we can move them.
         m_rb = GetComponent<Rigidbody>();
 
-        // setting current speed to original speed 
+        // S.etting current speed to original speed 
         m_fCurrentSpeed = m_fSpeed;
 
 
@@ -356,7 +357,7 @@ public class Player : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //------------------------------------------------------------------------------------------
     void Update()
     {
@@ -366,39 +367,39 @@ public class Player : MonoBehaviour
 
         if (m_bAlive)
         {
-            // allows players to traverse the map
+            // Allows players to traverse the map.
             Movement();
 
-            // allows players to aim in any desired direction
+            // Allows players to aim in any desired direction.
             Aiming();
 
-            // allows players to dash and phase right through snowballs
+            // Allows players to dash and phase right through snowballs.
             if (scpDash.m_bDashing && m_bHasBall)
                 gameObject.layer = LayerMask.NameToLayer("PlayerDash");
             else
                 gameObject.layer = LayerMask.NameToLayer("Player");
 
-            // allows players to throw snowballs
+            // Allows players to throw snowballs.
             Shoot();
 
-            // allows the player to spawn obstacle snowmen
+            // Allows the player to spawn obstacle snowmen.
             //scpSnowMan.CreateSnowMan();
 
-            // allows players to dash and phase right through snowballs
+            // Allows players to dash and phase right through snowballs.
             Projectiles();
         }
 
         Health();
 
-        // whilst iframes are active, aka when a player is hit by a snowball
+        // Whilst iframes are active, aka when a player is hit by a snowball.
         if (m_bIFrame && m_fIFrameTimer <= m_fIFrame)
         {
             m_fIFrameTimer += Time.deltaTime;
 
-            // if dizzy is not playing play dizzy
+            // If dizzy is not playing play dizzy.
             if (!m_psDizzy.isPlaying)
             {
-                // dizzy particle system plays
+                // Dizzy particle system plays.
                 m_psDizzy.Play();
             }
 
@@ -427,59 +428,60 @@ public class Player : MonoBehaviour
         }
         else if (m_fIFrameTimer > m_fIFrame)
         {
-            // get the mesh renderer
+            // Get the mesh renderer.
             //gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().enabled = true;
             m_bIFrame = false;
             //m_bIframeFlickerCount = 0.0f;
             m_fIFrameTimer = 0.0f;
-            // stop the particle system
+            // Stop the particle system.
             m_psDizzy.Stop();
         }
 
         if (!m_bAlive)
         {
-            // if player is dead let them influence the game by dropping stunning snowballs on players
+            // If player is dead let them influence the game by dropping stunning snowballs on players.
             //scpGiantSnowBall.DoEliminatedAbilityGiantSnowBall();
         }
 
-        // if the player is hit by the jumping snowman, they are stunned
+        // If the player is hit by the jumping snowman, they are stunned.
         if (m_bHitByGiantSnowBall)
         {
-            //try to make their velocity completely 0 and then knockback
+            // Try to make their velocity completely 0 and then knockback.
             //if (scpDash.m_bDashing)
             // scpDash.m_bDashing = false;
 
             m_fHitTimer += Time.deltaTime;
-            // don't let players move if they are stunned
+            // Don't let players move if they are stunned.
             m_bMovementLock = true;
         }
 
-        // after the player has been stunned by the jumping snowman, if they are moving slowly enough 
-        // movement controls are restored to them
+        // After the player has been stunned by the jumping snowman, if they are moving slowly enough movement
+        // controls are restored to them
         if (m_fHitTimer > m_fGiantSnowballStunTime && m_rb.velocity.magnitude < 2.0f && m_bHitByGiantSnowBall)
         {
             m_bHitByGiantSnowBall = false;
             m_fHitTimer = 0.0f;
-            // restore movement to the player
+
+            // Restore movement to the player.
             m_bMovementLock = false;
-            // honestly I do not remember what this fixes, something to do with if you are dashing under 
-            // the jumping snowman and he lands on you, stunning you and, but I cannot re-create it
+
             scpDash.m_fDashTimer = scpDash.m_fDashDuration + 1.0f;
         }
 
-        // if the player has the snowball fill their player ring to show this.
+        // If the player has the snowball fill their player ring to show this.
         if (m_bHasBall)
         {
-            m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRingFull; //set to new mat
+            // Set to new mat.
+            m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRingFull;
         }
-
-        // if the player does not have the snowball empty(un-fill) their player ring to show this.
+        // If the player does not have the snowball empty(un-fill) their player ring to show this.
         else if (!m_bHasBall)
         {
-            m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRing; //set to new mat
+            // Set to new mat.
+            m_goPlayerCircle.GetComponent<MeshRenderer>().material = m_matCharacterRing;
         }
 
-        // if a player is not hit by the jumping snowman then stop sliding, so controls are more predictable
+        // If a player is not hit by the jumping snowman then stop sliding, so controls are more predictable.
         if (!m_bHitByGiantSnowBall)
         {
             //stop sliding
@@ -496,7 +498,7 @@ public class Player : MonoBehaviour
     {
         Vector3 v3VerticalAxis = Vector3.zero;
 
-        // keyboard and xbox upward and downward movement controls for the first player
+        // Keyboard and xbox upward and downward movement controls for the first player.
         if (Input.GetKey(KeyCode.W) && controller == XboxController.First)
             v3VerticalAxis.z = 1.0f;
         else if (Input.GetKey(KeyCode.S) && controller == XboxController.First)
@@ -507,7 +509,7 @@ public class Player : MonoBehaviour
 
         Vector3 v3HorizontalAxis = Vector3.zero;
 
-        // keyboard and xbox right and left movement controls for the first player
+        // Keyboard and xbox right and left movement controls for the first player.
         if (Input.GetKey(KeyCode.D) && controller == XboxController.First)
             v3HorizontalAxis.x = 1.0f;
         else if (Input.GetKey(KeyCode.A) && controller == XboxController.First)
@@ -515,28 +517,28 @@ public class Player : MonoBehaviour
         else
             v3HorizontalAxis.x = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
 
-        // if movement is not locked
+        // If movement is not locked.
         if (!m_bMovementLock)
         {
-            // if charging a snowball throw
+            // If charging a snowball throw.
             if (m_bCharging)
-                // make the player move at a reduced speed
+                // Make the player move at a reduced speed.
                 m_fCurrentSpeed = m_fSlowSpeed;
+            // Make the player move at the max speed.
             else
-                // make the player move at the max speed
                 m_fCurrentSpeed = m_fMaxSpeed;
 
-            // if the player is not inputting a movement, don't move the player 
+            // If the player is not inputting a movement, don't move the player.
             m_v3MovePos = Vector3.zero;
 
-            // Up and down movement
+            // Up and down movement.
             m_v3MovePos += v3VerticalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-            // Left and right movement
+            // Left and right movement.
             m_v3MovePos += v3HorizontalAxis * Time.deltaTime * m_fCurrentSpeed;
 
-            // if the player is moving, normalize their movement and then times it by the 
-            // max speed over delta time
+            // If the player is moving, normalize their movement and then times it by the 
+            // max speed over delta time.
             if (m_v3MovePos.magnitude > m_fMaxSpeed * Time.deltaTime)
             {
                 m_v3MovePos.Normalize();
@@ -547,7 +549,7 @@ public class Player : MonoBehaviour
             //m_rb.MovePosition(m_rb.position + m_v3MovePos);
         }
 
-        // if they are walking set play running animation
+        // If they are walking set play running animation.
         m_Animator.SetFloat("running", m_v3MovePos.magnitude);
     }
 
@@ -561,29 +563,29 @@ public class Player : MonoBehaviour
     {
         if (!m_bMovementLock)
         {
-            // if the player is not touching the right stick = false, otherwise = true
+            // If the player is not touching the right stick = false, otherwise = true.
             if (XCI.GetAxisRaw(XboxAxis.RightStickX, controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightStickY, controller) != 0)
                 m_bAimOverride = true;
             else
                 m_bAimOverride = false;
 
-            // when the player uses the right analog stick aswell
+            // When the player uses the right analog stick aswell.
             if (!m_bAimOverride)
             {
-                // Xbox Left Stick Aiming
+                // Xbox Left Stick Aiming.
                 m_v3XboxDashDir = transform.forward;
                 if (!m_bLeftTriggerPressed)
                 {
-                    // get the input of the left analog stick
+                    // Get the input of the left analog stick.
                     m_axisX = XCI.GetAxisRaw(XboxAxis.LeftStickX, controller);
                     m_axisY = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
 
                     //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
 
-                    // if the player is not touching the left analog stick
+                    // If the player is not touching the left analog stick.
                     if (m_axisX != 0.0f || m_axisY != 0.0f)
                     {
-                        // turn the player to face the direction of the analog stick input
+                        // Turn the player to face the direction of the analog stick input.
                         m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
                         transform.forward = m_v3XboxDashDir;
                     }
@@ -591,20 +593,20 @@ public class Player : MonoBehaviour
             }
             else
             {
-                // Xbox Right Stick Aiming
+                // Xbox Right Stick Aiming.
                 m_v3XboxDashDir = transform.forward;
                 if (!m_bLeftTriggerPressed)
                 {
-                    // get the input of the right analog stick
+                    // Get the input of the right analog stick.
                     m_axisX = XCI.GetAxisRaw(XboxAxis.RightStickX, controller);
                     m_axisY = XCI.GetAxisRaw(XboxAxis.RightStickY, controller);
 
                     //Debug.Log("Right Stick X: " + axisX + " Right Stick Y: " + axisY);
 
-                    // if the player is not touching the right analog stick
+                    // If the player is not touching the right analog stick.
                     if (m_axisX != 0.0f || m_axisY != 0.0f)
                     {
-                        // turn the player to face the direction of the analog stick input
+                        // Turn the player to face the direction of the analog stick input.
                         m_v3XboxDashDir = new Vector3(m_axisX, 0.0f, m_axisY);
                         transform.forward = m_v3XboxDashDir;
                     }
@@ -612,22 +614,22 @@ public class Player : MonoBehaviour
             }
         }
 
-        // Mouse Aiming
+        // Mouse Aiming.
         if (!XCI.IsPluggedIn(1) && !m_bLeftTriggerPressed)
         {
-            // where the mouse is on the map projected form the screen, hits all collision
+            // Where the mouse is on the map projected form the screen, hits all collision.
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
             Physics.Raycast(ray, out hit);
 
             Vector3 v3Target = hit.point;
-            // get the y position of the hit point
+            // Get the y position of the hit point.
             v3Target.y = transform.position.y;
-            // rotate the player to look towards the cursor
+            // Rotate the player to look towards the cursor.
             transform.LookAt(v3Target);
 
-            // (does not work) dash towards the cursor
+            // (does not work) Dash towards the cursor.
             //if (Input.GetKeyDown(KeyCode.Space))
             //{
             //    m_v3DashDir = hit.point - transform.position;
@@ -643,32 +645,32 @@ public class Player : MonoBehaviour
     //------------------------------------------------------------------------------------------
     private void Shoot()
     {
-        //if the player don't have a ball don't let them charge!
+        // If the player don't have a ball don't let them charge!
         if (!m_bHasBall)
             ResetChargeThrow();
 
-        // if not throwing set animation to false
+        // If not throwing set animation to false.
         m_Animator.SetBool("throwing", false);
 
-        // calculate the range of power to do the math on the charge power throw.
+        // Calculate the range of power to do the math on the charge power throw.
         m_fPowerRange = m_fPowerMax - m_fPowerMin;
 
         float rightTrigHeight = m_MaxTriggerHeight * (1.0f - XCI.GetAxisRaw(XboxAxis.RightTrigger, controller));
         m_bThrow = (Input.GetKey(KeyCode.Mouse0) && controller == XboxController.First) || (rightTrigHeight < 1.0f);
 
-        // if the player is holding a snowball and is holding down the button to throw it
+        // If the player is holding a snowball and is holding down the button to throw it.
         if (rightTrigHeight < 1.0f && m_bHasBall)
         {
             // start throwing animation
             m_Animator.SetBool("throwing", true);
         }
 
-        // if the player is holding a snowball but not holding down the throw button
+        // If the player is holding a snowball but not holding down the throw button.
         if (m_bHasBall && rightTrigHeight > 1.0f)
         {
-            // snowball released
+            // Snowball released.
             m_bReleased = true;
-            // stop throwing animation
+            // Stop throwing animation.
             m_Animator.SetBool("throwing", false);
         }
         else
@@ -677,8 +679,8 @@ public class Player : MonoBehaviour
         Dash scpDash = gameObject.GetComponent<Dash>();
         //ChargeSlider scpSlider = gameObject.GetComponent<ChargeSlider>();
 
-        // if the player is intending to throw the ball and is not dashing and still has the ball,
-        // or max charge has been reached, or the ball is thrown 
+        // If the player is intending to throw the ball and is not dashing and still has the ball,
+        // or max charge has been reached, or the ball is thrown.
         if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bDuringMaxCharge || m_bThrowBall)
         {
             if (m_fChargeTimer < m_fMaxCharge && !m_bThrowBall)
@@ -686,16 +688,16 @@ public class Player : MonoBehaviour
                 m_fChargeTimer += Time.deltaTime;
                 //scpSlider.m_sliChargeSlider.value = m_fChargeTimer;
                 m_bCharging = true;
-                // stop max charge animation
+                // Stop max charge animation.
                 m_Animator.SetBool("maxcharge", false);
             }
-            // max charge reached and ball not thrown
+            // Max charge reached and ball not thrown.
             else if (m_fChargeTimer >= m_fMaxCharge && !m_bThrowBall)
             {
                 m_fChargeTimer = m_fMaxCharge;
             }
 
-            // when max power has been hit
+            // When max power has been hit.
             if (m_fChargeTimer >= m_fMaxCharge && m_bThrow && !m_bThrowBall)
             {
                 m_fIsChargedTimer += Time.deltaTime;
@@ -708,85 +710,91 @@ public class Player : MonoBehaviour
                 }
                 else if (m_fIsChargedTimer >= m_fIsChargedTimerLimit && !m_bThrowBall)
                 {
-                    // throw ball because player has been holding it for too long
+                    // Throw ball because player has been holding it for too long.
                     m_bCharging = false;
-                    // play the throw animation
+                    // Play the throw animation.
                     m_Animator.SetBool("maxcharge", true);
                 }
             }
 
-            // if they have let go of the button that says throw the snowball and they have a snowball and they are not charing anymore
+            // If they have let go of the button that says throw the snowball and they have a snowball and they are not charing anymore.
             if (m_bHasBall && !m_bCharging || m_bThrowBall)
             {
                 m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
                 m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
                 //Debug.Log("throwing");
 
-                // play throw audio if they ball has been thrown
+                // Play throw audio if they ball has been thrown.
                 if (m_bThrowBall && m_bHasBall)
                 {
                     AudioManager.m_SharedInstance.PlayThrowAudio();
                     RaycastHit hit;
 
-                    // shoots out back
+                    // Shoots out back.
                     if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f) && (hit.collider.gameObject.tag != "Character" && hit.collider.gameObject.tag != "Snowball"))
                     {
-                        // get access to the snowball in the object pool
+                        // Get access to the snowball in the object pool.
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                        // change the snowballs material to the players material
+                        // Change the snowballs material to the players material.
                         Snowball scpSnowball = copy.GetComponent<Snowball>();
 
-                        // change the color of the damage speed on the snowball to the players color
+                        // Change the color of the damage speed on the snowball to the players color.
                         scpSnowball.m_materials[1] = m_matSnowball;
 
-                        // set the spawn point of the snowball at the players arm position
+                        // Set the spawn point of the snowball at the players arm position.
                         copy.transform.position = transform.position + -transform.forward + (transform.up * 0.6f);
-                        // get the snowballs rigidbody
+                        // Get the snowballs rigidbody.
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
-                        // apply a 'throwing' force to the snowball
+                        // Apply a 'throwing' force to the snowball.
                         rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
-                        // move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater
+                        // Move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater.
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                        // The ball is thrown so it becomes false
+                        // The ball is thrown so it becomes false.
                         m_bHasBall = false;
-                        // tell the animator the ball is finished being thrown
+                        // Tell the animator the ball is finished being thrown.
                         m_Animator.SetBool("throwing", false);
 
-                        // run function that cleans up the charging when it is finshed
+                        // Run function that cleans up the charging when it is finshed.
                         ResetChargeThrow();
                     }
-                    // shoots out front
+                    // Shoots out front.
                     else
                     {
-                        // get access to the snowball in the object pool
+                        // Get access to the snowball in the object pool.
                         GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                        // change the snowballs material to the players material
+
+                        // Change the snowballs material to the players material.
                         Snowball scpSnowball = copy.GetComponent<Snowball>();
 
-                        // change the color of the damage speed on the snowball to the players color
+                        // Change the color of the damage speed on the snowball to the players color.
                         scpSnowball.m_materials[1] = m_matSnowball;
 
-                        // set the spawn point of the snowball at the players arm position
+                        // Set the spawn point of the snowball at the players arm position.
                         copy.transform.position = transform.position + transform.forward + (transform.up * 0.6f) * 1;
-                        // get the snowballs rigidbody
+
+                        // Get the snowballs rigidbody
                         Rigidbody rb = copy.GetComponent<Rigidbody>();
-                        // apply a 'throwing' force to the snowball
+
+                        // Apply a 'throwing' force to the snowball.
                         rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
-                        // move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater
+
+                        // Move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater.
                         copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                        // The ball is thrown so it becomes false
+
+                        // The ball is thrown so it becomes false.
                         m_bHasBall = false;
-                        // tell the animator the ball is finished being thrown
+
+                        // Tell the animator the ball is finished being thrown.
                         m_Animator.SetBool("throwing", false);
 
-                        // run function that cleans up the charging when it is finshed
+                        // Run function that cleans up the charging when it is finshed.
                         ResetChargeThrow();
                     }
                 }
             }
         }
         else
-            // not charging, don't remember the last charge power
+            // Not charging, don't remember the last charge power.
             m_fChargeTimer = 0.0f;
     }
     //------------------------------------------------------------------------------------------
@@ -794,7 +802,7 @@ public class Player : MonoBehaviour
     //------------------------------------------------------------------------------------------
     private void ResetChargeThrow()
     {
-        // resets everything required for the charge throw to work
+        // Resets everything required for the charge throw to work.
         m_fChargeModifier = 0.0f;
         m_bThrow = false;
         m_fChargeTimer = 0.0f;
@@ -805,7 +813,7 @@ public class Player : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------
-    // The health function keeps track of the health
+    // The health function keeps track of the health.
     //------------------------------------------------------------------------------------------
     private void Health()
     {
@@ -817,12 +825,12 @@ public class Player : MonoBehaviour
 
             if (m_DamageTimer <= 0.3f)
             {
-                // when a player is hit and damaged they turn red breifly
+                // When a player is hit and damaged they turn red breifly.
                 m_smrCharacterMesh.material.color = new Color(1.0f, 0.0f, 0.0f, 255.0f);
             }
             if (m_DamageTimer < 0.0f)
             {
-                // finished turning red for damage visual
+                // Finished turning red for damage visual.
                 m_tookDmg = false;
                 m_smrCharacterMesh.material.color = m_mainColor;
                 m_DamageTimer = 0.3f;
@@ -862,7 +870,7 @@ public class Player : MonoBehaviour
             //m_goPlayerReticleCopy.SetActive(true);
 
             //gameObject.transform.position = new Vector3(10.2f, 1.0f, -7.0f);
-            
+
             //updating the health value onscreen
             //SetHealthText();
 
@@ -893,9 +901,9 @@ public class Player : MonoBehaviour
     private void TakeDamage()
     {
         m_tookDmg = true;
-        // based on the snowballs damage value, deduct that much health points from the player
+        // Based on the snowballs damage value, deduct that much health points from the player.
         m_nCurrentHealth = m_nCurrentHealth - Snowball.m_nScoreValue;
-        // updating the health value onscreen
+        // Updating the health value onscreen.
         //SetHealthText();
         AudioManager.m_SharedInstance.PlayHurtAudio();
     }
@@ -909,15 +917,15 @@ public class Player : MonoBehaviour
         Snowball scpSnowball = m_goSnowball.GetComponent<Snowball>();
         //Dash scpDash = gameObject.GetComponent<Dash>();
 
-        // if you are dashing through a snowball that is stationary and have a ball
+        // If you are dashing through a snowball that is stationary and have a ball.
         if (!scpSnowball.m_bTooFast && m_bHasBall && !scpDash.m_bDashing)
         {
-            // array of snowballs in the scene
+            // Array of snowballs in the scene.
             Snowball[] arrSnowballs = FindObjectsOfType<Snowball>();
 
             for (int i = 0; i < arrSnowballs.Length; i++)
             {
-                // disable collider on snowball
+                // Disable collider on snowball.
                 Physics.IgnoreCollision(arrSnowballs[i].gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>(), false);
             }
         }
@@ -935,92 +943,92 @@ public class Player : MonoBehaviour
     //------------------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col)
     {
-        // if the player collided with another player
+        // If the player collided with another player.
         if (col.gameObject.tag == "Character")
         {
-            // another player who this player touched, them
+            // Another player who this player touched, them.
             Player scpColPlayer = col.gameObject.GetComponent<Player>();
-            // another player who this player touched, their dashing component
+            // Another player who this player touched, their dashing component.
             Dash scpColPlayerDash = col.gameObject.GetComponent<Dash>();
 
-            // if the player was hit by another player who was dashing, get your snowball stolen
+            // If the player was hit by another player who was dashing, get your snowball stolen.
             if (scpColPlayerDash.m_bDashing)
             {
                 //Debug.Log("Hit whilst dashing");
                 if (m_bHasBall && !scpColPlayer.m_bHasBall)
                 {
                     m_bHasBall = false;
-                    // give the player who stole your snowball, your snowball
+                    // Give the player who stole your snowball, your snowball.
                     scpColPlayer.m_bHasBall = true;
                 }
             }
         }
 
-        // if this player collides with a snowball
+        // If this player collides with a snowball.
         if (col.gameObject.tag == "Snowball")
         {
             Snowball scpSnowball = col.gameObject.GetComponent<Snowball>();
             Dash scpDash = gameObject.GetComponent<Dash>();
 
-            // Ball is moving at damaging speed
+            // Ball is moving at damaging speed.
             if (scpSnowball.m_bTooFast)
             {
-                // damaged by snowball
+                // Damaged by snowball.
                 if (m_bHasBall && !m_bIFrame)
                 {
-                    // start Iframe
+                    // Start Iframe.
                     m_bIFrame = true;
-                    
-                    // if you hit yourself with the snowball you fired, worked out via material check between the snowball and the throwing player
+
+                    // If you hit yourself with the snowball you fired, worked out via material check between the snowball and the throwing player.
                     if (scpSnowball.m_materials[1] == m_matSnowball)
                         Debug.Log("you hit your self you silly dufffer");
+                    // If you are hit by any snowball that is moving at damaging speed and is not yours.
                     else
-                        // if you are hit by any snowball that is moving at damaging speed and is not yours
                         TakeDamage();
 
-                    //Drop ball
+                    // Drop ball.
                     m_bHasBall = false;
 
                     GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
 
-                    // Snowball is thrown towards centre
+                    // Snowball is thrown towards centre.
                     Vector3 dir = m_goSnowBallTarget.transform.position - transform.position;
                     dir.y = 0.0f;
                     dir.Normalize();
                     dir.y = 0.5f;
                     dir.Normalize();
-                    // spawn the snowball above the players head
+                    // Spawn the snowball above the players head.
                     copy.transform.position = transform.position + (transform.up * 2.0f);
-                    // throw the snowball towards the middle of the map
+                    // Throw the snowball towards the middle of the map.
                     copy.GetComponent<Rigidbody>().AddForce(dir * m_fPowerOfTowardsCentre, ForceMode.Impulse);
                 }
+                // The player has picked it up.
                 else if (!m_bHasBall && scpDash.m_bDashing)
                 {
-                    // The player has picked it up
                     col.gameObject.SetActive(false);
 
                     m_bHasBall = true;
                 }
-                // hit by a snowball when you don't have one and is not during Iframe and you are not dashing
+                // Hit by a snowball when you don't have one and is not during Iframe and you are not dashing.
                 else if (!scpDash.m_bDashing && !m_bHasBall && !m_bIFrame)
                 {
-                    // start Iframe
+                    // Start Iframe
                     m_bIFrame = true;
 
-                    // if you hit yourself with the snowball you fired, worked out via material check between the snowball and the throwing player
+                    // If you hit yourself with the snowball you fired, worked out via material check between the snowball and the throwing player.
                     if (scpSnowball.m_materials[1] == m_matSnowball)
                         Debug.Log("you hit your self you silly dufffer");
+                    // If you are hit by any snowball that is moving at damaging speed and is not yours.
                     else
-                        // if you are hit by any snowball that is moving at damaging speed and is not yours
                         TakeDamage();
                 }
             }
-            // snowball is moving too slow too damage
+            // Snowball is moving too slow too damage.
             else
             {
                 if (!m_bHasBall)
                 {
-                    // The player has picked it up
+                    // The player has picked it up.
                     col.gameObject.SetActive(false);
                     m_bHasBall = true;
                 }

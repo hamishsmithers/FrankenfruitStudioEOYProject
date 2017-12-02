@@ -35,21 +35,25 @@ public class AbilitySnowMan : MonoBehaviour
     //[HideInInspector]
     //public bool m_bASnowManExists = false;
 
-    // Use this for initialization
+    //--------------------------------------------------------------------------------------
+    // Use this for initialization, called when the script is first accessed.
+    //--------------------------------------------------------------------------------------
     void Start()
     {
 
     }
 
-    // Update is called once per frame
+    //--------------------------------------------------------------------------------------
+    // Update is called once per frame.
+    //--------------------------------------------------------------------------------------
     void Update()
     {
 
     }
 
-    //--------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     // SnowMan, creates a snowman infront of the player
-    //--------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     public void CreateSnowMan()
     {
         //Player scpPlayer = gameObject.GetComponent<Player>();

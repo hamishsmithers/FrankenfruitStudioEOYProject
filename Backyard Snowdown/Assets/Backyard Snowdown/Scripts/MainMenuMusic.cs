@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------
 // Filename:        MainMenuMusic.cs
 //
 // Description:     Controls the music on the main menu. It allocates the 
@@ -8,7 +8,7 @@
 //                      
 // Author:          Nathan Nette
 // Editors:         Nathan Nette
-//-------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Generic;
@@ -19,61 +19,61 @@ using UnityEngine.Audio;
 public class MainMenuMusic : MonoBehaviour
 {
 
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     // Music Slider
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Music Volume Slider")]
     [Tooltip("Stores the slider for the music volume.")]
     public Slider m_sliMusicSlider = null;
 
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     // Music Audio Source
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("Music Audio Source")]
     [Tooltip("Stores the Audio source for the music.")]
     public AudioSource m_audMusicAudioSource = null;
 
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     // Audio Mixer for Music
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     [LabelOverride("MusicMixer")]
     [Tooltip("The audio mixer titled Music.")]
     public AudioMixerGroup m_audmixMixer = null;
 
-    //------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     // Function that turns a float to decibels
     //
     //  Param: 
     //      linear:
     //          The slider float value
-    //------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
     private float LinearToDecibel(float linear)
     {
         // A float for decibels.
         float dB;
 
-        // if the parsed in float is not equal to 0, do this.
+        // If the parsed in float is not equal to 0, do this.
         if (linear != 0)
             dB = 20.0f * Mathf.Log10(linear);
-
-        // Otherwise set it to -144
+        // Otherwise set it to -144.
         else
             dB = -144.0f;
 
-        // return the decibel value.
+        // Return the decibel value.
         return dB;
     }
 
-    //-------------------------------------------------------------------------------
-    // Use this for initialization
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
+    // Use this for initialization, called when the script is first accessed.
+    //--------------------------------------------------------------------------------------
     void Start()
     {
         m_sliMusicSlider.value = Global.m_fMusicVolume;
     }
 
-
-    // Update is called once per frame
+    //--------------------------------------------------------------------------------------
+    // Update is called once per frame.
+    //--------------------------------------------------------------------------------------
     void Update()
     {
         // The music's volume = the music slider.

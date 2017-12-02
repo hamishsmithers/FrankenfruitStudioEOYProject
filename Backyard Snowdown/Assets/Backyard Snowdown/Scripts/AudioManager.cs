@@ -21,49 +21,49 @@ public class AudioManager : MonoBehaviour
     public static AudioManager m_SharedInstance;
 
     //------------------------------------------------------------------------------------------
-    // Sound Effect for Dash
+    // Sound Effect for Dash.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Dash SFX")]
     [Tooltip("The sound effect for when the player dashes.")]
     public AudioClip m_sfxDash = null;
 
     //------------------------------------------------------------------------------------------
-    // Sound Effect for Snowman Jumping
+    // Sound Effect for Snowman Jumping.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Boing Snowman SFX")]
     [Tooltip("The boing sound effect for when the snowman jumps.")]
     public AudioClip m_sfxSnowManBoing = null;
 
     //------------------------------------------------------------------------------------------
-    // Sound Effect for Snowman Crumbling
+    // Sound Effect for Snowman Crumbling.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Crumble Snowman SFX")]
     [Tooltip("The crumbling sound effect for when the snowman dies.")]
     public AudioClip m_sfxSnowManCrumble = null;
 
     //------------------------------------------------------------------------------------------
-    // Sound Effect for Snowman being Summoned
+    // Sound Effect for Snowman being Summoned.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Summon Snowman SFX")]
     [Tooltip("The sound effect for when the snowman is summoned.")]
     public AudioClip m_sfxSnowManSummon = null;
 
     //------------------------------------------------------------------------------------------
-    // Audio Mixer for Sound Effects
+    // Audio Mixer for Sound Effects.
     //------------------------------------------------------------------------------------------
     [LabelOverride("SFX Mixer")]
     [Tooltip("The audio mixer titled SFX.")]
     public AudioMixerGroup m_audmixMixer = null;
 
     //------------------------------------------------------------------------------------------
-    // Sound Effect for Sounds
+    // Sound Effect for Sounds.
     //------------------------------------------------------------------------------------------
     [LabelOverride("Sound GameObject")]
     [Tooltip("Place the game object sound in here.")]
     public GameObject m_goSound = null;
 
     //------------------------------------------------------------------------------------------
-    // Sound Effect for Throw
+    // Sound Effect for Throw.
     //------------------------------------------------------------------------------------------
     [Tooltip("An array for the various throw sounds.")]
     public AudioClip[] m_sfxThrow = null;
@@ -96,35 +96,34 @@ public class AudioManager : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------
-    // Function that turns a float to decibels
+    // Function that turns a float to decibels.
     //
     //  Param: 
     //      linear:
-    //          The slider float value
+    //          The slider float value.
     //------------------------------------------------------------------------------------------
     private float LinearToDecibel(float linear)
     {
         // A float for decibels.
         float dB;
 
-        // if the parsed in float is not equal to 0, do this.
+        // If the parsed in float is not equal to 0, do this.
         if (linear != 0)
             dB = 20.0f * Mathf.Log10(linear);
-
-        // Otherwise set it to -144
+        // Otherwise set it to -144.
         else
             dB = -144.0f;
 
-        // return the decibel value.
+        // Return the decibel value.
         return dB;
     }
 
     //------------------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //------------------------------------------------------------------------------------------
     void Update()
     {
-        // Convert 0 to 1 volume to -80 to 20 db
+        // Convert 0 to 1 volume to -80 to 20 db.
         // float fSFXVolumeDB = (1 - Global.SFXVolume) * -20f;
         float fSFXVolumeDB = LinearToDecibel(Global.m_fSFXVolume);
         m_audmixMixer.audioMixer.SetFloat("SFXVolume", fSFXVolumeDB);

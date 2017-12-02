@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------
 // Filename:        PlayerAI.cs
 //
 // Description:     The player AI script controls the NavMesh functionality when
@@ -6,7 +6,7 @@
 //
 // Author:          Nathan Nette
 // Editors:         Nathan Nette
-//-------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Generic;
@@ -16,22 +16,22 @@ using UnityEngine.AI;
 public class PlayerAI : MonoBehaviour
 {
 
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // GameObject to store the Right wall point.
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Right Wall Point")]
     [Tooltip("Stores the GameObject for the Right wall point.")]
     public GameObject m_goRight = null;
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     // GameObject to store the Left wall point.
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
     [LabelOverride("Left Wall Point")]
     [Tooltip("Stores the GameObject for the Left wall point.")]
     public GameObject m_goLeft = null;
 
-    //-------------------------------------------------------------------------------
-    // Use this for initialization
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    // Use this for initialization, called even if the script is disabled.
+    //------------------------------------------------------------------------------------------
     void Awake()
     {
         // Deletes the dash component off the player.
@@ -62,23 +62,23 @@ public class PlayerAI : MonoBehaviour
 
     }
 
-    //-------------------------------------------------------------------------------
-    // Update is called once per frame
-    //-------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    // Update is called once per frame.
+    //------------------------------------------------------------------------------------------
     void Update()
     {
-        // Seeks Right
+        // Seeks Right.
         if (transform.position.x > 0)
         {
-            //go to right
+            // Go to right.
             NavMeshAgent agent = GetComponent<NavMeshAgent>();
             agent.destination = m_goRight.transform.position;
         }
 
-        // Seeks Left
+        // Seeks Left.
         if (transform.position.x < 0)
         {
-            //go to left
+            // Go to left.
             NavMeshAgent agent = GetComponent<NavMeshAgent>();
             agent.destination = m_goLeft.transform.position;
         }

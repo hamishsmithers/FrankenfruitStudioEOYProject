@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
     public XboxController m_Controller;
 
     //------------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //------------------------------------------------------------------------------------------
     void Start()
     {
@@ -39,7 +39,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //------------------------------------------------------------------------------------------
     void Update()
     {

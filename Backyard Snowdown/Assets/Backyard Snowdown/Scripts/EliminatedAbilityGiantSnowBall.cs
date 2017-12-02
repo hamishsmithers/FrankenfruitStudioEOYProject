@@ -18,6 +18,7 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
     // Snowball Copy
     //------------------------------------------------------------------------------------------
     private GameObject m_goCopy = null;
+
     //------------------------------------------------------------------------------------------
     // Player Reticle
     //------------------------------------------------------------------------------------------
@@ -31,7 +32,7 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
     //private bool bSummonable = false;
 
     //------------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //------------------------------------------------------------------------------------------
     void Start()
     {
@@ -40,7 +41,7 @@ public class EliminatedAbilityGiantSnowBall : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //------------------------------------------------------------------------------------------
     void Update()
     {

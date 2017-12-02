@@ -29,7 +29,7 @@ public class PodiumPosition : MonoBehaviour
     public GameObject[] m_ArrPodium;
 
     //------------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //------------------------------------------------------------------------------------------
     void Start()
     {
@@ -55,7 +55,7 @@ public class PodiumPosition : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //------------------------------------------------------------------------------------------
     void Update()
     {

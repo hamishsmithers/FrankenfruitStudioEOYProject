@@ -1,4 +1,4 @@
-﻿//-------------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------
 // Filename:        GiantSnowBall.cs
 //
 // Description:     GiantSnowBall is used to apply knockback to players.
@@ -6,7 +6,7 @@
 //
 // Author:          Mitchell Cattini-Schultz
 // Editors:         Mitchell Cattini-Schultz
-//-------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Generic;
@@ -47,7 +47,7 @@ public class GiantSnowBall : MonoBehaviour
 
 
     //--------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //--------------------------------------------------------------------------------------
     void Start()
     {
@@ -58,7 +58,7 @@ public class GiantSnowBall : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //--------------------------------------------------------------------------------------
     void Update()
     {
@@ -74,15 +74,15 @@ public class GiantSnowBall : MonoBehaviour
     {
         if (other.gameObject.tag == "SnowmanKnockBack")
         {
-            // setting the emit parameters for the particle system
+            // Setting the emit parameters for the particle system.
             ParticleSystem.EmitParams myParams = new ParticleSystem.EmitParams();
             myParams.startLifetime = 1.0f;
 
             Knockback();
 
-            // play the particle effect
+            // Play the particle effect.
             m_psSnowflake.Play();
-            // play the particle effect
+            // Play the particle effect.
             m_psCloud.Play();
 
         }
@@ -97,25 +97,25 @@ public class GiantSnowBall : MonoBehaviour
     //--------------------------------------------------------------------------------------
     void Knockback()
     {
-        Vector3 hit = transform.position; //ignore these numbers, get position from collision impact
-        // bitshifting with the or operator the 2 layers
+        Vector3 hit = transform.position; // Ignore these numbers, get position from collision impact,
+        // Bitshifting with the or operator the 2 layers,
         int playerLayer = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("PlayerDash");
-        // checking if the players are affected
+        // Checking if the players are affected.
         Collider[] players = Physics.OverlapSphere(hit, m_fAreaOfEffect, playerLayer);
 
         for (int i = 0; i < players.Length; ++i)
         {
             Rigidbody rb = players[i].gameObject.GetComponent<Rigidbody>();
-            // stopping the movement on the rigidbody
+            // Stopping the movement on the rigidbody.
             rb.velocity = Vector3.zero;
-            // pushing players back with explosive force
+            // Pushing players back with explosive force.
             rb.AddExplosionForce(m_fKnockbackForce, hit, m_fAreaOfEffect, 1.0f, ForceMode.Impulse);
-            // changing some bools in the player to restrict movement, dashing and throwing
+            // Changing some bools in the player to restrict movement, dashing and throwing.
             Player scpPlayer = players[i].GetComponent<Player>();
             scpPlayer.m_bHitByGiantSnowBall = true;
             scpPlayer.GetComponent<Dash>().m_bDashing = false;
             scpPlayer.GetComponent<Dash>().m_bCoolDown = false;
-            // if the player was dashing cut that short
+            // If the player was dashing cut that short.
             scpPlayer.GetComponent<Dash>().m_fDashTimer = scpPlayer.GetComponent<Dash>().m_fDashDuration;
             scpPlayer.m_goPlayerModel.GetComponent<Animator>().SetBool("dashing", false);
         }
