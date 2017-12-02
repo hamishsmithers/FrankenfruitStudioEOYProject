@@ -26,8 +26,6 @@ public class SnowMan : MonoBehaviour
 
     public bool m_bASnowManExists;
 
-
-
     //[HideInInspector]
     //public GameObject m_GoPlayer = null;
     //private int nCaseSwitch = 1;

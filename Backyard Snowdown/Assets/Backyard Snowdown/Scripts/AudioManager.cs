@@ -25,28 +25,28 @@ public class AudioManager : MonoBehaviour
     //------------------------------------------------------------------------------------------
     [LabelOverride("Dash SFX")]
     [Tooltip("The sound effect for when the player dashes.")]
-    public AudioClip sfxDash = null;
+    public AudioClip m_sfxDash = null;
 
     //------------------------------------------------------------------------------------------
     // Sound Effect for Snowman Jumping
     //------------------------------------------------------------------------------------------
     [LabelOverride("Boing Snowman SFX")]
     [Tooltip("The boing sound effect for when the snowman jumps.")]
-    public AudioClip sfxSnowManBoing = null;
+    public AudioClip m_sfxSnowManBoing = null;
 
     //------------------------------------------------------------------------------------------
     // Sound Effect for Snowman Crumbling
     //------------------------------------------------------------------------------------------
     [LabelOverride("Crumble Snowman SFX")]
     [Tooltip("The crumbling sound effect for when the snowman dies.")]
-    public AudioClip sfxSnowManCrumble = null;
+    public AudioClip m_sfxSnowManCrumble = null;
 
     //------------------------------------------------------------------------------------------
     // Sound Effect for Snowman being Summoned
     //------------------------------------------------------------------------------------------
     [LabelOverride("Summon Snowman SFX")]
     [Tooltip("The sound effect for when the snowman is summoned.")]
-    public AudioClip sfxSnowManSummon = null;
+    public AudioClip m_sfxSnowManSummon = null;
 
     //------------------------------------------------------------------------------------------
     // Audio Mixer for Sound Effects
@@ -60,28 +60,28 @@ public class AudioManager : MonoBehaviour
     //------------------------------------------------------------------------------------------
     [LabelOverride("Sound GameObject")]
     [Tooltip("Place the game object sound in here.")]
-    public GameObject goSound = null;
+    public GameObject m_goSound = null;
 
     //------------------------------------------------------------------------------------------
     // Sound Effect for Throw
     //------------------------------------------------------------------------------------------
     [Tooltip("An array for the various throw sounds.")]
-    public AudioClip[] sfxThrow = null;
+    public AudioClip[] m_sfxThrow = null;
 
     //------------------------------------------------------------------------------------------
     // Array of AudioClips storing the varied hit sounds.
     //------------------------------------------------------------------------------------------
     [Tooltip("An array for the various hit sounds.")]
-    public AudioClip[] sfxHitArray = null;
+    public AudioClip[] m_sfxHitArray = null;
 
     //------------------------------------------------------------------------------------------
     // Array of AudioClips storing the varied hurt sounds.
     //------------------------------------------------------------------------------------------
     [Tooltip("An array for the various hurt sounds.")]
-    public AudioClip[] sfxHurtArray = null;
+    public AudioClip[] m_sfxHurtArray = null;
 
     //------------------------------------------------------------------------------------------
-    // Awake is a Unity Function
+    // Use this for initialization, called even if the script is disabled.
     //------------------------------------------------------------------------------------------
     void Awake()
     {
@@ -89,7 +89,7 @@ public class AudioManager : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //------------------------------------------------------------------------------------------
     void Start()
     {
@@ -126,7 +126,7 @@ public class AudioManager : MonoBehaviour
     {
         // Convert 0 to 1 volume to -80 to 20 db
         // float fSFXVolumeDB = (1 - Global.SFXVolume) * -20f;
-        float fSFXVolumeDB = LinearToDecibel(Global.SFXVolume);
+        float fSFXVolumeDB = LinearToDecibel(Global.m_fSFXVolume);
         m_audmixMixer.audioMixer.SetFloat("SFXVolume", fSFXVolumeDB);
     }
 
@@ -136,13 +136,13 @@ public class AudioManager : MonoBehaviour
     public void PlayDashAudio()
     {
         // Instantiates the sound GameObject.
-        GameObject sound = Instantiate(goSound);
+        GameObject sound = Instantiate(m_goSound);
         AudioSource sfxSource = sound.GetComponent<AudioSource>();
 
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to the dash sound.
-        sfxSource.clip = sfxDash;
+        sfxSource.clip = m_sfxDash;
         // Play the current clip.
         sfxSource.Play();
         // This varies the pitch randomly to emulate different clips.
@@ -155,15 +155,15 @@ public class AudioManager : MonoBehaviour
     public void PlayThrowAudio()
     {
         // Instantiates the sound GameObject.
-        GameObject sound = Instantiate(goSound);
+        GameObject sound = Instantiate(m_goSound);
         AudioSource sfxSource = sound.GetComponent<AudioSource>();
 
         // Creates an int that is randomised between 0 and the length of the throw array.
-        int Selector = Random.Range(0, sfxThrow.Length);
+        int Selector = Random.Range(0, m_sfxThrow.Length);
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to a randomized index in the throw array.
-        sfxSource.clip = sfxThrow[Selector];
+        sfxSource.clip = m_sfxThrow[Selector];
         // Play the current clip.
         sfxSource.Play();
         // This varies the pitch randomly to emulate different clips.
@@ -176,13 +176,13 @@ public class AudioManager : MonoBehaviour
     public void PlaySnowmanBoingAudio()
     {
         // Instantiates the sound GameObject.
-        GameObject sound = Instantiate(goSound);
+        GameObject sound = Instantiate(m_goSound);
         AudioSource sfxSource = sound.GetComponent<AudioSource>();
 
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to the snowman boing sound.
-        sfxSource.clip = sfxSnowManBoing;
+        sfxSource.clip = m_sfxSnowManBoing;
         // Play the current clip.
         sfxSource.Play();
         // This varies the pitch randomly to emulate different clips.
@@ -195,15 +195,15 @@ public class AudioManager : MonoBehaviour
     public void PlaySnowBallHit()
     {
         // Instantiates the sound GameObject.
-        GameObject sound = Instantiate(goSound);
+        GameObject sound = Instantiate(m_goSound);
         AudioSource sfxSource = sound.GetComponent<AudioSource>();
 
         // Creates an int that is randomised between 0 and the length of the hit array.
-        int Selector = Random.Range(0, sfxHitArray.Length);
+        int Selector = Random.Range(0, m_sfxHitArray.Length);
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to a randomized index in the hit array.
-        sfxSource.clip = sfxHitArray[Selector];
+        sfxSource.clip = m_sfxHitArray[Selector];
         // Play the current clip.
         sfxSource.Play();
         // This varies the pitch randomly to emulate different clips.
@@ -216,15 +216,15 @@ public class AudioManager : MonoBehaviour
     public void PlayHurtAudio()
     {
         // Instantiates the sound GameObject.
-        GameObject sound = Instantiate(goSound);
+        GameObject sound = Instantiate(m_goSound);
         AudioSource sfxSource = sound.GetComponent<AudioSource>();
 
         // Creates an int that is randomised between 0 and the length of the hurt array.
-        int Selector = Random.Range(0, sfxHurtArray.Length);
+        int Selector = Random.Range(0, m_sfxHurtArray.Length);
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to a randomized index in the hurt array.
-        sfxSource.clip = sfxHurtArray[Selector];
+        sfxSource.clip = m_sfxHurtArray[Selector];
         // Play the current clip.
         sfxSource.Play();
         // This varies the pitch randomly to emulate different clips.
@@ -237,13 +237,13 @@ public class AudioManager : MonoBehaviour
     public void PlaySnowmanCrumble()
     {
         // Instantiates the sound GameObject.
-        GameObject sound = Instantiate(goSound);
+        GameObject sound = Instantiate(m_goSound);
         AudioSource sfxSource = sound.GetComponent<AudioSource>();
 
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to the snowman crumble sound effect.
-        sfxSource.clip = sfxSnowManCrumble;
+        sfxSource.clip = m_sfxSnowManCrumble;
         // Play the current clip.
         sfxSource.Play();
         // This varies the pitch randomly to emulate different clips.
@@ -256,13 +256,13 @@ public class AudioManager : MonoBehaviour
     public void PlaySnowmanSummon()
     {
         // Instantiates the sound GameObject.
-        GameObject sound = Instantiate(goSound);
+        GameObject sound = Instantiate(m_goSound);
         AudioSource sfxSource = sound.GetComponent<AudioSource>();
 
         // The sound effect source's mixer group is now the same as the m_audMixMixer.
         sfxSource.outputAudioMixerGroup = m_audmixMixer;
         // Sets the source's clip to the snowman summon sound effect.
-        sfxSource.clip = sfxSnowManSummon;
+        sfxSource.clip = m_sfxSnowManSummon;
         // Play the current clip.
         sfxSource.Play();
         // This varies the pitch randomly to emulate different clips.

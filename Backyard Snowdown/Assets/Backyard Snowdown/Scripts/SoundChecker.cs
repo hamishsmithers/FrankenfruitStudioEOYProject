@@ -17,7 +17,7 @@ public class SoundChecker : MonoBehaviour
 {
 
     //-------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization.
     //-------------------------------------------------------------------------------
     void Start()
     {
@@ -25,7 +25,7 @@ public class SoundChecker : MonoBehaviour
     }
 
     //-------------------------------------------------------------------------------
-    // Update is called once per frame
+    // Update is called once per frame.
     //-------------------------------------------------------------------------------
     void Update()
     {

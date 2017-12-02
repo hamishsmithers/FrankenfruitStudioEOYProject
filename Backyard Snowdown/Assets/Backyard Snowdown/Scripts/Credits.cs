@@ -23,7 +23,7 @@ public class Credits : MonoBehaviour {
     //------------------------------------------------------------------------------------------
     [LabelOverride("Credits Music")]
     [Tooltip("The audio source for the credits music.")]
-    public AudioSource CreditsMusic = null;
+    public AudioSource m_CreditsMusic = null;
 
     //------------------------------------------------------------------------------------------
     // Use this for initialization
@@ -31,7 +31,7 @@ public class Credits : MonoBehaviour {
     void Start ()
     {
         // Setting the music volume to the music volume singleton.
-        CreditsMusic.volume = Global.MusicVolume;
+        m_CreditsMusic.volume = Global.m_fMusicVolume;
     }
 
     //------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ public class Credits : MonoBehaviour {
         // The buttons that, when pressed, take you back to the menu.
         if (Input.GetKey(KeyCode.Escape) || XCI.GetButtonDown(XboxButton.Start, controller) || XCI.GetButtonDown(XboxButton.A, controller))
         {
-            // Load the Main Menu 
+            // Load the Main Menu.
             SceneManager.LoadScene("Main Menu");
         }
     }

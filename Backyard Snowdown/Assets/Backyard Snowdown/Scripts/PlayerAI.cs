@@ -21,13 +21,13 @@ public class PlayerAI : MonoBehaviour
     //-------------------------------------------------------------------------------
     [LabelOverride("Right Wall Point")]
     [Tooltip("Stores the GameObject for the Right wall point.")]
-    public GameObject goRight = null;
+    public GameObject m_goRight = null;
     //-------------------------------------------------------------------------------
     // GameObject to store the Left wall point.
     //-------------------------------------------------------------------------------
     [LabelOverride("Left Wall Point")]
     [Tooltip("Stores the GameObject for the Left wall point.")]
-    public GameObject goLeft = null;
+    public GameObject m_goLeft = null;
 
     //-------------------------------------------------------------------------------
     // Use this for initialization
@@ -54,8 +54,8 @@ public class PlayerAI : MonoBehaviour
         gameObject.AddComponent<NavMeshAgent>();
 
         // Seeks the closest wall point to walk to when out of health.
-        goRight = GameObject.Find("Right Wall Point");
-        goLeft = GameObject.Find("Left Wall Point");
+        m_goRight = GameObject.Find("Right Wall Point");
+        m_goLeft = GameObject.Find("Left Wall Point");
 
         // Sets the rigidbody to kinematic to prevent any physics.
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -72,7 +72,7 @@ public class PlayerAI : MonoBehaviour
         {
             //go to right
             NavMeshAgent agent = GetComponent<NavMeshAgent>();
-            agent.destination = goRight.transform.position;
+            agent.destination = m_goRight.transform.position;
         }
 
         // Seeks Left
@@ -80,7 +80,7 @@ public class PlayerAI : MonoBehaviour
         {
             //go to left
             NavMeshAgent agent = GetComponent<NavMeshAgent>();
-            agent.destination = goLeft.transform.position;
+            agent.destination = m_goLeft.transform.position;
         }
     }
 

@@ -19,14 +19,14 @@ public class MusicManager : MonoBehaviour {
     // Array to store all of the different songs for the background music.
     //-------------------------------------------------------------------------------
     [Tooltip("The array hold all of the songs to be randomly selected from.")]
-    public AudioClip[] Music;
+    public AudioClip[] m_audclipArrMusic;
 
     //-------------------------------------------------------------------------------
     // Music Source
     //-------------------------------------------------------------------------------
     [LabelOverride("Music Source")]
     [Tooltip("The audio source that the music will be played from.")]
-    public AudioSource MusicSource;
+    public AudioSource m_audMusicSource;
 
     //-------------------------------------------------------------------------------
     // Audio Mixer for Sound Effects
@@ -41,16 +41,16 @@ public class MusicManager : MonoBehaviour {
     void Start ()
     {
         // Allocates the AudioSource class into the MusicSource.
-        MusicSource = gameObject.GetComponent<AudioSource>();
+        m_audMusicSource = gameObject.GetComponent<AudioSource>();
 
         // An int that randomly selects from the Music array.
-        int Selector = Random.Range(0, Music.Length);
+        int Selector = Random.Range(0, m_audclipArrMusic.Length);
 
         // Sets the music source's clip to the randomly selected clip.
-        MusicSource.clip = Music[Selector];
+        m_audMusicSource.clip = m_audclipArrMusic[Selector];
 
         // Play the current clip in the music source.
-        MusicSource.Play();
+        m_audMusicSource.Play();
 	}
 
     //-------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ public class MusicManager : MonoBehaviour {
     void Update ()
     {
         //MusicSource.volume = Global.MusicVolume;
-        float fMusicVolumeDB = LinearToDecibel(Global.MusicVolume);
+        float fMusicVolumeDB = LinearToDecibel(Global.m_fMusicVolume);
         m_audmixMixer.audioMixer.SetFloat("MusicVolume", fMusicVolumeDB);
     }
 }

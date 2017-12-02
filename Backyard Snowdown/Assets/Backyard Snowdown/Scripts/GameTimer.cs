@@ -20,7 +20,7 @@ public class GameTimer : MonoBehaviour
 
 	private int m_nSeconds = 0;
 	private int m_nMinutes = 0;
-	private float initialTime;
+	private float m_fInitialTime;
     
     // Next update in second
     //private int nextUpdate = 1;

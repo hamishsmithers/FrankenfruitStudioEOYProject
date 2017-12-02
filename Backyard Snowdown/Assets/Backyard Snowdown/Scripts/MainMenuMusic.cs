@@ -24,14 +24,14 @@ public class MainMenuMusic : MonoBehaviour
     //-------------------------------------------------------------------------------
     [LabelOverride("Music Volume Slider")]
     [Tooltip("Stores the slider for the music volume.")]
-    public Slider sliMusicSlider = null;
+    public Slider m_sliMusicSlider = null;
 
     //-------------------------------------------------------------------------------
     // Music Audio Source
     //-------------------------------------------------------------------------------
     [LabelOverride("Music Audio Source")]
     [Tooltip("Stores the Audio source for the music.")]
-    public AudioSource MusicAudioSource = null;
+    public AudioSource m_audMusicAudioSource = null;
 
     //-------------------------------------------------------------------------------
     // Audio Mixer for Music
@@ -69,7 +69,7 @@ public class MainMenuMusic : MonoBehaviour
     //-------------------------------------------------------------------------------
     void Start()
     {
-        sliMusicSlider.value = Global.MusicVolume;
+        m_sliMusicSlider.value = Global.m_fMusicVolume;
     }
 
 
@@ -77,9 +77,9 @@ public class MainMenuMusic : MonoBehaviour
     void Update()
     {
         // The music's volume = the music slider.
-        Global.MusicVolume = sliMusicSlider.value;
+        Global.m_fMusicVolume = m_sliMusicSlider.value;
         // Converting the float to decibels.
-        float fMusicVolumeDB = LinearToDecibel(Global.MusicVolume);
+        float fMusicVolumeDB = LinearToDecibel(Global.m_fMusicVolume);
         // Set the float of the music volume to the db value.
         m_audmixMixer.audioMixer.SetFloat("MusicVolume", fMusicVolumeDB);
     }

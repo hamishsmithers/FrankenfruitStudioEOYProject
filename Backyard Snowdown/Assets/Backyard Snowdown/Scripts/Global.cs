@@ -25,8 +25,8 @@ public class Global : MonoBehaviour
     // the volume of the game through sliders and maintaining the same volume from what is
     // set from the options menu.
     //------------------------------------------------------------------------------------------
-    public static float MusicVolume = 0.5f;
-    public static float SFXVolume = 0.5f;
+    public static float m_fMusicVolume = 0.5f;
+    public static float m_fSFXVolume = 0.5f;
 
     public XboxController controller;
 

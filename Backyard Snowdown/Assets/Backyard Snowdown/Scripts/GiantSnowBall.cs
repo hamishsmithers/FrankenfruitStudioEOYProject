@@ -42,8 +42,8 @@ public class GiantSnowBall : MonoBehaviour
     [Tooltip("Drag and drop the respective particle system onto here.")]
     public GameObject m_goImpactParticlesCloud;
 
-    private ParticleSystem psCloud;
-    private ParticleSystem psSnowflake;
+    private ParticleSystem m_psCloud;
+    private ParticleSystem m_psSnowflake;
 
 
     //--------------------------------------------------------------------------------------
@@ -52,9 +52,9 @@ public class GiantSnowBall : MonoBehaviour
     void Start()
     {
         // assigning the Impact particle system to the variable psSnowflake
-        psSnowflake = m_goImpactParticles.GetComponent<ParticleSystem>();
+        m_psSnowflake = m_goImpactParticles.GetComponent<ParticleSystem>();
         // assigning the Impact particle system to the variable psCloud
-        psCloud = m_goImpactParticlesCloud.GetComponent<ParticleSystem>();
+        m_psCloud = m_goImpactParticlesCloud.GetComponent<ParticleSystem>();
     }
 
     //--------------------------------------------------------------------------------------
@@ -81,9 +81,9 @@ public class GiantSnowBall : MonoBehaviour
             Knockback();
 
             // play the particle effect
-            psSnowflake.Play();
+            m_psSnowflake.Play();
             // play the particle effect
-            psCloud.Play();
+            m_psCloud.Play();
 
         }
     }

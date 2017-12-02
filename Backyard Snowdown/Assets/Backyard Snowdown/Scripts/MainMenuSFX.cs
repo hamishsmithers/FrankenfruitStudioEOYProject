@@ -23,35 +23,35 @@ public class MainMenuSFX : MonoBehaviour {
     //-------------------------------------------------------------------------------
     [LabelOverride("SFX Volume Slider")]
     [Tooltip("Stores the slider for the sfx volume.")]
-    public Slider sliSFXSlider = null;
+    public Slider m_sliSFXSlider = null;
 
     //-------------------------------------------------------------------------------
     // SFX Audio Source
     //-------------------------------------------------------------------------------
     [LabelOverride("SFX Audio Source")]
     [Tooltip("Stores the audio source for the sfx.")]
-    public AudioSource SFXAudioSource = null;
+    public AudioSource m_sfxAudioSource = null;
 
     //-------------------------------------------------------------------------------
     // Button Selected
     //-------------------------------------------------------------------------------
     [LabelOverride("Button Selected")]
     [Tooltip("Stores the audio clip for when a button is selected.")]
-    public AudioClip buttonSelected = null;
+    public AudioClip m_audclipButtonSelected = null;
 
     //-------------------------------------------------------------------------------
     // Button Clicked
     //-------------------------------------------------------------------------------
     [LabelOverride("Button Clicked")]
     [Tooltip("Stores the audio clip for when a button is clicked.")]
-    public AudioClip buttonClicked = null;
+    public AudioClip m_audclipButtonClicked = null;
 
     //-------------------------------------------------------------------------------
     // Button Back
     //-------------------------------------------------------------------------------
     [LabelOverride("Button Back")]
     [Tooltip("Stores the audio clip for when a back button is clicked.")]
-    public AudioClip buttonBack = null;
+    public AudioClip m_audclipButtonBack = null;
 
 
     //-------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ public class MainMenuSFX : MonoBehaviour {
     void Start()
     {
         // Sets the initial value of the slider to be the SFXVolume value.
-        sliSFXSlider.value = Global.SFXVolume;
+        m_sliSFXSlider.value = Global.m_fSFXVolume;
     }
 
     //-------------------------------------------------------------------------------
@@ -101,9 +101,9 @@ public class MainMenuSFX : MonoBehaviour {
     void Update()
     {
         // The sfx's volume = the sfx slider.
-        Global.SFXVolume = sliSFXSlider.value;
+        Global.m_fSFXVolume = m_sliSFXSlider.value;
         // Converting the float to decibels.
-        float fSFXVolumeDB = LinearToDecibel(Global.SFXVolume);
+        float fSFXVolumeDB = LinearToDecibel(Global.m_fSFXVolume);
         // Set the float of the SFX volume to the db value.
         m_audmixMixer.audioMixer.SetFloat("SFXVolume", fSFXVolumeDB);
         
@@ -115,8 +115,8 @@ public class MainMenuSFX : MonoBehaviour {
     public void OnButtonSelect()
     {
         //change audiosource clip to select and play.
-        SFXAudioSource.clip = buttonSelected;
-        SFXAudioSource.Play();
+        m_sfxAudioSource.clip = m_audclipButtonSelected;
+        m_sfxAudioSource.Play();
     }
 
     //-------------------------------------------------------------------------------
@@ -126,8 +126,8 @@ public class MainMenuSFX : MonoBehaviour {
     public void OnButtonClick()
     {
         //change audiosource clip to select and play.
-        SFXAudioSource.clip = buttonClicked;
-        SFXAudioSource.Play();
+        m_sfxAudioSource.clip = m_audclipButtonClicked;
+        m_sfxAudioSource.Play();
     }
 
     //-------------------------------------------------------------------------------
@@ -137,7 +137,7 @@ public class MainMenuSFX : MonoBehaviour {
     public void OnButtonBack()
     {
         //change audiosource clip to select and play.
-        SFXAudioSource.clip = buttonBack;
-        SFXAudioSource.Play();
+        m_sfxAudioSource.clip = m_audclipButtonBack;
+        m_sfxAudioSource.Play();
     }
 }

@@ -45,7 +45,7 @@ public class PodiumPosition : MonoBehaviour
             m_ArrPlayers[i].transform.parent = m_ArrPodium[3].transform;
             m_ArrPlayers[i].transform.localPosition = Vector3.zero;
         }
-        
+
         for (int i = 0; i < ScoreManager.GetPlayerCount(); i++)
         {
             int nPlayer = ScoreManager.GetPodiumRank(i);

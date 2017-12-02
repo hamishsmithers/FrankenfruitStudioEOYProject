@@ -48,7 +48,7 @@ public class ChargeSlider : MonoBehaviour {
     //------------------------------------------------------------------------------------------
     // Creating a reference for the player script.
     //------------------------------------------------------------------------------------------
-    private Player scpPlayer;
+    private Player m_scpPlayer;
 
     //------------------------------------------------------------------------------------------
     // A float to store the maximum charge.
@@ -68,10 +68,11 @@ public class ChargeSlider : MonoBehaviour {
     //------------------------------------------------------------------------------------------
     void Start ()
     {
-        // Allocates the player class into the script to get values and functions in Player script
-        scpPlayer = gameObject.GetComponent<Player>();
+        // Allocates the player class into the script to get values and functions in Player 
+        // script.
+        m_scpPlayer = gameObject.GetComponent<Player>();
         // Sets the max charge to the max charge from the player script.
-        m_fMaxCharge = scpPlayer.m_fMaxCharge;
+        m_fMaxCharge = m_scpPlayer.m_fMaxCharge;
     }
 
     //------------------------------------------------------------------------------------------
@@ -84,10 +85,10 @@ public class ChargeSlider : MonoBehaviour {
             return;
 
         // Sets the slider fill amount to the charge timer divided by max charge.
-        m_imgForeground.fillAmount = scpPlayer.m_fChargeTimer / m_fMaxCharge;
+        m_imgForeground.fillAmount = m_scpPlayer.m_fChargeTimer / m_fMaxCharge;
         
         // If the player has a ball, set the player circle to full ring sprite.
-        if(scpPlayer.m_bHasBall)
+        if(m_scpPlayer.m_bHasBall)
         {
             m_imgBackground.sprite = m_sprFullRing;
             m_imgForeground.sprite = m_sprFullRing;

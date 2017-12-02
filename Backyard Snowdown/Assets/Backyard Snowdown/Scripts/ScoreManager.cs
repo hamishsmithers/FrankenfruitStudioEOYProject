@@ -16,15 +16,16 @@ using XboxCtrlrInput;       // Be sure to include this if you want an object to 
 
 public class ScoreManager : MonoBehaviour
 {
-
     // The list that players get added to to get the order of them dying.
     static List<int> m_LstPlayerRank = new List<int>();
 
     // The variable to be checked whether there is only one player left alive.
     static int m_nDeathCount = 0;
+
     // The rounds won counter was for a function that didn't get implemented due to scope.
     // It was meant to be counting how many rounds a player had won and the first to 3 would win.
     static int m_nRoundsWonCount = 0;
+
     // XInput
     public XboxController m_Controller;
 
@@ -47,6 +48,7 @@ public class ScoreManager : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("EndRound");
         }
+        
     }
 
     //------------------------------------------------------------------------------------------

@@ -18,6 +18,10 @@ using XboxCtrlrInput;		// Be sure to include this if you want an object to have 
 
 public class Dash : MonoBehaviour
 {
+    //--------------------------------------------------------------------------------------
+    // XInput float that defines where the trigger is pressed down to. 1.21 is not pressed 
+    // and 0 is fully pressed.
+    //--------------------------------------------------------------------------------------
     private const float m_MaxTriggerHeight = 1.21f;
 
     //--------------------------------------------------------------------------------------

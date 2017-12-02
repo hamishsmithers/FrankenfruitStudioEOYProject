@@ -21,28 +21,28 @@ public class SplashScreen : MonoBehaviour
     //-------------------------------------------------------------------------------
     // The splashscreen movie.
     //-------------------------------------------------------------------------------
-    public MovieTexture movie;
+    public MovieTexture m_movtexMovie;
 
     //-------------------------------------------------------------------------------
     //Time until loading main menu.
     //-------------------------------------------------------------------------------
-    public float timeToDelay;
+    public float m_fTimeToDelay;
 
     //-------------------------------------------------------------------------------
     // An audiosource to play the sound effect of the splat.
     //-------------------------------------------------------------------------------
-    private AudioSource audSource;
+    private AudioSource m_audSource;
 
     //-------------------------------------------------------------------------------
     // Use this for initialization
     //-------------------------------------------------------------------------------
     void Start()
     {
-        GetComponent<RawImage>().texture = movie as MovieTexture;
-        audSource = GetComponent<AudioSource>();
-        audSource.clip = movie.audioClip;
-        movie.Play();
-        audSource.Play();
+        GetComponent<RawImage>().texture = m_movtexMovie as MovieTexture;
+        m_audSource = GetComponent<AudioSource>();
+        m_audSource.clip = m_movtexMovie.audioClip;
+        m_movtexMovie.Play();
+        m_audSource.Play();
     }
 
     //-------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ public class SplashScreen : MonoBehaviour
     void Update()
     {
         // If the splashscreen is over, change to main menu scene.
-        if (Time.time > timeToDelay)
+        if (Time.time > m_fTimeToDelay)
         {
             SceneManager.LoadScene("Main Menu");
         }

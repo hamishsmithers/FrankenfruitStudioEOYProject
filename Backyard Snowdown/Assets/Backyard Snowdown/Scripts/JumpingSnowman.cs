@@ -92,10 +92,10 @@ public class JumpingSnowman : MonoBehaviour
     [Tooltip("Drag and drop the respective particle system onto here.")]
     public GameObject m_goSpawnParticles;
 
-    private ParticleSystem psSpawn;
+    private ParticleSystem m_psSpawn;
 
-    private bool bSpawnParticleEffectPlayed = false;
-    private bool bChooseNewSpawn = true;
+    private bool m_bSpawnParticleEffectPlayed = false;
+    private bool m_bChooseNewSpawn = true;
     private bool m_bOnce = true;
     private bool m_bStart = false;
 
@@ -118,12 +118,12 @@ public class JumpingSnowman : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------
-    // Use this for initialization
+    // Use this for initialization, called when the script is first accessed.
     //--------------------------------------------------------------------------------------
     void Start()
     {
         // getting and assigning the particle system
-        psSpawn = m_goSpawnParticles.GetComponent<ParticleSystem>();
+        m_psSpawn = m_goSpawnParticles.GetComponent<ParticleSystem>();
 
         // getting and assigning the collider and mesh renderer
         m_Collider = gameObject.GetComponent<Collider>();
@@ -152,8 +152,8 @@ public class JumpingSnowman : MonoBehaviour
             m_bBoingSound = true;
             m_fJumpingTimer = 0.0f;
             m_nHealthPoints = 2;
-            bSpawnParticleEffectPlayed = false;
-            bChooseNewSpawn = true;
+            m_bSpawnParticleEffectPlayed = false;
+            m_bChooseNewSpawn = true;
             m_bOnce = true;
 
             m_bStart = false;
@@ -166,20 +166,20 @@ public class JumpingSnowman : MonoBehaviour
             {
                 m_fSpawnCount += Time.deltaTime;
 
-                if (bChooseNewSpawn)
+                if (m_bChooseNewSpawn)
                 {
                     // move the snowman to the next location
                     transform.position = FindValidSpawnPos();
-                    bChooseNewSpawn = false;
+                    m_bChooseNewSpawn = false;
                 }
             }
 
-            if (!bSpawnParticleEffectPlayed && m_fSpawnCount > (m_fSpawnTime - 1.0f))
+            if (!m_bSpawnParticleEffectPlayed && m_fSpawnCount > (m_fSpawnTime - 1.0f))
             {
                 // particle system play
-                psSpawn.Play();
+                m_psSpawn.Play();
 
-                bSpawnParticleEffectPlayed = true;
+                m_bSpawnParticleEffectPlayed = true;
             }
             else if (m_fSpawnCount > m_fSpawnTime)
             {
@@ -187,7 +187,7 @@ public class JumpingSnowman : MonoBehaviour
                 m_Collider.enabled = true;
                 m_MeshRenderer.enabled = true;
                 m_bDead = false;
-                bChooseNewSpawn = true;
+                m_bChooseNewSpawn = true;
                 m_fSpawnTime = m_fDeathTime;
             }
 

@@ -16,7 +16,6 @@ using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour
 {
-
     //-------------------------------------------------------------------------------
     // GameObject for the main menu buttons.
     //-------------------------------------------------------------------------------
@@ -51,7 +50,7 @@ public class MainMenuButtons : MonoBehaviour
     //-------------------------------------------------------------------------------
     [LabelOverride("Scenes Array")]
     [Tooltip("Write the names of each main scene in the array boxes, it will randomize loading between the scenes in the array.")]
-    public string[] Scenes;
+    public string[] m_strArrScenes;
 
     //-------------------------------------------------------------------------------
     // Checking whether the play button is pressed.
@@ -83,9 +82,9 @@ public class MainMenuButtons : MonoBehaviour
     private string RandomizeLevel()
     {
         // Creates an int to store the selected scene number in the array.
-        int Selector = Random.Range(0, Scenes.Length);
+        int Selector = Random.Range(0, m_strArrScenes.Length);
         // Converts the name that's selected to a string.
-        string strSceneToLoad = Scenes[Selector].ToString();
+        string strSceneToLoad = m_strArrScenes[Selector].ToString();
         // Returns the name of the scene to be loaded.
         return strSceneToLoad;
     }

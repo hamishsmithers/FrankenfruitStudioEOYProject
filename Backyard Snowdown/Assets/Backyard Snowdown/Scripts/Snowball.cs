@@ -53,7 +53,7 @@ public class Snowball : MonoBehaviour
     private ParticleSystem m_ParticleSparks;
 
     //private Color mainColor = Color.white;
-    private MeshRenderer mr = null;
+    private MeshRenderer m_mr = null;
 
     //-------------------------------------------------------------------------------
     // Use this for initialization
@@ -62,7 +62,7 @@ public class Snowball : MonoBehaviour
     {
         m_rb = GetComponent<Rigidbody>();
 
-        mr = GetComponent<MeshRenderer>();
+        m_mr = GetComponent<MeshRenderer>();
         // Grabs the particle system which is on the first child
         m_ParticleSparks = transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
     }
@@ -77,14 +77,14 @@ public class Snowball : MonoBehaviour
         if (m_bTooFast)
         {
             // red material
-            mr.material = m_materials[1];
+            m_mr.material = m_materials[1];
             // plays the particle system sparks
             m_ParticleSparks.Play();
         }
         else
         {
             // default material
-            mr.material = m_materials[0];
+            m_mr.material = m_materials[0];
             // stops the particle system sparks
             m_ParticleSparks.Stop();
         }

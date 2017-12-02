@@ -203,9 +203,9 @@ public class Player : MonoBehaviour
     private bool m_bCharging = false;
     private float m_fIsChargedTimer = 0.0f;
     private float m_fIsChargedTimerLimit = 2.0f;
-    private bool bDuringMaxCharge = false;
+    private bool m_bDuringMaxCharge = false;
     private bool m_bReleased = false;
-    private bool bAimOverride = false;
+    private bool m_bAimOverride = false;
 
     //------------------------------------------------------------------------------------------
     // Iframe Timer
@@ -563,12 +563,12 @@ public class Player : MonoBehaviour
         {
             // if the player is not touching the right stick = false, otherwise = true
             if (XCI.GetAxisRaw(XboxAxis.RightStickX, controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightStickY, controller) != 0)
-                bAimOverride = true;
+                m_bAimOverride = true;
             else
-                bAimOverride = false;
+                m_bAimOverride = false;
 
             // when the player uses the right analog stick aswell
-            if (!bAimOverride)
+            if (!m_bAimOverride)
             {
                 // Xbox Left Stick Aiming
                 m_v3XboxDashDir = transform.forward;
@@ -679,7 +679,7 @@ public class Player : MonoBehaviour
 
         // if the player is intending to throw the ball and is not dashing and still has the ball,
         // or max charge has been reached, or the ball is thrown 
-        if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || bDuringMaxCharge || m_bThrowBall)
+        if (m_bThrow && !scpDash.m_bDashing && m_bHasBall || m_bDuringMaxCharge || m_bThrowBall)
         {
             if (m_fChargeTimer < m_fMaxCharge && !m_bThrowBall)
             {
@@ -704,7 +704,7 @@ public class Player : MonoBehaviour
 
                 if (m_fIsChargedTimer <= m_fIsChargedTimerLimit && !m_bThrowBall)
                 {
-                    bDuringMaxCharge = true;
+                    m_bDuringMaxCharge = true;
                 }
                 else if (m_fIsChargedTimer >= m_fIsChargedTimerLimit && !m_bThrowBall)
                 {
@@ -799,7 +799,7 @@ public class Player : MonoBehaviour
         m_bThrow = false;
         m_fChargeTimer = 0.0f;
         m_bCharging = false;
-        bDuringMaxCharge = false;
+        m_bDuringMaxCharge = false;
         m_fIsChargedTimer = 0.0f;
         m_bThrowBall = false;
     }
