@@ -48,7 +48,6 @@ public class MainMenuButtons : MonoBehaviour
     // The function to randomize the level to be loaded when the play button is 
     // pressed.
     //--------------------------------------------------------------------------------------
-    [LabelOverride("Scenes Array")]
     [Tooltip("Write the names of each main scene in the array boxes, it will randomize loading between the scenes in the array.")]
     public string[] m_strArrScenes;
 

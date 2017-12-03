@@ -37,5 +37,10 @@ public class PodiumButtonAction : MonoBehaviour
         {
             SceneManager.LoadScene("Main Menu");
         }
+        // If the Escape or Space key is pressed, set the scene to the main menu.
+        else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
     }
 }

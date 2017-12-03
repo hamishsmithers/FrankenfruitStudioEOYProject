@@ -625,8 +625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e595a81ce8f045d4f922eef40a0fbf13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliMusicSlider: {fileID: 994774156}
-  MusicAudioSource: {fileID: 176962653}
+  m_sliMusicSlider: {fileID: 994774156}
+  m_audMusicAudioSource: {fileID: 176962653}
   m_audmixMixer: {fileID: 243705048344233082, guid: 18b75aaf4953f034285e670487b42d29,
     type: 2}
 --- !u!1 &178519079
@@ -4856,7 +4856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   m_goPauseCanvas: {fileID: 1802528796}
-  m_btnFirstButton: {fileID: 0}
+  m_btnFirstButton: {fileID: 322851478}
   m_goSnowball: {fileID: 1309105767843890, guid: 7fdaa185c63eb4c4c8a42304e9d60abc,
     type: 2}
   m_goLstSnowballLoc: []
@@ -5159,11 +5159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e9b6f70b40359478b22a355a4495db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliSFXSlider: {fileID: 587426996}
-  SFXAudioSource: {fileID: 1330482984}
-  buttonSelected: {fileID: 8300000, guid: c61e891d6a1796243b2698a2fd4094c1, type: 3}
-  buttonClicked: {fileID: 8300000, guid: 6f6362f1c82fc9d4ea9489b7e95209c2, type: 3}
-  buttonBack: {fileID: 8300000, guid: cca4226b201a65e4bbe22773557d38b3, type: 3}
+  m_sliSFXSlider: {fileID: 587426996}
+  m_sfxAudioSource: {fileID: 1330482984}
+  m_audclipButtonSelected: {fileID: 8300000, guid: c61e891d6a1796243b2698a2fd4094c1,
+    type: 3}
+  m_audclipButtonClicked: {fileID: 8300000, guid: 6f6362f1c82fc9d4ea9489b7e95209c2,
+    type: 3}
+  m_audclipButtonBack: {fileID: 8300000, guid: cca4226b201a65e4bbe22773557d38b3, type: 3}
   m_audmixMixer: {fileID: 243506724158601810, guid: 18b75aaf4953f034285e670487b42d29,
     type: 2}
 --- !u!4 &1330482983
@@ -5662,7 +5664,7 @@ MonoBehaviour:
   m_goOptionsButtons: {fileID: 1355701325}
   m_goMusicSlider: {fileID: 994774154}
   m_goPlayButton: {fileID: 322851478}
-  Scenes: []
+  m_strArrScenes: []
 --- !u!114 &1355701327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6715,7 +6717,7 @@ MonoBehaviour:
   m_goOptionsButtons: {fileID: 1355701325}
   m_goMusicSlider: {fileID: 994774154}
   m_goPlayButton: {fileID: 322851478}
-  Scenes:
+  m_strArrScenes:
   - Main_001
   - Main_002
   - Main_003
