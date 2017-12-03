@@ -4822,7 +4822,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1141633530}
   - component: {fileID: 1141633529}
-  - component: {fileID: 1141633528}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4830,18 +4829,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1141633528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114313376669507072, guid: ed91ab81d92cc86499daea942bb63224,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1141633527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1141633529
 MonoBehaviour:
   m_ObjectHideFlags: 0

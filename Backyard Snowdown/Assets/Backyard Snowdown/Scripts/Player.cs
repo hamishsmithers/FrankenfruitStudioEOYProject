@@ -204,7 +204,6 @@ public class Player : MonoBehaviour
     private float m_fIsChargedTimer = 0.0f;
     private float m_fIsChargedTimerLimit = 2.0f;
     private bool m_bDuringMaxCharge = false;
-    private bool m_bReleased = false;
     private bool m_bAimOverride = false;
 
     //------------------------------------------------------------------------------------------
@@ -668,13 +667,9 @@ public class Player : MonoBehaviour
         // If the player is holding a snowball but not holding down the throw button.
         if (m_bHasBall && rightTrigHeight > 1.0f)
         {
-            // Snowball released.
-            m_bReleased = true;
             // Stop throwing animation.
             m_Animator.SetBool("throwing", false);
         }
-        else
-            m_bReleased = false;
 
         Dash scpDash = gameObject.GetComponent<Dash>();
         //ChargeSlider scpSlider = gameObject.GetComponent<ChargeSlider>();
