@@ -206,6 +206,9 @@ public class Player : MonoBehaviour
     private bool m_bDuringMaxCharge = false;
     private bool m_bAimOverride = false;
 
+    [HideInInspector]
+    public bool m_bGamePaused = false;
+
     //------------------------------------------------------------------------------------------
     // Iframe Timer
     //------------------------------------------------------------------------------------------
@@ -505,7 +508,6 @@ public class Player : MonoBehaviour
         else
             v3VerticalAxis.z = XCI.GetAxisRaw(XboxAxis.LeftStickY, controller);
 
-
         Vector3 v3HorizontalAxis = Vector3.zero;
 
         // Keyboard and xbox right and left movement controls for the first player.
@@ -644,9 +646,10 @@ public class Player : MonoBehaviour
     //------------------------------------------------------------------------------------------
     private void Shoot()
     {
+        Debug.Log(m_fSnowballSpeed);
         // If the player don't have a ball don't let them charge!
-        if (!m_bHasBall)
-            ResetChargeThrow();
+        //if (!m_bHasBall)
+        //ResetChargeThrow();
 
         // If not throwing set animation to false.
         m_Animator.SetBool("throwing", false);
@@ -686,6 +689,7 @@ public class Player : MonoBehaviour
                 // Stop max charge animation.
                 m_Animator.SetBool("maxcharge", false);
             }
+
             // Max charge reached and ball not thrown.
             else if (m_fChargeTimer >= m_fMaxCharge && !m_bThrowBall)
             {
@@ -712,78 +716,81 @@ public class Player : MonoBehaviour
                 }
             }
 
-            // If they have let go of the button that says throw the snowball and they have a snowball and they are not charing anymore.
-            if (m_bHasBall && !m_bCharging || m_bThrowBall)
+            if (!m_bGamePaused)
             {
-                m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
-                m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
-                //Debug.Log("throwing");
-
-                // Play throw audio if they ball has been thrown.
-                if (m_bThrowBall && m_bHasBall)
+                // If they have let go of the button that says throw the snowball and they have a snowball and they are not charing anymore.
+                if (m_bHasBall && !m_bCharging || m_bThrowBall)
                 {
-                    AudioManager.m_SharedInstance.PlayThrowAudio();
-                    RaycastHit hit;
+                    m_fChargeModifier = m_fChargeTimer / m_fMaxCharge;
+                    m_fSnowballSpeed = m_fChargeModifier * m_fPowerRange + m_fPowerMin;
+                    //Debug.Log("throwing");
 
-                    // Shoots out back.
-                    if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f) && (hit.collider.gameObject.tag != "Character" && hit.collider.gameObject.tag != "Snowball"))
+                    // Play throw audio if they ball has been thrown.
+                    if (m_bThrowBall && m_bHasBall)
                     {
-                        // Get access to the snowball in the object pool.
-                        GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
-                        // Change the snowballs material to the players material.
-                        Snowball scpSnowball = copy.GetComponent<Snowball>();
+                        AudioManager.m_SharedInstance.PlayThrowAudio();
+                        RaycastHit hit;
 
-                        // Change the color of the damage speed on the snowball to the players color.
-                        scpSnowball.m_materials[1] = m_matSnowball;
+                        // Shoots out back.
+                        if (Physics.Raycast(gameObject.transform.position, gameObject.transform.forward, out hit, 1.2f) && (hit.collider.gameObject.tag != "Character" && hit.collider.gameObject.tag != "Snowball"))
+                        {
+                            // Get access to the snowball in the object pool.
+                            GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
+                            // Change the snowballs material to the players material.
+                            Snowball scpSnowball = copy.GetComponent<Snowball>();
 
-                        // Set the spawn point of the snowball at the players arm position.
-                        copy.transform.position = transform.position + -transform.forward + (transform.up * 0.6f);
-                        // Get the snowballs rigidbody.
-                        Rigidbody rb = copy.GetComponent<Rigidbody>();
-                        // Apply a 'throwing' force to the snowball.
-                        rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
-                        // Move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater.
-                        copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
-                        // The ball is thrown so it becomes false.
-                        m_bHasBall = false;
-                        // Tell the animator the ball is finished being thrown.
-                        m_Animator.SetBool("throwing", false);
+                            // Change the color of the damage speed on the snowball to the players color.
+                            scpSnowball.m_materials[1] = m_matSnowball;
 
-                        // Run function that cleans up the charging when it is finshed.
-                        ResetChargeThrow();
-                    }
-                    // Shoots out front.
-                    else
-                    {
-                        // Get access to the snowball in the object pool.
-                        GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
+                            // Set the spawn point of the snowball at the players arm position.
+                            copy.transform.position = transform.position + -transform.forward + (transform.up * 0.6f);
+                            // Get the snowballs rigidbody.
+                            Rigidbody rb = copy.GetComponent<Rigidbody>();
+                            // Apply a 'throwing' force to the snowball.
+                            rb.AddForce(transform.forward * m_fSnowballSpeed * -0.5f, ForceMode.Acceleration);
+                            // Move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater.
+                            copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                            // The ball is thrown so it becomes false.
+                            m_bHasBall = false;
+                            // Tell the animator the ball is finished being thrown.
+                            m_Animator.SetBool("throwing", false);
 
-                        // Change the snowballs material to the players material.
-                        Snowball scpSnowball = copy.GetComponent<Snowball>();
+                            // Run function that cleans up the charging when it is finshed.
+                            ResetChargeThrow();
+                        }
+                        // Shoots out front.
+                        else
+                        {
+                            // Get access to the snowball in the object pool.
+                            GameObject copy = ObjectPool.m_SharedInstance.GetPooledObject();
 
-                        // Change the color of the damage speed on the snowball to the players color.
-                        scpSnowball.m_materials[1] = m_matSnowball;
+                            // Change the snowballs material to the players material.
+                            Snowball scpSnowball = copy.GetComponent<Snowball>();
 
-                        // Set the spawn point of the snowball at the players arm position.
-                        copy.transform.position = transform.position + transform.forward + (transform.up * 0.6f) * 1;
+                            // Change the color of the damage speed on the snowball to the players color.
+                            scpSnowball.m_materials[1] = m_matSnowball;
 
-                        // Get the snowballs rigidbody
-                        Rigidbody rb = copy.GetComponent<Rigidbody>();
+                            // Set the spawn point of the snowball at the players arm position.
+                            copy.transform.position = transform.position + transform.forward + (transform.up * 0.6f) * 1;
 
-                        // Apply a 'throwing' force to the snowball.
-                        rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
+                            // Get the snowballs rigidbody
+                            Rigidbody rb = copy.GetComponent<Rigidbody>();
 
-                        // Move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater.
-                        copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
+                            // Apply a 'throwing' force to the snowball.
+                            rb.AddForce(transform.forward * m_fSnowballSpeed, ForceMode.Acceleration);
 
-                        // The ball is thrown so it becomes false.
-                        m_bHasBall = false;
+                            // Move the snowball to the 'Projectiles' gameobject in the heirarcy to make things a bit neater.
+                            copy.transform.parent = GameObject.FindGameObjectWithTag("Projectiles").transform;
 
-                        // Tell the animator the ball is finished being thrown.
-                        m_Animator.SetBool("throwing", false);
+                            // The ball is thrown so it becomes false.
+                            m_bHasBall = false;
 
-                        // Run function that cleans up the charging when it is finshed.
-                        ResetChargeThrow();
+                            // Tell the animator the ball is finished being thrown.
+                            m_Animator.SetBool("throwing", false);
+
+                            // Run function that cleans up the charging when it is finshed.
+                            ResetChargeThrow();
+                        }
                     }
                 }
             }
@@ -792,11 +799,13 @@ public class Player : MonoBehaviour
             // Not charging, don't remember the last charge power.
             m_fChargeTimer = 0.0f;
     }
+
     //------------------------------------------------------------------------------------------
     // Resets the values used for charge throw, so that players can throw again and again
     //------------------------------------------------------------------------------------------
     private void ResetChargeThrow()
     {
+        Debug.Log("ran");
         // Resets everything required for the charge throw to work.
         m_fChargeModifier = 0.0f;
         m_bThrow = false;

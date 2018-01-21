@@ -13,8 +13,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class MusicManager : MonoBehaviour {
-
+public class MusicManager : MonoBehaviour
+{
     //------------------------------------------------------------------------------------------
     // Array to store all of the different songs for the background music.
     //------------------------------------------------------------------------------------------

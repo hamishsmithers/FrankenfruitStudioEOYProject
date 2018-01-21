@@ -131,6 +131,9 @@ public class Global : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "EndRound" || SceneManager.GetActiveScene().name == "Main Menu")
                 return;
 
+            // Access to the player so we can free their movement.
+            Player scpPlayer = GameObject.FindObjectOfType<Player>().GetComponent<Player>();
+
             // After start is pressed if the pause canvas is inactive in the hierarchy set it to active.
             if (!m_goPauseCanvas.activeInHierarchy)
             {
@@ -138,6 +141,12 @@ public class Global : MonoBehaviour
                 // Game time is frozen.
                 Time.timeScale = 0;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(m_btnFirstButton);
+
+                // Game is paused so tell the player! currently only used to stop the player throwing the ball when the game is paused.
+                scpPlayer.m_bGamePaused = true;
+
+                // Player can't move.
+                scpPlayer.m_bMovementLock = true;
             }
             // After start is pressed if the pause canvas is active in the hierarchy set it to inactive.
             else
@@ -146,6 +155,12 @@ public class Global : MonoBehaviour
                 // Game time is unfrozen.
                 Time.timeScale = 1;
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
+                // Game is unpaused so tell the player! currently only used to stop the player throwing the ball when the game is paused.
+                scpPlayer.m_bGamePaused = false;
+
+                // Player can move again.
+                scpPlayer.m_bMovementLock = false;
             }
         }
     }
