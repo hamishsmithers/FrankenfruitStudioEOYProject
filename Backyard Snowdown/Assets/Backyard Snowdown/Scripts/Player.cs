@@ -646,7 +646,7 @@ public class Player : MonoBehaviour
     //------------------------------------------------------------------------------------------
     private void Shoot()
     {
-        Debug.Log(m_fSnowballSpeed);
+        //Debug.Log(m_fSnowballSpeed);
         // If the player don't have a ball don't let them charge!
         //if (!m_bHasBall)
         //ResetChargeThrow();
