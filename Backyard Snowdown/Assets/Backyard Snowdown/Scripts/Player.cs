@@ -345,12 +345,15 @@ public class Player : MonoBehaviour
 
 
     //------------------------------------------------------------------------------------------
-    // An update runs 50 frames per second vs the usual 60, used for physics calculations.
+    // This runs every physics tick. It is used for physics calculations.
     //------------------------------------------------------------------------------------------
     void FixedUpdate()
     {
         if (m_bAlive)
         {
+            // Allows players to traverse the map.
+            Movement();
+
             Dash scpDash = gameObject.GetComponent<Dash>();
 
             if (!m_bCharging)
@@ -369,8 +372,6 @@ public class Player : MonoBehaviour
 
         if (m_bAlive)
         {
-            // Allows players to traverse the map.
-            Movement();
 
             // Allows players to aim in any desired direction.
             Aiming();
